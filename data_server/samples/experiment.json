@@ -1,0 +1,22 @@
+{
+  "Name": "演示实验_20261116",
+  "StartTime": "2026-11-16 10:00:00",
+  "EndTime": "2026-11-16 10:40:00",
+  "SerialNo": "DEMO-PCR-001",
+  "Block": 1,
+  "DeviceModel": "SLAN",
+  "WellResult": [
+    {
+      "ID": "SAMPLE-DEMO-001",
+      "SampleWellNames": ["A1"],
+      "SampleName": "演示样本",
+      "ProjectName": "演示项目",
+      "TargetResults": [{
+        "Name": "演示靶标", "Channel": 1, "Dye": "FAM", "Ct": 28.5,
+        "RawCurve": [{"X": 1, "Y": 100}, {"X": 2, "Y": 120}],
+        "AMPCurve": [{"X": 1, "Y": 0}, {"X": 2, "Y": 20}]
+      }]
+    }
+  ],
+  "Temperatures": []
+}

@@ -1,0 +1,55 @@
+import { test, expect } from '@playwright/test'
+import { readFile } from 'node:fs/promises'
+
+test('mock analysis changes Ct, stores versions and exports honest JSON without device calls', async ({ page }) => {
+  const apiRequests: string[] = []
+  page.on('request', request => { if (request.url().includes('/api/')) apiRequests.push(request.url()) })
+  await page.goto('/')
+  await expect(page.getByRole('heading', { name: '实验分析工作台' })).toBeVisible()
+  await expect(page.getByText('2026-11-16-13-04-40.pcr').first()).toBeVisible()
+  await page.screenshot({ path: 'test-results/workspace-desktop.png', fullPage: true })
+  await page.getByRole('tab', { name: '结果数据' }).click()
+  const firstCt = await page.locator('tbody tr').first().locator('td').nth(2).textContent()
+  await page.getByRole('spinbutton', { name: '荧光阈值' }).fill('600')
+  await expect(page.getByText('参数已修改，尚未应用')).toBeVisible()
+  await page.getByRole('button', { name: '执行二次分析' }).click()
+  await expect(page.getByRole('status')).toContainText('模拟二次分析完成')
+  const newCt = await page.locator('tbody tr').first().locator('td').nth(2).textContent()
+  expect(Number(newCt)).toBeGreaterThan(Number(firstCt))
+  await page.getByRole('button', { name: '孔位 A1', exact: true }).click()
+  await expect(page.locator('tbody tr')).toHaveCount(9)
+  await page.getByRole('button', { name: '保存 .pcr', exact: true }).click()
+  await expect(page.getByRole('dialog')).toContainText('不会把模拟 JSON 伪装成 .pcr')
+  const pending = page.waitForEvent('download')
+  await page.getByRole('button', { name: '导出演示快照' }).click()
+  const download = await pending
+  expect(download.suggestedFilename()).toMatch(/\.analysis\.json$/)
+  const snapshot = JSON.parse(await readFile((await download.path())!, 'utf8'))
+  expect(snapshot.mock).toBe(true); expect(snapshot.parameters.threshold).toBe(600)
+  await page.getByRole('navigation').getByRole('button', { name: '分析记录' }).click()
+  await expect(page.getByText('1 个版本')).toBeVisible()
+  await page.reload()
+  await page.getByRole('navigation').getByRole('button', { name: '分析记录' }).click()
+  await expect(page.getByText('1 个版本')).toBeVisible()
+  expect(apiRequests).toEqual([])
+})
+
+test('file selection simulates metadata only and invalid parameters are rejected', async ({ page }) => {
+  await page.goto('/')
+  await page.locator('input[type=file]').setInputFiles({ name: '本地演示.pcr', mimeType: 'application/octet-stream', buffer: Buffer.from('not-a-real-pcr') })
+  await expect(page.getByRole('status')).toContainText('未解码文件内容')
+  await expect(page.locator('.analysis-heading h2')).toHaveText('本地演示')
+  await page.getByRole('spinbutton', { name: '荧光阈值' }).fill('0')
+  await page.getByRole('button', { name: '执行二次分析' }).click()
+  await expect(page.getByRole('status')).toContainText('阈值范围')
+  await page.getByRole('navigation').getByRole('button', { name: '接入设置' }).click()
+  await expect(page.getByText('宏石 SDK 资料已就绪 · 真实解析未验证')).toBeVisible()
+})
+
+test('mobile layout remains usable and fits viewport', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/')
+  await expect(page.getByRole('button', { name: '执行二次分析' })).toBeVisible()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
+  await page.screenshot({ path: 'test-results/workspace-mobile.png', fullPage: true })
+})

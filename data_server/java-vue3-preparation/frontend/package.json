@@ -1,0 +1,21 @@
+{
+  "name": "pcr-platform-frontend-dependencies",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Vue 3 dependency preparation only; UI not implemented",
+  "engines": { "node": "^22.12.0 || >=24.0.0" },
+  "dependencies": {
+    "vue": "3.5.45",
+    "vue-router": "4.6.5",
+    "pinia": "3.0.4",
+    "axios": "1.21.1",
+    "element-plus": "2.14.8",
+    "echarts": "6.1.0"
+  },
+  "devDependencies": {
+    "vite": "8.3.8",
+    "@vitejs/plugin-vue": "6.0.11",
+    "typescript": "5.9.3"
+  }
+}

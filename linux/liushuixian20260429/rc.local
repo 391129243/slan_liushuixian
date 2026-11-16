@@ -1,0 +1,103 @@
+#!/bin/sh
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+export PATH=/usr/bin:/usr/sbin:/bin:/sbin:$PATH
+device_type="RNA"
+app_name="rna_app"
+
+echo "========================================="
+echo "========================================="
+sleep 5
+date >> /logs/auto_start.log
+echo "app auto start shell running..." >> /logs/auto_start.log
+
+get_device_type()
+{
+    cat /config/local_config/local_cfg.json|grep "PCR"
+
+    if [ $? -eq 0 ];
+    then
+        device_type="PCR"
+        app_name="pcr_app"
+    else
+        device_type="RNA"
+        app_name="rna_app"
+    fi
+}
+
+check_app()
+{
+    i=1
+    while [ $i -le 6 ]
+    do
+        appprocess=$(ps -ef |grep App |grep -v grep|wc -l)
+        if [ ${appprocess} -lt 5 ];
+        then
+            echo "${app_name} process has started ${appprocess}, wait $i seconds.." >> /logs/auto_start.log
+            sleep 1
+        else
+            echo "${app_name} start 5 process successfully! now exit..." >> /logs/auto_start.log
+            return 0
+        fi
+        i=$(($i+1))
+    done
+    return 1
+}
+
+start_app()
+{
+    mkdir -p /home/test
+    tar zxvf ./${app_name}_*.tar.gz -C /home/test/.
+    if [ $? -eq 0 ]
+    then
+        chmod +x /home/test/app/ -R
+        export LD_LIBRARY_PATH=/home/test/app/lib:$LD_LIBRARY_PATH
+        ulimit -s unlimited
+        ulimit -c unlimited
+        cd /home/test/app/
+        ./RootDaemonApp $1 $2 & 
+    else
+        return 1
+    fi
+}
+
+echo "now start RootDaemonApp.." >> /logs/auto_start.log
+
+ps -ef|grep App|grep -v grep|awk '{print $2}'|xargs kill -9
+get_device_type
+cd /home/${app_name}/apprun
+start_app /home/${app_name}/apprun /home/${app_name}/appbak
+check_app
+start_check=$?
+if [ ${start_check} -eq 0 ];
+then
+    echo "Apprun ${app_name} start successfully." >> /logs/auto_start.log
+    date >> /logs/auto_start.log
+    exit 0
+else
+    rm -rf /home/test/app
+    cd /home/${app_name}/appbak
+    start_app
+    check_app
+    start_check=$?
+    if [ ${start_check} -eq 0 ];
+    then
+	echo "Appbak ${app_name} start successfully." >> /logs/auto_start.log
+        date >> /logs/auto_start.log
+        exit 0
+    else
+        echo "Appbak ${app_name} start failed." >> /logs/auto_start.log
+        exit 1
+    fi
+fi
+
+exit 0

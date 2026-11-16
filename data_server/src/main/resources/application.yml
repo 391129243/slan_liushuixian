@@ -1,0 +1,30 @@
+server:
+  address: ${DATASERVER_BIND:127.0.0.1}
+  port: ${DATASERVER_PORT:8088}
+  tomcat:
+    max-http-form-post-size: 34MB
+spring:
+  datasource:
+    url: jdbc:h2:file:./runtime/database/dataserver;MODE=MySQL;DATABASE_TO_LOWER=TRUE;WRITE_DELAY=0
+    username: sa
+    password: ${DATASERVER_DB_PASSWORD:}
+  servlet:
+    multipart:
+      max-file-size: 32MB
+      max-request-size: 34MB
+  jackson:
+    deserialization:
+      fail-on-trailing-tokens: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+dataserver:
+  csharp-base-url: ${DATASERVER_CSHARP_URL:http://127.0.0.1:5099}
+  storage: ${DATASERVER_STORAGE:./runtime/files}
+  admin-password: ${DATASERVER_ADMIN_PASSWORD:}
+  online-seconds: 90
+  max-file-bytes: 33554432
+  max-json-bytes: 33554432
+  legacy-upload-enabled: ${DATASERVER_LEGACY_UPLOAD_ENABLED:true}

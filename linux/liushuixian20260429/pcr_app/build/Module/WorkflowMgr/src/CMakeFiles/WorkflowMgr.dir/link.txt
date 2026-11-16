@@ -1,0 +1,2 @@
+/usr/bin/ar qc libWorkflowMgr.a CMakeFiles/WorkflowMgr.dir/WorkflowMgr.cpp.o CMakeFiles/WorkflowMgr.dir/WorkflowMgrWrapper.cpp.o
+/usr/bin/ranlib libWorkflowMgr.a

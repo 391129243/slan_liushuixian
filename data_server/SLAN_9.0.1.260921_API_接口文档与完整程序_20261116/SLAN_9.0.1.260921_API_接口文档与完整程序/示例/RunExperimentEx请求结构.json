@@ -1,0 +1,13 @@
+{
+  "series": "REPLACE_WITH_DEVICE_SERIAL",
+  "experimentSetting": {
+    "PlateFile": null,
+    "PlateContent": "WellNo,TestPrj,TubeNo,Type,Property,ReTubeNo,BarCode,PName,终端编号\r\nA1,ExampleProject,,,,,,,\r\n",
+    "Block": 1,
+    "Name": "Example_20261116_001",
+    "UseHotBonnet": true,
+    "ScanMode": 0,
+    "TemperatureControlMode": 0,
+    "FilePath": null
+  }
+}

@@ -1,0 +1,138 @@
+﻿Compiled from "SLANService.kt"
+public final class com.hongshi.slansdk.service.SLANService {
+  public static final com.hongshi.slansdk.service.SLANService INSTANCE;
+  public static com.hongshi.slansdk.common.BaseDeviceViewModel base;
+  public final com.hongshi.slansdk.common.BaseDeviceViewModel getBase();
+  public final void setBase(com.hongshi.slansdk.common.BaseDeviceViewModel);
+  public final boolean init(com.hongshi.slansdk.slanenum.ConnectType);
+  public final void destroy();
+  public final void start();
+  public final void stop();
+  public final void initDevice(java.lang.String, int);
+  public final java.util.ArrayList<com.hongshi.slansdk.model.device.Device> getDevice();
+  public final boolean openDoor(java.lang.String, int[]);
+  public final boolean closeDoor(java.lang.String, int[]);
+  public final java.util.ArrayList<com.hongshi.slansdk.model.experiment.Project> getProjects(java.lang.String);
+  public final com.hongshi.slansdk.model.result.SDKResult addProject(com.hongshi.slansdk.model.experiment.Project);
+  public final boolean saveProject(java.lang.String, java.lang.String);
+  public final void setRunningInfoListener(com.hongshi.slansdk.listener.RunningInfoListener);
+  public final void setDeviceStateListener(com.hongshi.slansdk.listener.DeviceStateListener);
+  public final com.hongshi.slansdk.model.experiment.Experiment openExperiment(java.lang.String);
+  public final boolean saveExperiment(java.lang.String, java.lang.String);
+  public final com.hongshi.slansdk.slanenum.RunExperimentResult runExperiment(com.hongshi.slansdk.model.experiment.ExperimentParam);
+  public final com.hongshi.slansdk.slanenum.ContinueState continueExperiment(java.lang.String, int[]);
+  public final void stopExperiment(java.lang.String, int[]);
+  public final com.hongshi.slansdk.model.experiment.Experiment getExperimentResult(java.lang.String, int[]);
+  public final com.hongshi.slansdk.slanenum.ContinueState getExperimentResultFromInstrument(java.lang.String, int[]);
+  public final java.util.ArrayList<com.hongshi.slansdk.model.experiment.AnalyseParamter> getExperimentParamter(java.lang.String);
+  public final com.hongshi.slansdk.model.experiment.Experiment setExperimentParamter(java.lang.String, com.hongshi.slansdk.model.experiment.AnalyseParamter);
+  public final com.hongshi.slansdk.slanenum.RunExperimentResult startPreHeat(java.lang.String, java.lang.String, int[], double);
+  public final void stopPreHeat(java.lang.String, int[]);
+}
+Compiled from "NativeLib.kt"
+public final class com.hongshi.slansdk.NativeLib {
+  public static final com.hongshi.slansdk.NativeLib$Companion Companion;
+  public com.hongshi.slansdk.NativeLib();
+  public final native void initFromLib();
+  public final native void initDeviceFromLib();
+  public final native java.lang.String getDeviceFromLib(java.lang.String);
+  public final native java.lang.String getDeviceBySerialNoFromLib(java.lang.String, int[]);
+  public final native boolean openDoorFromLib(java.lang.String, int[]);
+  public final native boolean closeDoorFromLib(java.lang.String, int[]);
+  public final native void timerProcessFromLib();
+  public final native java.lang.String getDeviceRunningInfoFromLib(java.lang.String, int[]);
+  public final native java.lang.String getExperimentResultFromInstrumentFromLib(java.lang.String, int[]);
+  public final native java.lang.String getExperimentResultFromLib(java.lang.String, int[]);
+  public final native int runExperimentFromLib(java.lang.String);
+  public final native java.lang.String continueExperimentFromLib(java.lang.String, int[]);
+  public final native void stopExperimentFromLib(java.lang.String, int[]);
+  public final native java.lang.String openExperimentFromLib(java.lang.String);
+  public final native void saveExperimentFromLib(java.lang.String, java.lang.String);
+  public final native void saveAllExperimentFromLib(java.lang.String);
+  public final native java.lang.String getProjectsFromLib(java.lang.String, java.lang.String);
+  public final native java.lang.String addProjectFromLib(java.lang.String);
+  public final native boolean saveProjectFromLib(java.lang.String, java.lang.String);
+  public final native java.lang.String getProjectFromLib(java.lang.String);
+  public final native java.lang.String editProjectFromLib(java.lang.String);
+  public final native java.lang.String getExperimentParamterFromLib(java.lang.String);
+  public final native java.lang.String setExperimentParamterFromLib(java.lang.String, java.lang.String);
+  public static final com.hongshi.slansdk.NativeLib access$getInstance$cp();
+  public static final void access$setInstance$cp(com.hongshi.slansdk.NativeLib);
+}
+Compiled from "TargetParamter.kt"
+public class com.hongshi.slansdk.model.experiment.TargetParamter {
+  public com.hongshi.slansdk.model.experiment.TargetParamter(boolean, int, int, boolean, double, int, int, double, double);
+  public com.hongshi.slansdk.model.experiment.TargetParamter(boolean, int, int, boolean, double, int, int, double, double, int, kotlin.jvm.internal.DefaultConstructorMarker);
+  public final boolean getQualitativeAnalysis();
+  public final void setQualitativeAnalysis(boolean);
+  public final int getBeginBaseline();
+  public final void setBeginBaseline(int);
+  public final int getEndBaseline();
+  public final void setEndBaseline(int);
+  public final boolean getAutoThreshold();
+  public final void setAutoThreshold(boolean);
+  public final double getThreshold();
+  public final void setThreshold(double);
+  public final int getOptimizationMode();
+  public final void setOptimizationMode(int);
+  public final int getDigitalFilter();
+  public final void setDigitalFilter(int);
+  public final double getDetectionMin();
+  public final void setDetectionMin(double);
+  public final double getDetectionMax();
+  public final void setDetectionMax(double);
+  public com.hongshi.slansdk.model.experiment.TargetParamter();
+}
+Compiled from "TargetResult.kt"
+public class com.hongshi.slansdk.model.result.TargetResult extends com.hongshi.slansdk.model.result.BaseResult {
+  public java.lang.String Name;
+  public java.util.ArrayList<com.hongshi.slansdk.model.Dot> RawCurve;
+  public java.util.ArrayList<com.hongshi.slansdk.model.Dot> AMPCurve;
+  public java.util.ArrayList<com.hongshi.slansdk.model.Dot> RawMeltCurve;
+  public java.util.ArrayList<com.hongshi.slansdk.model.Dot> PeakCurve;
+  public java.util.ArrayList<com.hongshi.slansdk.model.result.MeltPeak> PeakValues;
+  public java.lang.String TubeName;
+  public java.lang.String Dye;
+  public java.lang.String Property;
+  public com.hongshi.slansdk.model.result.TargetResult();
+  public final int getChannel();
+  public final void setChannel(int);
+  public final java.lang.String getName();
+  public final void setName(java.lang.String);
+  public final java.util.ArrayList<com.hongshi.slansdk.model.Dot> getRawCurve();
+  public final void setRawCurve(java.util.ArrayList<com.hongshi.slansdk.model.Dot>);
+  public final java.util.ArrayList<com.hongshi.slansdk.model.Dot> getAMPCurve();
+  public final void setAMPCurve(java.util.ArrayList<com.hongshi.slansdk.model.Dot>);
+  public final java.util.ArrayList<com.hongshi.slansdk.model.Dot> getRawMeltCurve();
+  public final void setRawMeltCurve(java.util.ArrayList<com.hongshi.slansdk.model.Dot>);
+  public final java.util.ArrayList<com.hongshi.slansdk.model.Dot> getPeakCurve();
+  public final void setPeakCurve(java.util.ArrayList<com.hongshi.slansdk.model.Dot>);
+  public final java.util.ArrayList<com.hongshi.slansdk.model.result.MeltPeak> getPeakValues();
+  public final void setPeakValues(java.util.ArrayList<com.hongshi.slansdk.model.result.MeltPeak>);
+  public final java.lang.String getTubeName();
+  public final void setTubeName(java.lang.String);
+  public final int getTubeNo();
+  public final void setTubeNo(int);
+  public final java.lang.String getDye();
+  public final void setDye(java.lang.String);
+  public final java.lang.String getProperty();
+  public final void setProperty(java.lang.String);
+  public final double getCt();
+  public final void setCt(double);
+  public final double getCtMean();
+  public final void setCtMean(double);
+  public final double getCtSD();
+  public final void setCtSD(double);
+  public final double getCtCV();
+  public final void setCtCV(double);
+  public final double getCnValue();
+  public final void setCnValue(double);
+  public final double getCnMean();
+  public final void setCnMean(double);
+  public final double getCnSD();
+  public final void setCnSD(double);
+  public final double getCnCV();
+  public final void setCnCV(double);
+  public final double getRnValue();
+  public final void setRnValue(double);
+}

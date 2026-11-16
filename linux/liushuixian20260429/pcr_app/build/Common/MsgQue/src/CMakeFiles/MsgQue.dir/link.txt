@@ -1,0 +1,2 @@
+/usr/bin/ar qc libMsgQue.a CMakeFiles/MsgQue.dir/MsgQue.c.o CMakeFiles/MsgQue.dir/MsgWrapper.c.o
+/usr/bin/ranlib libMsgQue.a

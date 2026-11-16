@@ -1,0 +1,6 @@
+{
+    "log_dir":"/logs/pcr_app/",
+    "debug_prefix":"PcrApp_debug",
+    "log_prefix":"PcrApp_log",
+    "file_size":1048576
+}

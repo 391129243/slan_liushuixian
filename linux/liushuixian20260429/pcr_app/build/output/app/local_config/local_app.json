@@ -1,0 +1,36 @@
+
+{
+	"local_app":
+	[ 
+		{
+		   	"id": 0,
+		   	"debug_level": 2,
+			"start_flag": 1,
+		   	"app_name": "RootDaemonApp"
+		}, 
+		{
+		   	"id": 1,
+		   	"debug_level": 2,
+			"start_flag": 1,
+		   	"app_name": "SysDaemonApp"
+		}, 		
+		{
+		   	"id": 2,
+		   	"debug_level": 2,
+			"start_flag": 1,
+		   	"app_name": "LoggerApp"
+		},
+		{
+			"id": 3,
+			"debug_level": 2,
+			"start_flag": 1,
+			"app_name": "PcrMgrApp"
+		 },
+		 {
+			"id": 4,
+			"debug_level": 2,
+			"start_flag": 1,
+			"app_name": "UpgradeApp"
+         }
+	]	
+}

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libLoopQue.a CMakeFiles/LoopQue.dir/LoopQueue.c.o
+/usr/bin/ranlib libLoopQue.a

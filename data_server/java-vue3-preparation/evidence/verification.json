@@ -1,0 +1,14 @@
+﻿{
+    "CheckedAt":  "2026-11-16",
+    "BackendRuntimeJars":  78,
+    "MavenDependencyResolution":  "passed",
+    "FrontendInstall":  "passed",
+    "FrontendDependencyTree":  "passed",
+    "FrontendModuleImports":  "Vue Vite plugin-vue ECharts passed",
+    "NpmAuditAtInstall":  "0 known vulnerabilities",
+    "SdkStaticProbe":  "passed",
+    "NativeLibraryExecution":  "not performed: Linux ARM64 library on Windows x64",
+    "PcrAnalysis":  "not performed: no compatible runtime and sample file",
+    "DatabaseService":  "not installed",
+    "BusinessApplication":  "not implemented"
+}

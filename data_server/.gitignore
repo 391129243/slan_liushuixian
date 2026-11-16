@@ -1,0 +1,10 @@
+/target/
+/runtime/
+/.idea/
+*.log
+/frontend/node_modules/
+/frontend/dist/
+/frontend/test-results/
+/frontend/playwright-report/
+/csharp/PcrSdkBridge/bin/
+/csharp/PcrSdkBridge/obj/

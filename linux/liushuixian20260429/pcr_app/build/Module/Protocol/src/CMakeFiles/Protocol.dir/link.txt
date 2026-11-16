@@ -1,0 +1,2 @@
+/usr/bin/ar qc libProtocol.a CMakeFiles/Protocol.dir/UartProtocol.c.o CMakeFiles/Protocol.dir/WssProtocol.c.o
+/usr/bin/ranlib libProtocol.a

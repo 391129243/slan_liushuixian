@@ -1,0 +1,2913 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SLAN.API</name>
+    </assembly>
+    <members>
+        <member name="T:SLAN.API.Client.SlanDevice">
+            <summary>
+            宏石qPCR设备控制类
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Client.SlanDevice.SerialNumber">
+            <summary>
+            设备编号
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Client.SlanDevice.DeviceType">
+            <summary>
+            设备类型
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Client.SlanDevice.Fast">
+            <summary>
+            设备是否支持Fast控温
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Client.SlanDevice.UseBlock">
+            <summary>
+            设备模块使用状态，每个模块占1位(0：未使用， 1：已使用)
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Client.SlanDevice.PcrFile">
+            <summary>
+            数据文件路径（会存在多个模块一起运行，所以使用ExperimentList代替）
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Client.SlanDevice.ExperimentList">
+            <summary>
+            正在运行的实验信息
+            </summary>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.RunExperiment(System.String)">
+            <summary>
+            运行实验
+            </summary>
+            <param name="plate">孔板文件</param>
+            <returns>实验信息，包括数据文件和访问ID</returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.RunExperiment(System.String,SLAN.API.Model.ExperimentSetting)">
+            <summary>
+            运行实验
+            </summary>
+            <param name="plate">孔板文件</param>
+            <param name="experimentSetting">
+            设置信息，ExperimentSetting.Block和UseBlock无关，需要重新赋值
+            </param>
+            <returns>实验信息，包括数据文件和访问ID</returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.RunExperimentEx(SLAN.API.Model.ExperimentSetting)">
+            <summary>
+            运行实验
+            </summary>
+            <param name="experimentSetting">
+            设置信息，ExperimentSetting.Block和UseBlock无关，需要重新赋值
+            设置信息中，PlateFlie和PlateContent两者必须选择其中一个进行赋值
+            </param>
+            <returns>实验信息，包括数据文件和访问ID</returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.ContinueExperiment">
+            <summary>
+            断点继续运行实验
+            </summary>
+            <returns>
+            true：找到断点实验，并且继续运行，然后通过GetRunningInformation获取实验状态
+            fakse：没有找到断点实验，无法继续运行
+            </returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.StopExperiment">
+            <summary>
+            停止实验
+            </summary>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.ReleaseExperiment">
+            <summary>
+            释放实验，当实验运行结束时，调用此方法，后台程序从内存中释放实验
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.GetRunningInformation">
+            <summary>
+            获取运行信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.GetResult">
+            <summary>
+            获取结果数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.GetExperimentResult">
+            <summary>
+            获取结果数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.GetFluorescenceCount">
+            <summary>
+            获取当前荧光数量
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.OpenDoor">
+            <summary>
+            打开自动门
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.CloseDoor">
+            <summary>
+            关闭自动门
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.CanOperateDoor">
+            <summary>
+            是否可以操作自动门
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.GetAutoDoorStauts">
+            <summary>
+            获取自动门操作结果
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.GetMeltCurrentScanTemperature">
+            <summary>
+            获取熔解曲线当前扫描温度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.GetAQResult">
+            <summary>
+            获取扩增程序段数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.GetMeltResult">
+            <summary>
+            获取熔解程序段数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.CheckDeviceState">
+            <summary>
+            检查仪器状态
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanDevice.GetAutoDoorState">
+            <summary>
+            获取自动门状态
+            </summary>
+            <returns>
+            ErrorCode = None 时可以通过APIAutoDoorStateResult的Result来正确的获取到各个自动门的状态
+            Result解释{未知,打开状态,关闭状态,实验正在运行,自动门正在运行,状态查询中,出错}
+            Result    { 0,      1,      2,         3,             4,        5       , 6}
+            </returns>
+        </member>
+        <member name="T:SLAN.API.Client.SlanService">
+            <summary>
+            SLAN qPCR客户端服务
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Client.SlanService.IPAddress">
+            <summary>
+            IP地址，不设置时为localhost
+            </summary>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.Initialize(System.String)">
+            <summary>
+            初始化连接
+            </summary>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.Close">
+            <summary>
+            关闭客户端，使服务器释放客户端资源；此接口与Exit不同，不会关闭服务器
+            </summary>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetVersion">
+            <summary>
+            获取服务版本号
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetAllDevices">
+            <summary>
+            获取当前连接的所有设备
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.LoadExperiment(System.String)">
+            <summary>
+            从数据文件获得实验结果数据
+            </summary>
+            <param name="file">数据文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.LoadExperimentResult(System.String)">
+            <summary>
+            从数据文件获得实验结果数据
+            </summary>
+            <param name="file">数据文件路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetAllProject">
+            <summary>
+            获取所有项目
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.AddProject(SLAN.API.Model.Project)">
+            <summary>
+            增加项目，如果项目已经存在，则进行覆盖
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.AddProjectEx(SLAN.API.Model.Project)">
+            <summary>
+            增加项目，如果项目已经存在，则进行覆盖
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.RemoveProject(System.String)">
+            <summary>
+            删除项目
+            </summary>
+            <param name="projectName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.OpenExperiment(System.String)">
+            <summary>
+            打开实验
+            </summary>
+            <param name="file">数据文件路径</param>
+            <returns>实验</returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetExperimentData(System.String)">
+            <summary>
+            打开实验
+            </summary>
+            <param name="name">实验名称</param>
+            <returns>实验</returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.SaveExperiment(System.String)">
+            <summary>
+            保存实验
+            </summary>
+            <param name="name">实验名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.SetExperimentBasicInfo(System.String,SLAN.API.Model.ExperimentBasicInfo)">
+            <summary>
+            修改实验信息
+            </summary>
+            <param name="name">实验名称</param>
+            <param name="info">实验信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.CloseExperiment(System.String)">
+            <summary>
+            关闭实验
+            </summary>
+            <param name="name">实验名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.SetExperimentParamter(System.String,SLAN.API.Model.AnalyseParamter)">
+            <summary>
+            设置实验参数
+            </summary>
+            <param name="name">实验名称</param>
+            <param name="paramter">修改的参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetExperimentParamters(System.String)">
+            <summary>
+            获取实验所包含的参数
+            </summary>
+            <param name="name">实验名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetExperimentBasicInfo(System.String)">
+            <summary>
+            获取实验基本信息
+            </summary>
+            <param name="name">实验名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.SetProjectRule(System.String,System.String,System.String)">
+            <summary>
+            设置实验项目高级规则
+            </summary>
+            <param name="name">实验名称</param>
+            <param name="projectName">项目名称 </param>
+            <param name="rulePath">高级规则文件路径 路径为空时设置为基本规则</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetAllExperimentName">
+            <summary>
+            获取实验基本信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetExperimentRunTemperature(System.String)">
+            <summary>
+            获取实验运行温度
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.IsSameProgram(System.String,System.String)">
+            <summary>
+            判断2个项目的实验程序是否一致，一致时可以同时运行
+            </summary>
+            <param name="project1">项目名称1</param>
+            <param name="project2">项目名称2</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.SaveExperimentStd(System.String,System.String,System.String)">
+            <summary>
+            保存实验的标准曲线至外部标准曲线文件中
+            </summary>
+            <param name="experimentName">实验名称</param>
+            <param name="projectName">项目名称 为空时保存实验中所有的标准曲线</param>
+            <param name="stdName">保存的外标文件名 为空时默认项目名称(项目名称为空时,文件名不起作用)</param>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetExternalStdData(System.String)">
+            <summary>
+            查找外部标准曲线文件,获取标准曲线数据
+            </summary>
+            <param name="stdName">外部标准曲线文件名,为空时获取所有</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.SetExperimentStd(System.String,System.String,System.String)">
+            <summary>
+            设置实验的外部标准曲线
+            </summary>
+            <param name="experimentName">实验名称</param>
+            <param name="projectName">需要设置外标的项目名称</param>
+            <param name="stdName">调用的外部标准曲线文件名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.Exit">
+            <summary>
+            服务器退出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.RefreshProject">
+            <summary>
+            刷新项目列表，重新加载所有项目
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.SetProjectBasicRule(SLAN.API.Model.BasicRule)">
+            <summary>
+            设置项目的基本规则
+            </summary>
+            <param name="basicRule"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetProjectBasicRule(System.String)">
+            <summary>
+            获取项目的基础规则
+            </summary>
+            <param name="projectName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.ReleaseExperiment(System.String,System.Byte)">
+            <summary>
+            释放实验
+            </summary>
+            <param name="series">仪器编号</param>
+            <param name="block">模块信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetFluorescenceCount(System.String,System.Byte)">
+            <summary>
+            获取扩增曲线荧光数量
+            </summary>
+            <param name="series"></param>
+            <param name="block"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetMeltScanTemperature(System.String,System.Byte)">
+            <summary>
+            获取熔解曲线扫描温度
+            </summary>
+            <param name="series"></param>
+            <param name="block"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetAQResult(System.String,System.Byte)">
+            <summary>
+            获取扩增程序段数据
+            </summary>
+            <param name="series"></param>
+            <param name="block"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Client.SlanService.GetMeltResult(System.String,System.Byte)">
+            <summary>
+            获取熔解程序段数据
+            </summary>
+            <param name="series"></param>
+            <param name="block"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SLAN.API.Enum.APIError">
+            <summary>
+            运行错误代码
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.ExperimentNotFound">
+            <summary>
+            未找到实验
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.ExperimentLoadError">
+            <summary>
+            文件加载失败
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.ProjectNotFound">
+            <summary>
+            未找到项目
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.ProjectParameterInvalid">
+            <summary>
+            未找到该项目的参数或规则
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.RulejudgeInvalid">
+            <summary>
+            设置规则错误,高级规则文件无效
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.RulejudgeNotFound">
+            <summary>
+            未找到规则文件
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.ExperimentCanNotSave">
+            <summary>
+            实验无法保存,实验未完成或数据不够
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.ExperimentSaveError">
+            <summary>
+            文件保存出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.ExperimentIsRunning">
+            <summary>
+            实验正在运行
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.ParamterInvalid">
+            <summary>
+            设置分析参数,参数验证失败
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.UnKnowError">
+            <summary>
+            未知错误
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.FileNotExist">
+            <summary>
+            文件不存在
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.SaveStdError">
+            <summary>
+            保存标准曲线错误
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.ProjectNotMatch">
+            <summary>
+            项目不匹配
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.DeviceNotFound">
+            <summary>
+            设备未找到
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.DeviceNotSupport">
+            <summary>
+            设备不支持
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.DeviceStateNotFound">
+            <summary>
+            未查询到设备状态
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.CommandExecuting">
+            <summary>
+            正在执行命令
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.BasicRuleFail">
+            <summary>
+            基础规则设置失败
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.HasCrashExperiment">
+            <summary>
+            设备包含异常中断实验，无法刷新门状态
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.APIError.Unauthorized">
+            <summary>
+            登录验证失败
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.DeviceType">
+            <summary>
+            设备类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_96P">
+            <summary>
+            SLAN-96P
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_96S">
+            <summary>
+            SLAN-96S
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_48P">
+            <summary>
+            SLAN-48P
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_24P">
+            <summary>
+            SLAN-24P
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_96H">
+            <summary>
+            SLAN-96H
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_96D">
+            <summary>
+            SLAN-96D
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_48H">
+            <summary>
+            SLAN-48H
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_24H">
+            <summary>
+            SLAN-24H
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_08H">
+            <summary>
+            SLAN-08H
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_04H">
+            <summary>
+            SLAN-04H
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_24S">
+            <summary>
+            SLAN-24S
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_48S">
+            <summary>
+            SLAN-48S
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_32D">
+            <summary>
+            SLAN-32D
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_32DV">
+            <summary>
+            SLAN-32DV
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_48SC">
+            <summary>
+            SLAN-48SC
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_96R">
+            <summary>
+            SLAN-96R
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_16R">
+            <summary>
+            SLAN-16R
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.DeviceType.SLAN_16H">
+            <summary>
+            SLAN_16H
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.EnumManagement">
+            <summary>
+            枚举管理器
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EnumManagement.listTypeAll">
+            <summary>
+            获取所有样品类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Enum.EnumManagement.GetAllSampleType">
+            <summary>
+            获取所有样本类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Enum.EnumManagement.GetAllExperimentICSampleType">
+            <summary>
+            获取所有实验质控类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.Enum.EnumManagement.GetAllSampleICSampleType">
+            <summary>
+            获取样本类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SLAN.API.Enum.EOperator">
+            <summary>
+            比较符
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EOperator.Null">
+            <summary>
+            Null
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EOperator.Equal">
+            <summary>
+            等于
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EOperator.UnEqual">
+            <summary>
+            不等于
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EOperator.LessThan">
+            <summary>
+            小于
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EOperator.EqualLessThan">
+            <summary>
+            小于等于
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.ECalcResult">
+            <summary>
+            数据类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ECalcResult.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ECalcResult.Ct">
+            <summary>
+            Ct
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ECalcResult.Cn">
+            <summary>
+            Cn
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ECalcResult.Rn">
+            <summary>
+            Rn
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ECalcResult.r">
+            <summary>
+            r
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.ExperimentType">
+            <summary>
+            实验类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ExperimentType.AQ">
+            <summary>
+            定性/定量
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ExperimentType.Melt">
+            <summary>
+            标准熔解曲线
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ExperimentType.AD">
+            <summary>
+            等位基因鉴定
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ExperimentType.HRM">
+            <summary>
+            HRM
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ExperimentType.RQ">
+            <summary>
+            相对定量
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ExperimentType.IA">
+            <summary>
+            等温扩增 Isothermal amplification
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ExperimentType.TQ">
+            <summary>
+            反式定性定量 Qualitative and quantitative trans
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ExperimentType.FastCal">
+            <summary>
+            实验运行过程中，实时计算结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.EAMPAlgorithm">
+            <summary>
+            扩增曲线算法选择
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EAMPAlgorithm.Default">
+            <summary>
+            相对荧光值法
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EAMPAlgorithm.Subtraction">
+            <summary>
+            绝对荧光值法
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EAMPAlgorithm.RelativeLinear">
+            <summary>
+            相对荧光值法 - 线性
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.EOptionzationMode">
+            <summary>
+            基线优化方式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EOptionzationMode.NA">
+            <summary>
+            不优化
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EOptionzationMode.AUTO">
+            <summary>
+            自动优化
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EOptionzationMode.MANUAL">
+            <summary>
+            手动优化
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.EDigitalFilter">
+            <summary>
+            数字滤波
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EDigitalFilter.None">
+            <summary>
+            不滤波
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EDigitalFilter.Normal">
+            <summary>
+            轻度滤波
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EDigitalFilter.High">
+            <summary>
+            重度滤波
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.EPeekType">
+            <summary>
+            熔解峰型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EPeekType.Positive">
+            <summary>
+            正峰
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EPeekType.Negative">
+            <summary>
+            负峰
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EPeekType.Positive_Negative">
+            <summary>
+            正负峰
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.EMeltPeakAlgorithm">
+            <summary>
+            熔解曲线寻峰算法
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EMeltPeakAlgorithm.Standard">
+            <summary>
+            标准算法（以最大Y值为Tm）
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EMeltPeakAlgorithm.Advance">
+            <summary>
+            高级算法
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.EScanMode">
+            <summary>
+            熔解曲线扫描方式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EScanMode.Continue">
+            <summary>
+            Continue模式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.EScanMode.Step">
+            <summary>
+            Step模式
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.ChannelScanMode">
+            <summary>
+            通道扫描设置
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ChannelScanMode.Project">
+            <summary>
+            按项目
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.ChannelScanMode.All">
+            <summary>
+            全通道
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.TemperatureControlMode">
+            <summary>
+            温度控制方式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.TemperatureControlMode.Standard">
+            <summary>
+            标准控温
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.TemperatureControlMode.Fast">
+            <summary>
+            快速控温
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.RunExperimentError">
+            <summary>
+            运行错误代码
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.ExperimentIsRunning">
+            <summary>
+            实验正在运行
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.DeviceNotExist">
+            <summary>
+            没有找到设备
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.Plate_FileNotExist">
+            <summary>
+            孔板文件不存在
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.Plate_NoData">
+            <summary>
+            孔板文件没有数据
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.Plate_FormatError">
+            <summary>
+            孔板文件格式错误
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.Plate_ProjectNotExist">
+            <summary>
+            孔板文件中的项目不存在
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.Plate_WellNoNotExist">
+            <summary>
+            孔板文件中的孔号不存在
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.Plate_PCRDifferent">
+            <summary>
+            孔板文件引用的项目的PCR程序不一致
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunExperimentError.Customize_IncorrectFormat">
+            <summary>
+            定制信息格式错误
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.RunningError">
+            <summary>
+            运行错误代码
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.DeviceConnectError">
+            <summary>
+            设备连接出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.CommunicationError">
+            <summary>
+            通信出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.CloseHotlidError">
+            <summary>
+            关闭热盖出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.SliderNotClose">
+            <summary>
+            滑盖未到位
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.OpenHotlidError">
+            <summary>
+            打开热盖出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.SendCommandError">
+            <summary>
+            发送命令出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.BlockOverTemperatureError">
+            <summary>
+            模块超温出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.HotlidOverTemperatureError">
+            <summary>
+            热盖超温出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.BlockTemperatureUpDownError">
+            <summary>
+            模块升降温出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.HotlidTemperatureRiseError">
+            <summary>
+            热盖升温出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.FluorescenceResetError">
+            <summary>
+            设备信息错误
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningError.DeviceInfoError">
+            <summary>
+            设备信息错误
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.RunningState">
+            <summary>
+            运行状态
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningState.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningState.Running">
+            <summary>
+            正在运行
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningState.Error">
+            <summary>
+            出错
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningState.Finished">
+            <summary>
+            完成
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.RunningState.Crash">
+            <summary>
+            非正常退出时，上一次实验状态
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.AutoDoorState">
+            <summary>
+            自动门状态
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.AutoDoorState.Unknown">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.AutoDoorState.Opened">
+            <summary>
+            打开状态
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.AutoDoorState.Closed">
+            <summary>
+            关闭状态
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.AutoDoorState.ExperimentRunning">
+            <summary>
+            实验正在运行
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.AutoDoorState.DoorRunning">
+            <summary>
+            自动门正在运行
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.AutoDoorState.CommandExecuting">
+            <summary>
+            状态查询中
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.AutoDoorState.Error">
+            <summary>
+            出错
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Enum.SampleType">
+            <summary>
+            样本类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.Unknown">
+            <summary>
+            样品
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.Standard">
+            <summary>
+            标准品
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.HighPositive">
+            <summary>
+            阳性对照
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.LowPositive">
+            <summary>
+            临界阳性对照
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.Negative">
+            <summary>
+            阴性对照
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.NTC">
+            <summary>
+            无模板对照
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.QC">
+            <summary>
+            校准品（质控品）
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.RetestSample">
+            <summary>
+            重测样品
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.Calibrator">
+            <summary>
+            参比样品
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.Last">
+            <summary>
+            最后（只用作标识）
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Enum.SampleType.Custom">
+            <summary>
+            自定义类型
+            </summary>
+        </member>
+        <member name="T:SLAN.API.ISLANService">
+            <summary>
+            接口
+            </summary>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetVersion">
+            <summary>
+            获取服务版本号
+            </summary>
+            <returns>服务版本号</returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetAllDevice">
+            <summary>
+            获取当前连接的所有设备
+            **特别提示**
+            **当运行的设备中包含出错的实验(包括但不限于通信出错、超温出错等等)。**
+            **此时调用此接口与COM口通信会导致实验自动结束，无法通过ContinueExperiment来继续运行此实验**
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.Exit">
+            <summary>
+            退出
+            如果有正在运行的实验，返回false，不执行退出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetAllProject">
+            <summary>
+            获取所有项目
+            </summary>
+        </member>
+        <member name="M:SLAN.API.ISLANService.AddProject(SLAN.API.Model.Project)">
+            <summary>
+            增加项目
+            </summary>
+            <param name="project">项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.AddProjectEx(SLAN.API.Model.Project)">
+            <summary>
+            增加项目
+            </summary>
+            <param name="project">项目</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.RemoveProject(System.String)">
+            <summary>
+            删除项目
+            </summary>
+            <param name="projectName">项目名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.RunExperiment(System.String,System.String,System.Byte)">
+            <summary>
+            运行实验
+            </summary>
+            <param name="series">仪器序列号</param>
+            <param name="plate">孔板文件绝对路径，确保Project文件夹中存在孔板文件中使用的项目</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.RunExperimentWithSetting(System.String,System.String,SLAN.API.Model.ExperimentSetting)">
+            <summary>
+            运行实验
+            </summary>
+            <param name="series">仪器序列号</param>
+            <param name="plate">孔板文件绝对路径，确保Project文件夹中存在孔板文件中使用的项目</param>
+            <param name="experimentSetting">实验设置信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.RunExperimentEx(System.String,SLAN.API.Model.ExperimentSetting)">
+            <summary>
+            运行实验
+            </summary>
+            <param name="series">仪器序列号</param>
+            <param name="experimentSetting">实验设置信息
+            设置信息中，PlateFlie和PlateContent两者必须选择其中一个进行赋值
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.ContinueExperiment(System.String,System.Byte)">
+            <summary>
+            断点继续运行实验
+            </summary>
+            <param name="series">仪器序列号</param>
+            <param name="block">仪器模块</param>
+            <returns>
+            true：找到断点实验，并且继续运行，然后通过GetRunningInformation获取实验状态
+            false：没有找到断点实验，无法继续运行
+            </returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.StopExperiment(System.String,System.Byte)">
+            <summary>
+            停止实验
+            </summary>
+            <param name="series">设备序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+        </member>
+        <member name="M:SLAN.API.ISLANService.ReleaseExperiment(System.String,System.Byte)">
+            <summary>
+            释放实验
+            </summary>
+            <param name="series">设备序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetRunningInformation(System.String,System.Byte)">
+            <summary>
+            获取运行信息
+            </summary>
+            <param name="series">设备序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetFluorescenceCount(System.String,System.Byte)">
+            <summary>
+            获取扩增曲线当前荧光数量
+            </summary>
+            <param name="series">设备序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetMeltScanTemperature(System.String,System.Byte)">
+            <summary>
+            获取熔解曲线当前扫描温度
+            </summary>
+            <param name="series">设备序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns>
+            正在执行熔解程序段时，返回当前温度，其他情况下，返回NaN
+            </returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetAQResult(System.String,System.Byte)">
+            <summary>
+            获取扩增程序段数据
+            </summary>
+            <param name="series">设备序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetMeltResult(System.String,System.Byte)">
+            <summary>
+            获取熔解程序段数据
+            </summary>
+            <param name="series">设备序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetResult(System.String,System.Byte)">
+            <summary>
+            获取所有结果数据(已过时,应使用GetExperimentResult作为替代)
+            </summary>
+            <param name="series">设备序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetExperimentResult(System.String,System.Byte)">
+            <summary>
+            获取实验数据(包含结果数据)
+            </summary>
+            <param name="series">设备序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.OpenDoor(System.String,System.Byte)">
+            <summary>
+            打开自动门
+            </summary>
+            <param name="series">仪器序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.CloseDoor(System.String,System.Byte)">
+            <summary>
+            关闭自动门
+            </summary>
+            <param name="series">仪器序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.CanOperateDoor(System.String,System.Byte)">
+            <summary>
+            获取是否可以操作自动门
+            </summary>
+            <param name="series">仪器序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetAutoDoorStauts(System.String,System.Byte)">
+            <summary>
+            获取自动门操作结果
+            </summary>
+            <param name="series">仪器序列号</param>
+            <param name="block">仪器模块(比如：0x01为使用模块A；0x02为使用模块B；0x03为使用模块A和模块B)，默认值0x00表示所有模块</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetAutoDoorState(System.String)">
+            <summary>
+            **特别提示**
+            **调用此接口前需先调用CheckDeviceState来更新设备的状态**
+            **当设备正在运行实验时状态会自动更新，无需频繁调用CheckDeviceState**
+            获取自动门状态结果
+            </summary>
+            <param name="series">仪器序列号</param>
+            <returns>
+            ErrorCode = CommandExecuting    正在获取最新的设备状态，稍后再调用此接口
+            ErrorCode = DeviceStateNotFound 未获取到仪器的状态
+            ErrorCode = DeviceNotFound      未找到该仪器
+            ErrorCode = DeviceNotSupport    设备不支持此功能
+            
+            ErrorCode = None 时可以通过APIAutoDoorStateResult的Result来正确的获取到各个自动门的状态
+            Result解释{未知,打开状态,关闭状态,实验正在运行,自动门正在运行,状态查询中,出错}
+            Result    { 0,      1,      2,         3,             4,        5       , 6}
+            
+            </returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.CheckDeviceState(System.String)">
+            <summary>
+            检查设备状态
+            **特别提示**
+            **当运行的设备中包含异常中断的实验 。**
+            **此时调用此接口与COM口通信会导致仪器停止运行 20250805后会返回false**
+            </summary>
+            <param name="series">仪器序列号</param>
+            <returns>
+            ErrorCode = DeviceNotFound      未找到该仪器
+            ErrorCode = DeviceNotSupport    设备不支持此功能
+            </returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.LoadExperiment(System.String)">
+            <summary>
+            加载实验结果，不需要释放内存
+            </summary>
+            <param name="file">数据文件路径</param>
+            <returns>实验分析结果</returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.LoadExperimentResult(System.String)">
+            <summary>
+            加载实验结果，不需要释放内存
+            </summary>
+            <param name="file">数据文件路径</param>
+            <returns>实验分析结果</returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.OpenExperiment(System.String)">
+            <summary>
+            打开本地实验文件，并加载到内存中，不使用时需要调用CloseExperiment关闭实验，释放内存
+            1、OpenExperiment
+            2、GetExperimentParamter、GetExperimentBasicInfo (修改分析参数、实验基本信息前需先获取此参数后再进行修改)
+            3、SetExperimentParamter、SetExperimentBasicInfo、SetProjectRule
+            4、SaveExperiment
+            5、CloseExperiment
+            </summary>
+            <param name="file">数据文件路径</param>
+            <returns>实验</returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetExperimentData(System.String)">
+            <param name="name">实验名称</param>
+            <returns>实验</returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.SaveExperiment(System.String)">
+            <summary>
+            保存实验
+            </summary>
+            <param name="name">实验名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.CloseExperiment(System.String)">
+            <summary>
+            关闭实验
+            </summary>
+            <param name="name">实验名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetExperimentParamters(System.String)">
+            <summary>
+            获取实验所包含的参数
+            </summary>
+            <param name="name">实验名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.SetExperimentParamter(System.String,SLAN.API.Model.AnalyseParamter)">
+            <summary>
+            设置分析参数
+            </summary>
+            <param name="name">实验名称</param>
+            <param name="paramter">分析参数 </param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.SetProjectRule(System.String,System.String,System.String)">
+            <summary>
+            设置实验项目高级规则
+            </summary>
+            <param name="name">实验名称</param>
+            <param name="projectName">项目名称 </param>
+            <param name="rulePath">高级规则文件路径,路径为空时将设置为基本规则</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetExperimentBasicInfo(System.String)">
+            <summary>
+            获取实验基本信息
+            </summary>
+            <param name="name">实验名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.SetExperimentBasicInfo(System.String,SLAN.API.Model.ExperimentBasicInfo)">
+            <summary>
+            设置实验基本信息
+            </summary>
+            <param name="name">实验名称</param>
+            <param name="info">实验基本信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetAllExperimentName">
+            <summary>
+            获取所有服务端已加载的实验名称
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetExperimentRunTemperature(System.String)">
+            <summary>
+            获取实验运行温度
+            </summary>
+            <param name="name">实验名称</param>
+            <returns>实验运行温度</returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.DownloadFile(System.String)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="path">文件路径</param>
+            <returns>文件二进制数据</returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.IsSameProgram(System.String,System.String)">
+            <summary>
+            判断2个项目的实验程序是否一致，一致时可以同时运行
+            </summary>
+            <param name="project1">项目名称1</param>
+            <param name="project2">项目名称2</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.SaveExperimentStd(System.String,System.String,System.String)">
+            <summary>
+            保存实验的标准曲线至外部标准曲线文件中
+            </summary>
+            <param name="experimentName">实验名称</param>
+            <param name="projectName">项目名称 为空时保存实验中所有的标准曲线</param>
+            <param name="stdName">保存的外标文件名 为空时默认项目名称(项目名称为空时,文件名不起作用)</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetExternalStdData(System.String)">
+            <summary>
+            查找外部标准曲线文件,获取标准曲线数据
+            </summary>
+            <param name="stdName">外部标准曲线文件名,为空时获取所有</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.SetExperimentStd(System.String,System.String,System.String)">
+            <summary>
+            设置实验的外部标准曲线
+            </summary>
+            <param name="experimentName">实验名称</param>
+            <param name="projectName">需要设置外标的项目名称</param>
+            <param name="stdName">调用的外部标准曲线文件名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.RefreshProject">
+            <summary>
+            刷新项目
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.SetProjectBasicRule(SLAN.API.Model.BasicRule)">
+            <summary>
+            设置项目基础规则
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.GetProjectBasicRule(System.String)">
+            <summary>
+            获取项目基础规则的接口
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLAN.API.ISLANService.Login(System.String,System.String,System.Boolean)">
+            <summary>
+            登录
+            </summary>
+            <param name="userName">用户名</param>
+            <param name="password">密码</param>
+            <param name="isencrypted"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SLAN.API.Model.AnalyseParamter">
+            <summary>
+            分析参数
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.AnalyseParamter.ProjectName">
+            <summary>
+            项目名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.AnalyseParamter.AMPAlgorithm">
+            <summary>
+            扩增曲线算法
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.AnalyseParamter.Targets">
+            <summary>
+            目标列表
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.AnalyseParamter.CorssTalk">
+            <summary>
+            交叉干扰
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.AnalyseParamter.BasicRule">
+            <summary>
+            基础规则
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIAutoDoorStateResult">
+            <summary>
+            自动门状态返回结果
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIAutoDoorStateResult.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIBaseResult">
+            <summary>
+            返回值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIBaseResult.ErrorCode">
+            <summary>
+            返回值 0 成功 其他失败  
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIBaseResult.Message">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIBasicRuleResult">
+            <summary>
+            基础规则结果
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIBasicRuleResult.Result">
+            <summary>
+            基本规则
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIExperimentParamtersResult">
+            <summary>
+            返回值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIExperimentParamtersResult.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIDownloadResult">
+            <summary>
+            APIDownloadResult
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIDownloadResult.Data">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIExperimentRunTemperatureResult">
+            <summary>
+            返回值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIExperimentRunTemperatureResult.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIExternalStdResult">
+            <summary>
+            APIExternalStdResult
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIExternalStdResult.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIResult">
+            <summary>
+            返回值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIResult.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIExperimentBasicInfoResult">
+            <summary>
+            APIExperimentBasicInfoResult
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIExperimentBasicInfoResult.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIOpenedExperimentNameResult">
+            <summary>
+            APIOpenedExperimentNameResult返回值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIOpenedExperimentNameResult.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIExperimentResult">
+            <summary>
+            GetExperimentBasicInfo返回值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIExperimentResult.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.APIResult.APIUserResult">
+            <summary>
+            返回值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIUserResult.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.APIResult.APIUserResult.Success">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.BasicRule">
+            <summary>
+            基础规则
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.BasicRule.Name">
+            <summary>
+            项目名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.BasicRule.UseBasicRule">
+            <summary>
+            是否使用基本规则
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.BasicRule.ExperimentQC">
+            <summary>
+            实验质控
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.BasicRule.SampleQC">
+            <summary>
+            样品质控
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.BasicRule.ResultRule">
+            <summary>
+            结果判定
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.BasicRuleStructure">
+            <summary>
+            BasicRuleStructure
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.BasicRuleStructure.basicRule">
+            <summary>
+            基本规则
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.Experiment">
+            <summary>
+            实验
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.Name">
+            <summary>
+            实验名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.StartTime">
+            <summary>
+            实验开始时间
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.EndTime">
+            <summary>
+            实验开始结束时间
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.Operator">
+            <summary>
+            操作者
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.Auditor">
+            <summary>
+            审核者
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.Note">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.PlateNo">
+            <summary>
+            版号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.BatchNo">
+            <summary>
+            批次号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.SerialNumber">
+            <summary>
+            设备编号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.DeviceModel">
+            <summary>
+            设备型号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.Type">
+            <summary>
+            实验类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.UseModule">
+            <summary>
+            使用模块
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.UseHotBonnet">
+            <summary>
+            是否使用热盖
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.TemperatureControlMode">
+            <summary>
+            控温方式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.ScanMode">
+            <summary>
+            荧光扫描方式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.CustomColumns">
+            <summary>
+            自定义列名称(与患者信息中的CustomData对应)
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Experiment.WellResult">
+            <summary>
+            反应孔结果
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.Experiment.TargetStd">
+            <summary>
+            标准曲线数据
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.Experiment.Porjects">
+            <summary>
+            实验中的项目列表
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.TargetStd">
+            <summary>
+            目标标准曲线
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.TargetStd.ProjectName">
+            <summary>
+            检测项目名称
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.TargetStd.TargetName">
+            <summary>
+            检测目标名称
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.TargetStd.Slope">
+            <summary>
+            标准曲线斜率
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.TargetStd.Intercept">
+            <summary>
+            标准曲线截距
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.TargetStd.r_Value">
+            <summary>
+            标准曲线相关系数
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.TargetStd.Efficiency">
+            <summary>
+            扩增效率
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.TargetStd.StdDot">
+            <summary>
+            标准品数据点列表（X为浓度标称值的LOG值，Y为Ct值）
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.ExperimentBasicInfo">
+            <summary>
+            实验基本信息
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentBasicInfo.Operator">
+            <summary>
+            操作者
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentBasicInfo.Auditor">
+            <summary>
+            审核者
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentBasicInfo.Note">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentBasicInfo.PlateNo">
+            <summary>
+            版号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentBasicInfo.BatchNo">
+            <summary>
+            批次号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentBasicInfo.CustomizeData">
+            <summary>
+            定制信息
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.ExperimentSetting">
+            <summary>
+            实验设置；属性不设置时，采用默认值。
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.PlateFile">
+            <summary>
+            孔板导入文件路径（CSV文件），与PlateContent两者必须选择一项赋值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.PlateFlie">
+            <summary>
+            孔板导入文件路径（CSV文件），与PlateContent两者必须选择一项赋值 已废弃使用PlateFile替代
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.PlateContent">
+            <summary>
+            孔板导入文件内容（CSV文件内容），与PlateFile两者必须选择一项赋值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.Operator">
+            <summary>
+            操作者
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.Auditor">
+            <summary>
+            审核者
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.Note">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.PlateNo">
+            <summary>
+            孔板编号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.BatchNo">
+            <summary>
+            批次号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.UseHotBonnet">
+            <summary>
+            使用热盖
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.Block">
+            <summary>
+            使用模块
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.Name">
+            <summary>
+            文件名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.ScanMode">
+            <summary>
+            通道扫描模式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.TemperatureControlMode">
+            <summary>
+            温度控制方式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.FilePath">
+            <summary>
+            实验保存路径
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.ExperimentSetting.CustomizeData">
+            <summary>
+            客户定制信息json字符串
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.ExternalStd">
+            <summary>
+            外部标准曲线
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.ExternalStd.FileNmae">
+            <summary>
+            外部标准曲线文件名称
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.ExternalStd.TargetStd">
+            <summary>
+            标准曲线数据
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.MidValue">
+            <summary>
+            中间结果
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.MidValue.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.MidValue.Value">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.PatientInfo">
+            <summary>
+            患者信息
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.ID">
+            <summary>
+            唯一标示
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.Specimen">
+            <summary>
+            标本类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.SpecimenDate">
+            <summary>
+            采样日期
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.Doctor">
+            <summary>
+            送检医生
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.Office">
+            <summary>
+            送检科室
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.Diagnosis">
+            <summary>
+            诊断
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.CaseID">
+            <summary>
+            病历号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.BedID">
+            <summary>
+            病床号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.InPatientID">
+            <summary>
+            住院号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.OutPatientID">
+            <summary>
+            门诊号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.PatientInfo.CustomData">
+            <summary>
+            自定义
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.Peak">
+            <summary>
+            熔解峰
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Peak.Tm">
+            <summary>
+            熔解峰Tm
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Peak.Rm">
+            <summary>
+            熔解峰相对高度Rm
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Peak.Wm">
+            <summary>
+            熔解峰宽度Wm
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Peak.Ym">
+            <summary>
+            熔解峰绝对高度Ym
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.RuleItem">
+            <summary>
+            规则项
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.SampleType">
+            <summary>
+            样本类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.IsAnyTarget">
+            <summary>
+             是否为任一目标
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.TargetName">
+            <summary>
+            检测目标
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.LeftValue">
+            <summary>
+            左端数值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.LeftOperator">
+            <summary>
+            左端比较符
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.CalcResult">
+            <summary>
+            数据类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.RightOperator">
+            <summary>
+            右端比较符
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.RightValue">
+            <summary>
+            右端数值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RuleItem.Color">
+            <summary>
+            显示颜色 默认黑色
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.SimpleRule">
+            <summary>
+            简单规则
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SimpleRule.Use">
+            <summary>
+            是否使用
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SimpleRule.Items">
+            <summary>
+            规则项
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.Step">
+            <summary>
+            PCR程序-扩增程序段-步骤
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Step.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Step.Temperature">
+            <summary>
+            设置温度(°C)
+            </summary>
+        </member>
+        <member name="P:SLAN.API.Model.Step.HoldTime">
+            <summary>
+            保持时间(单位：秒)
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Step.IsAcquisition">
+            <summary>
+            是否荧光检测
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Step.IsAdvProgram">
+            <summary>
+            是否高级编程
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Step.StartCycle">
+            <summary>
+            高级编程的起始循环
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Step.TempVarValue">
+            <summary>
+            温度变化值（°C）（大于0：递增。小于0：递减）
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Step.TimeVarValue">
+            <summary>
+            时间变化值（单位：秒）（大于0：递增。小于0：递减）
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Step.Ramp">
+            <summary>
+            升降温速率(°C/s)（等于0：忽视。大于0：使用）
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.SectionMelt">
+            <summary>
+            PCR程序-程序段 熔解程序段
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SectionMelt.ScanMode">
+            <summary>
+            扫描方式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SectionMelt.Rate">
+            <summary>
+            速率（°C/s）
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SectionMelt.Interval">
+            <summary>
+            扫描间隔（°C）
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SectionMelt.HoldTime">
+            <summary>
+            保持时间（s）
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SectionMelt.StartTemp">
+            <summary>
+            起始温度（°C）
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SectionMelt.StartTempHoldTime">
+            <summary>
+            起始温度保持时间
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SectionMelt.EndTemp">
+            <summary>
+            结束温度（°C）
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.SectionAMP">
+            <summary>
+            PCR程序-程序段 扩增程序段
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SectionAMP.Cycles">
+            <summary>
+            循环数
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.SectionAMP.Items">
+            <summary>
+            步骤列表
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.Section">
+            <summary>
+            PCR程序-程序段
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Section.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.Program">
+            <summary>
+            PCR程序
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Program.Sections">
+            <summary>
+            程序段列表，需要根据实际情况创建不同的程序段
+            扩增程序段：SectionAMP
+            熔解程序段：SectionMelt
+            </summary>
+            
+        </member>
+        <member name="T:SLAN.API.Model.Project">
+            <summary>
+            项目
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.Name">
+            <summary>
+            项目名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.Type">
+            <summary>
+            实验类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.AMPAlgorithm">
+            <summary>
+            扩增曲线算法
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.Reaction">
+            <summary>
+            反应体系
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.Unit">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.Note">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.TubeSortByColumn">
+            <summary>
+            排序方式
+            True：竖排
+            False：横排
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.Targets">
+            <summary>
+            目标列表
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.Program">
+            <summary>
+            PCR程序段
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.CorssTalk">
+            <summary>
+            交叉干扰
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.Rule">
+            <summary>
+            高级规则文件路径
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Project.BasicRule">
+            <summary>
+            基础规则
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.RunExperimentResponse">
+            <summary>
+            运行实验响应
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunExperimentResponse.Error">
+            <summary>
+            错误代码
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunExperimentResponse.SavePath">
+            <summary>
+            文件保存路径
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.RunningInformation">
+            <summary>
+            运行信息
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.State">
+            <summary>
+            运行状态
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.Code">
+            <summary>
+            运行错误信息
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.RemainTime">
+            <summary>
+            剩余时间
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.RunningTime">
+            <summary>
+            已经运行时间
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.Running">
+            <summary>
+            正在运行的信息
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.HotlidTemperature">
+            <summary>
+            热盖温度
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.BlockTemperature">
+            <summary>
+            模块温度
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.TubeTemperature">
+            <summary>
+            试管温度
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.SetTemperature">
+            <summary>
+            当前设置温度
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.Cycle">
+            <summary>
+            当前程序段已经运行到第几个循环
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningInformation.HoldTime">
+            <summary>
+            当前步骤保持时间
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.Dot">
+            <summary>
+            点
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Dot.X">
+            <summary>
+            X
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Dot.Y">
+            <summary>
+            Y
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.TargetParamterMelt">
+            <summary>
+            目标参数-熔解曲线
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamterMelt.MinTemperature">
+            <summary>
+            最小温度
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamterMelt.MaxTemperature">
+            <summary>
+            最大温度
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamterMelt.NoiseThreshold">
+            <summary>
+            噪声阈值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamterMelt.PeekWidthThreshold">
+            <summary>
+            峰宽阈值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamterMelt.PeekHightThreshold">
+            <summary>
+            峰高阈值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamterMelt.PeekType">
+            <summary>
+            熔解峰型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamterMelt.MeltPeakAlgorithm">
+            <summary>
+            熔解曲线寻峰算法(实验类型为熔解曲线时，设定)
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.TargetParamter">
+            <summary>
+            目标参数
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamter.QualitativeAnalysis">
+            <summary>
+            True：定性分析
+            False：定量分析
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamter.BeginBaseline">
+            <summary>
+            基线起点
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamter.EndBaseline">
+            <summary>
+            基线终点
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamter.AutoThreshold">
+            <summary>
+            自动阀值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamter.Threshold">
+            <summary>
+            非自动阈值时，手动阀值设置值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamter.OptimizationMode">
+            <summary>
+            基线优化方式
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamter.DigitalFilter">
+            <summary>
+            数字滤波
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamter.DetectionMin">
+            <summary>
+            检测下限(定量分析时有效)
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetParamter.DetectionMax">
+            <summary>
+            检测上限(定量分析时有效)
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.Target">
+            <summary>
+            目标
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Target.Name">
+            <summary>
+            目标名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Target.TubeNo">
+            <summary>
+            试管编号(从1开始)
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Target.ChannelNo">
+            <summary>
+            通道编号(从1开始)
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Target.TargetIndex">
+            <summary>
+            编号(从1开始)
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Target.Dye">
+            <summary>
+            染料名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Target.Paramter">
+            <summary>
+            目标参数，根据实验类型创建不同的参数对象
+            定性定量：TargetParamter
+            熔解曲线：TargetParamterMelt
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Target.Color">
+            <summary>
+            颜色
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.TemperatureDot">
+            <summary>
+            温度点
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TemperatureDot.RunTemperature">
+            <summary>
+            运行温度数据
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TemperatureDot.HotlidTemperature">
+            <summary>
+            热盖温度数据
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TemperatureDot.Time">
+            <summary>
+            时间(秒)
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.WellResult">
+            <summary>
+            反应孔结果
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.ID">
+            <summary>
+            反应孔标识，比如：A1、A2等等
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.SampleWellNames">
+            <summary>
+            样本所在反应空名称，比如：三管实验[A1,A2,A3]
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.SampleType">
+            <summary>
+            样本类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.SampleTypeName">
+            <summary>
+            样本类型名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.SampleName">
+            <summary>
+            样本名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.CompoundTubeNo">
+            <summary>
+            复管编号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.PatientInfo">
+            <summary>
+            样本患者信息
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.TargetResults">
+            <summary>
+            反应孔包含的目标结果
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.SampleConclusion">
+            <summary>
+            样本结论
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.SampleMidValue">
+            <summary>
+            样本中间结果
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.WellConclusion">
+            <summary>
+            孔结论
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.WellMidValue">
+            <summary>
+            样本中间结果
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.WellResult.ProjectName">
+            <summary>
+            项目名称
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.TargetResult">
+            <summary>
+            目标结果
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.Channel">
+            <summary>
+            检测通道
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.Name">
+            <summary>
+            检测目标，比如HBV
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.Ct">
+            <summary>
+            Ct值
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.CtMean">
+            <summary>
+            CtMean
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.CtSD">
+            <summary>
+            CtSD
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.CtCV">
+            <summary>
+            CtCV
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.Cn">
+            <summary>
+            Cn
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.CnMean">
+            <summary>
+            CnMean
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.CnSD">
+            <summary>
+            CnSD
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.CnCV">
+            <summary>
+            CnCV
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.Rn">
+            <summary>
+            Rn
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.RawCurve">
+            <summary>
+            原始曲线数据
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.AMPCurve">
+            <summary>
+            扩增曲线数据
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.RawMeltCurve">
+            <summary>
+            原始熔解曲线数据
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.PeakCurve">
+            <summary>
+            峰值曲线数据
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.PeakValues">
+            <summary>
+            熔解峰数据
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.TubeName">
+            <summary>
+            试管名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.TubeNo">
+            <summary>
+            试管编号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.Dye">
+            <summary>
+            染料名称
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.Property">
+            <summary>
+            属性
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.ConclusionList">
+            <summary>
+            目标结论
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.MidValue">
+            <summary>
+            中间结果
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.TargetResult.Color">
+            <summary>
+            显示颜色
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.Device">
+            <summary>
+            设备
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Device.SerialNumber">
+            <summary>
+            设备编号
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Device.DeviceType">
+            <summary>
+            设备类型
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Device.ExperimentList">
+            <summary>
+            正在运行的实验信息
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Device.Fast">
+            <summary>
+            设备是否支持Fast控温
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Device.UseBlock">
+            <summary>
+            （已废弃，转移到RunningBlockList）
+            设备模块使用状态，每个模块占1位(0：未使用， 1：已使用)
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.Device.PcrFile">
+            <summary>
+            （已废弃，转移到RunningBlockList）
+            设备结果保存路径
+            </summary>
+        </member>
+        <member name="T:SLAN.API.Model.RunningBlock">
+            <summary>
+            正在运行的模块
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningBlock.Block">
+            <summary>
+            设备运行模块，每个模块占1位(0：未使用， 1：已使用)
+            </summary>
+        </member>
+        <member name="F:SLAN.API.Model.RunningBlock.PcrFile">
+            <summary>
+            设备运行模块结果保存路径
+            </summary>
+        </member>
+        <member name="T:SLAN.API.SlanServerFault">
+            <summary>
+            异常信息
+            运行出现错误时候，要抛出SlanServerFault异常
+            </summary>
+        </member>
+        <member name="M:SLAN.API.SlanServerFault.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:SLAN.API.SlanServerFault.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="F:SLAN.API.SlanServerFault.Message">
+            <summary>
+            信息
+            </summary>
+        </member>
+    </members>
+</doc>

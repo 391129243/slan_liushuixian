@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "common.h": "c",
+        "logger.h": "c",
+        "array": "c",
+        "string": "c",
+        "map": "cpp",
+        "uartprotocol.h": "c",
+        "*.tcc": "cpp"
+    }
+}

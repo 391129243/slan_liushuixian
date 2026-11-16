@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "data_server"
+		},
+		{
+			"path": "../../Bio_PCR_20230927"
 		}
 	]
 }

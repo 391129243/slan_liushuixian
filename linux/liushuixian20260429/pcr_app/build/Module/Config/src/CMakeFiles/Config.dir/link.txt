@@ -1,0 +1,2 @@
+/usr/bin/ar qc libConfig.a CMakeFiles/Config.dir/ConfSrv.c.o CMakeFiles/Config.dir/ConfLocal.c.o CMakeFiles/Config.dir/ConfLog.c.o
+/usr/bin/ranlib libConfig.a

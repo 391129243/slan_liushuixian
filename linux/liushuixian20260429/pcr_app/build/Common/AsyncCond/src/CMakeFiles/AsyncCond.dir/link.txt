@@ -1,0 +1,2 @@
+/usr/bin/ar qc libAsyncCond.a CMakeFiles/AsyncCond.dir/AsyncCond.c.o
+/usr/bin/ranlib libAsyncCond.a

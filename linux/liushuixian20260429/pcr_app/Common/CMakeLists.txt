@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
+project(Common LANGUAGES C)
+
+add_subdirectory("MD5")
+add_subdirectory("Timer")
+add_subdirectory("MsgQue")
+add_subdirectory("Logger")
+add_subdirectory("System")
+add_subdirectory("LoopQue")
+add_subdirectory("AsyncCond")

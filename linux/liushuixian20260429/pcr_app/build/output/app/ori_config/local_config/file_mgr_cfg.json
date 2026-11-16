@@ -1,0 +1,23 @@
+{
+    "rna_log": {
+        "file_dir":"/logs/rna_app/",
+        "prefix":"RnaApp",
+        "clean_time":1,
+        "clean_threshold":300
+    },
+    "pcr_log": {
+        "file_dir":"/logs/pcr_app/",
+        "prefix":"PcrApp",
+        "clean_time":1,
+        "clean_threshold":300
+    },
+    "pcr_result": {
+        "file_dir":"/pcr/result/",
+        "prefix":"pcr_result",
+        "clean_time":1,
+        "clean_threshold":600
+    },
+    "disk": {
+        "used_rate_threshold":0.7
+    }
+}

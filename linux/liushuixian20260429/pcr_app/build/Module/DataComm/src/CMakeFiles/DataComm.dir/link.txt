@@ -1,0 +1,2 @@
+/usr/bin/ar qc libDataComm.a CMakeFiles/DataComm.dir/mongoose.c.o CMakeFiles/DataComm.dir/Wss.c.o CMakeFiles/DataComm.dir/Uart.c.o
+/usr/bin/ranlib libDataComm.a
