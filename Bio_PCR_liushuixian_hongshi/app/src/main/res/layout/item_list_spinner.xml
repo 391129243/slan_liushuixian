@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="2dp">
+    <TextView
+        android:id="@+id/item_spinner_tv"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:textColor="@color/black"
+        android:background="@drawable/selector_item_spinner_bg"
+        android:textSize="@dimen/font_size_normal_18sp"
+        android:gravity="center"/>
+</LinearLayout>

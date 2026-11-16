@@ -1,0 +1,122 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace "com.gzlab.autoassemblyline_client"
+
+    signingConfigs {
+      debug {
+            storeFile file('./keystore/platform.jks')
+            storePassword 'android'
+            keyAlias = 'android'
+            keyPassword 'android'
+        }
+    }
+
+    compileSdkVersion 33
+    buildToolsVersion = '30.0.3'
+    defaultConfig {
+        applicationId "com.gzlab.autoassemblyline_client"
+        minSdkVersion 26
+        targetSdkVersion 33
+        versionCode 20271109
+        versionName "V1.0.17 20261109宏石(增加内存log、优化client、增加重启client消息)"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        jniLibs {
+            pickFirsts += ['lib/arm64-v8a/liberrno-lib.so', 'lib/arm64-v8a/libusb-lib.so', 'lib/arm64-v7a/liberrno-lib.so', 'lib/arm64-v7a/libusb-lib.so', 'lib/armeabi-v7a/liberrno-lib.so', 'lib/armeabi-v7a/libusb-lib.so', 'lib/x86/liberrno-lib.so', 'lib/x86/libusb-lib.so', 'lib/x86_64/liberrno-lib.so', 'lib/x86_64/libusb-lib.so']
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+
+}
+
+dependencies {
+    implementation project(path: ':SerialPortLibrary')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation files('libs/lite-orm-1.9.2.jar')
+    implementation 'com.android.support:appcompat-v7:33+'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+//    implementation 'com.github.mjdev:libaums:0.7.4'
+    implementation 'me.jahnen.libaums:core:0.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.8'
+    implementation 'com.squareup.okio:okio:1.15.0'
+    implementation 'androidx.annotation:annotation:1.5.0'
+    //implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+
+    implementation ("org.greenrobot:eventbus:3.3.1")
+
+
+    implementation files('libs/commons-net-3.10.0.jar')
+
+    //PCR
+    implementation 'com.tencent:mmkv:1.2.15'
+    implementation group: 'com.google.guava', name: 'guava', version: '24.1-jre'//23.5
+    implementation 'cn.hutool:hutool-all:5.7.14'
+    implementation 'com.alibaba:fastjson:1.1.54.android'
+   // implementation 'com.gitee.sscl:SerialPortLibrary:1.0.5'//1.0.5
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'//3.0.2 3.1.0
+    implementation'com.google.android.material:material:1.0.0-rc01'
+    implementation(fileTree("libs"))
+
+    //SLANSDK的引用
+    implementation 'com.github.mik3y:usb-serial-for-android:3.5.1'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.iqiyi.xcrash:xcrash-android-lib:2.5.7'
+    implementation files('libs/slansdk261026.aar')
+    implementation files('libs/EnjoySDK-CompatibleVersion-V1.0.3-8.aar')
+    implementation 'com.itextpdf:itext7-core:7.1.13'
+    implementation 'de.mindpipe.android:android-logging-log4j:1.0.3'
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation 'com.itextpdf:itextg:5.5.10'
+
+    // 如果你需要生成图片形式的条形码，可以添加以下依赖
+   // implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
+    implementation 'com.google.zxing:core:3.4.1'
+    // 对于Android使用ZXing的集成库
+    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
+
+
+    implementation 'ca.uhn.hapi:hapi-base:2.4'
+    implementation 'ca.uhn.hapi:hapi-structures-v251:2.4'
+
+    //websocket
+    implementation 'org.java-websocket:Java-WebSocket:1.5.2'
+}
+configurations {
+    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+    all*.exclude group: 'com.google.guava', module: 'guava'
+
+
+
+}

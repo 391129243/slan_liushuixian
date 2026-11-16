@@ -1,0 +1,68 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 23 01 00 08 00 00 00 00 00 2C FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            }
+        ],
+        "Description": "托盘回零"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 45 01 00 08 00 00 00 00 00 4E FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 23 01 00 32 00 00 0B B8 01 19 FF FC FF ",
+                "Delay": 0,
+                "Description": "3",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关门正位"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 12 01 00 0A 00 00 65 90 01 12 FF FC FF ",
+                "Delay": 0,
+                "Description": "26",
+                "IsSelected": true
+            }
+        ],
+        "Description": "PCR上升"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 34 01 00 0A 00 00 32 C8 01 39 FF FC FF ",
+                "Delay": 0,
+                "Description": "13",
+                "IsSelected": true
+            }
+        ],
+        "Description": "推杆下降"
+    }
+]

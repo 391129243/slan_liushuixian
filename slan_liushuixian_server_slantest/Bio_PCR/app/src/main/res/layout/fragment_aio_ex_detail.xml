@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/root_ll"
+        android:background="@color/white">
+        <include
+            android:id="@+id/slan_ex_result_detail_title_layout"
+            layout="@layout/include_common_title_layout"/>
+        <RelativeLayout
+            android:id="@+id/slan_ex_detail_info_layout"
+            android:layout_below="@id/slan_ex_result_detail_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:layout_marginBottom= "10dp"
+            android:paddingRight="20dp"
+            android:background="@color/color_bioway_top_bar_bg">
+
+            <TextView
+                android:id="@+id/result_more_tv"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/more"
+                android:drawableTop="@drawable/selector_ex_more"
+                android:textColor="@color/color_white_blue_selector"
+                android:textSize="@dimen/font_size_normal_16sp" />
+
+            <TextView
+                android:id="@+id/save_json_tv"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/result_more_tv"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/save_file"
+                android:drawableTop="@drawable/selector_save_file"
+                android:textColor="@color/color_white_blue_selector"
+                android:textSize="@dimen/font_size_normal_16sp" />
+            <TextView
+                android:id="@+id/upload_json_tv"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/save_json_tv"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/upload"
+                android:drawableTop="@drawable/selector_upload_file"
+                android:textColor="@color/color_white_blue_selector"
+                android:textSize="@dimen/font_size_normal_16sp" />
+            <TextView
+                android:id="@+id/result_screenshot_tv"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/upload_json_tv"
+                android:layout_marginRight="20dp"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_size_normal_16sp"
+                android:textColor="@color/white"
+                android:text="@string/screenshot"
+                android:drawableTop="@drawable/selector_ex_screenshot"
+                android:gravity="center"/>
+
+
+            <!--样本编号-->
+            <com.gidi.bio_pcr.view.CustomTitleText
+                android:id="@+id/result_ex_time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:title_text="@string/result_time"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
+                custom:content_text=""
+                custom:title_text_color="@color/white"
+                custom:content_text_color="@color/white" />
+            <!--测试项目-->
+            <TextView
+                android:id="@+id/slan_result_ex_testitem_title_tv"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/result_ex_time_tv"
+                android:padding="6dp"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
+                android:gravity="left|center_vertical"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/result_testitem" />
+
+            <TextView
+                android:id="@+id/result_ex_testitem_tv"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/slan_result_ex_testitem_title_tv"
+                android:gravity="left|center_vertical"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+
+        </RelativeLayout>
+
+
+
+        <!--通道-->
+        <LinearLayout
+            android:id="@+id/channel_layout"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/slan_ex_detail_info_layout"
+            android:padding="2dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/running_select_channel"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:textColor="@color/blue"/>
+
+            <com.gidi.bio_pcr.view.CustomCheckText
+                android:id="@+id/all_channel_check_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_all_channel_bg"
+                custom:content_text="@string/running_channel_all_chekck"
+                custom:content_text_size="20sp"/>
+
+            <com.gidi.bio_pcr.view.CustomCheckText
+                android:id="@+id/fam_channel_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="28dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_fam_bg"
+                custom:content_text="FAM"
+                custom:content_text_size="20sp"/>
+
+            <com.gidi.bio_pcr.view.CustomCheckText
+                android:id="@+id/hex_channel_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="28dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_hex_bg"
+                custom:content_text="HEX"
+                custom:content_text_size="20sp"/>
+
+
+            <com.gidi.bio_pcr.view.CustomCheckText
+                android:id="@+id/rox_channel_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="28dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_rox_bg"
+                custom:content_text="ROX"
+                custom:content_text_size="20sp"/>
+
+            <com.gidi.bio_pcr.view.CustomCheckText
+                android:id="@+id/cy5_channel_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="28dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_cy5_bg"
+                custom:content_text="CY5"
+                custom:content_text_size="20sp"/>
+
+            <com.gidi.bio_pcr.view.CustomCheckText
+                android:id="@+id/quasar_channel_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="28dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_quasar_bg"
+                custom:content_text="QUA 705"
+                custom:content_text_size="20sp"/>
+
+            <com.gidi.bio_pcr.view.CustomCheckText
+                android:id="@+id/atto_channel_tv"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="28dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_atto_bg"
+                custom:content_text="ATTO 425"
+                custom:content_text_size="20sp"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/sec_analyse_tv"
+            android:layout_width="128dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@id/channel_layout"
+            android:gravity="center"
+            android:text="@string/second_analyse"
+            android:layout_marginTop="28dp"
+            android:textColor="@color/color_white_blue_selector"
+            android:textSize="@dimen/font_size_normal_16sp"
+            android:background="@drawable/selector_rect_blue_recycle"/>
+
+
+        <RadioGroup
+            android:id="@+id/curve_rb_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/slan_ex_detail_info_layout"
+            android:layout_toRightOf="@id/channel_layout"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+            <RadioButton
+                style="@style/style_tab_system_info"
+                android:id="@+id/rawcurve_rb"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/running_curve_virgin"
+                />
+            <RadioButton
+                style="@style/style_tab_system_info"
+                android:id="@+id/ampcurve_rb"
+                android:layout_marginLeft="4dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/running_curve_amplify"
+                />
+            <RadioButton
+                style="@style/style_tab_system_info"
+                android:id="@+id/slan_ex_result_meltcurve_rb"
+                android:layout_marginLeft="4dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/running_curve_melt"
+                />
+            <RadioButton
+                style="@style/style_tab_system_info"
+                android:id="@+id/slan_ex_result_peakcurve_rb"
+                android:layout_marginLeft="4dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/running_curve_melt_peak" />
+            <RadioButton
+                style="@style/style_tab_system_info"
+                android:id="@+id/slan_ex_result_list_rb"
+                android:layout_marginLeft="4dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/running_curve_excel" />
+            <RadioButton
+                style="@style/style_tab_system_info"
+                android:id="@+id/slan_ex_result_sec_analyse_rb"
+                android:layout_marginLeft="4dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="@string/running_curve_set_paramter" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/curve_chart_layout"
+            android:layout_width="match_parent"
+            android:layout_height="540dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:padding="4dp"
+            android:layout_below="@id/curve_rb_rg"
+            android:layout_toRightOf="@id/channel_layout">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/result_curve_chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:layout_marginTop="10dp"
+                android:background="#f3f5f8"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/result_exl_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/curve_rb_rg"
+            android:layout_toRightOf="@id/channel_layout"
+            android:layout_above="@id/hole_layout"
+            android:visibility="gone"
+            android:padding="4dp"
+            android:orientation="vertical">
+            <!---标题-->
+            <include
+                android:id="@+id/slan_ex_detail_exl_title_layout"
+                layout="@layout/include_fragment_ex_slan_result_excel_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp" />
+            <ListView
+                android:id="@+id/result_exl_lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:dividerHeight="1dp"
+                android:divider="@color/detect_gray"/>
+        </LinearLayout>
+
+
+        <!--二次分析的页面-->
+        <RelativeLayout
+            android:id="@+id/sec_analyse_layout"
+            android:layout_width="match_parent"
+            android:layout_height="540dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:visibility="gone"
+            android:padding="4dp"
+            android:orientation="vertical"
+            android:layout_below="@id/curve_rb_rg"
+            android:layout_toRightOf="@id/channel_layout">
+            <!--基本参数，熔解曲线参数标题-->
+            <LinearLayout
+                android:id="@+id/slan_ex_result_sec_analyse_param_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/basic_param_title_tv"
+                    android:layout_width="120dp"
+                    android:layout_height="32dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:textColor="@color/white"
+                    android:text="@string/config_info_basic_parameters"
+                    android:background="@drawable/shape_rect_blue"/>
+                <TextView
+                    android:id="@+id/melt_param_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:gravity="center"
+                    android:text="@string/config_info_melt_curve_parameters"
+                    android:background="@drawable/shape_rect_blue_stroke"/>
+            </LinearLayout>
+            <!--扩增曲线算法参数-->
+            <LinearLayout
+                android:id="@+id/amp_param_layout"
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                android:visibility="visible"
+                android:layout_below="@id/slan_ex_result_sec_analyse_param_title_layout"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/config_info_amplification_curve_algorithm"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/font_size_normal_18sp" />
+
+                    <TextView
+                        android:id="@+id/amp_algorithm_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="12dp"
+                        android:text="@string/config_info_ampalgorithm_default"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_size_normal_18sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@drawable/arrow_press" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:orientation="horizontal"
+                    android:background="@color/color_recycle">
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_dye_1"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_channel"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_analyse_type"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_begin_baseline"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_end_baseline"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_optimization"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_auto_threshold"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_manual_threshold"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_digital_filter"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+                <ListView
+                    android:id="@+id/amp_algorithm_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="1dp"
+                    android:divider="@color/blue"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+            </LinearLayout>
+            <!--熔解曲线算法参数-->
+            <LinearLayout
+                android:id="@+id/melt_param_layout"
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                android:layout_below="@id/slan_ex_result_sec_analyse_param_title_layout"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@color/color_recycle"
+                    android:orientation="horizontal">
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_dye_1"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_channel"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_min_temp"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_max_temp"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_melt_algorithm"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_peak_threshold"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="@string/config_info_peak_type"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+                <!--熔解曲线参数-->
+                <ListView
+                    android:id="@+id/melt_paramter_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="1dp"
+                    android:divider="@color/blue"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/hole_layout"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="46dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="0dp"
+            android:layout_toRightOf="@id/channel_layout"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/result_sample_one_ll"
+                android:layout_width="118dp"
+                android:layout_height="188dp"
+                android:background="@drawable/shape_rect_blue_stroke_12_normal_bg"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="28dp">
+
+                <TextView
+                    android:id="@+id/sample_one_b8_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="B8"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+
+                <TextView
+                    android:id="@+id/sample_one_a8_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="A8"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/result_sample_two_ll"
+                android:layout_width="118dp"
+                android:layout_height="188dp"
+                android:gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="36dp"
+                android:background="@drawable/shape_rect_blue_stroke_12_normal_bg"
+                android:orientation="vertical"
+                android:padding="28dp">
+
+
+                <TextView
+                    android:id="@+id/sample_two_b7_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="B7"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+
+
+                <TextView
+                    android:id="@+id/sample_two_a7_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="A7"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/result_sample_three_ll"
+                android:layout_width="118dp"
+                android:layout_height="188dp"
+                android:gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="42dp"
+                android:background="@drawable/shape_rect_blue_stroke_12_normal_bg"
+                android:orientation="vertical"
+                android:padding="28dp">
+
+                <TextView
+                    android:id="@+id/sample_three_b6_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="B6"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+
+                <TextView
+                    android:id="@+id/sample_three_a6_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="A6"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/result_sample_four_ll"
+                android:layout_width="118dp"
+                android:layout_height="188dp"
+                android:gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="42dp"
+                android:background="@drawable/shape_rect_blue_stroke_12_normal_bg"
+                android:orientation="vertical"
+                android:padding="28dp">
+
+                <TextView
+                    android:id="@+id/sample_four_b5_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="B5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+
+                <TextView
+                    android:id="@+id/sample_four_a5_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="A5"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/result_sample_five_ll"
+                android:layout_width="118dp"
+                android:layout_height="188dp"
+                android:gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="42dp"
+                android:background="@drawable/shape_rect_blue_stroke_12_normal_bg"
+                android:orientation="vertical"
+                android:padding="28dp">
+
+                <TextView
+                    android:id="@+id/sample_five_b4_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="B4"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+
+
+                <TextView
+                    android:id="@+id/sample_five_a4_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="A4"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/result_sample_six_ll"
+                android:layout_width="118dp"
+                android:layout_height="188dp"
+                android:gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="42dp"
+                android:background="@drawable/shape_rect_blue_stroke_12_normal_bg"
+                android:orientation="vertical"
+                android:padding="28dp">
+
+                <TextView
+                    android:id="@+id/sample_six_b3_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="B3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+
+                <TextView
+                    android:id="@+id/sample_six_a3_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="A3"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/result_sample_seven_ll"
+                android:layout_width="118dp"
+                android:layout_height="188dp"
+                android:gravity="center_horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="42dp"
+                android:background="@drawable/shape_rect_blue_stroke_12_normal_bg"
+                android:orientation="vertical"
+                android:padding="28dp">
+                <TextView
+                    android:id="@+id/sample_seven_b2_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="B2"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+                <TextView
+                    android:id="@+id/sample_seven_a2_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="A2"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/result_sample_eight_ll"
+                android:layout_width="118dp"
+                android:layout_height="188dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="42dp"
+                android:background="@drawable/shape_rect_blue_stroke_12_normal_bg"
+                android:padding="28dp">
+
+                <TextView
+                    android:id="@+id/sample_eight_b1_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="B1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+
+                <TextView
+                    android:id="@+id/sample_eight_a1_tv"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/selector_hole_state_bg"
+                    android:gravity="center"
+                    android:text="A1"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    </FrameLayout>
+</layout>

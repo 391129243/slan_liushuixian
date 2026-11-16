@@ -1,0 +1,183 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 02 01 00 0A 00 00 0A F0 01 07 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀2-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 0A F0 01 0A FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 41 01 00 0A 00 00 00 00 00 4C FF FC FF ",
+                "Delay": 0,
+                "Description": "左杆到管2",
+                "IsSelected": true
+            }
+        ],
+        "Description": "移杆开阀2/5"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 32 00 01 15 58 00 D3 FF FC FF ",
+                "Delay": 0,
+                "Description": "69-liejieye_height_setting",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 31 01 00 32 00 00 55 F0 01 A9 FF FC FF ",
+                "Delay": 0,
+                "Description": "22+liejieye_height_setting",
+                "IsSelected": true
+            }
+        ],
+        "Description": "抽裂解液_liejieye_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 02 01 00 0A 00 00 38 A4 00 E9 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀2-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 5A A0 01 06 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 31 01 00 0A 00 00 1F 40 00 9B FF FC FF ",
+                "Delay": 0,
+                "Description": "8",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀抬杆"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 10,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 0A 00 01 15 58 00 AB FF FC FF ",
+                "Delay": 0,
+                "Description": "71",
+                "IsSelected": true
+            }
+        ],
+        "Description": "磁珠活化"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 0A 00 01 15 58 00 AB FF FC FF ",
+                "Delay": 0,
+                "Description": "69-total_height_setting",
+                "IsSelected": true
+            }
+        ],
+        "Description": "磁珠活化_total_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 10,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 0A 00 01 15 58 00 AB FF FC FF ",
+                "Delay": 0,
+                "Description": "71",
+                "IsSelected": true
+            }
+        ],
+        "Description": "磁珠活化"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 32 00 01 15 58 00 D3 FF FC FF ",
+                "Delay": 0,
+                "Description": "69-total_height_setting",
+                "IsSelected": true
+            }
+        ],
+        "Description": "磁珠活化_total_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 2C EC 01 24 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-180",
+                "IsSelected": false
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 38 A4 00 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": false
+            }
+        ],
+        "Description": "关阀1/5"
+    }
+]

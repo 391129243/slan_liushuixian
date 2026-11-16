@@ -1,0 +1,81 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "finish",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 18 01 00 0A 00 00 00 00 00 23 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "升降回0"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 15 01 01 0A 00 00 00 00 00 21 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 16 01 01 0A 00 00 00 00 00 22 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "Y回0"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 17 01 01 0A 00 00 00 00 00 23 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "X回0"
+    },
+    {
+        "IsSelected": true,
+        "Name": "finish",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    }
+]

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/tab_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="12dp"
+        android:layout_centerVertical="true"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:textSize="@dimen/font_size_large_24sp"/>
+    <!--显示时间-->
+    <ImageView
+        android:id="@+id/tab_back_img"
+        android:layout_width="wrap_content"
+        android:padding="8dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_top_tab_back"
+        android:background="@drawable/shape_oval_top_bg"
+        android:contentDescription="@null"/>
+
+    <TextView
+        android:id="@+id/secret_tv"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@id/tab_back_img"
+        android:layout_alignParentRight="true"/>
+
+</RelativeLayout>

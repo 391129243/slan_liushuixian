@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="@color/white">
+
+    <EditText
+        android:id="@+id/dig_category_edit"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:textSize="@dimen/font_size_normal_18sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        android:background="@drawable/shape_rect_stoke"/>
+    <ListView
+        android:id="@+id/dig_category_lv"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="6dp"
+        android:dividerHeight="1dp"
+        android:layout_below="@id/dig_category_edit"/>
+
+</RelativeLayout>

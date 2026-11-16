@@ -1,0 +1,107 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 23 01 00 08 00 00 00 00 00 2C FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            }
+        ],
+        "Description": "托盘收回"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 45 01 00 08 00 00 00 00 00 4E FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 23 01 00 32 00 00 0B B8 01 19 FF FC FF ",
+                "Delay": 0,
+                "Description": "3",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关门正位"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 DA C0 01 D8 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 DA C0 01 D9 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 21 01 01 0A 00 00 3E 80 00 EB FF FC FF ",
+                "Delay": 0,
+                "Description": "16",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 22 01 01 0A 00 00 3E 80 00 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "16",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "托盘推拉杆落"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 43 01 00 0A 00 00 27 10 00 85 FF FC FF ",
+                "Delay": 0,
+                "Description": "10",
+                "IsSelected": true
+            }
+        ],
+        "Description": "推拉杆平移"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 43 01 00 0A 00 00 13 88 00 E9 FF FC FF ",
+                "Delay": 0,
+                "Description": "5",
+                "IsSelected": true
+            }
+        ],
+        "Description": "推拉杆平移"
+    }
+]

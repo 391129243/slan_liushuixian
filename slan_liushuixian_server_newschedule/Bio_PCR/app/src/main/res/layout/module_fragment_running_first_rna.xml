@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="14dp"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/shape_rect_white_bg">
+
+    <RelativeLayout
+        android:id="@+id/layout_state"
+        android:layout_width="340dp"
+        android:layout_height="match_parent"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:background="@drawable/common_main_content_bg">
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/running_rna_project_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/runing_detect_template_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/running_rna_project_tv"
+            custom:title_text="@string/running_rna_step_name"
+            android:layout_marginTop="28dp"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/runing_detect_discription_tv"
+            android:layout_below="@id/runing_detect_template_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            custom:title_text="@string/running_rna_step_discription"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/runing_detect_step_status_tv"
+            android:layout_below="@id/runing_detect_discription_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            custom:title_text="@string/running_rna_step_status"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/runing_detect_total_step_tv"
+            android:layout_below="@id/runing_detect_step_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            custom:title_text="@string/running_rna_step_num"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/runing_detect_temp_tv"
+            android:layout_below="@id/runing_detect_total_step_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            custom:title_text="@string/running_pcr_project_current_temp"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+        <!---已完成步骤数-->
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/runing_detect_step_done_tv"
+            android:layout_below="@id/runing_detect_temp_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            custom:title_text="@string/running_rna_step_done"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/layout_state">
+
+        <LinearLayout
+            android:id="@+id/running_counter_layout"
+            android:layout_width="188dp"
+            android:layout_height="188dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_oval_status_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Chronometer
+                android:id="@+id/first_rna_chronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="32sp" />
+
+            <TextView
+                android:id="@+id/first_rna_counter_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/run_rna_extraction_time"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large_22sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+
+
+</RelativeLayout>

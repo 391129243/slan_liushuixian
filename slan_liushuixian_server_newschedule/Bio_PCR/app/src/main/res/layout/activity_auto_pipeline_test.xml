@@ -1,0 +1,1847 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    tools:context="com.winters.boweilibrary.autopipeline.AutoPipelineTestActivity">
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:scrollbars="horizontal"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="1000dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="1000dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+		    <Button
+                        android:id="@+id/closebtn"
+                        android:layout_width="120dp"
+                        android:layout_height="80dp"
+                android:layout_marginLeft = "2dp"
+                        android:text="关闭"
+                        android:textSize="20sp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/wss_server"
+                        android:layout_width="120dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft = "2dp"
+                        android:text="启动wssserver"
+                        android:textSize="20sp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/slanpcr_wss_client"
+                        android:layout_width="120dp"
+                        android:layout_height="80dp"
+                        android:text="启动SLANclient"
+                        android:layout_marginLeft = "2dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/pcr_wss_client"
+                        android:layout_width="120dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft = "2dp"
+                        android:text="启动boweiclient"
+                        android:textSize="20sp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/rna_wss_client"
+                        android:layout_width="120dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft = "2dp"
+                        android:text="启动 核提client"
+                        android:textSize="20sp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <TextView
+                        android:id="@+id/selectItem"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft = "2dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="选中连接"
+                        android:textColor="@color/red"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/wss_server_log"
+                        android:layout_width="550dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="选中连接"
+                        android:textColor="@color/red"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/QueryDevicePCR1"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置PCR1"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/QueryDevicePCR2"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置PCR2"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/QueryDevicePCR3"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置PCR3"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/QueryDevicePCR4"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置PCR4"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/QueryDevicePCR5"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置PCR5"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/QueryDevicePCR6"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置PCR6"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/QueryDeviceSLANPCR1"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置SLAN1"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/QueryDeviceSLANPCR2"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置SLAN2"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/QueryDeviceSLANPCR3"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置SLAN3"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/QueryDeviceSLANPCR4"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置SLAN4"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/QueryDeviceSLANPCR5"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置SLAN5"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/QueryDeviceSLANPCR6"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置SLAN6"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/RestartSLANPCRApp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="重启SLAN App"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/RestartSLANPCRAppForce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="强制重启SLAN App"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/QueryDeviceRNA1"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置RNA1"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/QueryDeviceRNA2"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="设置RNA2"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/HeartBeat"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="心跳测试"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteResetForce"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="强制RNA复位"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/StopRNA"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="停止RNA"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ResumeRNA"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:text="异常恢复RNA"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+
+                    <Button
+                        android:id="@+id/StopPCR"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="停止PCR"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/RestPCR"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:text="复位SLANPCR"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/TestQRCode"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="QRcode测试"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteRNA"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="下发RNA模板"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteReset"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="下发RNA复位"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteResetExpetion"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="下发RNA异常复位"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecutePCRFirst"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:text="下发PCR1模板"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecutePCRSecond"
+                        android:layout_width="120dp"
+                        android:layout_height="40dp"
+                        android:text="下发PCR2模板"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/ExecuteSLANPCRFirst"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="SLAN_PCR1模板"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteSLANPCRSecond"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="SLAN_PCR2模板"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/upgradeRNA"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="升级RNA v1"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/upgradeRNA1"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="升级RNA v2"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/upgradePCR"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="升级PCR v1"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/upgradePCR1"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="升级PCR v2"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/ExecuteOpenDoor"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="开门"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteCloseDoor"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="关门"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteCoolerPan1"
+                        android:layout_width="180dp"
+                        android:layout_height="40dp"
+                        android:text="盘1半导体12度"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteCloseCoolerPan1"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="盘1半导体关"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteLedOpenPan4"
+                        android:layout_width="180dp"
+                        android:layout_height="40dp"
+                        android:text="盘4LED开"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/ExecuteLedClosePan4"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="盘4LED关"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="1000dp"
+                    android:layout_height="600dp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+                    <ListView
+                        android:id="@+id/listView_wssconnection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </ListView>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="600dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="600dp"
+                    android:layout_height="150dp"
+                    android:gravity="top"
+                    android:orientation="vertical">
+                    <ListView
+                        android:id="@+id/listView_QRcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                    </ListView>
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/main_top_state_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:visibility="visible"
+                    android:orientation="horizontal"
+                    android:background="#80B4FE">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Robot"
+                        android:padding="12dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="15sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/robot_state_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+                    <TextView
+                        android:id="@+id/robot_alarm_msg_tv"
+                        android:layout_width="260dp"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/red"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="580dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="源位置"
+                        android:textColor="@color/red"
+                        android:textSize="10sp" />
+
+                    <Spinner
+                        android:id="@+id/Spinner_source"
+                        android:gravity="top"
+                        android:layout_gravity="top"
+                        android:layout_width="340dp"
+                        android:layout_height="40dp">
+                    </Spinner>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="580dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="目标位置"
+                        android:textColor="@color/red"
+                        android:textSize="10sp" />
+
+                    <Spinner
+                        android:id="@+id/Spinner_target"
+                        android:gravity="top"
+                        android:layout_gravity="top"
+                        android:layout_width="340dp"
+                        android:layout_height="40dp">
+                    </Spinner>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="580dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/Robot_Start_get"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:text="取"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+
+                    <Button
+                        android:id="@+id/Robot_Start_put"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:text="放"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/Robot_Stop"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:text="停止"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/RobotArm_config"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:text="配置"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/Robot_reset"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:text="复位"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/Robot_start"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:text="联动"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+
+                    <Button
+                        android:id="@+id/Robot_error_continue"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:text="异常继续"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/finish_btn"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:text="finish"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="580dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/Robot_close_rna"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:text="核提关门"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/Robot_open_rna"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:text="核提开门"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+                    <Button
+                        android:id="@+id/Robot_put_pan"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="机械臂上盘放回托盘"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+
+
+                    <Button
+                        android:id="@+id/Robot_put_cover"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="临时位置放回盖子"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                    <Button
+                        android:id="@+id/Robot_put_cover_to_pcr"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:text="放回盖子到PCR"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/blue"
+                        android:background="@drawable/shape_btn_login"/>
+                </LinearLayout>
+
+                    <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:visibility="visible"
+                    android:orientation="horizontal"
+                    android:background="#80B4FE">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PAN1"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PAN1_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PAN2"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PAN2_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PAN3"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PAN3_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PAN4"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PAN4_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PAN5"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PAN5_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PAN6"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PAN6_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PAN7"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PAN7_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PAN8"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PAN8_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:visibility="visible"
+                    android:orientation="horizontal"
+                    android:background="#80B4FE">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="RNA1"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/RNA1_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="RNA2"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/RNA2_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PCR1"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PCR1_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PCR2"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PCR2_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PCR3"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PCR3_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PCR4"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PCR4_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PCR5"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PCR5_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="PCR6"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/PCR6_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="ARM"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/ARM_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:visibility="visible"
+                    android:orientation="horizontal"
+                    android:background="#80B4FE">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="COVER0"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/COVER0_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="COVER1"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/COVER1_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="COVER2"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/COVER2_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="COVER3"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/COVER3_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="COVER4"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/COVER4_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="COVER5"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/COVER5_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="COVER6"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/COVER6_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="DOOR"
+                        android:padding="0dp"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                    <com.gidi.bio_pcr.view.CustomView
+                        android:id="@+id/DOOR_state_img"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"
+                        custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="580dp"
+                    android:layout_height="150dp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+                    <ScrollView
+                        android:id="@+id/recevie_data_RobotRunningMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp">
+                        <TextView
+                            android:id="@+id/RobotRunningMessageText"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="20dp"
+                            android:layout_height="match_parent"
+                            android:padding="0dp"
+                            android:text="RobotRunningMessageText"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </ScrollView>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="580dp"
+                    android:layout_height="230dp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+                    <ScrollView
+                        android:id="@+id/recevie_data_RobotWorkManagerRunningMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/RobotWorkManagerRunningMessageText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:padding="0dp"
+                            android:text="1213"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </ScrollView>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:id="@+id/result_layout"
+                    android:layout_width="580dp"
+                    android:layout_height="450dp">
+                    <LinearLayout
+                        android:id="@+id/bowei_running_slan_chanel_layout"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <com.gidi.bio_pcr.view.CustomCheckText
+                            android:id="@+id/bowei_result_slan_all_channel_check_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            custom:content_img="@drawable/item_chanel_uncheck"
+                            custom:background_img="@drawable/shape_channel_all_channel_bg"
+                            custom:content_text="All"/>
+
+                        <com.gidi.bio_pcr.view.CustomCheckText
+                            android:id="@+id/bowei_running_slan_result_fam_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            custom:content_img="@drawable/item_chanel_uncheck"
+                            custom:background_img="@drawable/shape_channel_fam_bg"
+                            custom:content_text="FAM"/>
+
+                        <com.gidi.bio_pcr.view.CustomCheckText
+                            android:id="@+id/bowei_running_slan_result_hex_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            custom:content_img="@drawable/item_chanel_uncheck"
+                            custom:background_img="@drawable/shape_channel_hex_bg"
+                            custom:content_text="HEX"/>
+
+
+                        <com.gidi.bio_pcr.view.CustomCheckText
+                            android:id="@+id/bowei_running_slan_result_rox_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            custom:content_img="@drawable/item_chanel_uncheck"
+                            custom:background_img="@drawable/shape_channel_rox_bg"
+                            custom:content_text="ROX"/>
+
+                        <com.gidi.bio_pcr.view.CustomCheckText
+                            android:id="@+id/bowei_running_slan_result_cy5_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            custom:content_img="@drawable/item_chanel_uncheck"
+                            custom:background_img="@drawable/shape_channel_cy5_bg"
+                            custom:content_text="CY5"/>
+
+                        <TextView
+                            android:id="@+id/bowei_open_file_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center"
+                            android:text="打开文件"
+                            android:textColor="@color/white"
+                            android:background="@drawable/shape_channel_all_channel_bg"/>
+
+                        <TextView
+                            android:id="@+id/bowei_running_slan_sec_analyse_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:gravity="center"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/second_analyse"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_size_normal_16sp"
+                            android:visibility="visible"
+                            android:background="@drawable/selector_rect_blue_recycle"/>
+
+                        <TextView
+                            android:id="@+id/bowei_running_slan_result_report_tv"
+                            android:layout_width="match_parent"
+                            android:layout_height="42dp"
+                            android:gravity="center"
+                            android:layout_marginTop="12dp"
+                            android:text="@string/result_report"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_size_normal_16sp"
+                            android:visibility="visible"
+                            android:background="@drawable/selector_rect_blue_recycle"/>
+                    </LinearLayout>
+                    <RadioGroup
+                        android:id="@+id/bowei_result_slan_curve_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/bowei_running_slan_chanel_layout"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="12dp"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            style="@style/style_tab_system_info_test"
+                            android:id="@+id/bowei_result_slan_rawcurve_rb"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="Raw"
+                            />
+                        <RadioButton
+                            style="@style/style_tab_system_info_test"
+                            android:id="@+id/bowei_result_slan_ampcurve_rb"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="AMP"
+                            />
+                        <RadioButton
+                            style="@style/style_tab_system_info_test"
+                            android:id="@+id/bowei_result_slan_meltcurve_rb"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="Melt"
+                            />
+                        <RadioButton
+                            style="@style/style_tab_system_info_test"
+                            android:id="@+id/bowei_result_slan_peakcurve_rb"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="Melt Peak"
+                            />
+                        <RadioButton
+                            style="@style/style_tab_system_info_test"
+                            android:id="@+id/bowei_result_slan_list_rb"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="@string/running_curve_excel"
+                            />
+                        <RadioButton
+                            style="@style/style_tab_system_info_test"
+                            android:id="@+id/bowei_result_slan_set_paramter_rb"
+                            android:layout_marginLeft="4dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:text="@string/running_curve_set_paramter"
+                            />
+                    </RadioGroup>
+                    <!--显示曲线-->
+                    <LinearLayout
+                        android:id="@+id/bowei_result_slan_hole_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:paddingRight="36dp"
+                        android:layout_alignParentBottom="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:layout_toRightOf="@id/bowei_running_slan_chanel_layout">
+                        <TextView
+                            style="@style/style_detect_hole"
+                            android:id="@+id/bowei_result_slan_running_all_hole_ck"
+                            android:textSize="@dimen/font_size_small_14sp"
+                            android:text="@string/result_all_hole_check" />
+
+                        <TextView
+                            style="@style/style_detect_hole"
+                            android:id="@+id/bowei_result_slan_hole_one_btn"
+                            android:layout_marginLeft="12dp"
+                            android:text="A1" />
+                        <TextView
+                            style="@style/style_detect_hole"
+                            android:id="@+id/bowei_result_slan_hole_two_btn"
+                            android:layout_marginLeft="12dp"
+                            android:text="A2" />
+                        <TextView
+                            style="@style/style_detect_hole"
+                            android:id="@+id/bowei_result_slan_hole_three_btn"
+                            android:layout_marginLeft="12dp"
+                            android:text="A3" />
+                        <TextView
+                            style="@style/style_detect_hole"
+                            android:id="@+id/bowei_result_slan_hole_four_btn"
+                            android:layout_marginLeft="12dp"
+                            android:text="A4" />
+                        <TextView
+                            style="@style/style_detect_hole"
+                            android:id="@+id/bowei_result_slan_hole_five_btn"
+                            android:layout_marginLeft="12dp"
+                            android:text="A5" />
+                        <TextView
+                            style="@style/style_detect_hole"
+                            android:id="@+id/bowei_result_slan_hole_six_btn"
+                            android:layout_marginLeft="12dp"
+                            android:text="A6" />
+                        <TextView
+                            style="@style/style_detect_hole"
+                            android:id="@+id/bowei_result_slan_hole_seven_btn"
+                            android:layout_marginLeft="12dp"
+                            android:text="A7" />
+                        <TextView
+                            style="@style/style_detect_hole"
+                            android:id="@+id/bowei_result_slan_hole_eight_btn"
+                            android:layout_marginLeft="12dp"
+                            android:text="A8" />
+                    </LinearLayout>
+                    <!--显示曲线-->
+                    <LinearLayout
+                        android:id="@+id/bowei_result_slan_curve_chart_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_below="@id/bowei_result_slan_curve_layout"
+
+                        android:layout_toRightOf="@id/bowei_running_slan_chanel_layout"
+                        android:layout_above="@id/bowei_result_slan_hole_layout"
+                        android:visibility="visible">
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/bowei_running_result_slan_curve_chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="4dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#f3f5f8"/>
+                    </LinearLayout>
+                    <!--显示参数-->
+
+                    <HorizontalScrollView
+                        android:id="@+id/bowei_result_slan_excel_list_scrollview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_below="@id/bowei_result_slan_curve_layout"
+                        android:layout_toRightOf="@id/bowei_running_slan_chanel_layout"
+                        android:layout_above="@id/bowei_result_slan_hole_layout"
+                        android:padding="4dp"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:id="@+id/bowei_result_slan_excel_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <!---标题-->
+                            <include
+                                android:id="@+id/bowei_resut_slan_list_title_layout"
+                                layout="@layout/include_result_slan_excel_title_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="10dp" />
+                            <ListView
+                                android:id="@+id/bowei_result_slan_list_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:dividerHeight="1dp"
+                                android:divider="@color/detect_gray"/>
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                    <!--二次分析的页面-->
+                    <RelativeLayout
+                        android:id="@+id/bowei_slan_result_sec_analyse_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:padding="4dp"
+                        android:layout_below="@id/bowei_result_slan_curve_layout"
+                        android:layout_toRightOf="@id/bowei_running_slan_chanel_layout"
+                        android:layout_above="@id/bowei_result_slan_hole_layout">
+                        <!--基本参数，熔解曲线参数标题-->
+                        <LinearLayout
+                            android:id="@+id/bowei_slan_result_sec_analyse_param_title_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/bowei_slan_result_basic_param_title_tv"
+                                android:layout_width="100dp"
+                                android:layout_height="32dp"
+                                android:gravity="center"
+                                android:textSize="@dimen/font_size_normal_18sp"
+                                android:textColor="@color/white"
+                                android:text="基本参数"
+                                android:background="@drawable/shape_rect_blue"/>
+                            <TextView
+                                android:id="@+id/bowei_slan_result_melt_param_title_tv"
+                                android:layout_width="100dp"
+                                android:layout_height="32dp"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/font_size_normal_18sp"
+                                android:gravity="center"
+                                android:text="熔解曲线参数"
+                                android:background="@drawable/shape_rect_blue_stroke"/>
+                        </LinearLayout>
+                        <!--扩增曲线算法参数-->
+                        <LinearLayout
+                            android:id="@+id/bowei_slan_result_sec_analyse_amp_param_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="310dp"
+                            android:visibility="visible"
+                            android:layout_below="@id/bowei_slan_result_sec_analyse_param_title_layout"
+                            android:orientation="vertical">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginBottom="12dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="扩增曲线算法"
+                                    android:textColor="@color/blue"
+                                    android:textSize="@dimen/font_size_normal_18sp" />
+
+                                <TextView
+                                    android:id="@+id/bowei_slan_result_sec_analyse_amp_algorithm_tv"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:paddingLeft="12dp"
+                                    android:text="相对荧光值法-log"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/font_size_normal_18sp" />
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:contentDescription="@null"
+                                    android:src="@drawable/arrow_press" />
+                            </LinearLayout>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/blue"/>
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="36dp"
+                                android:orientation="horizontal"
+                                android:background="@color/color_recycle">
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="染料"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="通道"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="分析类型"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="基线起点"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="基线终点"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="基线优化"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="自动阈值"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="手动阈值"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="数字滤波"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/blue"/>
+                            <ListView
+                                android:id="@+id/bowei_slan_result_sec_analyse_amp_algorithm_lv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:dividerHeight="1dp"
+                                android:divider="@color/blue"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/blue"/>
+                        </LinearLayout>
+                        <!--熔解曲线算法参数-->
+                        <LinearLayout
+                            android:id="@+id/bowei_slan_result_sec_analyse_melt_param_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="310dp"
+                            android:layout_below="@id/bowei_slan_result_sec_analyse_param_title_layout"
+                            android:visibility="gone"
+                            android:orientation="vertical">
+
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="36dp"
+                                android:background="@color/color_recycle"
+                                android:orientation="horizontal">
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="染料"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="通道"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="最低温度"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="最高温度"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="熔解曲线算法"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="峰高阈值"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                                <TextView
+                                    style="@style/style_config_ex_pamram_tv"
+                                    android:layout_weight="1"
+                                    android:text="熔解峰型"
+                                    android:textColor="@color/black"/>
+                                <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/blue"/>
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/blue"/>
+                            <!--熔解曲线参数-->
+                            <ListView
+                                android:id="@+id/bowei_slan_result_sec_analyse_melt_paramter_lv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:dividerHeight="1dp"
+                                android:divider="@color/blue"/>
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/blue"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+
+
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+</LinearLayout>

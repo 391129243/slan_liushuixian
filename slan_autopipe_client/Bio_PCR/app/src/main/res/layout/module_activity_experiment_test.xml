@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/ex_result_detail_title_layout"
+        layout="@layout/include_common_title_layout"/>
+
+    <!--通道-->
+    <LinearLayout
+        android:id="@+id/ex_result_chanel_layout"
+        android:layout_width="128dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/ex_result_detail_title_layout"
+        android:padding="2dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/running_select_channel"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textColor="@color/blue"/>
+
+        <com.gzlab.autoassemblyline_client.view.CustomCheckText
+            android:id="@+id/ex_result_fam_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_fam_bg"
+            custom:content_text="FAM"/>
+
+        <com.gzlab.autoassemblyline_client.view.CustomCheckText
+            android:id="@+id/ex_result_hex_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_hex_bg"
+            custom:content_text="HEX"/>
+
+
+        <com.gzlab.autoassemblyline_client.view.CustomCheckText
+            android:id="@+id/ex_result_rox_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_rox_bg"
+            custom:content_text="ROX"/>
+
+        <com.gzlab.autoassemblyline_client.view.CustomCheckText
+            android:id="@+id/ex_result_cy5_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_cy5_bg"
+            custom:content_text="CY5"/>
+        <com.gzlab.autoassemblyline_client.view.CustomCheckText
+            android:id="@+id/ex_result_sec_analyse_ck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            android:background="@null"
+            android:clickable="false"
+            custom:content_text="自动阈值"/>
+
+        <TextView
+            android:id="@+id/ex_result_sec_analyse_tv"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:gravity="center"
+            android:text="二次分析"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_16sp"
+            android:background="@drawable/shape_channel_fam_bg"/>
+    </LinearLayout>
+    <RadioGroup
+        android:id="@+id/ex_result_curve_rb_layout"
+        android:layout_width="950dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ex_result_detail_title_layout"
+        android:layout_toRightOf="@id/ex_result_chanel_layout"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/ex_result_rawcurve_rb"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_virgin"
+            />
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/ex_result_ampcurve_rb"
+            android:layout_marginLeft="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_amplify"
+            />
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/ex_result_meltcurve_rb"
+            android:layout_marginLeft="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_melt"
+            />
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/ex_result_peakcurve_rb"
+            android:layout_marginLeft="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_melt_peak" />
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/ex_result_list_rb"
+            android:layout_marginLeft="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_excel"
+            />
+    </RadioGroup>
+
+    <LinearLayout
+        android:id="@+id/ex_curve_chart_layout"
+        android:layout_width="950dp"
+        android:layout_height="400dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:padding="4dp"
+        android:layout_below="@id/ex_result_curve_rb_layout"
+        android:layout_toRightOf="@id/ex_result_chanel_layout">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/ex_result_curve_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            android:layout_marginTop="10dp"
+            android:background="#f3f5f8"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ex_result_list_layout"
+        android:layout_width="950dp"
+        android:layout_height="400dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:visibility="gone"
+        android:padding="4dp"
+        android:orientation="vertical"
+        android:layout_below="@id/ex_result_curve_rb_layout"
+        android:layout_toRightOf="@id/ex_result_chanel_layout">
+
+        <!---标题-->
+        <include
+            android:id="@+id/ex_detail_exl_title_layout"
+            layout="@layout/include_result_excel_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_marginTop="10dp" />
+        <ListView
+            android:id="@+id/ex_result_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="1dp"
+            android:divider="@color/detect_gray"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/result_hole_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="68dp"
+        android:padding="24dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/ex_result_chanel_layout"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_one_btn"
+            android:text="A1" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_two_btn"
+            android:layout_marginLeft="42dp"
+            android:text="A2" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_three_btn"
+            android:layout_marginLeft="42dp"
+            android:text="A3" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_four_btn"
+            android:layout_marginLeft="42dp"
+            android:text="A4" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_five_btn"
+            android:layout_marginLeft="42dp"
+            android:text="A5" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_six_btn"
+            android:layout_marginLeft="42dp"
+            android:text="A6" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_seven_btn"
+            android:layout_marginLeft="42dp"
+            android:text="A7" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_eight_btn"
+            android:layout_marginLeft="42dp"
+            android:text="A8" />
+    </LinearLayout>
+
+
+</RelativeLayout>

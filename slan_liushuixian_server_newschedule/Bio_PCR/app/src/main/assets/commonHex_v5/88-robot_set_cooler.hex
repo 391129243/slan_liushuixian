@@ -1,0 +1,33 @@
+[
+    {
+        "IsSelected": false,
+        "Name": "finish",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": false,
+        "Name": "cold",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "1100",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": false
+            }
+        ],
+        "Description": ""
+    },
+    {
+        "IsSelected": false,
+        "Name": "finish",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    }
+]

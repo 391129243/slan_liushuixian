@@ -1,0 +1,9 @@
+flowchart LR
+    S["放回/复位<br/>设备 armStep=BACK"] --> Q{"托盘是否被标 str_ERROR?"}
+    Q -- "修复前: 否(漏 Notify)" --> BUG["checkTrayEnd 推进 di+1<br/>❌ 继续后续流程"]
+    Q -- "修复后: 是(★Notify)" --> OK["checkTrayEnd 守卫跳过<br/>✔ 停在异常, 需手动恢复"]
+
+    classDef fix fill:#e6ffe6,stroke:#2c2;
+    classDef bug fill:#ffe6e6,stroke:#c22;
+    class OK fix;
+    class BUG bug;

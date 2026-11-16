@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingLeft="52dp"
+    android:paddingRight="52dp"
+    android:paddingTop="42dp"
+    android:paddingBottom="42dp">
+    <!--用户名，查询-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_account"
+            android:textColor="@color/deep_gray"
+            android:textSize="@dimen/font_size_large_20sp"/>
+        <EditText
+            android:id="@+id/account_manager_name_et"
+            android:layout_width="200dp"
+            android:layout_height="42dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:digits="qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890"
+            android:background="@drawable/shape_rect_blue_stroke"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:text="@string/login_password"
+            android:textColor="@color/deep_gray"
+            android:textSize="@dimen/font_size_large_20sp"/>
+        <EditText
+            android:id="@+id/account_manager_password_et"
+            android:layout_width="200dp"
+            android:layout_height="42dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginLeft="12dp"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:maxLength="20"
+            android:inputType="number"
+            android:background="@drawable/shape_rect_blue_stroke"/>
+
+
+
+        <TextView
+            android:id="@+id/account_manager_add_tv"
+            android:layout_width="128dp"
+            android:layout_height="42dp"
+            android:layout_marginLeft="28dp"
+            android:gravity="center"
+            android:drawablePadding="3dp"
+            android:text="@string/add"
+            android:background="@drawable/shape_channel_hex_bg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large_20sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:background="@color/blue"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue"/>
+        <!--序号-->
+        <TextView
+            style="@style/style_config_ex_pamram_tv"
+            android:id="@+id/item_multi_index_tv"
+            android:layout_weight="1"
+            android:text="@string/create_multi_serial_number"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <TextView
+            android:id="@+id/item_account_manager_name_tv"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:text="@string/login_account" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/item_account_manager_password_tv"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/password"
+            android:textStyle="bold"
+            android:textSize="@dimen/font_size_normal_18sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/item_account_manager_edit_tv"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large_20sp"
+            android:textStyle="bold"
+            android:text="操作" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+    </LinearLayout>
+    <!--列表-->
+    <ListView
+        android:id="@+id/account_manager_show_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/light_gray"
+        android:dividerHeight="1dp"/>
+</LinearLayout>

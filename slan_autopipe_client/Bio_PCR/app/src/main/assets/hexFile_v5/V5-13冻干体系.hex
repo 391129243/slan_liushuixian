@@ -1,0 +1,168 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 0A F0 01 0B FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 10 01 00 0A 00 00 5A A0 01 15 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀10-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 10,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "抽拉混匀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 1E 00 00 D0 FC 02 1E FF FC FF ",
+                "Delay": 0,
+                "Description": "53.5",
+                "IsSelected": true
+            }
+        ],
+        "Description": "抽拉混匀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 1E 00 00 DA C0 01 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            }
+        ],
+        "Description": "抽拉混匀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 10,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "抽拉混匀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 32 C8 01 0B FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 10 01 00 0A 00 00 32 C8 01 15 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀10-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 41 01 00 0A 00 00 00 00 00 4C FF FC FF ",
+                "Delay": 0,
+                "Description": "左杆-0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 42 01 00 0A 00 00 00 00 00 4D FF FC FF ",
+                "Delay": 0,
+                "Description": "右杆-0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 43 01 00 0A 00 00 00 00 00 4E FF FC FF ",
+                "Delay": 0,
+                "Description": "平移回零",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀移杆"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 00 00 00 3E FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 00 00 00 3F FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 21 01 01 0A 00 00 00 00 00 2D FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 22 01 01 0A 00 00 00 00 00 2E FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "抬卡盒升杆"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 12 01 00 0A 00 00 65 90 01 12 FF FC FF ",
+                "Delay": 0,
+                "Description": "26",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 34 01 00 14 00 00 17 70 00 D0 FF FC FF ",
+                "Delay": 0,
+                "Description": "6",
+                "IsSelected": true
+            }
+        ],
+        "Description": "PCR贴合"
+    }
+]

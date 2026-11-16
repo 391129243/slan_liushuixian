@@ -1,0 +1,10 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "finish",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "完成"
+    }
+]

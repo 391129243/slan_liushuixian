@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+   <LinearLayout
+		android:layout_width="620dp"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+        android:orientation="vertical"
+        android:alpha="0.8"
+        android:background="@drawable/dialog_common_bg">
+        <!-- android:background="@drawable/shape_custom_dialog_bg"  -->
+  		<TextView  
+			android:id="@+id/title"  
+            android:layout_width="fill_parent"  
+            android:layout_height="52dp"
+			android:layout_margin="12dp"
+            android:gravity="center"
+            android:visibility="visible"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/font_size_large_22sp" />
+
+		<LinearLayout  
+			android:id="@+id/content"  
+            android:layout_width="fill_parent"  
+            android:layout_height="wrap_content"  
+            android:layout_marginBottom="12dp"
+			android:layout_marginLeft="12dp"
+			android:layout_marginRight="12dp"
+            android:gravity="center" >  
+ 			<TextView  
+				android:id="@+id/message"   
+				android:layout_width="fill_parent"  
+				android:layout_height="wrap_content"  
+				android:gravity="left|center"  
+                android:paddingBottom="15dp"  
+                android:paddingLeft="20dp"  
+                android:paddingRight="20dp"  
+                android:paddingTop="15dp"
+                android:textSize="20sp" />  
+		</LinearLayout>  
+
+
+		<LinearLayout
+			android:layout_width="fill_parent"  
+			android:layout_height="52dp"
+	        android:layout_alignParentBottom="true"   >
+			<TextView
+				android:id="@+id/negative_btn"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+				android:text="@string/dialog_cancel"
+				android:textSize="@dimen/font_size_normal_18sp"
+				android:textColor="@color/black"
+				android:background="@drawable/dialog_cancel_btn_bg"
+				android:gravity="center" />
+			<TextView
+				style="@style/style_portrait_line"
+				android:background="@color/check_normal_bg"/>
+			<TextView  
+				android:id="@+id/positive_btn"  				
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"
+	            android:text="@string/dialog_ok"
+				android:textColor="@color/red"
+	            android:textSize="@dimen/font_size_normal_18sp"
+				android:background="@drawable/dialog_ok_btn_bg"
+				android:gravity="center" />
+		</LinearLayout>
+	</LinearLayout>
+
+</FrameLayout>

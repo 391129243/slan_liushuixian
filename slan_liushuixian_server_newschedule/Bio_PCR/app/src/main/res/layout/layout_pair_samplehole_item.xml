@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 一个 cell:A+B 一对,B 在上 A 在下。带浅色背景便于识别 cell 边界 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="6dp"
+    android:padding="4dp"
+    android:background="#22FF0000"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:id="@+id/hole_b_name_tv"
+        android:layout_width="@dimen/pipemain_hole_size"
+        android:layout_height="@dimen/pipemain_hole_size"
+        android:background="@drawable/shape_oval_blue_bg"
+        android:gravity="center"
+        android:textColor="@color/content_text"
+        android:textSize="@dimen/pipemain_hole_text"
+        tools:text="B8" />
+
+    <TextView
+        android:id="@+id/hole_a_name_tv"
+        android:layout_width="@dimen/pipemain_hole_size"
+        android:layout_height="@dimen/pipemain_hole_size"
+        android:layout_marginTop="@dimen/pipemain_hole_left"
+        android:background="@drawable/shape_oval_blue_bg"
+        android:gravity="center"
+        android:textColor="@color/content_text"
+        android:textSize="@dimen/pipemain_hole_text"
+        tools:text="A8" />
+</LinearLayout>

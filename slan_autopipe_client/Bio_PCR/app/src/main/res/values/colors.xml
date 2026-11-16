@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="color_spring_green">#00FF7F</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="light_gray">#cdcdcd</color>
+    <color name="deep_gray">#8a8a8a</color>
+    <color name="detect_gray">#B7B8C5</color>
+    <color name="commonbg">#5A0AF9</color>
+    <color name="white">#FFFFFF</color>
+    <color name="blue">#1C86EE</color>
+    <!--fam颜色-->
+    <color name="chart_blue">#0000FF</color>
+    <!--hex颜色-->
+    <color name="chart_orange">#FF9900</color>
+    <!--cy5颜色-->
+    <color name="red">#FF0000</color>
+    <color name="quasar">#FF8000FF</color>
+    <color name="atto">#FF800000</color>
+    <!--hex颜色-->
+    <color name="chart_green">#00C853</color>
+    <color name="pressed_blue">#01A6FF</color>
+    <color name="black">#000000</color>
+    <color name="blue_universal">#01A6FF</color>
+    <color name="tab_button_tv_pressed">#486BFF</color>
+    <color name="tab_buttom_bg">#486BFF</color>
+    <color name="color_main_bg">#E8EDFD</color>
+
+    <!--Zxing相关-->
+    <color name="contents_text">#ff000000</color>
+    <color name="orange">#c0ffbd21</color> <!-- Android standard ICS color -->
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c099cc00</color> <!-- Android standard ICS color -->
+    <color name="result_view">#b0000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="color_ok_normal">#00C853</color>
+    <color name="color_content_normal">#37D990</color>
+    <color name="color_ok_pressed">#00AA47</color>
+    <color name="color_purple">#800080</color>
+
+    <!--设备的主色-->
+    <color name ="color_main">#486BFF</color>
+    <color name = "check_normal_bg">#dbdbdb</color>
+    <color name = "color_siliver">#C0C0C0</color>
+    <color name = "color_dialog_normal_tv">#38ADFF</color>
+
+    <color name = "color_login_edit">#F5F5F5</color>
+
+    <color name="color_detection_number_normal">#002071</color>
+    <color name="color_detection_content_unit">#5471d2</color>
+    <color name="color_system_rb_bg_pressed">#0D46A0</color>
+    <color name="color_system_rb_bg_normal">#F5F5F5</color>
+
+
+    <color name="color_landscape_main_bg">#90AACEF9</color>
+    <color name="color_landscape_main_center">#90AEC6E7</color>
+
+    <color name="color_dialog_btn_pressed">#2E9DD1</color>
+    <color name="color_dialog_btn_normal">#1B3549</color>
+    <color name="color_main_normal_bg">#516CBB</color>
+    <color name="color_second_normal_bg">#3B4CA5</color>
+
+    <!---程序主色-->
+    <color name ="color_top_bar_bg">#3395D2</color>
+    <color name ="color_top_bar_pressed">#2887BF</color>
+    <color name ="color_top_rb_normal_bg">#527B91</color>
+    <color name = "color_main_title">#2c2c2c</color>
+    <color name = "color_main_text">#3395D2</color>
+    <color name ="color_item_odd">#F5F5F5</color>
+    <color name ="color_item_even">#D7D8E5</color>
+    <color name ="color_item_pressed_bg">#D7D8E5</color>
+    <color name="color_sub_bg">#F5F5F5</color>
+    <color name="color_btn_normal">#90AACEF9</color>
+    <color name="color_recycle">#AACEF9</color>
+    <color name="set_top_bar_bg">#359DEB</color>
+    <color name="main_tab_color">#333333</color>
+    <color name="color_open_wifi">#ABD2FB</color>
+    <color name="color_config_left_normal_text">#707070</color>
+    <color name="color_item_list_normal_bg">#F6F6F6</color>
+    <color name="color_item_list_text_normal">#666666</color>
+    <color name="config_left_bg">#D7E9F7</color>
+    <color name="config_hex_normal">#3E3A39</color>
+
+    <color name="color_user_main_text">#4D75C4</color>
+    <color name="color_user_main_press">#5378CA</color>
+    <color name="color_orange_deep">#F88242</color>
+    <color name="color_login_hint">#8F8F8E</color>
+    <color name="color_login_value">#8F8C8C</color>
+</resources>

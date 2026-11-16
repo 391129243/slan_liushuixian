@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.paul.pipeline.fragment.PipePcrFragment">
+    <data>
+        <variable
+            name="model"
+            type="com.paul.pipeline.fragment.model.PipePCRModel" />
+        <variable
+            name="viewmodel"
+            type="com.paul.pipeline.fragment.viewmodel.PipePcrViewModel" />
+
+    </data>
+    <LinearLayout
+        android:id="@+id/mainbg_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:stringStatusImg="@{model.allstatus}"
+        android:layout_margin="@dimen/content_padding"
+        android:padding="@dimen/content_padding">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            app:stringStatusBg="@{model.allstatus}">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/content_title"
+                android:textSize="@dimen/pipemain_title"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:text="@{model.name}" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/content_title"
+                android:textSize="@dimen/pipemain_text"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                app:intStepString="@{model.armStep}"
+                app:trayExist="@{model.exist}"
+                app:allStatus="@{model.allstatus}" />
+
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <LinearLayout
+                    android:id="@+id/rl_bottom"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="220dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/content_title"
+                                    android:textSize="14sp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:text="@string/pipe_main_linuxstatus" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/content_title"
+                                    android:textSize="14sp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentRight="true"
+                                    app:stringStatus="@{model.linuxStatus}" />
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="10dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/content_title"
+                                    android:textSize="14sp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:text="@string/pipe_main_status" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/content_title"
+                                    android:textSize="14sp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentRight="true"
+                                    app:stringStatus="@{model.status}" />
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/content_title"
+                                    android:textSize="14sp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:text="@string/pipe_main_connect" />
+
+                                <com.gidi.bio_pcr.view.CustomView
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_width="20dp"
+                                    android:layout_height="wrap_content"
+                                    app:booleanToImg="@{model.connect}"/> />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/content_title"
+                                    android:textSize="14sp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:text="@string/exist_check" />
+
+                                <com.gidi.bio_pcr.view.CustomView
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    app:existImg="@{model.exist}"/> />
+                            </LinearLayout>
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:dividerPadding="5dp">
+                        <RadioButton
+                            style="@style/style_tab_system_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:id="@+id/radioButton_step"
+                            android:text="@string/pcr_step"
+                            android:checked="@{viewmodel.radioGroupOption==0}"/>
+                        <RadioButton
+                            style="@style/style_tab_system_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:layout_marginLeft="2dp"
+                            android:id="@+id/radioButton_curve"
+                            android:text="@string/pcr_data"
+                            android:checked="@{viewmodel.radioGroupOption==1}"
+                            />
+
+                    </RadioGroup>
+                    <Button
+                        android:id="@+id/detail_btn"
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="@string/more"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:background="@drawable/selector_general_btn_bg"/>
+                </LinearLayout>
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/result_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_above="@id/rl_bottom">
+
+                        <!--                    <androidx.viewpager.widget.ViewPager-->
+                        <!--                        android:id="@+id/pcr_viewpager"-->
+                        <!--                        android:layout_width="match_parent"-->
+                        <!--                        android:layout_height="match_parent"-->
+                        <!--                        android:layout_above="@id/rl_bottom"/>-->
+                        <FrameLayout
+                            android:id="@+id/pcrv_fragment_container_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                        </FrameLayout>
+                    </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+</layout>

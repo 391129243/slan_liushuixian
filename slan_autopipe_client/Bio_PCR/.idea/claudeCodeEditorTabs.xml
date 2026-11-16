@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ClaudeCodeEditorTabs">
+    <option name="activeSessionId" value="f0a09942-5710-47e5-8572-4f5e65384670" />
+    <option name="openSessionIds">
+      <list>
+        <option value="d88ee2e3-b105-4ddf-8047-e57434051704" />
+        <option value="8259be43-43a1-4599-839d-7b0bfa5cd42e" />
+        <option value="6bbbd78e-d079-42cf-8555-10faf4aab895" />
+        <option value="f0a09942-5710-47e5-8572-4f5e65384670" />
+      </list>
+    </option>
+    <option name="sessionPaths">
+      <map>
+        <entry key="6bbbd78e-d079-42cf-8555-10faf4aab895" value="/sessions/new" />
+        <entry key="8259be43-43a1-4599-839d-7b0bfa5cd42e" value="/sessions/2a1adbce-e36e-45d1-b0bf-0f3f205ce610" />
+        <entry key="d88ee2e3-b105-4ddf-8047-e57434051704" value="/sessions/48d429e4-4890-46a4-a445-2217d39ba6c6" />
+        <entry key="f0a09942-5710-47e5-8572-4f5e65384670" value="/sessions/d911c36b-7320-481b-bcf7-dcccd9fe2746" />
+      </map>
+    </option>
+    <option name="sessionTitles">
+      <map>
+        <entry key="6bbbd78e-d079-42cf-8555-10faf4aab895" value="Claude Code" />
+        <entry key="8259be43-43a1-4599-839d-7b0bfa5cd42e" value="检查 signingConfigs { debug { storeFile file('./keys" />
+        <entry key="d88ee2e3-b105-4ddf-8047-e57434051704" value="为什么为什么没有连接PCR模块时，设备状态是free，设备警报是空的，不是应该设备状态是error，" />
+        <entry key="f0a09942-5710-47e5-8572-4f5e65384670" value="分析客户端内存泄漏问题" />
+      </map>
+    </option>
+  </component>
+</project>

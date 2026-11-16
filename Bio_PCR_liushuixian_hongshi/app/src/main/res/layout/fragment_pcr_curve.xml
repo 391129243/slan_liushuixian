@@ -1,0 +1,555 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    tools:context="com.paul.pipeline.fragment.PcrCurveFragment">
+    <data>
+        <variable
+            name="model"
+            type="com.paul.pipeline.fragment.model.PipePCRModel" />
+
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        <LinearLayout
+            android:id="@+id/bowei_running_slan_chanel_layout"
+            android:layout_below="@id/bowei_result_slan_curve_layout"
+            android:layout_above="@id/bowei_result_slan_hole_layout"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.paul.pipeline.view.MiniCheckText
+                android:id="@+id/bowei_result_slan_all_channel_check_tv"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_all_channel_bg"
+                custom:content_text="All" />
+
+            <com.paul.pipeline.view.MiniCheckText
+                android:id="@+id/bowei_running_slan_result_fam_tv"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="2dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_fam_bg"
+                custom:content_text="FAM"/>
+
+            <com.paul.pipeline.view.MiniCheckText
+                android:id="@+id/bowei_running_slan_result_hex_tv"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="2dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_hex_bg"
+                custom:content_text="HEX"/>
+
+
+            <com.paul.pipeline.view.MiniCheckText
+                android:id="@+id/bowei_running_slan_result_rox_tv"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="2dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_rox_bg"
+                custom:content_text="ROX"/>
+
+            <com.paul.pipeline.view.MiniCheckText
+                android:id="@+id/bowei_running_slan_result_cy5_tv"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginTop="2dp"
+                custom:content_img="@drawable/item_chanel_uncheck"
+                custom:background_img="@drawable/shape_channel_cy5_bg"
+                custom:content_text="CY5"/>
+
+
+        </LinearLayout>
+        <RadioGroup
+            android:id="@+id/bowei_result_slan_curve_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_height="28dp"
+                style="@style/style_tab_system_info_test"
+                android:id="@+id/bowei_result_slan_rawcurve_rb"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Raw"
+                android:textSize="10sp"
+                />
+            <RadioButton
+                android:layout_height="28dp"
+                style="@style/style_tab_system_info_test"
+                android:id="@+id/bowei_result_slan_ampcurve_rb"
+                android:layout_marginLeft="2dp"
+                android:textSize="10sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="AMP"
+                />
+            <RadioButton
+                android:layout_height="28dp"
+                style="@style/style_tab_system_info_test"
+                android:id="@+id/bowei_result_slan_meltcurve_rb"
+                android:layout_marginLeft="2dp"
+                android:textSize="10sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Melt"
+                />
+            <RadioButton
+                android:layout_height="28dp"
+                style="@style/style_tab_system_info_test"
+                android:id="@+id/bowei_result_slan_peakcurve_rb"
+                android:layout_marginLeft="2dp"
+                android:textSize="10sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="Melt Peak"
+                />
+            <!--                        <RadioButton-->
+            <!--                            android:layout_height="28dp"-->
+            <!--                            style="@style/style_tab_system_info_test"-->
+            <!--                            android:id="@+id/bowei_result_slan_list_rb"-->
+            <!--                            android:layout_marginLeft="2dp"-->
+            <!--                            android:textSize="10sp"-->
+            <!--                            android:layout_width="0dp"-->
+            <!--                            android:layout_weight="1"-->
+            <!--                            android:text="@string/running_curve_excel"-->
+            <!--                            />-->
+            <!--                        <RadioButton-->
+            <!--                            android:layout_height="28dp"-->
+            <!--                            style="@style/style_tab_system_info_test"-->
+            <!--                            android:id="@+id/bowei_result_slan_set_paramter_rb"-->
+            <!--                            android:layout_marginLeft="2dp"-->
+            <!--                            android:textSize="10sp"-->
+            <!--                            android:layout_width="0dp"-->
+            <!--                            android:layout_weight="1"-->
+            <!--                            android:text="@string/running_curve_set_paramter"-->
+            <!--                            />-->
+        </RadioGroup>
+        <!--显示曲线-->
+        <LinearLayout
+            android:id="@+id/bowei_result_slan_hole_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/style_detect_hole"
+                android:id="@+id/bowei_result_slan_running_all_hole_ck"
+                android:textSize="@dimen/font_size_small_14sp"
+                android:text="@string/result_all_hole_check"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/style_detect_hole"
+                android:id="@+id/bowei_result_slan_hole_one_btn"
+                android:layout_marginLeft="5dp"
+                android:text="A1" />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/style_detect_hole"
+                android:id="@+id/bowei_result_slan_hole_two_btn"
+                android:layout_marginLeft="5dp"
+                android:text="A2" />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/style_detect_hole"
+                android:id="@+id/bowei_result_slan_hole_three_btn"
+                android:layout_marginLeft="5dp"
+                android:text="A3" />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/style_detect_hole"
+                android:id="@+id/bowei_result_slan_hole_four_btn"
+                android:layout_marginLeft="5dp"
+                android:text="A4" />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/style_detect_hole"
+                android:id="@+id/bowei_result_slan_hole_five_btn"
+                android:layout_marginLeft="5dp"
+                android:text="A5" />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/style_detect_hole"
+                android:id="@+id/bowei_result_slan_hole_six_btn"
+                android:layout_marginLeft="5dp"
+                android:text="A6" />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/style_detect_hole"
+                android:id="@+id/bowei_result_slan_hole_seven_btn"
+                android:layout_marginLeft="5dp"
+                android:text="A7" />
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                style="@style/style_detect_hole"
+                android:id="@+id/bowei_result_slan_hole_eight_btn"
+                android:layout_marginLeft="5dp"
+                android:text="A8" />
+        </LinearLayout>
+        <!--显示曲线-->
+        <LinearLayout
+            android:id="@+id/bowei_result_slan_curve_chart_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_below="@id/bowei_result_slan_curve_layout"
+            android:layout_toRightOf="@id/bowei_running_slan_chanel_layout"
+            android:layout_above="@id/bowei_result_slan_hole_layout"
+            android:visibility="visible">
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/bowei_running_result_slan_curve_chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:layout_marginTop="5dp"
+                android:background="#f3f5f8"/>
+        </LinearLayout>
+        <!--显示参数-->
+
+        <HorizontalScrollView
+            android:id="@+id/bowei_result_slan_excel_list_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_below="@id/bowei_result_slan_curve_layout"
+            android:layout_toRightOf="@id/bowei_running_slan_chanel_layout"
+            android:layout_above="@id/bowei_result_slan_hole_layout"
+            android:padding="4dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/bowei_result_slan_excel_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!---标题-->
+                <include
+                    android:id="@+id/bowei_resut_slan_list_title_layout"
+                    layout="@layout/include_result_slan_excel_title_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp" />
+                <ListView
+                    android:id="@+id/bowei_result_slan_list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="1dp"
+                    android:divider="@color/detect_gray"/>
+            </LinearLayout>
+        </HorizontalScrollView>
+        <!--二次分析的页面-->
+        <RelativeLayout
+            android:id="@+id/bowei_slan_result_sec_analyse_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:padding="4dp"
+            android:layout_below="@id/bowei_result_slan_curve_layout"
+            android:layout_toRightOf="@id/bowei_running_slan_chanel_layout"
+            android:layout_above="@id/bowei_result_slan_hole_layout">
+            <!--基本参数，熔解曲线参数标题-->
+            <LinearLayout
+                android:id="@+id/bowei_slan_result_sec_analyse_param_title_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/bowei_slan_result_basic_param_title_tv"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:textColor="@color/white"
+                    android:text="基本参数"
+                    android:background="@drawable/shape_rect_blue"/>
+                <TextView
+                    android:id="@+id/bowei_slan_result_melt_param_title_tv"
+                    android:layout_width="100dp"
+                    android:layout_height="32dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:gravity="center"
+                    android:text="熔解曲线参数"
+                    android:background="@drawable/shape_rect_blue_stroke"/>
+            </LinearLayout>
+            <!--扩增曲线算法参数-->
+            <LinearLayout
+                android:id="@+id/bowei_slan_result_sec_analyse_amp_param_layout"
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                android:visibility="visible"
+                android:layout_below="@id/bowei_slan_result_sec_analyse_param_title_layout"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="扩增曲线算法"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/font_size_normal_18sp" />
+
+                    <TextView
+                        android:id="@+id/bowei_slan_result_sec_analyse_amp_algorithm_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="12dp"
+                        android:text="相对荧光值法-log"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/font_size_normal_18sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@null"
+                        android:src="@drawable/arrow_press" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:orientation="horizontal"
+                    android:background="@color/color_recycle">
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="染料"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="通道"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="分析类型"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="基线起点"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="基线终点"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="基线优化"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="自动阈值"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="手动阈值"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="数字滤波"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+                <ListView
+                    android:id="@+id/bowei_slan_result_sec_analyse_amp_algorithm_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="1dp"
+                    android:divider="@color/blue"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+            </LinearLayout>
+            <!--熔解曲线算法参数-->
+            <LinearLayout
+                android:id="@+id/bowei_slan_result_sec_analyse_melt_param_layout"
+                android:layout_width="match_parent"
+                android:layout_height="310dp"
+                android:layout_below="@id/bowei_slan_result_sec_analyse_param_title_layout"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:background="@color/color_recycle"
+                    android:orientation="horizontal">
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="染料"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="通道"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="最低温度"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="最高温度"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="熔解曲线算法"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="峰高阈值"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                    <TextView
+                        style="@style/style_config_ex_pamram_tv"
+                        android:layout_weight="1"
+                        android:text="熔解峰型"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/blue"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+                <!--熔解曲线参数-->
+                <ListView
+                    android:id="@+id/bowei_slan_result_sec_analyse_melt_paramter_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:dividerHeight="1dp"
+                    android:divider="@color/blue"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/blue"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+</layout>

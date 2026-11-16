@@ -1,0 +1,17 @@
+[
+    {
+        "IsSelected": false,
+        "Name": "door",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "1",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": false
+            }
+        ],
+        "Description": ""
+    }
+]

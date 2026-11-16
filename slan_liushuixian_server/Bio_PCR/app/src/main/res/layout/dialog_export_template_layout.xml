@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText
+        android:id="@+id/dialog_export_temp_name_et"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textColor="@color/blue"
+        android:singleLine="true"
+        android:textSize="@dimen/font_size_normal_18sp"/>
+</LinearLayout>

@@ -1,0 +1,17 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "heat",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "90",
+                "Delay": 0,
+                "Description": "温度90_split_temperature_setting",
+                "IsSelected": true
+            }
+        ],
+        "Description": "温控-split_temperature_setting"
+    }
+]

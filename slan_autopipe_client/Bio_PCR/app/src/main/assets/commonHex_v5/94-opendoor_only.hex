@@ -1,0 +1,40 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 45 01 00 10 00 01 BD 50 01 64 FF FC FF ",
+                "Delay": 0,
+                "Description": "114",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开舱门"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 23 01 00 08 00 02 B7 50 01 35 FF FC FF ",
+                "Delay": 0,
+                "Description": "178",
+                "IsSelected": true
+            }
+        ],
+        "Description": "伸出托盘"
+    },
+    {
+        "IsSelected": true,
+        "Name": "finish",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "完成"
+    }
+]

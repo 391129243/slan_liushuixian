@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/user_main_bg_2">
+
+    <LinearLayout
+        android:id="@+id/user_main_top_state_layout"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:gravity="center_vertical"
+        android:visibility="invisible"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/user_alarm_msg_title"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/blue"
+            android:layout_marginLeft="30dp"
+            android:textSize="@dimen/font_size_large_20sp"
+            android:text="@string/top_bar_alarm_msg"
+            />
+        <TextView
+            android:id="@+id/user_main_top_alarm_msg_tv"
+            android:layout_width="600dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/red"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/font_size_large_20sp"
+            />
+        <ImageView
+            android:id="@+id/user_main_top_sound_tv"
+            android:layout_width="wrap_content"
+            android:padding="12dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/icon_no_mute"
+            android:background="@drawable/shape_oval_top_bg"
+            android:contentDescription="@null"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/user_main_full_procee_tab"
+        android:layout_width="308dp"
+        android:layout_height="348dp"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:background="@drawable/selector_user_main_tab_bg">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:src="@drawable/icon_user_main_procee_normal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_tab_user_project"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/color_user_main_text"
+            android:textSize="38sp" />
+    </LinearLayout>
+
+
+
+    <!--Detect-->
+    <LinearLayout
+        android:id="@+id/user_main_tab_record_layout"
+        android:layout_width="308dp"
+        android:layout_height="348dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="58dp"
+        android:layout_toLeftOf="@id/user_main_full_procee_tab"
+        android:gravity="center_horizontal"
+        android:background="@drawable/selector_user_main_tab_bg"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:src="@drawable/icon_user_main_record_normal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_tab_user_record"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/color_user_main_text"
+            android:textSize="38sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/user_main_tab_setting_layout"
+        android:layout_width="308dp"
+        android:layout_height="348dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="58dp"
+        android:layout_toRightOf="@id/user_main_full_procee_tab"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:background="@drawable/selector_user_main_tab_bg">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:src="@drawable/icon_user_main_setting_normal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/main_tab_user_setting"
+            android:textColor="@color/color_user_main_text"
+            android:textSize="38sp" />
+    </LinearLayout>
+</RelativeLayout>

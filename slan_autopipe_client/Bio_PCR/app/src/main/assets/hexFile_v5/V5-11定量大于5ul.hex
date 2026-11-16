@@ -1,0 +1,269 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 5A A0 01 0B FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 08 01 00 0A 00 00 0A F0 01 0D FF FC FF ",
+                "Delay": 0,
+                "Description": "阀8-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 02 00 0A 00 00 07 D0 01 16 FF FC FF ",
+                "Delay": 0,
+                "Description": "相对下落2mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "排残留磁珠"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 08 01 00 0A 00 00 38 A4 00 EF FF FC FF ",
+                "Delay": 0,
+                "Description": "阀8-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 0A F0 01 0B FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 09 01 00 0A 00 00 0A F0 01 0E FF FC FF ",
+                "Delay": 0,
+                "Description": "阀9-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开关阀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 02 00 64 00 00 03 E8 01 84 FF FC FF ",
+                "Delay": 0,
+                "Description": "相对下落1mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "排气"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 09 01 00 0A 00 00 5A A0 01 0E FF FC FF ",
+                "Delay": 0,
+                "Description": "阀9-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 10 01 00 0A 00 00 5A A0 01 15 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀10-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 02 00 64 00 00 00 00 00 99 FF FC FF ",
+                "Delay": 0,
+                "Description": "dingliang_height_setting",
+                "IsSelected": true
+            }
+        ],
+        "Description": "定量10ul_dingliang_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 38 A4 00 ED FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 42 01 00 0A 00 00 FA 00 01 47 FF FC FF ",
+                "Delay": 0,
+                "Description": "管7-64",
+                "IsSelected": true
+            }
+        ],
+        "Description": "移杆关阀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 34 01 00 0A 00 00 61 A8 01 48 FF FC FF ",
+                "Delay": 0,
+                "Description": "25",
+                "IsSelected": true
+            }
+        ],
+        "Description": "预压"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 07 01 00 0A 00 00 5A A0 01 0C FF FC FF ",
+                "Delay": 0,
+                "Description": "阀7-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 34 01 00 1E 00 00 DA C0 01 ED FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀推油"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 07 01 00 0A 00 00 2C EC 01 2A FF FC FF ",
+                "Delay": 0,
+                "Description": "阀7-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 09 01 00 0A 00 00 2C EC 01 2C FF FC FF ",
+                "Delay": 0,
+                "Description": "阀9-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 10 01 00 0A 00 00 2C EC 01 33 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀10-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 34 01 00 0A 00 00 00 00 00 3F FF FC FF ",
+                "Delay": 0,
+                "Description": "抬右杆",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀抬杆"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 5A A0 01 0B FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 08 01 00 0A 00 00 0A F0 01 0D FF FC FF ",
+                "Delay": 0,
+                "Description": "阀8-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 14 00 00 DA C0 01 E1 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 14 00 00 DA C0 01 E2 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            }
+        ],
+        "Description": "排洗脱液"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 2C EC 01 29 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 08 01 00 0A 00 00 38 A4 00 EF FF FC FF ",
+                "Delay": 0,
+                "Description": "阀8-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀"
+    }
+]

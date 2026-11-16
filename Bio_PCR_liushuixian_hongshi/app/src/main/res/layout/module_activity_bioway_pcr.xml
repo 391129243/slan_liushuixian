@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bioway_detect_main_root_layout"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/bioway_detect_running_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/bioway_detect_tab_state_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:background="@drawable/loading"/>
+        <TextView
+            android:id="@+id/bioway_detect_tab_state_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/bioway_detect_tab_state_img"
+            android:visibility="gone"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/font_size_large_20sp"
+            />
+        <!--显示时间-->
+        <com.gidi.bio_pcr.view.DateTimeView
+            android:id="@+id/bioway_detect_running_time_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            custom:title_text_color="@color/black"
+            custom:content_text_color="@color/black">
+        </com.gidi.bio_pcr.view.DateTimeView>
+        <ImageView
+            android:id="@+id/bioway_detect_tab_back_img"
+            android:layout_width="wrap_content"
+            android:padding="14dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/bioway_detect_running_time_ll"
+            android:layout_marginRight="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_main"
+            android:background="@drawable/shape_oval_top_bg"
+            android:contentDescription="@null"/>
+
+        <ImageView
+            android:id="@+id/bioway_detect_tab_stop_img"
+            android:layout_width="wrap_content"
+            android:padding="14dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/bioway_detect_tab_back_img"
+            android:layout_marginRight="50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_stop"
+            android:background="@drawable/shape_oval_top_bg"
+            android:contentDescription="@null"/>
+
+
+        <!--截图，在出现结果后在出现-->
+        <ImageView
+            android:id="@+id/bioway_detect_running_sceentshot_tv"
+            android:layout_width="wrap_content"
+            android:padding="14dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/bioway_detect_tab_stop_img"
+            android:layout_marginRight="50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_screenshot"
+            android:background="@drawable/shape_oval_top_bg"
+            android:contentDescription="@null"/>
+
+        <ImageView
+            android:id="@+id/bioway_pcr_sound_tv"
+            android:layout_width="wrap_content"
+            android:padding="14dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/bioway_detect_running_sceentshot_tv"
+            android:layout_marginRight="50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_no_mute"
+            android:background="@drawable/shape_oval_top_bg"
+            android:contentDescription="@null"/>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bioway_detect_running_state_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/color_bioway_top_bar_bg"
+        android:layout_below="@id/bioway_detect_running_title_layout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/runinng_rna_serial"
+            android:padding="12dp"
+            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large_20sp" />
+        <com.gidi.bio_pcr.view.CustomView
+            android:id="@+id/bioway_detect_runing_rna_state_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/runnning_pcr_connect"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:padding="12dp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large_20sp" />
+        <com.gidi.bio_pcr.view.CustomView
+            android:id="@+id/bioway_detect_runing_coval_state_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+
+
+        <TextView
+            android:id="@+id/bioway_detect_alarm_msg_title"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginLeft="30dp"
+            android:textSize="@dimen/font_size_large_20sp"
+            android:text="@string/top_bar_alarm_msg"
+            />
+        <TextView
+            android:id="@+id/bioway_detect_alarm_msg_tv"
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:singleLine="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/red"
+            android:layout_marginLeft="10dp"
+            android:textSize="20sp" />
+        <ImageView
+            android:id="@+id/bioway_counting_alarm_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:src="@drawable/icon_counting_alarm"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:contentDescription="@null"/>
+
+        <LinearLayout
+            android:id="@+id/bioway_running_counter_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <Chronometer
+                android:id="@+id/bioway_running_detect_chronometer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/bioway_first_rna_counter_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="@string/running_remaining_time"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+    <View
+        android:id="@+id/bioway_detect_running_devider_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/bioway_detect_running_state_layout"
+        style="@style/horizontal_line"/>
+
+    <FrameLayout
+        android:id="@+id/bioway_activity_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/bioway_detect_running_devider_line"
+        android:background="@color/white">
+    </FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:orientation="horizontal"
+    android:background="@color/white">
+
+        <TextView
+            android:id="@+id/item_amp_detect_range_channel_tv"
+            style="@style/style_config_ex_pamram_tv"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:background="@drawable/shape_rect_blue_stroke"/>
+
+        <TextView
+            android:id="@+id/item_amp_detect_min_tv"
+            style="@style/style_config_ex_pamram_tv"
+            android:layout_weight="1"
+            android:textColor="@color/color_black_blue_selector"
+            android:background="@drawable/shape_rect_blue_stroke"/>
+
+        <TextView
+            android:id="@+id/item_amp_detect_max_tv"
+            style="@style/style_config_ex_pamram_tv"
+            android:layout_weight="1"
+            android:textColor="@color/color_black_blue_selector"
+            android:background="@drawable/shape_rect_blue_stroke"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

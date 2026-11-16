@@ -1,0 +1,61 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 12 01 00 0A 00 00 00 00 00 1D FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 34 01 00 0A 00 00 00 00 00 3F FF FC FF ",
+                "Delay": 0,
+                "Description": "0",
+                "IsSelected": true
+            }
+        ],
+        "Description": "柔性回零"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 45 01 00 08 00 01 C5 20 01 34 FF FC FF ",
+                "Delay": 0,
+                "Description": "116",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开舱门"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 23 01 00 08 00 02 90 40 00 FE FF FC FF ",
+                "Delay": 0,
+                "Description": "168",
+                "IsSelected": true
+            }
+        ],
+        "Description": "伸出托盘"
+    },
+    {
+        "IsSelected": true,
+        "Name": "finish",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "完成"
+    }
+]

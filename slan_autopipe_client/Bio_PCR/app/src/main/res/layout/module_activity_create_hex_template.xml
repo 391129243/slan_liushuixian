@@ -1,0 +1,967 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="#f5f5f5">
+    <!--标题-->
+    <include
+        android:id="@+id/hex_create_title_layout"
+        layout="@layout/include_common_title_layout"/>
+
+    <!--已选中的文件-->
+    <LinearLayout
+        android:id="@+id/hex_create_tab_layout"
+        android:layout_width="348dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/hex_create_title_layout"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/shape_rect_white_bg"
+        android:orientation="vertical"
+       >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_rect_blue_2_corners"
+            android:gravity="center"
+            android:text="@string/create_multi_template_selected"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large_20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hex_create_filename_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/create_multi_template_name"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <EditText
+                android:id="@+id/hex_create_template_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/shape_rect_stoke"
+                android:inputType="none"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:text="hex-"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal_18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hex_create_filename_second_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/create_multi_template_second_name"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <EditText
+                android:id="@+id/hex_create_template_name_second_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/shape_rect_stoke"
+                android:inputType="none"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal_18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hex_create_filename_third_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/create_multi_template_third_name"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <EditText
+                android:id="@+id/hex_create_template_name_third_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/shape_rect_stoke"
+                android:inputType="none"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal_18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/single_rna_create_totaltime_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/create_single_rna_time"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <EditText
+                android:id="@+id/single_rna_create_totaltime_et"
+                android:layout_width="172dp"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/shape_rect_stoke"
+                android:inputType="number"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginLeft="8dp"
+                android:text="s"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+        </LinearLayout>
+
+        <com.gzlab.autoassemblyline_client.view.CustomImageText
+            android:id="@+id/hex_create_rna_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            custom:content_img="@drawable/shape_oval_top_bg"
+            custom:content_text="@string/rna_extraction"
+            custom:content_text_color="@color/blue"
+            custom:image_content_text="1"
+            custom:image_content_text_color="@color/white" />
+
+        <TextView
+            android:id="@+id/hex_create_rna_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp" />
+
+
+        <TextView
+            android:id="@+id/hex_create_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/selector_general_btn_bg"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="@string/create_multi_template_save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp" />
+    </LinearLayout>
+
+    <!--显示RNA文件列表-->
+    <RelativeLayout
+        android:id="@+id/hex_create_rna_file_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/hex_create_tab_layout"
+        android:layout_below="@id/hex_create_title_layout"
+        android:padding="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="12dp"
+        android:visibility="visible"
+        android:background="@drawable/shape_rect_white_bg">
+        <TextView
+            style="@style/style_common_title_tv"
+            android:id="@+id/single_create_rna_list_title"
+            android:layout_width="wrap_content"
+            android:text="@string/create_multi_rna_extraction_file"
+            android:textColor="@color/blue" />
+        <TextView
+            style="@style/style_common_create_title_tv"
+            android:id="@+id/hex_create_hex_create_tv"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/config_hex_activity_title"
+            android:background="@drawable/selector_general_btn_bg"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hex_create_rna_list"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_below="@id/single_create_rna_list_title" />
+
+        <!--RNA文件详情-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hex_create_rna_list">
+            <LinearLayout
+                android:id="@+id/layout_closedoor"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/hex_create_close_door_ck_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/check_normal"
+                    android:contentDescription="@null"/>
+
+                <TextView
+                    style="@style/style_config_hex_title"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_below="@id/detect_entry_info_hole_title"
+                    android:text="@string/config_hex_step_1_title"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_centerVertical="true"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_sample_volume"/>
+                        <!--磁珠活化样本体积-->
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_tv_megneticsample"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="ul"/>
+                    </LinearLayout>
+                    <View
+                        style="@style/horizontal_line"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/config_hex_normal"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_below="@id/layout_closedoor"
+                android:id="@+id/layout_magnetic"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/hex_create_megnetic_ck_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/check_normal"
+                    android:contentDescription="@null"/>
+                <TextView
+                    style="@style/style_config_hex_title"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/config_hex_step_2_title"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text=""
+                    android:id="@+id/magneticlive_tv"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/font_size_large_20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_split"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:layout_below="@id/layout_magnetic">
+                <ImageView
+                    android:id="@+id/hex_create_split_ck_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/check_normal"
+                    android:contentDescription="@null"/>
+                <TextView
+                    style="@style/style_config_hex_title"
+                    android:id="@+id/hex_create_hex_split_title"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/config_hex_step_3_title"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp">
+                    <LinearLayout
+                        android:id="@+id/split_layout_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_temperatue"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_splittemperature_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="℃"/>
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="126dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_cracking_volume"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_splitlijieye_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="ul"/>
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="52dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_time"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_splittime_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/unit_second"/>
+                    </LinearLayout>
+                    <View
+                        style="@style/horizontal_line"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/config_hex_normal"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_below="@id/layout_split"
+                android:id="@+id/layout_wash1"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/hex_create_wash1_ck_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/check_normal"
+                    android:contentDescription="@null"/>
+                <TextView
+                    style="@style/style_config_hex_title"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/config_hex_step_4_1_title"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_temperatue"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_wash1temp_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="℃"/>
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="126dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_washing_volume"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_wash1xidiye_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="ul"/>
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="52dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_time"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_wash1time_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/unit_second"/>
+                    </LinearLayout>
+                    <View
+                        style="@style/horizontal_line"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/config_hex_normal"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <!--洗涤2-->
+            <LinearLayout
+                android:id="@+id/hex_create_layout_wash2"
+                android:layout_below="@id/layout_wash1"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/hex_create_wash2_ck_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/check_normal"
+                    android:contentDescription="@null"/>
+                <TextView
+                    style="@style/style_config_hex_title"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/config_hex_step_4_2_title"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_temperatue"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_wash2_2temperature_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="℃"/>
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="126dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_washing_volume"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_wash2_2xidiye_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="ul"/>
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="52dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_time"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_wash2_2time"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/unit_second"/>
+                    </LinearLayout>
+                    <View
+                        style="@style/horizontal_line"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/config_hex_normal"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/hex_create_layout_wash3_3"
+                android:layout_below="@id/hex_create_layout_wash2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:visibility="visible"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/hex_create_wash3_ck_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/check_normal"
+                    android:contentDescription="@null"/>
+                <TextView
+                    style="@style/style_config_hex_title"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/config_hex_step_4_3_title"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_temperatue"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_wash3_3temperature_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="℃"/>
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="126dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_washing_volume"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_wash3_3xidiye_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="ul"/>
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="52dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_time"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_wash3_3time_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/unit_second"/>
+                    </LinearLayout>
+                    <View
+                        style="@style/horizontal_line"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/config_hex_normal"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!--洗脱-->
+            <LinearLayout
+                android:layout_below="@id/hex_create_layout_wash3_3"
+                android:id="@+id/layout_elution"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/hex_create_elution_ck_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/check_normal"
+                    android:contentDescription="@null"/>
+                <TextView
+                    style="@style/style_config_hex_title"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/config_hex_step_5_title"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_temperatue"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_elutiontemperature_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="℃"/>
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="126dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_elution_volume"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_elutionxituoye_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="ul"/>
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="52dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_time"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_elutiontime_tv"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/unit_second"/>
+                    </LinearLayout>
+                    <View
+                        style="@style/horizontal_line"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/config_hex_normal"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!--体系-->
+            <LinearLayout
+                android:layout_below="@id/layout_elution"
+                android:id="@+id/layout_quantify"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/hex_create_quantify_ck_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/check_normal"
+                    android:contentDescription="@null"/>
+                <TextView
+                    style="@style/style_config_hex_title"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/config_hex_step_6_title"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:text="@string/config_hex_volume"/>
+                        <TextView
+                            style="@style/style_config_hex_edit"
+                            android:id="@+id/hex_create_quantifyvolume"
+                            android:layout_width="90dp"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="@dimen/font_size_normal_18sp" />
+                        <TextView
+                            style="@style/style_config_hex_sub_title"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_normal_18sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="ul"/>
+
+                        <TextView
+                            android:id="@+id/hex_create_freeze_dry_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:textColor="@color/blue"
+                            android:textSize="@dimen/font_size_large_20sp" />
+                    </LinearLayout>
+                    <View
+                        style="@style/horizontal_line"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/config_hex_normal"
+                        android:layout_alignParentBottom="true"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_below="@id/layout_quantify"
+                android:id="@+id/layout_second"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="4dp"
+                android:visibility="gone"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/hex_create_second_ck_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/check_normal"
+                    android:contentDescription="@null"/>
+                <TextView
+                    style="@style/style_config_hex_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/config_hex_step_7_title"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

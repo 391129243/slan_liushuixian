@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:padding="14dp">
+
+
+    <RelativeLayout
+        android:id="@+id/bioway_running_pcr_temp_layout"
+        android:layout_width="340dp"
+        android:layout_height="match_parent"
+        android:paddingLeft="14dp"
+        android:paddingTop="8dp"
+        android:background="@drawable/common_main_content_bg">
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_project_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_start_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bioway_running_pcr_project_tv"
+            android:layout_marginTop="2dp"
+            custom:title_text="@string/running_pcr_project_start_time"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_project_state_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bioway_running_pcr_start_time_tv"
+            android:layout_marginTop="2dp"
+            custom:title_text="@string/running_pcr_project_state"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+        <!--运行时间-->
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_running_time_tv"
+            android:layout_below="@id/bioway_running_pcr_project_state_tv"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project_running_time"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_lasttime_tv"
+            android:layout_below="@id/bioway_running_pcr_running_time_tv"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project_last_time"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_current_program_tv"
+            android:layout_below="@id/bioway_running_pcr_lasttime_tv"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project_current_program"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white"
+            />
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_current_step_tv"
+            android:layout_below="@id/bioway_running_pcr_current_program_tv"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project_current_step"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_project_loop_tv"
+            android:layout_below="@id/bioway_running_pcr_current_step_tv"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project_loop"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_project_temp_tv"
+            android:layout_below="@id/bioway_running_pcr_project_loop_tv"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project_current_temp"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_project_tubetemp_tv"
+            android:layout_below="@id/bioway_running_pcr_project_temp_tv"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_temperature_one"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_project_tubetemp_2_tv"
+            android:layout_below="@id/bioway_running_pcr_project_tubetemp_tv"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_temperature_two"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_project_tubetemp_3_tv"
+            android:layout_below="@id/bioway_running_pcr_project_tubetemp_2_tv"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_temperature_three"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+
+        <com.gidi.bio_pcr.view.CustomTitleText
+            android:id="@+id/bioway_running_pcr_project_holdtime_tv"
+            android:layout_below="@id/bioway_running_pcr_project_tubetemp_3_tv"
+            android:layout_marginTop="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project_hold_time"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/bioway_running_pcr_temp_layout">
+
+        <LinearLayout
+            android:id="@+id/bioway_first_pcr_counterdown_layout"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:padding="4dp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="28dp"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true">
+            <TextView
+                android:id="@+id/bioway_first_running_step_tv"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:gravity="center"
+                android:text="@string/running_real_step"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_16sp"
+                android:background="@drawable/shape_general_pressed_btn"/>
+            <TextView
+                android:id="@+id/bioway_first_pcr_countdown_tv"
+                android:layout_width="86dp"
+                android:layout_height="86dp"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="20dp"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:gravity="center"
+                android:background="@drawable/shape_oval_blue_stroke_bg"/>
+            <TextView
+                android:id="@+id/bioway_first_running_curve_tv"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="@string/running_real_data"
+                android:padding="6dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_16sp"
+                android:background="@drawable/shape_general_normal_btn"/>
+
+        </LinearLayout>
+
+
+
+        <HorizontalScrollView
+            android:id="@+id/bioway_first_pcr_step_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:visibility="visible"
+            android:layout_above="@id/bioway_first_pcr_counterdown_layout">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/bioway_first_pcr_program_title_layout"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="48dp">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/bioway_first_pcr_program_recycle_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal"
+                    >
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/bioway_first_pcr_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/bioway_first_pcr_program_title_layout"
+                    android:layout_above="@id/bioway_first_pcr_program_recycle_layout"/>
+            </RelativeLayout>
+        </HorizontalScrollView>
+
+
+        <!--曲綫-->
+        <RelativeLayout
+            android:id="@+id/bioway_first_pcr_running_chart_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:visibility="gone"
+            android:layout_above="@id/bioway_first_pcr_counterdown_layout">
+
+            <LinearLayout
+                android:id="@+id/bioway_first_pcr_left_layout"
+                android:layout_width="112dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/bioway_first_pcr_running_channel_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:padding="2dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/running_select_channel"
+                        android:textSize="@dimen/font_size_normal_18sp"
+                        android:textColor="@color/blue"/>
+
+                    <com.gidi.bio_pcr.view.CustomCheckText
+                        android:id="@+id/bioway_first_pcr_all_channel_check_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        custom:content_img="@drawable/item_chanel_uncheck"
+                        custom:background_img="@drawable/shape_channel_all_channel_bg"
+                        custom:content_text="@string/result_all_channel"/>
+
+                    <com.gidi.bio_pcr.view.CustomCheckText
+                        android:id="@+id/bioway_first_pcr_running_result_fam_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        custom:content_img="@drawable/item_chanel_uncheck"
+                        custom:background_img="@drawable/shape_channel_fam_bg"
+                        custom:content_text="FAM"/>
+
+                    <com.gidi.bio_pcr.view.CustomCheckText
+                        android:id="@+id/bioway_first_pcr_running_result_hex_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        custom:content_img="@drawable/item_chanel_uncheck"
+                        custom:background_img="@drawable/shape_channel_hex_bg"
+                        custom:content_text="HEX"/>
+
+
+                    <com.gidi.bio_pcr.view.CustomCheckText
+                        android:id="@+id/bioway_first_pcr_running_result_rox_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        custom:content_img="@drawable/item_chanel_uncheck"
+                        custom:background_img="@drawable/shape_channel_rox_bg"
+                        custom:content_text="ROX"/>
+
+                    <com.gidi.bio_pcr.view.CustomCheckText
+                        android:id="@+id/bioway_first_pcr_running_result_cy5_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        custom:content_img="@drawable/item_chanel_uncheck"
+                        custom:background_img="@drawable/shape_channel_cy5_bg"
+                        custom:content_text="CY5"/>
+
+                </LinearLayout>
+
+                <!--显示温度值颜色的标记-->
+                <LinearLayout
+                    android:id="@+id/bioway_first_pcr_running_temp_color_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:padding="2dp"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/first_pcr_running_temp_block_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:gravity="center"
+                        android:layout_marginTop="64dp"
+                        android:padding="2dp"
+                        android:text="@string/running_block_temp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_normal_16sp"
+                        android:background="@color/chart_blue" />
+
+                    <TextView
+                        android:id="@+id/first_pcr_running_temp_tube_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:padding="2dp"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/running_tube_temp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_normal_16sp"
+                        android:background="@color/chart_green" />
+
+                    <TextView
+                        android:id="@+id/first_pcr_running_temp_hotlid_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:padding="2dp"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/running_hotlid_temp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/font_size_normal_16sp"
+                        android:background="@color/chart_orange"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--曲线名称-->
+            <RadioGroup
+                android:id="@+id/bioway_first_pcr_running_curve_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/bioway_first_pcr_left_layout"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+                <RadioButton
+                    style="@style/style_tab_system_info"
+                    android:id="@+id/bioway_first_pcr_running_rawcurve_rb"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/running_curve_virgin"
+                    />
+                <RadioButton
+                    style="@style/style_tab_system_info"
+                    android:id="@+id/bioway_first_pcr_running_ampcurve_rb"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/running_curve_amplify"
+                    />
+                <RadioButton
+                    style="@style/style_tab_system_info"
+                    android:id="@+id/bioway_first_pcr_running_meltcurve_rb"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/running_curve_melt" />
+                <RadioButton
+                    style="@style/style_tab_system_info"
+                    android:id="@+id/bioway_first_pcr_running_temperature_rb"
+                    android:layout_marginLeft="4dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:text="@string/running_curve_temperature" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/bioway_result_hole_layout"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_toRightOf="@id/bioway_first_pcr_left_layout">
+                <TextView
+                    style="@style/style_detect_hole"
+                    android:id="@+id/bioway_first_pcr_running_all_hole_ck"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:text="@string/result_all_hole_check" />
+                <!--孔1-A8-->
+                <TextView
+                    style="@style/style_detect_hole"
+                    android:id="@+id/bioway_first_pcr_running_hole_eight_tv"
+                    android:layout_marginLeft="32dp"
+                    android:text="@string/hole_one" />
+                <!--孔2-A7-->
+                <TextView
+                    style="@style/style_detect_hole"
+                    android:id="@+id/bioway_first_pcr_running_hole_seven_tv"
+                    android:layout_marginLeft="32dp"
+                    android:text="@string/hole_two" />
+                <!--孔3-A6-->
+                <TextView
+                    style="@style/style_detect_hole"
+                    android:id="@+id/bioway_first_pcr_running_hole_six_tv"
+                    android:layout_marginLeft="32dp"
+                    android:text="@string/hole_three" />
+                <!--孔4-A5-->
+                <TextView
+                    style="@style/style_detect_hole"
+                    android:id="@+id/bioway_first_pcr_running_hole_five_tv"
+                    android:layout_marginLeft="32dp"
+                    android:text="@string/hole_four" />
+                <!--孔5-A4-->
+                <TextView
+                    style="@style/style_detect_hole"
+                    android:id="@+id/bioway_first_pcr_running_hole_four_tv"
+                    android:layout_marginLeft="32dp"
+                    android:text="@string/hole_five" />
+                <!--孔6-A3-->
+                <TextView
+                    style="@style/style_detect_hole"
+                    android:id="@+id/bioway_first_pcr_running_hole_three_tv"
+                    android:layout_marginLeft="32dp"
+                    android:text="@string/hole_six" />
+                <!--孔7-A2-->
+                <TextView
+                    style="@style/style_detect_hole"
+                    android:id="@+id/bioway_first_pcr_running_hole_two_tv"
+                    android:layout_marginLeft="32dp"
+                    android:text="@string/hole_seven" />
+                <!--孔8-A1-->
+                <TextView
+                    style="@style/style_detect_hole"
+                    android:id="@+id/bioway_first_pcr_running_hole_one_tv"
+                    android:layout_marginLeft="32dp"
+                    android:text="@string/hole_eight" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/bioway_result_curve_chart_layout"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:padding="4dp"
+                android:layout_below="@id/bioway_first_pcr_running_curve_layout"
+                android:layout_toRightOf="@id/bioway_first_pcr_left_layout"
+                android:layout_above="@id/bioway_result_hole_layout">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/bioway_first_pcr_running_result_curve_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="4dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#f3f5f8"/>
+            </LinearLayout>
+            <!--显示温度曲线-->
+            <LinearLayout
+                android:id="@+id/bioway_first_temperature_curve_chart_layout"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:padding="4dp"
+                android:visibility="gone"
+                android:layout_below="@id/bioway_first_pcr_running_curve_layout"
+                android:layout_toRightOf="@id/bioway_first_pcr_left_layout"
+                android:layout_above="@id/bioway_result_hole_layout">
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/bioway_first_pcr_running_temperature_curve_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="4dp"
+                    android:paddingBottom="4dp"
+                    android:paddingTop="4dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#f3f5f8"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

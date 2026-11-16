@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="14dp"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/second_rna_layout_state"
+        android:layout_width="340dp"
+        android:layout_height="match_parent"
+        android:padding="14dp"
+        android:background="@drawable/common_main_content_bg"
+        >
+
+        <com.gzlab.autoassemblyline_client.view.CustomTitleText
+            android:id="@+id/running_rna_project_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project"
+            custom:content_text=""
+            custom:title_text_color="@color/white"
+            custom:content_text_color="@color/white" />
+
+        <com.gzlab.autoassemblyline_client.view.CustomTitleText
+            android:id="@+id/second_rna_template_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/running_rna_project_tv"
+            android:layout_marginTop="28dp"
+            custom:title_text="@string/running_rna_step_name"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+
+        <com.gzlab.autoassemblyline_client.view.CustomTitleText
+            android:id="@+id/second_rna_discription_tv"
+            android:layout_below="@id/second_rna_template_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            custom:title_text="@string/running_rna_step_discription"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+
+        <com.gzlab.autoassemblyline_client.view.CustomTitleText
+            android:id="@+id/second_rna_step_status_tv"
+            android:layout_below="@id/second_rna_discription_tv"
+            android:layout_marginTop="36dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_rna_step_status"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+
+        <com.gzlab.autoassemblyline_client.view.CustomTitleText
+            android:id="@+id/second_rna_total_step_tv"
+            android:layout_below="@id/second_rna_step_status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            custom:title_text="@string/running_rna_step_num"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+        <com.gzlab.autoassemblyline_client.view.CustomTitleText
+            android:id="@+id/second_rna_temp_tv"
+            android:layout_below="@id/second_rna_total_step_tv"
+            android:layout_marginTop="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_pcr_project_current_temp"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+        <!---已完成步骤数-->
+        <com.gzlab.autoassemblyline_client.view.CustomTitleText
+            android:id="@+id/second_rna_step_done_tv"
+            android:layout_below="@id/second_rna_temp_tv"
+            android:layout_marginTop="28dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:title_text="@string/running_rna_step_done"
+            custom:content_text_color="@color/white"
+            custom:content_text=""
+            custom:title_text_color="@color/white"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/second_rna_layout_state">
+        <LinearLayout
+            android:id="@+id/second_rna_counter_layout"
+            android:layout_width="198dp"
+            android:layout_height="198dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center_horizontal"
+            android:background="@drawable/shape_oval_status_bg">
+            <Chronometer
+                android:id="@+id/second_rna_chronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginTop="36dp"
+                android:textSize="32sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/run_rna_extraction_time"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+
+
+</RelativeLayout>

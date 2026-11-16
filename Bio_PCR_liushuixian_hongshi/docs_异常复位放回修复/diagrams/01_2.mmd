@@ -1,0 +1,31 @@
+sequenceDiagram
+    autonumber
+    actor U as 用户
+    participant F as RnaDetailFragment/PcrDetailFragment
+    participant M as RNAManager/PCRManager
+    participant A as APLManager
+    participant TM as TrayManager
+    participant D as PipeRNA/PCRModel(设备)
+    participant E1 as SchedulingEngine.checkTrayEnd
+    participant E2 as SchedulingEngine.checkTrayError
+    participant T as PipeTrayModel(托盘)
+
+    U->>F: 点「放回」sendBackTray()
+    F->>M: reset(index) 复位设备
+    F->>A: NotifyRnaTrayError(index) ★新增
+    A->>TM: errorDispatch(tray, dispIdx, target, type)
+    TM->>T: tray.status = str_ERROR
+    TM->>T: errorDispatchindex = dispIdx
+    TM->>T: 对应 DispatchModel.status/devicestatus = STATUS_ERROR
+    F->>A: checkRnaFinishError(index)
+    A->>D: armStep = BACK
+
+    loop 每 5s 调度周期
+        E1->>T: 读 tray.status != str_RUN → continue ✔ 不推进
+        E2->>T: 命中 str_ERROR 托盘
+        E2->>D: 委托取回(delegate) → 机械臂送回托盘
+        E2->>T: 取回后 setTrayFlagFree，但 status 保持 str_ERROR
+        Note over T: 托盘停在异常，不再推进<br/>需手动重新下发才恢复
+    end
+
+    U->>F: (恢复) 手动重新下发 TrayDetailFragment<br/>errorDispatchindex=0 / dispatchindex=1

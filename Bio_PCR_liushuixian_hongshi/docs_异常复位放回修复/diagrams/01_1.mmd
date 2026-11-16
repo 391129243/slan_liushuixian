@@ -1,0 +1,24 @@
+sequenceDiagram
+    autonumber
+    actor U as 用户
+    participant F as RnaDetailFragment/PcrDetailFragment
+    participant M as RNAManager/PCRManager
+    participant A as APLManager
+    participant D as PipeRNA/PCRModel(设备)
+    participant E as SchedulingEngine.checkTrayEnd
+    participant T as PipeTrayModel(托盘)
+
+    U->>F: 点「放回」sendBackTray()
+    F->>M: reset(index) 复位设备
+    F->>A: checkRnaFinishError(index)
+    A->>D: armStep = BACK
+    Note over F,D: ❌ 漏调 NotifyXxxTrayError<br/>托盘 status 仍为 str_RUN
+
+    loop 每 5s 调度周期
+        E->>T: 读 tray.status == str_RUN ✔ 通过守卫
+        E->>D: deviceBackFinishedInBack? (取回完成)
+        D-->>E: true
+        E->>T: setDispatchStatusFinish(当前列)
+        E->>T: advanceTrayDispatch(di+1) 推进下一步 ❌
+        Note over T: 托盘继续跑后续正常流程<br/>异常被当成"单列完成"
+    end

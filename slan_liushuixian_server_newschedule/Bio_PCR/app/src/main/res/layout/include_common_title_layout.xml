@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:background="#D7E9F7">
+    <ImageView
+        android:id="@+id/tab_back_img"
+        android:layout_width="wrap_content"
+        android:padding="15dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_title_back_1"
+        android:contentDescription="@null"/>
+    <TextView
+        android:id="@+id/tab_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_toRightOf="@id/tab_back_img"
+        android:layout_centerVertical="true"
+        android:text="@string/result_record"
+        android:textColor="@color/main_tab_color"
+        android:textSize="@dimen/font_size_large_24sp"/>
+
+    <TextView
+        android:id="@+id/secret_tv"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"/>
+
+
+</RelativeLayout>

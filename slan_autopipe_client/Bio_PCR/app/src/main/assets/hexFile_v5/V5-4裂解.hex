@@ -1,0 +1,310 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 15,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "total_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 D6 D8 01 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "55",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 D6 D8 01 ED FF FC FF ",
+                "Delay": 0,
+                "Description": "55-total_height_setting",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "裂解混合_total_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 D6 D8 01 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "55-total_height_setting",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 D6 D8 01 ED FF FC FF ",
+                "Delay": 0,
+                "Description": "55",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "裂解混合_total_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 15,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "total_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "heat",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "0",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关闭加热"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 11 01 00 0A 00 00 23 28 00 67 FF FC FF ",
+                "Delay": 0,
+                "Description": "9mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "磁铁贴合"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 2,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 B4 00 00 DA C0 02 82 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 B4 00 00 D6 D8 02 97 FF FC FF ",
+                "Delay": 0,
+                "Description": "55-total_height_setting",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "裂解磁吸_total_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 B4 00 00 D6 D8 02 96 FF FC FF ",
+                "Delay": 0,
+                "Description": "55-total_height_setting",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 B4 00 00 DA C0 02 83 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "裂解磁吸_total_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 2,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 02 01 00 0A 00 00 0A F0 01 07 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀2-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 0A F0 01 0A FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 14 00 00 DA C0 01 E1 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 14 00 00 DA C0 01 E2 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            }
+        ],
+        "Description": "排裂解液废液"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 02 01 00 0A 00 00 38 A4 00 E9 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀2-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 38 A4 00 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀2/5"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 0C 00 00 27 10 00 76 FF FC FF ",
+                "Delay": 0,
+                "Description": "10",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 08 00 00 17 70 00 C3 FF FC FF ",
+                "Delay": 0,
+                "Description": "6",
+                "IsSelected": true
+            }
+        ],
+        "Description": "抽气"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 0C 00 00 DA C0 01 D9 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 08 00 00 DA C0 01 D6 FF FC FF ",
+                "Delay": 0,
+                "Description": "56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 5A A0 01 06 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 0A F0 01 0A FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀排气"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 2C EC 01 24 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 38 A4 00 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀1/5"
+    }
+]

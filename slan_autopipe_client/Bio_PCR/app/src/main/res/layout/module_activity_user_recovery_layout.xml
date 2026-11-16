@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/recovery_top_state_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:visibility="visible"
+        android:background="#3395D2"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/runinng_rna_serial"
+            android:padding="12dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large_20sp" />
+        <com.gzlab.autoassemblyline_client.view.CustomView
+            android:id="@+id/recovery_top_rna_state_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/runnning_pcr_connect"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="32dp"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large_20sp" />
+        <com.gzlab.autoassemblyline_client.view.CustomView
+            android:id="@+id/recovery_top_pcr_state_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            custom:content_img="@drawable/shape_oval_orange_bg"/>
+
+
+        <TextView
+            android:id="@+id/recovery_alarm_msg_title"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:layout_marginLeft="30dp"
+            android:textSize="@dimen/font_size_large_20sp"
+            android:text="@string/top_bar_alarm_msg"
+            />
+        <TextView
+            android:id="@+id/recovery_top_alarm_msg_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:textColor="@color/red"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/font_size_large_20sp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/recovery_info_layout"
+        android:layout_width="1200dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_rect_main_tab_bg"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/laststep_info_textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:padding="12dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large_24sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/recovery_tab_reset_layout"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="380dp"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/selector_main_tab_2_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/icon_tab_reset" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/main_reset_setting"
+            android:textColor="@color/main_tab_color"
+            android:textSize="@dimen/font_size_large_24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/main_tab_continue_layout"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="380dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/selector_main_tab_2_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_oval_white_bg">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_continue"
+                android:contentDescription="@null" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/main_tab_continue"
+            android:textColor="@color/main_tab_color"
+            android:textSize="@dimen/font_size_large_24sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/recovery_tab_tomain_layout"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_rect_main_tab_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_recovery_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="@string/recovery_tomain"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</RelativeLayout>

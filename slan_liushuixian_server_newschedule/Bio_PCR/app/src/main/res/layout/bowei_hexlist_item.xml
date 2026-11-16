@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/num"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="40dp"
+        android:visibility="gone"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="150dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/hex"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="50dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/cycles"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:layout_width="30dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/time"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="30dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/description"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="100dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tempreture"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="30dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tempreture_up"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="50dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tempreture_down"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="50dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/fluro_amp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="50dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/fluro_melt"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="50dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/memory"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/black"
+        android:layout_width="50dp"
+        android:textSize="10sp"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

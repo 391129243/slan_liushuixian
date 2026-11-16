@@ -1,0 +1,17 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 12 01 00 08 00 00 27 10 00 52 FF FC FF ",
+                "Delay": 0,
+                "Description": "10",
+                "IsSelected": true
+            }
+        ],
+        "Description": "PCR贴合"
+    }
+]

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp"
+    android:background="@drawable/shape_rect_white_bg">
+    <TextView
+        android:id="@+id/dialog_copy_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_large_20sp"
+        android:text="@string/result_export_copy"
+        android:textColor="@color/black"/>
+    <!--目的地-->
+    <TextView
+        android:id="@+id/dialog_copy_dest_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_copy_title_tv"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/font_size_normal_18sp"
+        android:text="目的地"
+        android:textColor="@color/deep_gray">
+    </TextView>
+    <RelativeLayout
+        android:id="@+id/dialog_file_info_layout"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@id/dialog_copy_dest_tv"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/file_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/copy_file_progress_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <ProgressBar
+        style="@style/mProgressBarStyle"
+        android:id="@+id/dialog_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_file_info_layout"
+        android:layout_marginTop="10dp"
+        android:progressDrawable="@drawable/progress_bg"/>
+
+    <TextView
+        android:id="@+id/dialog_cancel_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_progress_bar"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/blue"
+        android:text="@string/cancel"
+        android:visibility="visible"
+        android:textSize="@dimen/font_size_large_20sp"
+
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
+</RelativeLayout>

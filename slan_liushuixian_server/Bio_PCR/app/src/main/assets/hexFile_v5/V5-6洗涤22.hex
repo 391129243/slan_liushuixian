@@ -1,0 +1,240 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "heat",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "80",
+                "Delay": 0,
+                "Description": "xidiye_temperature_setting",
+                "IsSelected": true
+            }
+        ],
+        "Description": "温控_xidiye_temperature_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 04 01 00 0A 00 00 0A F0 01 09 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀4-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 5A A0 01 0A FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 41 01 00 0A 00 00 5D C0 01 69 FF FC FF ",
+                "Delay": 0,
+                "Description": "左推杆到管4",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀移杆"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 31 01 00 32 00 00 55 F0 01 A9 FF FC FF ",
+                "Delay": 0,
+                "Description": "22+xidiye_height_setting",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 32 01 00 32 00 01 15 58 00 D3 FF FC FF ",
+                "Delay": 0,
+                "Description": "69-xidiye_height_setting",
+                "IsSelected": true
+            }
+        ],
+        "Description": "抽洗涤液2_xidiye_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 04 01 00 0A 00 00 38 A4 00 EB FF FC FF ",
+                "Delay": 0,
+                "Description": "阀4-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 2C EC 01 28 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 31 01 00 0A 00 00 1F 40 00 9B FF FC FF ",
+                "Delay": 0,
+                "Description": "抬左杆8",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀抬杆"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 3,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xidiye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 01 11 70 00 C0 FF FC FF ",
+                "Delay": 0,
+                "Description": "70",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 01 15 58 00 AD FF FC FF ",
+                "Delay": 0,
+                "Description": "69-xidiye_height_setting",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "洗涤混合2_xidiye_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 01 15 58 00 AC FF FC FF ",
+                "Delay": 0,
+                "Description": "69-xidiye_height_setting",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 01 11 70 00 C1 FF FC FF ",
+                "Delay": 0,
+                "Description": "70",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "洗涤混合2_xidiye_height_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 3,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xidiye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "heat",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "0",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关闭加热"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 04 01 00 0A 00 00 0A F0 01 09 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀4-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 5A A0 01 0A FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 14 00 01 15 58 00 B5 FF FC FF ",
+                "Delay": 0,
+                "Description": "71",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 14 00 01 15 58 00 B6 FF FC FF ",
+                "Delay": 0,
+                "Description": "71",
+                "IsSelected": true
+            }
+        ],
+        "Description": "排洗涤2废液"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 04 01 00 0A 00 00 38 A4 00 EB FF FC FF ",
+                "Delay": 0,
+                "Description": "阀4-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 2C EC 01 28 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀4/5"
+    }
+]

@@ -1,0 +1,39 @@
+pluginManagement {
+    repositories {
+        // 腾讯云镜像（速度最快）
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/") }
+        // 阿里云镜像（国内加速）
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+        maven { url = uri("https://maven.aliyun.com/repository/central") }
+        maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        // 华为云镜像（备用）
+        maven { url = uri("https://repo.huaweicloud.com/repository/maven/") }
+        // 官方源（国内镜像无法访问时使用）
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        // JitPack
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        // 腾讯云镜像（速度最快）
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/") }
+        // 阿里云镜像（国内加速）
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+        maven { url = uri("https://maven.aliyun.com/repository/central") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        // 华为云镜像（备用）
+        maven { url = uri("https://repo.huaweicloud.com/repository/maven/") }
+        // 官方源
+        google()
+        mavenCentral()
+        // JitPack
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+rootProject.name='Bio_PCR'
+include ':app', ':SerialPortLibrary'

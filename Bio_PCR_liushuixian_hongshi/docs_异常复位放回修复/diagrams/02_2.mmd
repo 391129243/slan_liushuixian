@@ -1,0 +1,12 @@
+stateDiagram-v2
+    direction LR
+    state "修复前" as before {
+        [*] --> b_run: running
+        b_run --> b_run: 放回/复位<br/>(只改设备 armStep=BACK)
+        b_run --> b_next: checkTrayEnd 推进 di+1 ❌<br/>继续后续流程
+    }
+    state "修复后" as after {
+        [*] --> a_run: running
+        a_run --> a_err: 放回/复位<br/>NotifyXxxTrayError ★
+        a_err --> a_err: 停在 error，不推进 ✔
+    }

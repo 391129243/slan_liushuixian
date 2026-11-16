@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Category">
+        <item>博卡病毒1</item>
+        <item>副流感病毒2型</item>
+        <item>呼吸道合胞病毒</item>
+        <item>腺病毒</item>
+        <item>甲型流感病毒</item>
+        <item>副流感病毒3型</item>
+        <item>副流感病毒1型</item>
+        <item>人偏肺病毒</item>
+        <item>内标肺病毒</item>
+        <item>乙型流感病毒</item>
+        <item>冠状病毒229E</item>
+        <item>新型冠状病毒</item>
+        <item>冠状病毒0C43</item>
+        <item>肺炎支原体</item>
+        <item>甲流</item>
+        <item>乙流</item>
+    </string-array>
+    <string-array name="Channel">
+        <item>FAM</item>
+        <item>HEX</item>
+        <item>ROX</item>
+        <item>CY5</item>
+        <item>QUASAR 705</item>
+        <item>ATTO 425</item>
+    </string-array>
+    <string-array name="AMPAlgorithm">
+        <item>@string/config_info_ampalgorithm_default</item>
+        <item>@string/config_info_ampalgorithm_subtraction</item>
+        <item>@string/config_info_ampalgorithm_relativeLinear</item>
+    </string-array>
+    <string-array name="AMPDigitalFiler">
+        <item>@string/config_info_digitalfilter_none</item>
+        <item>@string/config_info_digitalfilter_normal</item>
+        <item>@string/config_info_digitalfilter_high</item>
+    </string-array>
+
+</resources>

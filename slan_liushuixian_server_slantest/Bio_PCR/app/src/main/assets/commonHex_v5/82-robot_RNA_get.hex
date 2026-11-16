@@ -1,0 +1,116 @@
+[
+    {
+        "IsSelected": false,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 15 01 01 0F 00 06 1A 80 00 C6 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": false
+            },
+            {
+                "Hex": "5A A5 16 01 01 0F 00 06 1A 80 00 C7 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": false
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": false
+            }
+        ],
+        "Description": "双Y回中"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 17 01 00 0F 00 00 3C 8C 00 EF FF FC FF ",
+                "Delay": 0,
+                "Description": "get_x",
+                "IsSelected": false
+            }
+        ],
+        "Description": "机械臂_get_xy"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 15 01 01 0F 00 02 26 C8 01 16 FF FC FF ",
+                "Delay": 0,
+                "Description": "get_y",
+                "IsSelected": false
+            },
+            {
+                "Hex": "5A A5 16 01 01 0F 00 02 26 C8 01 17 FF FC FF ",
+                "Delay": 0,
+                "Description": "get_y",
+                "IsSelected": false
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "机械臂_get_xy"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 18 01 00 0A 00 03 01 88 00 AF FF FC FF ",
+                "Delay": 0,
+                "Description": "get_z",
+                "IsSelected": false
+            }
+        ],
+        "Description": "机械臂_get_z"
+    },
+    {
+        "IsSelected": true,
+        "Name": "485",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "01 C5 00 9C 40 07 D0 00 27 10 6B",
+                "Delay": 0,
+                "Description": "抓紧",
+                "IsSelected": true
+            }
+        ],
+        "Description": "hand_flag"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 18 01 00 0A 00 00 00 00 00 23 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "手上移"
+    }
+]

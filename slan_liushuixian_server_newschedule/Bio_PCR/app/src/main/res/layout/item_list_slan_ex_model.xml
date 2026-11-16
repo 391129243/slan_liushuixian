@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_ex_result_layout"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_height="112dp">
+    <TextView
+        android:id="@+id/item_list_ex_num_tv"
+        style="@style/style_ex_result_item_title"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textSize="@dimen/font_size_large_22sp"
+        android:textColor="@color/color_main_title"
+        android:text="@string/result_num"/>
+  <!--  <TextView
+        android:id="@+id/item_list_ex_deviceid_tv"
+        style="@style/style_ex_result_item_title"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:textSize="@dimen/font_size_large_22sp"
+        android:textColor="@color/color_main_title"
+        android:text="@string/result_num"/>-->
+    <TextView
+        android:id="@+id/item_list_ex_starttime_tv"
+        style="@style/style_ex_result_item_title"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:textSize="@dimen/font_size_large_22sp"
+        android:textColor="@color/color_main_title"/>
+    <TextView
+        android:id="@+id/item_list_ex_endtime_tv"
+        style="@style/style_ex_result_item_title"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:textSize="@dimen/font_size_large_22sp"
+        android:textColor="@color/color_main_title"/>
+
+    <TextView
+        android:id="@+id/item_list_ex_result_testitem_tv"
+        style="@style/style_ex_result_item_title"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:text="@string/result_testitem"
+        android:textSize="@dimen/font_size_large_22sp"
+        android:textColor="@color/color_main_title"/>
+    <TextView
+        android:id="@+id/item_list_ex_result_description_tv"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_marginLeft="4dp"
+        android:singleLine="false"
+        android:textSize="@dimen/font_size_large_22sp"
+        style="@style/style_ex_result_item_title"
+        android:textColor="@color/color_main_title"/>
+    <ImageView
+        android:id="@+id/item_ex_result_ck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:src="@drawable/item_unchecked"
+        android:visibility="invisible" />
+</LinearLayout>

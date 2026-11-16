@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/user_slan_main_root_layout"
+    android:background="@drawable/user_main_bg_2"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/user_slan_running_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="78dp">
+
+
+        <!--显示时间-->
+        <com.gzlab.autoassemblyline_client.view.DateTimeView
+            android:id="@+id/user_slan_running_time_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            custom:title_text_color="@color/color_user_main_text"
+            custom:content_text_color="@color/color_user_main_text">
+        </com.gzlab.autoassemblyline_client.view.DateTimeView>
+        <ImageView
+            android:id="@+id/user_slan_tab_back_img"
+            android:layout_width="wrap_content"
+            android:padding="14dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/user_slan_running_time_ll"
+            android:layout_marginRight="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_main"
+            android:background="@drawable/shape_oval_user_top_bg"
+            android:contentDescription="@null"/>
+
+        <ImageView
+            android:id="@+id/user_slan_tab_stop_img"
+            android:layout_width="wrap_content"
+            android:padding="14dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/user_slan_tab_back_img"
+            android:layout_marginRight="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_stop"
+            android:background="@drawable/shape_oval_user_top_bg"
+            android:contentDescription="@null"/>
+
+        <!--截图，在出现结果后在出现-->
+        <ImageView
+            android:id="@+id/user_slan_running_sceentshot_tv"
+            android:layout_width="wrap_content"
+            android:padding="14dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/user_slan_tab_stop_img"
+            android:layout_marginRight="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_screenshot"
+            android:background="@drawable/shape_oval_user_top_bg"
+            android:contentDescription="@null"/>
+
+        <ImageView
+            android:id="@+id/user_slan_pcr_sound_tv"
+            android:layout_width="wrap_content"
+            android:padding="14dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/user_slan_running_sceentshot_tv"
+            android:layout_marginRight="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_no_mute"
+            android:background="@drawable/shape_oval_user_top_bg"
+            android:contentDescription="@null"/>
+
+        <ImageView
+            android:id="@+id/user_slan_pcr_setting_tv"
+            android:layout_width="wrap_content"
+            android:padding="14dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/user_slan_pcr_sound_tv"
+            android:layout_marginRight="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon_top_records"
+            android:background="@drawable/shape_oval_user_top_bg"
+            android:contentDescription="@null"/>
+        <!---报警信息-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/user_slan_pcr_setting_tv"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/user_slan_alarm_msg_title"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:textColor="@color/red"
+                android:layout_marginLeft="30dp"
+                android:textSize="@dimen/font_size_large_20sp"
+                android:text="@string/top_bar_alarm_msg"
+                />
+            <TextView
+                android:id="@+id/user_slan_alarm_msg_tv"
+                android:layout_width="500dp"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/user_slan_alarm_msg_title"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textColor="@color/red"
+                android:layout_marginLeft="10dp"
+                android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/user_slan_pcr_counting_alarm_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:visibility="invisible"
+                android:src="@drawable/icon_counting_alarm"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:contentDescription="@null"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+
+    <FrameLayout
+        android:id="@+id/user_slan_activity_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/user_slan_running_title_layout">
+
+    </FrameLayout>
+</RelativeLayout>

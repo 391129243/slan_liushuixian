@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前的deviceid:"/>
+        <TextView
+            android:id="@+id/device_id_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前的devicePos:"
+            android:layout_marginLeft="50dp"/>
+        <TextView
+            android:id="@+id/device_pos_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="12dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="版本:"
+            android:layout_marginLeft="50dp"/>
+        <TextView
+            android:id="@+id/version_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/send_pcr_file_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="发送pcr文件"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#F5F5F5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前PCR实验信息"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="模板名称: "
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/pcr_template_name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="--"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="文件名称: "
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/pcr_project_name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="--"
+                android:textColor="@color/black"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="结果路径: "
+                android:textSize="14sp"/>
+            <TextView
+                android:id="@+id/pcr_result_path_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="--"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- SLAN 调试状态面板 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:background="#FFFAF0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔍 SLAN 调试状态"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FF6347"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- 主控 WSS 连接状态 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="【主控WSS】"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/debug_wss_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="WSS: --"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"/>
+
+            <!-- 连接状态 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="【连接状态】"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/debug_connection_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="连接: -- | 设备: --"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"/>
+
+            <!-- 运行状态 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="【运行状态】"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/debug_running_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="运行: -- | 状态: -- | Linux: --"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"/>
+
+            <!-- 当前实验 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="【当前实验】"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/debug_experiment_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="模板: -- | 文件: --"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"/>
+
+            <!-- 告警信息 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="【告警信息】"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/debug_alarm_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="告警: -- | Linux告警: --"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"/>
+
+            <!-- 错误计数 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="【错误计数】"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/debug_error_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SLAN错误: 0 | 重连次数: 0"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"/>
+
+            <!-- 守卫状态 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="【守卫状态】"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/debug_guard_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="已上报: false | 会话令牌: 0"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"/>
+
+            <!-- 文件路径 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="【文件路径】"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/debug_file_paths"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="模板目录: --\n结果文件: --"
+                android:textSize="12sp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

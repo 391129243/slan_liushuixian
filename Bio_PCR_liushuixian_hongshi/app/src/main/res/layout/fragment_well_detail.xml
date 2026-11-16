@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.paul.pipeline.fragment.WellDetailFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:background="@color/white">
+    <include
+        android:id="@+id/result_bioway_detail_title_layout"
+        layout="@layout/include_common_title_layout"/>
+
+    <RelativeLayout
+        android:id="@+id/well_bioway_detail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_below="@id/result_bioway_detail_title_layout">
+
+        <RelativeLayout
+            android:id="@+id/result_bioway_detail_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/common_main_content_bg"
+            android:padding="20dp">
+            <!--样本编号-->
+            <com.gidi.bio_pcr.view.CustomTitleText
+                android:id="@+id/result_well_bioway_detail_samplename_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                custom:content_text=""
+                custom:content_text_color="@color/white"
+                custom:title_text="@string/result_idcard"
+                custom:title_text_color="@color/white" />
+
+
+            <!--试剂编号-->
+            <com.gidi.bio_pcr.view.CustomTitleText
+                android:id="@+id/result_well_bioway_detail_regentcode_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/result_well_bioway_detail_samplename_tv"
+                custom:content_text=""
+                custom:content_text_color="@color/white"
+                custom:title_text="@string/result_reagent"
+                custom:title_text_color="@color/white" />
+
+            <!--测试时间-->
+            <com.gidi.bio_pcr.view.CustomTitleText
+                android:id="@+id/result_well_bioway_detail_testtime_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/result_well_bioway_detail_samplename_tv"
+                custom:content_text=""
+                custom:content_text_color="@color/white"
+                custom:title_text="@string/result_time"
+                custom:title_text_color="@color/white" />
+            <!--测试项目-->
+            <com.gidi.bio_pcr.view.CustomTitleText
+                android:id="@+id/result_well_bioway_detail_testitem_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/result_well_bioway_detail_regentcode_tv"
+                android:layout_toRightOf="@id/result_well_bioway_detail_testtime_tv"
+                custom:content_text=""
+                custom:content_text_color="@color/white"
+                custom:title_text="@string/result_testitem"
+                custom:title_text_color="@color/white" />
+            <!--测试结论-->
+            <TextView
+                android:id="@+id/result_well_bioway_conclusion_title_tv"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/result_well_bioway_detail_testtime_tv"
+                android:layout_gravity="center_horizontal"
+                android:gravity="left|center_vertical"
+                android:padding="6dp"
+                android:text="扩增结论："
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <TextView
+                android:id="@+id/result_well_bioway_conclusion_content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/result_well_bioway_detail_testtime_tv"
+                android:layout_toRightOf="@id/result_well_bioway_conclusion_title_tv"
+                android:gravity="left|center_vertical"
+                android:padding="6dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <TextView
+                android:id="@+id/result_well_bioway_conclusion_2_title_tv"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/result_well_bioway_conclusion_title_tv"
+                android:layout_gravity="center_horizontal"
+                android:gravity="left|center_vertical"
+                android:padding="6dp"
+                android:text="熔解结论："
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <TextView
+                android:id="@+id/result_well_bioway_conclusion_2_content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/result_well_bioway_conclusion_title_tv"
+                android:layout_toRightOf="@id/result_well_bioway_conclusion_2_title_tv"
+                android:gravity="left|center_vertical"
+                android:padding="6dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <TextView
+                android:id="@+id/result_well_bioway_screenshot_tv"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/result_well_bioway_conclusion_2_title_tv"
+                android:layout_marginTop="6dp"
+                android:drawableTop="@drawable/selector_ex_screenshot"
+                android:gravity="center"
+                android:text="@string/screenshot"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large_20sp" />
+
+            <TextView
+                android:id="@+id/result_well_bioway_show_pdf_tv"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/result_well_bioway_conclusion_2_title_tv"
+                android:layout_marginTop="6dp"
+                android:layout_toRightOf="@id/result_well_bioway_screenshot_tv"
+                android:drawableTop="@drawable/selector_ex_show_pdf"
+                android:layout_marginLeft="12dp"
+                android:gravity="center"
+                android:text="@string/detail_show_report"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large_20sp" />
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/result_well_bioway_detail_chart_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/result_bioway_detail_info_layout">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="4dp">
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/result_well_bioway_detail_curve_one_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:padding="4dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#f3f5f8"/>
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/include_color_chart_hint_layout"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:padding="4dp">
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/result_well_bioway_detail_curve_two_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:padding="4dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#f3f5f8"/>
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/include_color_chart_hint_layout"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/well_bioway_detail_pdf_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@id/result_bioway_detail_title_layout">
+
+        <RelativeLayout
+            android:id="@+id/well_bioway_detail_pdf_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#F5F5F5"
+            android:padding="12dp">
+            <TextView
+                android:id="@+id/well_bioway_pdf_save_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:text="@string/well_detail_save_pdf_report"
+                android:textColor="@color/color_blue_odd_selector"/>
+            <ImageView
+                android:id="@+id/well_bioway_show_pdf_back_img"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="80dp"
+                android:padding="10dp"
+                android:background="@drawable/icon_back_1"/>
+        </RelativeLayout>
+        <ScrollView
+            android:id="@+id/show_pdf_view"
+            android:layout_width="1240dp"
+            android:layout_height="1754dp"
+            android:layout_below="@id/well_bioway_detail_pdf_title_layout">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="52dp"
+                android:paddingRight="52dp">
+                <TextView
+                    android:id="@+id/pdf_title_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/well_detail_pdf_report_title"
+                    android:gravity="center"
+                    android:textSize="28sp"
+                    android:textColor="@color/black"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="6dp"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp">
+                    <LinearLayout
+                        android:id="@+id/bioway_pdf_ex_num_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/well_slan_pdf_ex_num_title"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textSize="@dimen/font_size_large_20sp"
+                            android:text="@string/well_detail_pdf_report_title_ex_num"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_horizontal"
+                            android:contentDescription="@null" />
+                        <TextView
+                            android:id="@+id/well_bioway_pdf_ex_num_content_tv"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_size_large_20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/bioway_pdf_ex_device_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/bioway_pdf_ex_num_layout"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/bioway_pdf_ex_device_title"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textSize="@dimen/font_size_large_20sp"
+                            android:text="@string/well_detail_pdf_report_title_ex_instrument"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_horizontal"
+                            android:contentDescription="@null" />
+                        <TextView
+                            android:id="@+id/bioway_pdf_ex_device_content_tv"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_size_large_20sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/bioway_pdf_ex_date_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@id/bioway_pdf_ex_num_layout"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/bioway_pdf_ex_date_title"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textSize="@dimen/font_size_large_20sp"
+                            android:text="@string/well_detail_pdf_report_title_ex_test_date"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_horizontal"
+                            android:contentDescription="@null" />
+                        <TextView
+                            android:id="@+id/bioway_pdf_ex_date_content_tv"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_size_large_20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/bioway_pdf_ex_starttime_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/bioway_pdf_ex_date_layout"
+                        android:layout_below="@id/bioway_pdf_ex_device_layout"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/bioway_pdf_ex_starttime_title"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textSize="@dimen/font_size_large_20sp"
+                            android:text="@string/well_detail_pdf_report_title_ex_starttime"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_horizontal"
+                            android:contentDescription="@null" />
+                        <TextView
+                            android:id="@+id/bioway_pdf_ex_starttime_content_tv"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/font_size_large_20sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/bioway_pdf_ex_endtime_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/bioway_pdf_ex_starttime_layout"
+                        android:layout_alignBottom="@id/bioway_pdf_ex_starttime_layout"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/bioway_pdf_ex_endtime_title"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textSize="@dimen/font_size_large_20sp"
+                            android:text="@string/well_detail_pdf_report_title_ex_endtime"
+                            android:textColor="@color/black"
+                            android:layout_gravity="center_horizontal"
+                            android:contentDescription="@null" />
+                        <TextView
+                            android:id="@+id/bioway_pdf_ex_endtime_content_tv"
+                            android:layout_width="240dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textSize="@dimen/font_size_large_20sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="6dp"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="52dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="#D8D8D8"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textColor="@color/black"
+                        android:text="@string/well_detail_pdf_report_sample_name"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+                    <TextView
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:text="@string/well_detail_pdf_report_well_name"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+                    <TextView
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textColor="@color/black"
+                        android:text="@string/well_detail_pdf_report_project_name"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+                    <TextView
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textColor="@color/black"
+                        android:text="@string/well_detail_pdf_report_type"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+
+                    <TextView
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textColor="@color/black"
+                        android:text="@string/well_detail_pdf_report_target_name"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+                    <TextView
+                        android:id="@+id/well_bioway_pdf_control_peak_ct_title"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:text="@string/well_detail_pdf_report_target_ct"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+                    <TextView
+                        android:id="@+id/well_bioway_pdf_real_ct_title"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:text="@string/well_detail_pdf_report_test_ct"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+                    <TextView
+                        android:id="@+id/well_bioway_pdf_peak_rm_title"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:text="@string/well_detail_pdf_report_test_rm"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+                    <TextView
+                        android:id="@+id/well_bioway_pdf_peak_tm_title"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:text="@string/well_detail_pdf_report_test_tm"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+                    <TextView
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textColor="@color/black"
+                        android:text="@string/well_detail_pdf_report_test_conclusion"
+                        android:textSize="@dimen/font_size_normal_18sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/bioway_pdf_sample_name_tv"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/bioway_pdf_wellnum_tv"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/bioway_pdf_testitem_tv"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/bioway_pdf_test_type_tv"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/bioway_pdf_test_target_type_tv"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/bioway_pdf_test_target_ct_tv"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5" />
+
+                    <TextView
+                        android:id="@+id/well_bioway_pdf_real_ct_tv"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5" />
+                    <TextView
+                        android:id="@+id/well_bioway_pdf_real_rm_value_tv"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5" />
+                    <TextView
+                        android:id="@+id/well_bioway_pdf_real_tm_value_tv"
+                        style="@style/style_pdf_item_title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5" />
+                    <TextView
+                        style="@style/style_pdf_item_title"
+                        android:id="@+id/well_pdf_bioway_conclusion_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    android:layout_marginTop="6dp"/>
+
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/result_well_bioway_pdf_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="420dp"
+                    android:padding="4dp"
+                    android:layout_marginTop="48dp"
+                    android:background="#f3f5f8"/>
+                <include
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/include_color_chart_hint_layout"/>
+            </LinearLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>

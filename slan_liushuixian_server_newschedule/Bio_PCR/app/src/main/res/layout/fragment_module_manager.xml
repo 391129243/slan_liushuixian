@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:paddingLeft="52dp"
+    android:paddingRight="52dp"
+    android:paddingTop="42dp"
+    android:paddingBottom="42dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/manager_device_pcr_module_list"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_large_20sp"/>
+        <!--手动重启全部 PCR client-->
+        <Button
+            android:id="@+id/module_restart_all_pcr_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="重启全部PCR程序"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:background="@drawable/selector_general_btn_bg"/>
+    </LinearLayout>
+    <!--标题-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:background="@color/blue"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <!--序号-->
+        <TextView
+            style="@style/style_config_ex_pamram_tv"
+            android:id="@+id/title_index_tv"
+            android:layout_weight="1"
+            android:text="序号"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/item_module_name_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_type"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <!--设备编号-->
+        <TextView
+            android:id="@+id/item_module_number_tv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_position"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <!--设备IP-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_ip"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_version"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <!--设备状态-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_status"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <!--启用-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="启用"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+    <ListView
+        android:id="@+id/module_manager_lv"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:divider="@color/light_gray"
+        android:dividerHeight="1dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/manager_device_rna_module_list"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_large_20sp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center_vertical"
+        android:background="@color/blue"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <!--序号-->
+        <TextView
+            style="@style/style_config_ex_pamram_tv"
+            android:layout_weight="1"
+            android:text="序号"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_type"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <!--设备编号-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_position"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <!--设备IP-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_ip"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_version"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <!--设备状态-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/manager_device_status"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+        <!--启用-->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="启用"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textStyle="bold" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+    <ListView
+        android:id="@+id/module_manager_rna_lv"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:divider="@color/light_gray"
+        android:dividerHeight="1dp"/>
+
+</LinearLayout>

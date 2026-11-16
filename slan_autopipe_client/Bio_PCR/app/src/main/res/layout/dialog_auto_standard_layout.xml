@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <!--自动标准品编辑器-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="选中反应孔数量："
+            android:textColor="@color/blue"
+            android:textSize="@dimen/font_size_normal_18sp" />
+
+        <TextView
+            android:id="@+id/dialog_auto_standard_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|left"
+            android:text="起始浓度："
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textColor="@color/blue"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:gravity="center"
+            android:id="@+id/dialog_auto_standard_initial_concentration_tv"
+            android:text="10000"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:background="@drawable/shape_rect_stoke"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_margin="12dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|left"
+            android:text="稀释梯度："
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textColor="@color/blue"/>
+        <TextView
+            android:layout_width="128dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:id="@+id/dialog_auto_dilution_gradient_mode_tv"
+            android:text="@string/sample_standard_dilute_increment"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:background="@drawable/shape_rect_stoke"/>
+        <ImageView
+            android:id="@+id/info_sampletype_arrow_img"
+            android:layout_width="42dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/arrow_normal"
+            android:background="@color/color_user_main_text"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginLeft="18dp"
+            android:id="@+id/dialog_auto_dilution_gradient_num_tv"
+            android:text="10"
+            android:inputType="number"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:background="@drawable/shape_rect_stoke"/>
+    </LinearLayout>
+</LinearLayout>

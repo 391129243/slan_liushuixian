@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ClaudeCodeEditorTabs">
+    <option name="activeSessionId" value="e2d12259-3437-4114-a3be-9759120b5312" />
+    <option name="openSessionIds">
+      <list>
+        <option value="e2d12259-3437-4114-a3be-9759120b5312" />
+      </list>
+    </option>
+    <option name="sessionPaths">
+      <map>
+        <entry key="e2d12259-3437-4114-a3be-9759120b5312" value="/sessions/6db67951-8ace-4e7e-bd53-2ebb816d319c" />
+      </map>
+    </option>
+    <option name="sessionTitles">
+      <map>
+        <entry key="e2d12259-3437-4114-a3be-9759120b5312" value="现在还是存在大量重复的log写入不同文件的情况，请检查" />
+      </map>
+    </option>
+  </component>
+</project>

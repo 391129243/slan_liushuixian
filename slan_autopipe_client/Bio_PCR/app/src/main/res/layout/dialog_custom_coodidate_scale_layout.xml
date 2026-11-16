@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="188dp"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:text="@string/result_ex_min_value"
+            android:textColor="@color/blue"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="208dp"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:text="@string/result_ex_max_value"
+            android:textColor="@color/blue"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:gravity="center"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:text="@string/result_ex_x"
+            android:textColor="@color/blue"/>
+        <com.gzlab.autoassemblyline_client.view.CustomAddSubEdit
+            android:id="@+id/dialog_coodidate_min_x_et"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginLeft="12dp" />
+        <com.gzlab.autoassemblyline_client.view.CustomAddSubEdit
+            android:id="@+id/dialog_coodidate_max_x_et"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginLeft="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="28dp"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:text="@string/result_ex_y"
+            android:textColor="@color/blue"/>
+        <com.gzlab.autoassemblyline_client.view.CustomAddSubEdit
+            android:id="@+id/dialog_coodidate_y_min_et"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginLeft="12dp" />
+        <com.gzlab.autoassemblyline_client.view.CustomAddSubEdit
+            android:id="@+id/dialog_coodidate_Y_max_et"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_marginLeft="12dp" />
+    </LinearLayout>
+</LinearLayout>

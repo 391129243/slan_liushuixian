@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "slan_autopipe_client"
+		},
+		{
+			"path": "slan_liushuixian_server_newschedule"
+		},
+		{
+			"path": "data_server"
+		}
+	]
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="320dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_rect_white_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dialog_title_tv"
+            android:layout_width="match_parent"
+            android:background="@drawable/dialog_title_bg"
+            android:text="@string/dialog_title"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/font_size_large_20sp"
+            android:layout_height="42dp" />
+        <LinearLayout
+            android:id="@+id/dialog_btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/custom_dialog_cancel_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:background="@drawable/dialog_cancel_btn_bg"
+                android:gravity="center"
+                android:lines="1"
+                android:text="@string/dialog_cancel"
+                android:textColor="@color/color_dialog_btn_selector"
+                android:textSize="@dimen/font_size_normal_18sp"/>
+            <View
+                style="@style/style_portrait_line"/>
+            <Button
+                android:id="@+id/custom_dialog_ok_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:background="@drawable/dialog_cancel_btn_bg"
+                android:gravity="center"
+                android:lines="1"
+                android:text="@string/dialog_ok"
+                android:textColor="@color/color_dialog_btn_selector"
+                android:textSize="@dimen/font_size_normal_18sp"/>
+        </LinearLayout>
+        <View
+            android:id="@+id/dialog_horizon_line"
+            style="@style/horizontal_line"
+            android:layout_above="@id/dialog_btn_layout"
+            android:background="@color/detect_gray">
+
+        </View>
+        <TextView
+            android:id="@+id/custom_dialog_message_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_below="@id/dialog_title_tv"
+            android:layout_above="@id/dialog_horizon_line"
+            android:padding="20dp"
+            android:textSize="@dimen/font_size_normal_16sp"
+            android:layout_gravity="center"
+            android:textColor="@color/black" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="#f5f5f5">
+    <!--标题-->
+    <include
+        android:id="@+id/single_pcr_create_title_layout"
+        layout="@layout/include_common_title_layout"/>
+    <!--已选中的文件-->
+    <LinearLayout
+        android:id="@+id/single_pcr_create_tab_layout"
+        android:layout_width="348dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/single_pcr_create_title_layout"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/shape_rect_white_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/shape_rect_blue_2_corners"
+            android:gravity="center"
+            android:text="@string/create_multi_template_selected"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_large_20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/single_pcr_create_filename_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/create_multi_template_name"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <EditText
+                android:id="@+id/single_pcr_create_template_name_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/shape_rect_stoke"
+                android:inputType="none"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:text="pcr_"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal_18sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/single_pcr_create_filename_second_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/create_multi_template_second_name"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <EditText
+                android:id="@+id/single_pcr_create_template_name_second_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/shape_rect_stoke"
+                android:inputType="none"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal_18sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/single_pcr_create_filename_third_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/create_multi_template_third_name"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <EditText
+                android:id="@+id/single_pcr_create_template_name_third_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:background="@drawable/shape_rect_stoke"
+                android:inputType="none"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal_18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/single_pcr_create_totaltime_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/create_single_pcr_time"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <EditText
+                android:id="@+id/single_pcr_create_totaltime_et"
+                android:layout_width="208dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:enabled="false"
+                android:background="@drawable/shape_rect_stoke"
+                android:inputType="number"
+                android:padding="4dp"
+                android:maxLength="4"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_normal_18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="s"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_normal_18sp" />
+        </LinearLayout>
+        <!--控温方式-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textColor="@color/blue"
+                android:gravity="center"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:text="@string/create_multi_temperature_control"/>
+            <RadioGroup
+                android:id="@+id/single_pcr_tempctrl_mode_rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/single_pcr_tempctrl_fast"
+                    style="@style/style_tab_temperature_ctrl_rb"
+                    android:checked="true"
+                    android:paddingRight="8dp"
+                    android:layout_width="88dp"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:text="@string/create_multi_temperature_fast"/>
+                <RadioButton
+                    android:id="@+id/single_pcr_tempctrl_standard"
+                    style="@style/style_tab_temperature_ctrl_rb"
+                    android:layout_marginLeft="6dp"
+                    android:layout_width="120dp"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/font_size_normal_18sp"
+                    android:text="@string/create_multi_temperature_standard"/>
+            </RadioGroup>
+        </LinearLayout>
+        <com.gidi.bio_pcr.view.CustomImageText
+            android:id="@+id/single_pcr_create_pcr_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginTop="24dp"
+            custom:content_img="@drawable/shape_oval_top_bg"
+            custom:content_text="PCR"
+            custom:content_text_color="@color/blue"
+            custom:image_content_text="1"
+            custom:image_content_text_color="@color/white" />
+
+        <TextView
+            android:id="@+id/single_pcr_create_pcr_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp" />
+
+        <com.gidi.bio_pcr.view.CustomImageText
+            android:id="@+id/single_pcr_create_peak_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginTop="20dp"
+            custom:content_img="@drawable/shape_oval_top_bg"
+            custom:content_text="@string/create_multi_peak_judge_file"
+            custom:content_text_color="@color/blue"
+            custom:image_content_text="2"
+            custom:image_content_text_color="@color/white" />
+
+        <TextView
+            android:id="@+id/single_pcr_create_peak_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp" />
+        <com.gidi.bio_pcr.view.CustomImageText
+            android:id="@+id/single_pcr_create_ct_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginTop="20dp"
+            custom:content_img="@drawable/shape_oval_top_bg"
+            custom:content_text="@string/create_multi_ct_judge_file"
+            custom:content_text_color="@color/blue"
+            custom:image_content_text="3"
+            custom:image_content_text_color="@color/white" />
+
+        <TextView
+            android:id="@+id/single_pcr_create_ct_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginTop="14dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp" />
+        <TextView
+            android:id="@+id/single_pcr_create_save_btn"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/selector_general_btn_bg"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="@string/create_multi_template_save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_18sp" />
+    </LinearLayout>
+
+    <!--显示PCR文件列表和详情-->
+    <RelativeLayout
+        android:id="@+id/single_pcr_create_pcr_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/single_pcr_create_tab_layout"
+        android:layout_below="@id/single_pcr_create_title_layout"
+        android:padding="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="12dp"
+        android:visibility="visible"
+        android:background="@drawable/shape_rect_white_bg">
+        <TextView
+            style="@style/style_common_title_tv"
+            android:id="@+id/single_create_pcr_list_title"
+            android:layout_width="wrap_content"
+            android:text="@string/create_multi_pcr_file"
+            android:textColor="@color/blue" />
+
+        <TextView
+            style="@style/style_common_create_title_tv"
+            android:id="@+id/single_pcr_create_tv"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/create_multi_create_pcr_file"
+            android:background="@drawable/selector_general_btn_bg"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/single_pcr_rv"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="12dp"
+            android:layout_below="@id/single_create_pcr_list_title"/>
+
+
+        <HorizontalScrollView
+            android:id="@+id/single_pcr_create_step_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/single_pcr_rv"
+            android:visibility="visible">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/single_pcr_create_program_title_layout"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="48dp">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/single_pcr_create_program_recycle_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal"
+                    >
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/single_pcr_create_slan_program_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:layout_below="@id/single_pcr_create_program_title_layout"
+                    android:layout_above="@id/single_pcr_create_program_recycle_layout"/>
+            </RelativeLayout>
+        </HorizontalScrollView>
+    </RelativeLayout>
+
+    <!--判别列表-->
+    <!--判别文件列表-->
+    <RelativeLayout
+        android:id="@+id/single_pcr_create_judge_file_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/single_pcr_create_tab_layout"
+        android:layout_below="@id/single_pcr_create_title_layout"
+        android:padding="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="12dp"
+        android:visibility="gone">
+        <TextView
+            style="@style/style_common_title_tv"
+            android:id="@+id/single_create_judge_list_title"
+            android:layout_width="wrap_content"
+            android:text="@string/create_multi_judge_file"
+            android:textColor="@color/blue" />
+        <TextView
+            style="@style/style_common_create_title_tv"
+            android:id="@+id/single_pcr_create_ct_tv"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/create_multi_create_judge_ct_file"
+            android:background="@drawable/selector_general_btn_bg"/>
+        <TextView
+            style="@style/style_common_create_title_tv"
+            android:layout_width="wrap_content"
+            android:id="@+id/single_pcr_create_peak_tv"
+            android:layout_marginRight="32dp"
+            android:layout_toLeftOf="@id/single_pcr_create_ct_tv"
+            android:text="@string/create_multi_create_judge_peak_file"
+            android:background="@drawable/selector_general_btn_bg"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/single_pcr_create_judge_list"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_below="@id/single_create_judge_list_title"/>
+
+        <!--CT判别文件的详情-->
+        <include
+            layout="@layout/include_config_ct_detail_layout"
+            android:id="@+id/config_single_pcr_judge_ct_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="14dp"
+            android:layout_below="@id/single_pcr_create_judge_list"
+            android:visibility="gone">
+        </include>
+        <!--单重判别文件layout结束-->
+        <!---duo重判别文件peaklayout-->
+        <include
+            layout="@layout/include_config_peak_detail_layout"
+            android:id="@+id/config_single_pcr_judge_peak_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="14dp"
+            android:layout_below="@id/single_pcr_create_judge_list"
+            android:visibility="visible">
+        </include>
+    </RelativeLayout>
+</RelativeLayout>

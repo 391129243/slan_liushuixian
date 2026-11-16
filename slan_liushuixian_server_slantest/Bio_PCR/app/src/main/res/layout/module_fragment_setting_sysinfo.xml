@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:text="@string/sys_info_disk_size"
+                android:textSize="@dimen/font_size_large_22sp"
+                android:textColor="@color/color_main_title"/>
+            <com.gidi.bio_pcr.view.RingProgressBar
+                android:id="@+id/sys_info_disk_bar"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                custom:circle_radius="60dp"
+                custom:stroke_width="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:text="@string/sys_info_test_total"
+                android:textSize="@dimen/font_size_large_22sp"
+                android:textColor="@color/color_main_title"/>
+            <com.gidi.bio_pcr.view.RingProgressBar
+                android:id="@+id/sys_info_test_total_bar"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                custom:circle_radius="60dp"
+                custom:stroke_width="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:text="@string/sys_info_well_total"
+                android:textSize="@dimen/font_size_large_22sp"
+                android:textColor="@color/color_main_title"/>
+            <com.gidi.bio_pcr.view.RingProgressBar
+                android:id="@+id/sys_info_well_total_bar"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                custom:circle_radius="60dp"
+                custom:stroke_width="20dp" />
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:text="@string/sys_info_validity"
+                android:textSize="@dimen/font_size_large_22sp"
+                android:textColor="@color/color_main_title"/>
+            <com.gidi.bio_pcr.view.RingProgressBar
+                android:id="@+id/sys_info_valid_bar"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                custom:circle_radius="60dp"
+                custom:stroke_width="20dp" />
+        </LinearLayout>
+
+        <!--核提总时间-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:text="@string/sys_info_rna_extraction_total_duration"
+                android:textSize="@dimen/font_size_large_22sp"
+                android:textColor="@color/color_main_title"/>
+            <com.gidi.bio_pcr.view.RingProgressBar
+                android:id="@+id/sys_info_rna_extraction_total_time_bar"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                custom:circle_radius="60dp"
+                custom:stroke_width="20dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="left"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="120dp">
+        <include
+            android:id="@+id/sys_info_manufactor_layout"
+            layout="@layout/include_sys_info_layout"/>
+        <!--设备型号-->
+        <include
+            android:id="@+id/sys_info_device_model_layout"
+            layout="@layout/include_sys_info_layout"/>
+        <include
+            android:id="@+id/sys_info_version_layout"
+            layout="@layout/include_sys_info_layout"/>
+        <include
+            android:id="@+id/sys_info_full_version_layout"
+            layout="@layout/include_sys_info_layout"/>
+        <include
+            android:id="@+id/sys_info_contact_layout"
+            layout="@layout/include_sys_info_layout"/>
+        <include
+            android:id="@+id/sys_info_production_date_layout"
+            android:visibility="gone"
+            layout="@layout/include_sys_info_layout"/>
+    </LinearLayout>
+</RelativeLayout>

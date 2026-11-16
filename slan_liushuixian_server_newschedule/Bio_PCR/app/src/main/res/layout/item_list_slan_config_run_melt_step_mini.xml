@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="202dp"
+    android:paddingTop="4dp"
+    android:layout_height="match_parent"
+    android:id="@+id/item_pcr_melt_step_layout"
+    android:background="@drawable/item_bg_selector">
+<!-- 202dp 12dp   326dp -->
+    <TextView
+        android:id="@+id/item_slan_run_melt_step_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/color_main_text"
+        android:textSize="10sp"/>
+<!--    18sp-->
+
+    <com.gidi.bio_pcr.view.MeltStepView
+        android:id="@+id/item_slan_run_melt_step_view_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/item_slan_run_melt_step_name_tv"
+        />
+<!--    android:layout_above="@id/item_slan_run_melt_step_run_img"-->
+    <ImageView
+        android:id="@+id/item_slan_run_melt_step_run_img"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="3dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/icon_pcr_step_visible"
+        android:contentDescription="@null"/>
+</RelativeLayout>

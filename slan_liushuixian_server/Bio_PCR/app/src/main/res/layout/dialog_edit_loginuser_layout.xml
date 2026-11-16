@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:gravity="center_vertical" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size_large_20sp"
+            android:textColor="@color/blue"
+            android:text="@string/login_account"/>
+        <EditText
+            android:id="@+id/dialog_edit_account_et"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/shape_rect_stoke"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textSize="@dimen/font_size_large_20sp"
+            android:textColor="@color/blue"
+            android:text="@string/login_password"/>
+        <EditText
+            android:id="@+id/dialog_edit_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/shape_rect_stoke"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:maxLength="20"
+            android:inputType="number"/>
+    </LinearLayout>
+</LinearLayout>

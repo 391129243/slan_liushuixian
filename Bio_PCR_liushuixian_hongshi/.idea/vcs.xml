@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../linux/20251009/loushuixian/pcr_app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../linux/20251009/loushuixian/rna_app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../linux/20251220/pcr_app" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../../linux/20251220/rna_app" vcs="Git" />
+  </component>
+</project>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom ="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.paul.pipeline.fragment.UpdateLinuxFragment">
+    <data>
+        <variable
+            name="ulvm"
+            type="com.paul.pipeline.fragment.viewmodel.UpdateLinuxViewModel" />
+    </data>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <Button
+                android:id="@+id/btn_selectfile"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:drawablePadding="3dp"
+                android:text="@string/select_file"
+                android:background="@drawable/shape_channel_hex_bg"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large_20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/file_version"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_large_20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="200dp"
+                android:layout_marginLeft="5dp"
+                android:text="@{ulvm.fileversion}"
+                android:textColor="@color/deep_gray"
+                android:textSize="@dimen/font_size_normal_18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/file_type"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_large_20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="200dp"
+                android:layout_marginLeft="5dp"
+                android:text="@{ulvm.filetype}"
+                android:textColor="@color/deep_gray"
+                android:textSize="@dimen/font_size_normal_18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/file_name"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_large_20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="300dp"
+                android:layout_marginLeft="5dp"
+                android:text="@{ulvm.filename}"
+                android:textColor="@color/deep_gray"
+                android:textSize="@dimen/font_size_normal_18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="@string/file_path"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/font_size_large_20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="500dp"
+                android:layout_marginLeft="5dp"
+                android:text="@{ulvm.filepath}"
+                android:textColor="@color/deep_gray"
+                android:textSize="@dimen/font_size_normal_18sp"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/file_all"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/font_size_large_20sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@{ulvm.updateall}"
+                    android:textColor="@color/deep_gray"
+                    android:textSize="@dimen/font_size_normal_18sp"/>
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:text="@string/file_finish"-->
+<!--                    android:textColor="@color/blue"-->
+<!--                    android:textSize="@dimen/font_size_large_20sp"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:minWidth="100dp"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:text="@{ulvm.updatefinish}"-->
+<!--                    android:textColor="@color/deep_gray"-->
+<!--                    android:textSize="@dimen/font_size_normal_18sp"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="20dp"-->
+<!--                    android:text="@string/file_fail"-->
+<!--                    android:textColor="@color/blue"-->
+<!--                    android:textSize="@dimen/font_size_large_20sp"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:minWidth="100dp"-->
+<!--                    android:layout_marginLeft="5dp"-->
+<!--                    android:text="@{ulvm.updatefail}"-->
+<!--                    android:textColor="@color/deep_gray"-->
+<!--                    android:textSize="@dimen/font_size_normal_18sp"/>-->
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="@{ulvm.filealert}"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/font_size_normal_18sp"/>
+            <Button
+                android:id="@+id/btn_updatelinux"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginRight="28dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:drawablePadding="3dp"
+                android:text="@string/setting_updatelinux"
+                android:background="@drawable/shape_green_bg"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large_20sp"/>
+            <Button
+                android:id="@+id/btn_updatestop"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginRight="28dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:drawablePadding="3dp"
+                android:text="@string/config_hex_clear_all"
+                android:background="@drawable/shape_red_bg"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_large_20sp"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:background="@color/blue"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:text="@string/device_name" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:text="@string/devicetype" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:text="@string/deviceposition" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:text="@string/ip_port" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/item_account_manager_password_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="@string/device_version"
+                android:textSize="@dimen/font_size_normal_18sp" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/item_result"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:text="@string/oprate_result" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/item_operate"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:textStyle="bold"
+                android:text="@string/config_account_operate" />
+
+        </LinearLayout>
+        <!--列表-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/devices_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/light_gray"
+            android:dividerHeight="1dp"/>
+    </LinearLayout>
+</LinearLayout>
+</layout>

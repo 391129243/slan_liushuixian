@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:id="@+id/item_multi_header_root_layout"
+    android:background="@drawable/item_bg_selector"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/deep_gray"/>
+        <TextView
+            style="@style/style_config_ex_pamram_tv"
+            android:id="@+id/item_multi_header_channel_title"
+            android:layout_weight="1"
+            android:text="FAM"
+            android:textStyle="bold"
+            android:textColor="@color/deep_gray"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue"/>
+        <!--序号-->
+        <TextView
+            style="@style/style_config_ex_pamram_tv"
+            android:id="@+id/item_multi_header_index_title"
+            android:layout_weight="1"
+            android:text="@string/create_multi_serial_number"
+            android:textStyle="bold"
+            android:textColor="@color/deep_gray"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue"/>
+
+
+        <!--种类-->
+        <TextView
+            android:id="@+id/item_multi_header_category_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/deep_gray"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:text="@string/create_multi_category" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue"/>
+
+        <!--ct值-->
+        <TextView
+            android:id="@+id/item_multi_header_peakvalue_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/create_multi_peak_value"
+            android:textColor="@color/deep_gray"
+            android:textSize="@dimen/font_size_normal_18sp" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue"/>
+        <!--下限值-->
+        <TextView
+            android:id="@+id/item_multi_header_peakvalue_up_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/deep_gray"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:text="@string/create_multi_upper_limit" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue"/>
+        <!--上限值-->
+        <TextView
+            android:id="@+id/item_multi_header_peakvalue_dowm_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/deep_gray"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:text="@string/create_multi_lower_limit" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue"/>
+        <!--可疑-->
+        <TextView
+            android:id="@+id/item_multi_header_peakvalue_rm_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/deep_gray"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:text="@string/create_multi_relative_peak_high" />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

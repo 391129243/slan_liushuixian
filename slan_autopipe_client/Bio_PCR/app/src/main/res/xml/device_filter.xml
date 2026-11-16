@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  USB 设备过滤器：设备插入时系统自动弹出授权对话框，
+  勾选“默认情况下用于该 USB 设备”后即可免弹框自动授权。
+  覆盖常见 USB 转串口芯片，用于连接 PCR / RNA 仪器。
+-->
+<resources>
+    <!-- CH340 / CH341 (WCH) -->
+    <usb-device vendor-id="6790" />          <!-- 0x1A86 -->
+    <!-- CP210x (Silicon Labs) -->
+    <usb-device vendor-id="4292" />          <!-- 0x10C4 -->
+    <!-- PL2303 (Prolific) -->
+    <usb-device vendor-id="1659" />          <!-- 0x067B -->
+    <!-- FTDI -->
+    <usb-device vendor-id="1027" />          <!-- 0x0403 -->
+    <!-- Qinheng CH9102 等新款串口芯片同属 0x1A86，已被上面覆盖 -->
+</resources>

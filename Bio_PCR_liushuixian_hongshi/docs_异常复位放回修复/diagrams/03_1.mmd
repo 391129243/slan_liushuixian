@@ -1,0 +1,41 @@
+flowchart TD
+    subgraph UI[UI 层 详情页]
+        A1["点「放回」sendBackTray()"]
+        A2["点「复位」resetBtn"]
+    end
+
+    subgraph APL[APLManager]
+        B1["NotifyRnaTrayError / NotifyPcrTrayError ★新增<br/>(含托盘存在守卫: 无托盘则 no-op)"]
+        B2["checkRnaFinishError / checkPcrFinishError<br/>设备 armStep=BACK"]
+    end
+
+    subgraph TMgr[TrayManager.errorDispatch]
+        C1["tray.status = str_ERROR"]
+        C2["errorDispatchindex = 当前 dispIdx"]
+        C3["DispatchModel.status/devicestatus = STATUS_ERROR"]
+    end
+
+    subgraph ENG[SchedulingEngine 每5s周期]
+        D1{"checkTrayEnd:<br/>tray.status == str_RUN ?"}
+        D2["跳过 continue<br/>不 advanceTrayDispatch ✔"]
+        D3["checkTrayError:<br/>命中 str_ERROR 托盘 → 机械臂取回<br/>取回后 status 仍 str_ERROR"]
+    end
+
+    subgraph REC[恢复 TrayDetailFragment]
+        E1["手动重新下发<br/>errorDispatchindex=0 / dispatchindex=1<br/>tray.status → running"]
+    end
+
+    A1 --> M1["reset(index) 复位设备"]
+    A2 --> M1
+    M1 --> B1
+    B1 --> C1 --> C2 --> C3
+    B1 --> B2
+    C1 --> D1
+    D1 -- "否 (=error)" --> D2
+    D2 --> D3
+    D3 --> E1
+
+    classDef fix fill:#e6ffe6,stroke:#2c2;
+    classDef bug fill:#ffe6e6,stroke:#c22;
+    class B1 fix;
+    class D2 fix;

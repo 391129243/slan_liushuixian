@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+    <!--启动自检-->
+    <RelativeLayout
+        android:id="@+id/login_auto_check_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_bg_2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="40dp"
+            android:text="@string/system_self_check"
+            android:textColor="#0CBEE2"
+            android:textSize="@dimen/font_size_xlarge_28sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/login_account_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@drawable/first_page_bg">
+        <RelativeLayout
+            android:layout_width="420dp"
+            android:layout_height="240dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:background="@drawable/shape_temp_choice_normal_bg">
+            <LinearLayout
+                android:id="@+id/layout_accout"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginLeft="21dp"
+                android:layout_marginRight="21dp"
+                android:layout_marginTop="32dp"
+
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/setting_perfusion_livernum_title"
+                    style="@style/style_login_title_txt"
+                    android:layout_width="103dp"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:text="@string/login_account" />
+
+                <EditText
+                    style="@style/style_pre_setting_iconedit"
+                    android:id="@+id/login_account_et"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:enabled="false"
+                    android:text="User"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/layout_password"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginLeft="21dp"
+                android:layout_marginRight="21dp"
+                android:layout_marginTop="32dp"
+                android:layout_below="@id/layout_accout"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/style_login_title_txt"
+                    android:id="@+id/setting_perfusion_weight_title"
+                    android:layout_width="103dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/login_password" />
+                <!-- 密码 -->
+                <com.gzlab.autoassemblyline_client.view.SystemKeyBoardEditText
+                    style="@style/style_pre_setting_iconedit"
+                    android:id="@+id/login_pwd_et"
+                    android:layout_height="match_parent"
+                    android:inputType="numberPassword"
+                    android:layout_marginLeft="2dp"
+                    android:maxLength="10"
+                    custom:outSideCancel="true"
+                    android:text="123456"
+                    custom:keyDrawable="@drawable/btn_keyboard_key"
+                    custom:xmlLayoutResId="@xml/keyboard_numbers"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginLeft="72dp"
+                android:layout_marginRight="72dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/layout_password"
+                android:text="@string/login"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/blue"
+                android:background="@drawable/selector_btn_login"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

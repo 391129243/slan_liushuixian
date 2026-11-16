@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gidi.bio_pcr">
+
+    <uses-feature
+        android:name="android.harware.usb.host"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 不然收不到wifi -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.hardware.usb.host"
+        android:required="false" />
+
+    <application
+        android:name=".PcrApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+<!--        <service-->
+<!--            android:name="com.paul.pipeline.service.APLService"-->
+<!--            android:enabled="true"-->
+<!--            android:exported="true">-->
+<!--        </service>-->
+        <profileable android:shell="true"/>
+        <activity
+            android:name=".user.activity.HomePageActivity"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="unspecified">
+
+        </activity>
+        <activity
+            android:name="com.paul.pipeline.activity.PipeMainActivity"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme" >
+            <intent-filter android:priority="100">
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.winters.boweilibrary.autopipeline.AutoPipelineTestActivity"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".user.activity.UserLoginActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".user.activity.UserMainActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".user.activity.UserRecoveryActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".user.activity.UserBiowayActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".bioway.activity.BiowayActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name="com.winters.boweilibrary.BoWei.BoweiTestActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="unspecified">
+<!--            <intent-filter android:priority="100">-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".bioway.activity.BiowaySingleActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".activity.RecoveryActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".activity.SystemSettingActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".activity.SystemInfoActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".activity.ResultActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified" />
+        <activity
+            android:name=".config.ConfigSLANActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".config.activity.CreateSingleActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".config.activity.CreateMultiActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".config.activity.PeakJudgeActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".config.activity.JudgeCtActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".config.activity.CreateSingleRNAActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".config.activity.CreateSinglePCRActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".config.activity.ShowConfigActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" /> <!-- 创建核酸文件 -->
+        <activity
+            android:name=".config.activity.ConfigHexActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.ResultExportActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".bioway.activity.BiowayExDetailActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".bioway.activity.BiowayWellDetailActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard"
+            android:launchMode="singleTask"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <receiver
+            android:name=".receiver.BootUpReceiver"
+            android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver> <!-- 监听网络变化 -->
+        <receiver
+            android:name=".receiver.NetWorkChangeReceiver"
+            android:exported="true">
+            <intent-filter>
+
+                <!-- 用于接收网络变化时发出的广播 -->
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.UsbBroadCastReceiver"
+            android:exported="true">
+            <intent-filter>
+
+                <!-- 用于接收网络变化时发出的广播 -->
+                <action android:name="android.intent.action.MEDIA_MOUNTED" />
+                <action android:name="android.intent.action.MEDIA_UNMOUNTED" />
+                <action android:name="android.intent.action.MEDIA_EJECT" />
+
+                <data android:scheme="file" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>

@@ -1,0 +1,9 @@
+stateDiagram-v2
+    [*] --> RUN: 正在跑模板
+    RUN --> BACK: checkXxxFinishError()<br/>excutefinish=true, 清 backtray 标志
+    BACK --> FREE: 机械臂取回完成<br/>markDeviceScheduleDone(armStep=FREE,uiinit=true)
+    note right of BACK
+        设备 BACK 只负责"把盘送回"，
+        与托盘是否 error 解耦；
+        托盘异常由 tray.status 独立表达
+    end note

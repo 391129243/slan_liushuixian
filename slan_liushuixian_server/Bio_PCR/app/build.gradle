@@ -1,0 +1,169 @@
+apply plugin: 'com.android.application'
+
+ext {
+    ndkVersion = '25.1.8937393'
+}
+
+android {
+    namespace "com.gidi.bio_pcr"
+
+    signingConfigs {
+       /* debug {
+            storeFile file('./keystore/debug.keystore')
+            storePassword 'android'
+            keyAlias = 'androiddebugkey'
+            keyPassword 'android'
+        }*/
+    }
+
+    compileSdkVersion 34
+    buildToolsVersion = '35.0.0'
+    defaultConfig {
+        applicationId "com.gidi.bio_pcr.pipeline"
+        minSdkVersion 26
+        targetSdkVersion 33
+        versionCode 20261009
+        versionName "V2.0.17_20261009"//V1.0.0_autopipeline_20251010" ///加入ack的log调试
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+
+    ndkVersion ndkVersion
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+
+    packagingOptions {
+
+        pickFirst 'lib/arm64-v8a/liberrno-lib.so'
+        pickFirst 'lib/arm64-v8a/libusb-lib.so'
+        pickFirst 'lib/arm64-v7a/liberrno-lib.so'
+        pickFirst 'lib/arm64-v7a/libusb-lib.so'
+        pickFirst 'lib/armeabi-v7a/liberrno-lib.so'
+        pickFirst 'lib/armeabi-v7a/libusb-lib.so'
+        pickFirst 'lib/x86/liberrno-lib.so'
+        pickFirst 'lib/x86/libusb-lib.so'
+        pickFirst 'lib/x86_64/liberrno-lib.so'
+        pickFirst 'lib/x86_64/libusb-lib.so'
+    }
+
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            // 启用BuildConfig生成
+            debuggable true
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    externalNativeBuild {
+        cmake {
+            path "src/main/cpp/CMakeLists.txt"
+        }
+    }
+
+    buildFeatures{
+        viewBinding true
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation files('libs/slansdk260916.aar')
+    implementation project(path: ':SerialPortLibrary')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.activity:activity:1.7.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-runtime-android:2.9.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'com.android.identity:identity-credential:20231002'
+//    implementation 'com.google.firebase:firebase-crashlytics-buildtools:3.0.6'
+    implementation 'androidx.privacysandbox.tools:tools-core:1.0.0-alpha13'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.11.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation files('libs/lite-orm-1.9.2.jar')
+    implementation 'com.android.support:appcompat-v7:33+'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+//    implementation 'com.github.mjdev:libaums:0.7.4'
+    implementation 'me.jahnen.libaums:core:0.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.8'
+    implementation 'com.squareup.okio:okio:1.15.0'
+    implementation 'androidx.annotation:annotation:1.5.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    implementation ("org.greenrobot:eventbus:3.3.1")
+    implementation files('libs/commons-net-3.10.0.jar')
+    //PCR
+    implementation 'com.tencent:mmkv:1.2.15'
+   // implementation group: 'com.google.guava', name: 'guava', version: '24.1-android'
+//    implementation 'com.google.guava:guava:33.4.8-android'
+   // implementation 'com.google.guava:listenablefuture:1.0'
+    implementation 'cn.hutool:hutool-all:5.7.14'
+    implementation 'com.alibaba:fastjson:1.1.54.android'
+  //  implementation 'com.gitee.sscl:SerialPortLibrary:1.0.5'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation'com.google.android.material:material:1.0.0-rc01'
+    implementation(fileTree("libs"))
+
+    //SLANSDK的引用
+    implementation 'com.github.mik3y:usb-serial-for-android:3.5.1'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.iqiyi.xcrash:xcrash-android-lib:2.5.7'
+    implementation files('libs/EnjoySDK-CompatibleVersion-V1.0.3-8.aar')
+    implementation 'com.itextpdf:itext7-core:7.1.13'
+    implementation 'de.mindpipe.android:android-logging-log4j:1.0.3'
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+    implementation 'com.itextpdf:itextg:5.5.10'
+
+    // 如果你需要生成图片形式的条形码，可以添加以下依赖
+     implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
+    // 对于Android使用ZXing的集成库
+    implementation 'com.google.zxing:core:3.4.1'
+    ///websocket
+//    implementation 'org.java-websocket:Java-WebSocket:1.5.3'
+//    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.15'
+    implementation 'org.slf4j:slf4j-api:2.0.15'
+
+    implementation 'com.nex3z:flow-layout:1.2.3'
+    //workmanager库
+    implementation "androidx.work:work-runtime:2.8.1"
+    implementation 'com.google.guava:guava:27.0.1-android'
+}
+configurations {
+//    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+//    all*.exclude group: 'com.google.guava', module: 'guava'
+
+}

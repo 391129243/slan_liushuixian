@@ -1,0 +1,18 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+A problem occurred configuring root project 'Bio_PCR'.
+> A build operation failed.
+      Could not move temporary workspace (H:\.gradle\caches\8.11.1\transforms\990596b872978f2cb862d12a4b70ef8a-37a473d4-456f-4acf-9089-cabdaea3eb4d) to immutable location (H:\.gradle\caches\8.11.1\transforms\990596b872978f2cb862d12a4b70ef8a)
+   > Could not move temporary workspace (H:\.gradle\caches\8.11.1\transforms\990596b872978f2cb862d12a4b70ef8a-37a473d4-456f-4acf-9089-cabdaea3eb4d) to immutable location (H:\.gradle\caches\8.11.1\transforms\990596b872978f2cb862d12a4b70ef8a)
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 21s

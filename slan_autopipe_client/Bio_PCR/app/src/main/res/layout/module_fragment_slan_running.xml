@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:id="@+id/fragment_slan_runing_step_layout"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:orientation="horizontal"
+        android:paddingTop="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+        <com.gzlab.autoassemblyline_client.view.CustomImageText
+            android:id="@+id/runing_slan_firstrna_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            custom:content_text="@string/first_rna"
+            custom:content_text_color="@color/black"
+            custom:content_img="@drawable/shape_oval_top_bg"
+            custom:image_content_text_color="@color/white"
+            custom:image_content_text="1"
+            />
+
+        <com.gzlab.autoassemblyline_client.view.CustomImageText
+            android:id="@+id/running_slan_firstpcr_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            custom:content_text="@string/first_pcr_1"
+            custom:content_text_color="@color/black"
+            custom:content_img="@drawable/shape_oval_top_bg"
+            custom:image_content_text_color="@color/white"
+            custom:image_content_text="2" />
+
+        <com.gzlab.autoassemblyline_client.view.CustomImageText
+            android:id="@+id/running_slan_secondrna_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            custom:content_text="@string/second_rna"
+            custom:content_text_color="@color/black"
+            custom:content_img="@drawable/shape_oval_top_bg"
+            custom:image_content_text_color="@color/white"
+            custom:image_content_text="3"
+            />
+        <com.gzlab.autoassemblyline_client.view.CustomImageText
+            android:id="@+id/running_slan_secondpcr_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            custom:content_text="@string/second_pcr_2"
+            custom:content_text_color="@color/black"
+            custom:content_img="@drawable/shape_oval_top_bg"
+            custom:image_content_text_color="@color/white"
+            custom:image_content_text="4"
+            />
+        <com.gzlab.autoassemblyline_client.view.CustomImageText
+            android:id="@+id/running_slan_done_title_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            custom:content_text="@string/done"
+            custom:content_text_color="@color/black"
+            custom:content_img="@drawable/shape_oval_top_bg"
+            custom:image_content_text_color="@color/white"
+            custom:image_content_text="5"
+            />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/running_slan_item_framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/fragment_slan_runing_step_layout"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"/>
+
+</RelativeLayout>

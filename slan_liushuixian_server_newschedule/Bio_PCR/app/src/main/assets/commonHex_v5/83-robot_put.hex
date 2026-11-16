@@ -1,0 +1,80 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 15 01 01 0F 00 07 F5 1C 01 3E FF FC FF ",
+                "Delay": 0,
+                "Description": "get_y",
+                "IsSelected": false
+            },
+            {
+                "Hex": "5A A5 16 01 01 0F 00 07 F5 1C 01 3F FF FC FF ",
+                "Delay": 0,
+                "Description": "get_y",
+                "IsSelected": false
+            },
+            {
+                "Hex": "5A A5 17 01 01 0F 00 07 F5 1C 01 40 FF FC FF ",
+                "Delay": 0,
+                "Description": "get_x",
+                "IsSelected": false
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "机械臂_get_xy"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 18 01 00 0A 00 01 1D 28 00 69 FF FC FF ",
+                "Delay": 0,
+                "Description": "get_z",
+                "IsSelected": false
+            }
+        ],
+        "Description": "机械臂_get_z"
+    },
+    {
+        "IsSelected": true,
+        "Name": "485",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "01 C5 01 9C 40 07 D0 00 27 10 6B",
+                "Delay": 0,
+                "Description": "放松",
+                "IsSelected": true
+            }
+        ],
+        "Description": "hand_flag"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 18 01 00 0A 00 00 00 00 00 23 FF FC FF ",
+                "Delay": 0,
+                "Description": "",
+                "IsSelected": true
+            }
+        ],
+        "Description": "手上移"
+    }
+]

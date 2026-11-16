@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_file_root_layout"
+    android:padding="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/item_usb_file_bg">
+    <ImageView
+        android:id="@+id/item_file_icon_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_item_file"/>
+    <TextView
+        android:id="@+id/item_file_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/item_file_icon_iv"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:textSize="@dimen/font_size_normal_18sp"
+        android:textColor="@color/deep_gray"/>
+
+    <ImageView
+        android:id="@+id/item_file_ck_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/item_file_uncheck"/>
+</RelativeLayout>

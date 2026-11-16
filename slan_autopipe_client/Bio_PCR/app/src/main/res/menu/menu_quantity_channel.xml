@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id = "@+id/channel_fam"
+        android:title="FAM" />
+    <item
+        android:id = "@+id/channel_hex"
+        android:title="HEX" />
+    <item
+        android:id = "@+id/channel_rox"
+        android:title="ROX" />
+    <item
+        android:id = "@+id/channel_cy5"
+        android:title="CY5" />
+
+</menu>

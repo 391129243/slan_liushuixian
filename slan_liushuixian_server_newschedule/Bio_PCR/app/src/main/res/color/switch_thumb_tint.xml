@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 选中：白色滑块在绿色轨道上，清晰可见 -->
+    <item android:color="@color/white" android:state_checked="true" />
+    <!-- 未选中：蓝色滑块在白色页面上避免"隐身" -->
+    <item android:color="@color/blue" />
+</selector>

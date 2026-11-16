@@ -1,0 +1,15 @@
+stateDiagram-v2
+    [*] --> free: 初始
+    free --> running: 下发调度
+    running --> finish: 整盘所有列完成(checkTrayEnd)
+
+    running --> error: 放回/复位/停止/自检/ack异常<br/>NotifyXxxTrayError→errorDispatch
+    note right of error
+        error 是"吸收态"：
+        checkTrayEnd 的 !str_RUN 守卫跳过，
+        不再 advanceTrayDispatch 推进
+    end note
+
+    error --> error: checkTrayError 取回托盘<br/>(setTrayFlagFree, status 保持 error)
+    error --> running: 手动重新下发<br/>errorDispatchindex=0 / dispatchindex=1
+    finish --> [*]

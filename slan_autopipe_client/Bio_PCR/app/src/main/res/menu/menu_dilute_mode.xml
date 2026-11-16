@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id = "@+id/mode_increment_mode"
+        android:title="@string/sample_standard_dilute_increment" />
+    <item
+        android:id = "@+id/mode_decrement_mode"
+        android:title="@string/sample_standard_dilute_decrement" />
+</menu>

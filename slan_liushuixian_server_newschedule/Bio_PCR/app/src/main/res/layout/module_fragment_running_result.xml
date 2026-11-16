@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@color/white"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+
+    <!--通道-->
+    <LinearLayout
+        android:id="@+id/running_chanel_layout"
+        android:layout_width="128dp"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:padding="2dp"
+        android:layout_marginLeft="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/running_select_channel"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textColor="@color/blue"/>
+        <com.gidi.bio_pcr.view.CustomCheckText
+            android:id="@+id/result_all_channel_check_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_all_channel_bg"
+            custom:content_text="@string/result_all_channel"/>
+
+        <com.gidi.bio_pcr.view.CustomCheckText
+            android:id="@+id/running_result_fam_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_fam_bg"
+            custom:content_text="FAM"/>
+
+        <com.gidi.bio_pcr.view.CustomCheckText
+            android:id="@+id/running_result_hex_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_hex_bg"
+            custom:content_text="HEX"/>
+
+
+        <com.gidi.bio_pcr.view.CustomCheckText
+            android:id="@+id/running_result_rox_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_rox_bg"
+            custom:content_text="ROX"/>
+
+        <com.gidi.bio_pcr.view.CustomCheckText
+            android:id="@+id/running_result_cy5_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_cy5_bg"
+            custom:content_text="CY5"/>
+
+
+        <com.gidi.bio_pcr.view.CustomCheckText
+            android:id="@+id/running_sec_analyse_ck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            custom:content_img="@drawable/item_chanel_uncheck"
+            custom:background_img="@drawable/shape_channel_all_channel_bg"
+            custom:content_text="@string/result_auto_threshold"/>
+
+        <TextView
+            android:id="@+id/running_sec_analyse_tv"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:gravity="center"
+            android:text="@string/second_analyse"
+            android:layout_marginTop="24dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_normal_16sp"
+            android:background="@drawable/shape_channel_all_channel_bg"/>
+
+
+
+    </LinearLayout>
+    <!--曲线名称-->
+    <RadioGroup
+        android:id="@+id/result_curve_layout"
+        android:layout_width="820dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_toRightOf="@id/running_chanel_layout"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/result_rawcurve_rb"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_virgin"
+            />
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/result_ampcurve_rb"
+            android:layout_marginLeft="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_amplify"
+            />
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/result_meltcurve_rb"
+            android:layout_marginLeft="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_melt"
+            />
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/result_peakcurve_rb"
+            android:layout_marginLeft="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_melt_peak"
+            />
+        <RadioButton
+            style="@style/style_tab_system_info"
+            android:id="@+id/result_list_rb"
+            android:layout_marginLeft="4dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/running_curve_excel"
+            />
+    </RadioGroup>
+    <!--孔位-->
+    <LinearLayout
+        android:id="@+id/result_hole_layout"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/running_chanel_layout">
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_running_all_hole_ck"
+            android:textSize="@dimen/font_size_small_14sp"
+            android:text="@string/result_all_hole_check" />
+
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_one_btn"
+            android:enabled="false"
+            android:layout_marginLeft="42dp"
+            android:text="A1" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_two_btn"
+            android:enabled="false"
+            android:layout_marginLeft="42dp"
+            android:text="A2" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_three_btn"
+            android:enabled="false"
+            android:layout_marginLeft="42dp"
+            android:text="A3" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_four_btn"
+            android:enabled="false"
+            android:layout_marginLeft="42dp"
+            android:text="A4" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_five_btn"
+            android:enabled="false"
+            android:layout_marginLeft="42dp"
+            android:text="A5" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_six_btn"
+            android:enabled="false"
+            android:layout_marginLeft="42dp"
+            android:text="A6" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_seven_btn"
+            android:enabled="false"
+            android:layout_marginLeft="42dp"
+            android:text="A7" />
+        <TextView
+            style="@style/style_detect_hole"
+            android:id="@+id/result_hole_eight_btn"
+            android:enabled="false"
+            android:layout_marginLeft="42dp"
+            android:text="A8" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/result_curve_chart_layout"
+        android:layout_width="820dp"
+        android:layout_height="440dp"
+        android:padding="4dp"
+        android:layout_marginLeft="24dp"
+        android:layout_below="@id/result_curve_layout"
+        android:layout_toRightOf="@id/running_chanel_layout"
+        android:layout_above="@id/result_hole_layout">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/running_result_curve_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+
+            android:layout_marginTop="10dp"
+            android:background="#f3f5f8"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/result_excel_layout"
+        android:layout_width="820dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="24dp"
+        android:visibility="gone"
+        android:layout_below="@id/result_curve_layout"
+        android:layout_toRightOf="@id/running_chanel_layout"
+        android:layout_above="@id/result_hole_layout">
+
+        <!---标题-->
+        <include
+            android:id="@+id/resut_list_title_layout"
+            layout="@layout/include_result_excel_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp" />
+        <ListView
+            android:id="@+id/result_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="1dp"
+            android:divider="@color/detect_gray"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

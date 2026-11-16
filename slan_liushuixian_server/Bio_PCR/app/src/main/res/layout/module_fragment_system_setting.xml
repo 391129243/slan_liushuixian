@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <!--密码-->
+    <RelativeLayout
+        android:id="@+id/system_setting_password_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp">
+        <TextView
+            android:id="@+id/system_setting_password_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:layout_marginTop="@dimen/font_size_large_20sp"
+            android:text="@string/sys_setting_hint"/>
+        <LinearLayout
+            android:id="@+id/system_setting_password_et_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="180dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/system_setting_password_title"
+                style="@style/style_login_title_txt"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:textColor="@color/color_main_title"
+                android:text="@string/system_info_setting_password" />
+
+            <com.gidi.bio_pcr.view.SystemKeyBoardEditText
+                android:layout_width="240dp"
+                android:layout_height="46dp"
+                android:id="@+id/system_settting_password_et"
+                android:layout_marginLeft="8dp"
+                android:padding="4dp"
+                android:singleLine="true"
+                android:text="101010"
+                android:maxLength="20"
+                android:gravity="center"
+                android:textSize="@dimen/font_size_normal_18sp"
+                android:textColor="@color/blue"
+                android:background="@drawable/shape_rect_stoke"
+                android:inputType="numberPassword"
+                custom:outSideCancel="true"
+                custom:keyDrawable="@drawable/btn_keyboard_key"
+                custom:xmlLayoutResId="@xml/keyboard_numbers" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/system_setting_password_btn"
+            android:layout_width="210dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/system_setting_password_et_layout"
+            android:text="@string/dialog_ok"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:background="@drawable/selector_general_btn_bg"/>
+    </RelativeLayout>
+</RelativeLayout>

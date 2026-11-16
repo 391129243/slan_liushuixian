@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id = "@+id/up_symbol_less_than"
+        android:title="@string/less_than" />
+    <item
+        android:id = "@+id/up_symbol_less_than_equal"
+        android:title="@string/less_than_equal" />
+    <item
+        android:id = "@+id/up_symbol_equal"
+        android:title="=" />
+</menu>

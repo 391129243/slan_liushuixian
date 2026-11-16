@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ClaudeCodeEditorTabs">
+    <option name="activeSessionId" value="93925af9-067b-425c-b1bf-821b60ea12f2" />
+    <option name="openSessionIds">
+      <list>
+        <option value="753cb560-b184-413f-afea-e78ba8f841ad" />
+        <option value="3da0feba-0e7d-4cfa-9081-aeea44466965" />
+        <option value="a9130322-42ce-48eb-a1a8-254dd9e45c7f" />
+        <option value="9e2ac52a-d6ae-44f9-a739-a06eaeb1670d" />
+        <option value="7a517b1f-aedb-4fab-a1b5-474acbc09706" />
+        <option value="acb289b0-ff98-4c64-9b9b-49165c949db6" />
+        <option value="f8f70ecd-5bec-4782-9ba9-f2058a7823b6" />
+        <option value="9d5e694c-7fd3-4fc2-8257-a2ec6ed37c0e" />
+        <option value="29d7c802-c0b5-4244-9e4e-76df3add9267" />
+        <option value="ffdbeb94-8549-45f2-9fc2-ebdbe9b65775" />
+        <option value="4b0e0785-7a6c-46e1-997a-c2c34da40a82" />
+        <option value="93925af9-067b-425c-b1bf-821b60ea12f2" />
+      </list>
+    </option>
+    <option name="sessionPaths">
+      <map>
+        <entry key="29d7c802-c0b5-4244-9e4e-76df3add9267" value="/sessions/5110c8d6-1967-4c2e-8d06-d8d485b562ad" />
+        <entry key="3da0feba-0e7d-4cfa-9081-aeea44466965" value="/sessions/d0b5b96b-826d-409c-a3c8-52002c01891a" />
+        <entry key="4b0e0785-7a6c-46e1-997a-c2c34da40a82" value="/sessions/d1fffc3a-8f8e-45e8-86d1-31b9fc152e21" />
+        <entry key="753cb560-b184-413f-afea-e78ba8f841ad" value="/sessions/b5e486d2-8951-4abb-9105-086f7d301536" />
+        <entry key="7a517b1f-aedb-4fab-a1b5-474acbc09706" value="/sessions/new" />
+        <entry key="93925af9-067b-425c-b1bf-821b60ea12f2" value="/sessions/1eab3b1e-8f3c-479c-8553-5e4069ce975d" />
+        <entry key="9e2ac52a-d6ae-44f9-a739-a06eaeb1670d" value="/sessions/978b18c9-18a7-4117-b535-307adb73eb10" />
+        <entry key="a9130322-42ce-48eb-a1a8-254dd9e45c7f" value="/sessions/d0b5b96b-826d-409c-a3c8-52002c01891a" />
+        <entry key="acb289b0-ff98-4c64-9b9b-49165c949db6" value="/sessions/7d82022d-eaa3-49ef-af9a-186a20799241" />
+        <entry key="ffdbeb94-8549-45f2-9fc2-ebdbe9b65775" value="/sessions/ae188aa5-0c29-44dc-ad63-cd76fda5fda5" />
+      </map>
+    </option>
+    <option name="sessionTitles">
+      <map>
+        <entry key="29d7c802-c0b5-4244-9e4e-76df3add9267" value="机械臂异常dialog继续与复位冲突" />
+        <entry key="3da0feba-0e7d-4cfa-9081-aeea44466965" value="修改自检页面、主页面、模组详情页面，连接状态为wss的连接状态" />
+        <entry key="4b0e0785-7a6c-46e1-997a-c2c34da40a82" value="slansdk261026.aar 荧光通道配置接口" />
+        <entry key="753cb560-b184-413f-afea-e78ba8f841ad" value="# # There is insufficient memory for the Java Run" />
+        <entry key="7a517b1f-aedb-4fab-a1b5-474acbc09706" value="Claude Code" />
+        <entry key="93925af9-067b-425c-b1bf-821b60ea12f2" value="onReceiveMessage 二进制解码性能" />
+        <entry key="9e2ac52a-d6ae-44f9-a739-a06eaeb1670d" value="调试一键还盘盖子归位错误" />
+        <entry key="a9130322-42ce-48eb-a1a8-254dd9e45c7f" value="清空托盘信息，但是不清空设备状态信息要用于还盘操作，设备模组页面有单独的空闲按钮" />
+        <entry key="acb289b0-ff98-4c64-9b9b-49165c949db6" value="检查异步任务 ismIsrunning 状态" />
+        <entry key="ffdbeb94-8549-45f2-9fc2-ebdbe9b65775" value="RestartPCRAppMessage 重启 slanpcr client" />
+      </map>
+    </option>
+  </component>
+</project>

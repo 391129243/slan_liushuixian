@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:layout_width="380dp"
+        android:layout_height="250dp"
+        android:gravity="center"
+        android:alpha="0.8"
+        android:background="@drawable/dialog_common_bg"
+        android:orientation="vertical">
+        <!-- 标题 -->
+        <TextView 
+            android:id="@+id/tv_dialog_notice_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="12dp"
+            android:text="@string/dialog_title_prompt"
+            android:textSize="@dimen/font_size_large_22sp"
+            android:textStyle="bold"
+            android:textColor="@color/blue"/>
+
+
+        <!--提示内容-->
+        <LinearLayout
+            android:id="@+id/li_dialog_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:layout_below="@id/tv_dialog_notice_title"
+            android:gravity="center"
+            android:orientation="vertical">
+ 
+            <TextView
+                android:id="@+id/tv_dialog_message"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="left"
+                android:textColor="#666666"
+                android:textSize="10sp" />    
+         </LinearLayout>   
+         
+         <TextView
+            android:id="@+id/dialog_single_button"
+            android:layout_width="fill_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:background="@drawable/dialog_single_btn_bg"
+            android:gravity="center"
+            android:lines="1"
+            android:orientation="horizontal"
+            android:text="@string/dialog_ok"
+            android:textColor="@color/red"
+            android:textSize="@dimen/font_size_large_20sp"/>
+        <TextView
+            style="@style/horizontal_line"
+            android:background="@color/check_normal_bg"
+            android:layout_marginTop="10dp"
+            android:layout_above="@id/dialog_single_button"/>
+    </RelativeLayout>
+
+</LinearLayout>
