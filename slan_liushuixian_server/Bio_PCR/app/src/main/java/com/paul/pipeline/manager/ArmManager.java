@@ -96,6 +96,10 @@ public class ArmManager {
     }
 
     public void clearData(Context context){
+        // 【修复】重置停止后还盘标志
+        shouldReturnTrayAfterStop = false;
+        returnTrayIndex = -1;
+
         if(armlist!=null) {
             for (int i = 0; i < armlist.size(); ++i) {
                 int index = armlist.get(i).index.get();
@@ -396,6 +400,10 @@ public class ArmManager {
                 try {
                     updateArmwork(1, ConstantData.ARM_GET);
                     saveModel(1);
+
+                    // 【修复】保存原回调，避免被覆盖
+                    final ArmFinishCallback originalCallback = this.armFinishCallback;
+
                     // 先取回托盘
                     SerialPortManager_Robot.getInstance().robotGet(itemProperty_source);
 
@@ -408,18 +416,47 @@ public class ArmManager {
                             updateArmwork(1, ConstantData.ARM_PUT);
                             saveModel(1);
                             SerialPortManager_Robot.getInstance().robotPut(itemProperty_target);
+
+                            // 【修复】设置第二步的回调用于还盘完成
+                            setArmFinishCallback(new ArmFinishCallback() {
+                                @Override
+                                public void finish(int arm, ItemProperty aim, ItemProperty source) {
+                                    Log.w("ArmManager", "【执行还盘】放回完成，还盘流程结束");
+                                    // 【修复】恢复原回调并重置状态
+                                    armFinishCallback = originalCallback;
+                                    setFree();
+                                    shouldReturnTrayAfterStop = false;
+                                    returnTrayIndex = -1;
+                                }
+
+                                @Override
+                                public void fail(int arm, ItemProperty aim, ItemProperty source, String error) {
+                                    Log.e("ArmManager", "【执行还盘】放回失败：" + error);
+                                    // 【修复】恢复原回调并重置状态
+                                    armFinishCallback = originalCallback;
+                                    setFree();
+                                    shouldReturnTrayAfterStop = false;
+                                    returnTrayIndex = -1;
+                                }
+                            });
                         }
 
                         @Override
                         public void fail(int arm, ItemProperty aim, ItemProperty source, String error) {
                             Log.e("ArmManager", "【执行还盘】取回失败：" + error);
+                            // 【修复】恢复原回调并重置状态
+                            armFinishCallback = originalCallback;
                             setFree();
+                            shouldReturnTrayAfterStop = false;
+                            returnTrayIndex = -1;
                         }
                     });
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e("ArmManager", "【执行还盘】异常：" + e.getMessage());
                     setFree();
+                    shouldReturnTrayAfterStop = false;
+                    returnTrayIndex = -1;
                 }
             } else {
                 // 目标是其他位置，直接还回
@@ -428,11 +465,17 @@ public class ArmManager {
                 if (result != null) {
                     Log.e("ArmManager", "【执行还盘】失败：" + result);
                 }
+                // 【修复】重置状态
+                shouldReturnTrayAfterStop = false;
+                returnTrayIndex = -1;
             }
         } else {
             // 机械臂没有持有物品，直接清理
             Log.w("ArmManager", "【执行还盘】机械臂无持有物品，清理引用");
             setFree();
+            // 【修复】重置状态
+            shouldReturnTrayAfterStop = false;
+            returnTrayIndex = -1;
         }
     }
 
