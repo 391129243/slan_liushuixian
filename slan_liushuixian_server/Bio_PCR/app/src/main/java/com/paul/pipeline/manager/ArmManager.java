@@ -46,6 +46,10 @@ public class ArmManager {
     public ItemProperty itemProperty_source;//源位置
     public ItemProperty itemProperty_target;//目标位置
 
+    // 【新增】停止后还盘标志
+    private boolean shouldReturnTrayAfterStop = false;
+    private int returnTrayIndex = -1;
+
     public void init(Context context){
         itemPropertyList = SerialPortManager_Robot.getInstance().getItemPropertyList();
         initArmModel(context);
@@ -53,6 +57,15 @@ public class ArmManager {
             @Override
             public void onAllTasksCompleted(String text) {
                 updateFinish(1,true);
+
+                // 【新增】检查是否需要执行"停止后还盘"
+                if (shouldReturnTrayAfterStop && returnTrayIndex >= 0) {
+                    Log.w("ArmManager", "【停止后还盘】机械臂队列完成，开始执行还盘流程");
+                    shouldReturnTrayAfterStop = false;
+                    triggerReturnTrayAfterStop(returnTrayIndex);
+                    return;
+                }
+
                 if(text!=null&&text.contains(ConstantData.RESET_EXCEPTION)) {
                     if (armResetCallback != null) {
                         armResetCallback.finish(true, text);
@@ -342,6 +355,85 @@ public class ArmManager {
     public void setFree(){
         itemProperty_source = null;
         itemProperty_target = null;
+    }
+
+    /**
+     * 【新增】注册"停止后还盘"
+     * 当用户点停止后，让RobotWorkManager继续完成队列中的所有worker
+     * 队列完成后自动触发还盘
+     */
+    public void setStopAndReturnTray(int trayIndex) {
+        Log.w("ArmManager", "【用户停止】注册停止后还盘，托盘索引：" + trayIndex);
+        this.shouldReturnTrayAfterStop = true;
+        this.returnTrayIndex = trayIndex;
+        // 【关键】不调用 stop() 或 cancelAllWork()
+        // RobotWorkManager 中的队列会继续执行完毕
+    }
+
+    /**
+     * 【新增】停止后的还盘逻辑
+     * 此时机械臂已完成所有worker，处于安全状态
+     */
+    private void triggerReturnTrayAfterStop(int trayIndex) {
+        Log.w("ArmManager", "【执行还盘】开始处理停止后的还盘，托盘索引：" + trayIndex);
+
+        // 检查机械臂是否持有物品
+        if (itemProperty_target != null) {
+            String targetType = itemProperty_target.getType();
+            int targetPos = itemProperty_target.getPosition();
+
+            Log.w("ArmManager", "【执行还盘】机械臂持有物品：" + targetType + targetPos);
+
+            // 如果目标是PCR或RNA，需要取回并放回托盘
+            if (targetType.equals("PCR") || targetType.equals("RNA")) {
+                Log.w("ArmManager", "【执行还盘】从" + targetType + targetPos + "取回托盘");
+
+                // 两步操作：
+                // 1. 先从设备取回
+                setSource(ConstantData.ConvertDeviceType(targetType), targetPos);
+                setTarget(ConstantData.DEVICE_TRAY, trayIndex);
+
+                try {
+                    updateArmwork(1, ConstantData.ARM_GET);
+                    saveModel(1);
+                    // 先取回托盘
+                    SerialPortManager_Robot.getInstance().robotGet(itemProperty_source);
+
+                    // 然后放回托盘位置
+                    // 这里通过新的finish回调处理第二步
+                    setArmFinishCallback(new ArmFinishCallback() {
+                        @Override
+                        public void finish(int arm, ItemProperty aim, ItemProperty source) {
+                            Log.w("ArmManager", "【执行还盘】取回完成，现在放回托盘");
+                            updateArmwork(1, ConstantData.ARM_PUT);
+                            saveModel(1);
+                            SerialPortManager_Robot.getInstance().robotPut(itemProperty_target);
+                        }
+
+                        @Override
+                        public void fail(int arm, ItemProperty aim, ItemProperty source, String error) {
+                            Log.e("ArmManager", "【执行还盘】取回失败：" + error);
+                            setFree();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.e("ArmManager", "【执行还盘】异常：" + e.getMessage());
+                    setFree();
+                }
+            } else {
+                // 目标是其他位置，直接还回
+                Log.w("ArmManager", "【执行还盘】还回到目标位置：" + targetType + targetPos);
+                String result = startPut(ConstantData.ConvertDeviceType(targetType), targetPos);
+                if (result != null) {
+                    Log.e("ArmManager", "【执行还盘】失败：" + result);
+                }
+            }
+        } else {
+            // 机械臂没有持有物品，直接清理
+            Log.w("ArmManager", "【执行还盘】机械臂无持有物品，清理引用");
+            setFree();
+        }
     }
 
     ArmFinishCallback armFinishCallback;

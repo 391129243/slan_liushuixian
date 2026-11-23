@@ -119,7 +119,9 @@ public class TrayManageFragment extends Fragment {
     }
     /**
      * 统一的停止执行方法
-     * 停止后不可恢复，需要清盘后重新开始
+     *
+     * 新策略：停止后让机械臂继续完成当前队列中的所有worker，完成后自动触发还盘
+     * 这样可以避免所有中途中断的复杂场景（RNA门打开、PCR盖子卡住等）
      */
     private void stopTrayExecution(){
         if(trayModel == null) {
@@ -132,50 +134,42 @@ public class TrayManageFragment extends Fragment {
         // 1. 设置状态为STOP，停止后不可恢复
         trayModel.flagstatus.set(ConstantData.FLAG_STOP);
 
-        // 2. 停止当前运行的设备（PCR或RNA）
+        // 2. 标记为用户中断 - 阻止新任务分配，但让当前队列继续完成
         DispatchModel dm = TrayManager.getInstance().getCurrentDispatch(trayIndex);
         if (dm != null && dm.targettype.get() != null && dm.target.get() != null) {
             if (dm.targettype.get() == ConstantData.DEVICE_PCR) {
-                stopPcrwork(dm.target.get());
+                PipePCRModel model = PCRManager.getInstance().getPipePCRModel(dm.target.get());
+                if (model != null) {
+                    model.usererror.set(1);  // 标记为用户中断，不立即停止
+                    Log.w("TrayManageFragment", "【用户停止】标记PCR为用户中断，让当前队列继续");
+                }
             } else if (dm.targettype.get() == ConstantData.DEVICE_RNA) {
-                stopRnawork(dm.target.get());
+                PipeRNAModel model = RNAManager.getInstance().getPipeRNAModel(dm.target.get());
+                if (model != null) {
+                    model.usererror.set(1);  // 标记为用户中断，不立即停止
+                    Log.w("TrayManageFragment", "【用户停止】标记RNA为用户中断，让当前队列继续");
+                }
             }
         }
 
-        // 3. 【关键修复】触发机械臂还盘
-        triggerArmReturnTray(trayIndex);
+        // 3. 【关键】注册"停止后还盘" - 让ArmManager在队列完成后自动还盘
+        //    这里不要立即执行还盘逻辑，而是让RobotWorkManager继续完成队列
+        ArmManager.getInstance().setStopAndReturnTray(trayIndex);
 
         // 4. 保存托盘状态
         TrayManager.getInstance().saveModel(trayIndex);
 
-        showLongToast("托盘已停止，请等待机械臂还盘完成！");
+        showLongToast("托盘已停止，等待机械臂完成当前动作...");
     }
 
     /**
-     * 触发机械臂还盘逻辑
-     * 如果机械臂持有托盘或其他设备，需要还回
+     * 【废弃】原来的triggerArmReturnTray方法不再使用
+     * 现在还盘逻辑已移到ArmManager.triggerReturnTrayAfterStop()
      */
+    @Deprecated
     private void triggerArmReturnTray(int trayIndex){
-        ArmManager armManager = ArmManager.getInstance();
-
-        // 清理机械臂的source/target引用
-        // 如果机械臂持有东西（target不为空），则放回到对应位置
-        if (armManager.itemProperty_target != null) {
-            Log.w("TrayManageFragment", "机械臂持有物品：" + armManager.itemProperty_target.getType()
-                    + armManager.itemProperty_target.getPosition() + "，触发还回");
-            // 将持有的物品放回原位置
-            String result = armManager.startPut(
-                ConstantData.ConvertDeviceType(armManager.itemProperty_target.getType()),
-                armManager.itemProperty_target.getPosition()
-            );
-            if (result != null) {
-                Log.e("TrayManageFragment", "还盘失败：" + result);
-            }
-        } else {
-            // 机械臂没有持有物品，直接清理引用
-            armManager.setFree();
-            Log.w("TrayManageFragment", "机械臂无持有物品，清理引用");
-        }
+        // 此方法已废弃，还盘逻辑已移到ArmManager中
+        Log.w("TrayManageFragment", "【已废弃】triggerArmReturnTray不再使用");
     }
     private void stopRnawork(int index){
         boolean result = RNAManager.getInstance().stopRnaWork(index);
