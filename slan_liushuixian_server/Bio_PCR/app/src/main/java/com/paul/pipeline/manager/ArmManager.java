@@ -51,62 +51,110 @@ public class ArmManager {
     private int returnTrayIndex = -1;
 
     public void init(Context context){
+        Log.i("ArmManager", "【初始化】ArmManager.init() 开始");
         itemPropertyList = SerialPortManager_Robot.getInstance().getItemPropertyList();
+        Log.i("ArmManager", "【初始化】itemPropertyList 大小：" + (itemPropertyList != null ? itemPropertyList.size() : 0));
+
         initArmModel(context);
+        Log.i("ArmManager", "【初始化】initArmModel() 完成");
+
         RobotWorkManager.getInstance().setWorkQueueListener(new RobotWorkManager.WorkQueueListener() {
             @Override
             public void onAllTasksCompleted(String text) {
+                Log.i("ArmManager", "【队列回调】onAllTasksCompleted() 被触发");
+                Log.i("ArmManager", "【队列回调】回调信息：" + text);
+                Log.i("ArmManager", "【队列回调】shouldReturnTrayAfterStop=" + shouldReturnTrayAfterStop +
+                      ", returnTrayIndex=" + returnTrayIndex);
+
                 updateFinish(1,true);
+                Log.d("ArmManager", "【队列回调】updateFinish(1, true) 完成");
 
                 // 【新增】检查是否需要执行"停止后还盘"
                 if (shouldReturnTrayAfterStop && returnTrayIndex >= 0) {
-                    Log.w("ArmManager", "【停止后还盘】机械臂队列完成，开始执行还盘流程");
+                    Log.w("ArmManager", "【队列回调】【停止后还盘】检测到需要还盘标志，开始执行还盘流程");
+                    Log.w("ArmManager", "【队列回调】【停止后还盘】托盘索引：" + returnTrayIndex);
                     shouldReturnTrayAfterStop = false;
+                    Log.d("ArmManager", "【队列回调】【停止后还盘】已重置shouldReturnTrayAfterStop=false");
                     triggerReturnTrayAfterStop(returnTrayIndex);
+                    Log.w("ArmManager", "【队列回调】【停止后还盘】还盘流程执行完毕，return");
                     return;
                 }
 
                 if(text!=null&&text.contains(ConstantData.RESET_EXCEPTION)) {
+                    Log.i("ArmManager", "【队列回调】检测到RESET_EXCEPTION，调用armResetCallback");
                     if (armResetCallback != null) {
                         armResetCallback.finish(true, text);
+                        Log.i("ArmManager", "【队列回调】armResetCallback.finish(true) 已调用");
+                    }else{
+                        Log.w("ArmManager", "【队列回调】armResetCallback为null，无法调用");
                     }
                 }else {
+                    Log.i("ArmManager", "【队列回调】执行正常的setcallback(true)");
                     setcallback(true, text);
                 }
             }
 
             @Override
             public void onTaskFailed(String text) {
+                Log.e("ArmManager", "【队列回调】【失败】onTaskFailed() 被触发");
+                Log.e("ArmManager", "【队列回调】【失败】失败信息：" + text);
+
                 if(text!=null&&text.contains(ConstantData.RESET_EXCEPTION)) {
+                    Log.e("ArmManager", "【队列回调】【失败】检测到RESET_EXCEPTION");
                     if (armResetCallback != null) {
                         armResetCallback.finish(false, text);
+                        Log.e("ArmManager", "【队列回调】【失败】armResetCallback.finish(false) 已调用");
+                    }else{
+                        Log.w("ArmManager", "【队列回调】【失败】armResetCallback为null");
                     }
                 }else {
+                    Log.e("ArmManager", "【队列回调】【失败】执行setcallback(false)");
                     setcallback(false, text);
                 }
             }
 
             @Override
             public void onQrCodeRevert(List<QRCodeItem> qRCodeItems, int panNum) {
+                Log.i("ArmManager", "【队列回调】onQrCodeRevert() 被触发");
+                Log.i("ArmManager", "【队列回调】qRCodeItems 大小：" + (qRCodeItems != null ? qRCodeItems.size() : 0) +
+                      ", panNum：" + panNum);
+
                 if(qRCodeItems!=null&&qRCodeItems.size()!=0) {
+                    Log.i("ArmManager", "【队列回调】调用 checkHoles()");
                     checkHoles(panNum,qRCodeItems);
+                }else{
+                    Log.w("ArmManager", "【队列回调】qRCodeItems为空或为0，跳过checkHoles()");
                 }
             }
         });
+        Log.i("ArmManager", "【初始化】setWorkQueueListener() 完成，ArmManager.init() 结束");
     }
 
     public void clearData(Context context){
+        Log.i("ArmManager", "【清理数据】clearData() 开始");
+        Log.i("ArmManager", "【清理数据】清理前状态：shouldReturnTrayAfterStop=" + shouldReturnTrayAfterStop +
+              ", returnTrayIndex=" + returnTrayIndex);
+
         // 【修复】重置停止后还盘标志
         shouldReturnTrayAfterStop = false;
+        Log.d("ArmManager", "【清理数据】已重置 shouldReturnTrayAfterStop=false");
+
         returnTrayIndex = -1;
+        Log.d("ArmManager", "【清理数据】已重置 returnTrayIndex=-1");
 
         if(armlist!=null) {
+            Log.i("ArmManager", "【清理数据】armlist 大小：" + armlist.size());
             for (int i = 0; i < armlist.size(); ++i) {
                 int index = armlist.get(i).index.get();
+                Log.d("ArmManager", "【清理数据】清理arm[" + i + "], index=" + index);
                 armlist.get(i).initModel(index,context.getString(R.string.pipe_main_arm_name));
-//                armlist.set(i, newModel(context, index));
             }
+            Log.i("ArmManager", "【清理数据】所有arm模型已清理");
+        }else{
+            Log.w("ArmManager", "【清理数据】armlist为null");
         }
+
+        Log.i("ArmManager", "【清理数据】clearData() 完成");
     }
     public void initArmModel(Context context){
         ArrayList<PipeArmModel> list = new ArrayList<>();
@@ -367,11 +415,23 @@ public class ArmManager {
      * 队列完成后自动触发还盘
      */
     public void setStopAndReturnTray(int trayIndex) {
-        Log.w("ArmManager", "【用户停止】注册停止后还盘，托盘索引：" + trayIndex);
+        Log.w("ArmManager", "【用户停止】=== setStopAndReturnTray() 被调用 ===");
+        Log.w("ArmManager", "【用户停止】参数：trayIndex=" + trayIndex);
+        Log.w("ArmManager", "【用户停止】当前状态：");
+        Log.w("ArmManager", "  - shouldReturnTrayAfterStop=" + shouldReturnTrayAfterStop);
+        Log.w("ArmManager", "  - returnTrayIndex=" + returnTrayIndex);
+        Log.w("ArmManager", "  - itemProperty_source=" + (itemProperty_source != null ? itemProperty_source.getType() + itemProperty_source.getPosition() : "null"));
+        Log.w("ArmManager", "  - itemProperty_target=" + (itemProperty_target != null ? itemProperty_target.getType() + itemProperty_target.getPosition() : "null"));
+
         this.shouldReturnTrayAfterStop = true;
+        Log.d("ArmManager", "【用户停止】已设置 shouldReturnTrayAfterStop=true");
+
         this.returnTrayIndex = trayIndex;
-        // 【关键】不调用 stop() 或 cancelAllWork()
-        // RobotWorkManager 中的队列会继续执行完毕
+        Log.d("ArmManager", "【用户停止】已设置 returnTrayIndex=" + trayIndex);
+
+        Log.w("ArmManager", "【用户停止】【关键】不调用 stop() 或 cancelAllWork()");
+        Log.w("ArmManager", "【用户停止】【关键】RobotWorkManager 中的队列会继续执行完毕");
+        Log.w("ArmManager", "【用户停止】setStopAndReturnTray() 完成，等待队列完成回调");
     }
 
     /**
@@ -379,6 +439,8 @@ public class ArmManager {
      * 此时机械臂已完成所有worker，处于安全状态
      */
     private void triggerReturnTrayAfterStop(int trayIndex) {
+        Log.w("ArmManager", "【执行还盘】=== triggerReturnTrayAfterStop() 被调用 ===");
+        Log.w("ArmManager", "【执行还盘】参数：trayIndex=" + trayIndex);
         Log.w("ArmManager", "【执行还盘】开始处理停止后的还盘，托盘索引：" + trayIndex);
 
         // 检查机械臂是否持有物品
@@ -386,96 +448,182 @@ public class ArmManager {
             String targetType = itemProperty_target.getType();
             int targetPos = itemProperty_target.getPosition();
 
-            Log.w("ArmManager", "【执行还盘】机械臂持有物品：" + targetType + targetPos);
+            Log.w("ArmManager", "【执行还盘】【有物品】机械臂持有物品：" + targetType + targetPos);
+            Log.d("ArmManager", "【执行还盘】【有物品】itemProperty_source=" +
+                  (itemProperty_source != null ? itemProperty_source.getType() + itemProperty_source.getPosition() : "null"));
 
             // 如果目标是PCR或RNA，需要取回并放回托盘
             if (targetType.equals("PCR") || targetType.equals("RNA")) {
-                Log.w("ArmManager", "【执行还盘】从" + targetType + targetPos + "取回托盘");
+                Log.w("ArmManager", "【执行还盘】【PCR/RNA】检测到目标是" + targetType + "，需要两步还盘：取回+放回");
+                Log.w("ArmManager", "【执行还盘】【PCR/RNA】从" + targetType + targetPos + "取回托盘");
 
                 // 两步操作：
                 // 1. 先从设备取回
                 setSource(ConstantData.ConvertDeviceType(targetType), targetPos);
+                Log.d("ArmManager", "【执行还盘】【PCR/RNA】【第一步】setSource(" + targetType + ", " + targetPos + ") 完成");
+
                 setTarget(ConstantData.DEVICE_TRAY, trayIndex);
+                Log.d("ArmManager", "【执行还盘】【PCR/RNA】【第一步】setTarget(TRAY, " + trayIndex + ") 完成");
 
                 try {
                     updateArmwork(1, ConstantData.ARM_GET);
+                    Log.d("ArmManager", "【执行还盘】【PCR/RNA】【第一步】updateArmwork(1, ARM_GET) 完成");
+
                     saveModel(1);
+                    Log.d("ArmManager", "【执行还盘】【PCR/RNA】【第一步】saveModel(1) 完成");
 
                     // 【修复】保存原回调，避免被覆盖
                     final ArmFinishCallback originalCallback = this.armFinishCallback;
+                    Log.d("ArmManager", "【执行还盘】【PCR/RNA】【第一步】已保存原回调：" +
+                          (originalCallback != null ? "非null" : "null"));
 
                     // 先取回托盘
+                    Log.w("ArmManager", "【执行还盘】【PCR/RNA】【第一步】调用 robotGet() 开始取回");
                     SerialPortManager_Robot.getInstance().robotGet(itemProperty_source);
+                    Log.w("ArmManager", "【执行还盘】【PCR/RNA】【第一步】robotGet() 已调用");
 
                     // 然后放回托盘位置
                     // 这里通过新的finish回调处理第二步
                     setArmFinishCallback(new ArmFinishCallback() {
                         @Override
                         public void finish(int arm, ItemProperty aim, ItemProperty source) {
-                            Log.w("ArmManager", "【执行还盘】取回完成，现在放回托盘");
+                            Log.w("ArmManager", "【执行还盘】【PCR/RNA】【第一步回调】【成功】robotGet() 完成");
+                            Log.d("ArmManager", "【执行还盘】【PCR/RNA】【第一步回调】aim=" +
+                                  (aim != null ? aim.getType() + aim.getPosition() : "null") +
+                                  ", source=" + (source != null ? source.getType() + source.getPosition() : "null"));
+
+                            Log.w("ArmManager", "【执行还盘】【PCR/RNA】【第二步】取回完成，现在放回托盘");
                             updateArmwork(1, ConstantData.ARM_PUT);
+                            Log.d("ArmManager", "【执行还盘】【PCR/RNA】【第二步】updateArmwork(1, ARM_PUT) 完成");
+
                             saveModel(1);
+                            Log.d("ArmManager", "【执行还盘】【PCR/RNA】【第二步】saveModel(1) 完成");
+
+                            Log.w("ArmManager", "【执行还盘】【PCR/RNA】【第二步】调用 robotPut() 开始放回");
                             SerialPortManager_Robot.getInstance().robotPut(itemProperty_target);
+                            Log.w("ArmManager", "【执行还盘】【PCR/RNA】【第二步】robotPut() 已调用");
 
                             // 【修复】设置第二步的回调用于还盘完成
                             setArmFinishCallback(new ArmFinishCallback() {
                                 @Override
                                 public void finish(int arm, ItemProperty aim, ItemProperty source) {
-                                    Log.w("ArmManager", "【执行还盘】放回完成，还盘流程结束");
+                                    Log.w("ArmManager", "【执行还盘】【PCR/RNA】【第二步回调】【成功】robotPut() 完成");
+                                    Log.w("ArmManager", "【执行还盘】【PCR/RNA】【完成】放回完成，还盘流程结束");
+
                                     // 【修复】恢复原回调并重置状态
+                                    Log.d("ArmManager", "【执行还盘】【PCR/RNA】【完成】恢复原回调");
                                     armFinishCallback = originalCallback;
+
+                                    Log.d("ArmManager", "【执行还盘】【PCR/RNA】【完成】调用 setFree()");
                                     setFree();
+
                                     shouldReturnTrayAfterStop = false;
+                                    Log.d("ArmManager", "【执行还盘】【PCR/RNA】【完成】重置 shouldReturnTrayAfterStop=false");
+
                                     returnTrayIndex = -1;
+                                    Log.d("ArmManager", "【执行还盘】【PCR/RNA】【完成】重置 returnTrayIndex=-1");
+
+                                    Log.w("ArmManager", "【执行还盘】【PCR/RNA】【完成】=== 还盘流程完全结束 ===");
                                 }
 
                                 @Override
                                 public void fail(int arm, ItemProperty aim, ItemProperty source, String error) {
-                                    Log.e("ArmManager", "【执行还盘】放回失败：" + error);
+                                    Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第二步回调】【失败】robotPut() 失败");
+                                    Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第二步回调】【失败】错误：" + error);
+
                                     // 【修复】恢复原回调并重置状态
+                                    Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第二步回调】【失败】恢复原回调");
                                     armFinishCallback = originalCallback;
+
+                                    Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第二步回调】【失败】调用 setFree()");
                                     setFree();
+
                                     shouldReturnTrayAfterStop = false;
+                                    Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第二步回调】【失败】重置 shouldReturnTrayAfterStop=false");
+
                                     returnTrayIndex = -1;
+                                    Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第二步回调】【失败】重置 returnTrayIndex=-1");
+
+                                    Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第二步回调】【失败】=== 还盘流程异常结束 ===");
                                 }
                             });
                         }
 
                         @Override
                         public void fail(int arm, ItemProperty aim, ItemProperty source, String error) {
-                            Log.e("ArmManager", "【执行还盘】取回失败：" + error);
+                            Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第一步回调】【失败】robotGet() 失败");
+                            Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第一步回调】【失败】错误：" + error);
+
                             // 【修复】恢复原回调并重置状态
+                            Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第一步回调】【失败】恢复原回调");
                             armFinishCallback = originalCallback;
+
+                            Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第一步回调】【失败】调用 setFree()");
                             setFree();
+
                             shouldReturnTrayAfterStop = false;
+                            Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第一步回调】【失败】重置 shouldReturnTrayAfterStop=false");
+
                             returnTrayIndex = -1;
+                            Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第一步回调】【失败】重置 returnTrayIndex=-1");
+
+                            Log.e("ArmManager", "【执行还盘】【PCR/RNA】【第一步回调】【失败】=== 还盘流程异常结束 ===");
                         }
                     });
                 } catch (Exception e) {
+                    Log.e("ArmManager", "【执行还盘】【PCR/RNA】【异常】捕获异常：" + e.getClass().getName());
+                    Log.e("ArmManager", "【执行还盘】【PCR/RNA】【异常】异常信息：" + e.getMessage());
                     e.printStackTrace();
-                    Log.e("ArmManager", "【执行还盘】异常：" + e.getMessage());
+                    Log.e("ArmManager", "【执行还盘】【异常】异常堆栈已打印");
+
                     setFree();
+                    Log.e("ArmManager", "【执行还盘】【异常】已调用 setFree()");
+
                     shouldReturnTrayAfterStop = false;
+                    Log.e("ArmManager", "【执行还盘】【异常】重置 shouldReturnTrayAfterStop=false");
+
                     returnTrayIndex = -1;
+                    Log.e("ArmManager", "【执行还盘】【异常】重置 returnTrayIndex=-1");
+
+                    Log.e("ArmManager", "【执行还盘】【异常】=== 还盘流程异常结束 ===");
                 }
             } else {
                 // 目标是其他位置，直接还回
-                Log.w("ArmManager", "【执行还盘】还回到目标位置：" + targetType + targetPos);
+                Log.w("ArmManager", "【执行还盘】【其他位置】目标类型不是PCR/RNA：" + targetType);
+                Log.w("ArmManager", "【执行还盘】【其他位置】还回到目标位置：" + targetType + targetPos);
+
                 String result = startPut(ConstantData.ConvertDeviceType(targetType), targetPos);
+                Log.d("ArmManager", "【执行还盘】【其他位置】startPut() 返回：" + (result != null ? "失败：" + result : "成功"));
+
                 if (result != null) {
-                    Log.e("ArmManager", "【执行还盘】失败：" + result);
+                    Log.e("ArmManager", "【执行还盘】【其他位置】【失败】失败原因：" + result);
                 }
+
                 // 【修复】重置状态
                 shouldReturnTrayAfterStop = false;
+                Log.d("ArmManager", "【执行还盘】【其他位置】重置 shouldReturnTrayAfterStop=false");
+
                 returnTrayIndex = -1;
+                Log.d("ArmManager", "【执行还盘】【其他位置】重置 returnTrayIndex=-1");
+
+                Log.w("ArmManager", "【执行还盘】【其他位置】=== 还盘流程完成 ===");
             }
         } else {
             // 机械臂没有持有物品，直接清理
-            Log.w("ArmManager", "【执行还盘】机械臂无持有物品，清理引用");
+            Log.w("ArmManager", "【执行还盘】【无物品】itemProperty_target为null");
+            Log.w("ArmManager", "【执行还盘】【无物品】机械臂无持有物品，直接清理引用");
+
             setFree();
+            Log.d("ArmManager", "【执行还盘】【无物品】已调用 setFree()");
+
             // 【修复】重置状态
             shouldReturnTrayAfterStop = false;
+            Log.d("ArmManager", "【执行还盘】【无物品】重置 shouldReturnTrayAfterStop=false");
+
             returnTrayIndex = -1;
+            Log.d("ArmManager", "【执行还盘】【无物品】重置 returnTrayIndex=-1");
+
+            Log.w("ArmManager", "【执行还盘】【无物品】=== 还盘流程完成 ===");
         }
     }
 

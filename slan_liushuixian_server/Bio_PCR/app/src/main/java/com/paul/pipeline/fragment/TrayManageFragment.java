@@ -124,42 +124,79 @@ public class TrayManageFragment extends Fragment {
      * 这样可以避免所有中途中断的复杂场景（RNA门打开、PCR盖子卡住等）
      */
     private void stopTrayExecution(){
+        Log.w("TrayManageFragment", "【用户点停止】=== stopTrayExecution() 被调用 ===");
+
         if(trayModel == null) {
+            Log.e("TrayManageFragment", "【用户点停止】【错误】trayModel为null");
             showLongToast("托盘信息为空！");
             return;
         }
 
         int trayIndex = trayModel.index.get();
+        Log.i("TrayManageFragment", "【用户点停止】托盘索引：" + trayIndex);
+        Log.i("TrayManageFragment", "【用户点停止】当前状态：flagstatus=" + trayModel.flagstatus.get());
 
         // 1. 设置状态为STOP，停止后不可恢复
+        Log.i("TrayManageFragment", "【用户点停止】【步骤1】设置状态为FLAG_STOP");
         trayModel.flagstatus.set(ConstantData.FLAG_STOP);
+        Log.d("TrayManageFragment", "【用户点停止】【步骤1】已设置flagstatus=" + ConstantData.FLAG_STOP);
 
         // 2. 标记为用户中断 - 阻止新任务分配，但让当前队列继续完成
+        Log.i("TrayManageFragment", "【用户点停止】【步骤2】检查当前调度任务");
         DispatchModel dm = TrayManager.getInstance().getCurrentDispatch(trayIndex);
         if (dm != null && dm.targettype.get() != null && dm.target.get() != null) {
+            Log.i("TrayManageFragment", "【用户点停止】【步骤2】检测到调度任务");
+            Log.d("TrayManageFragment", "【用户点停止】【步骤2】  - targettype：" + dm.targettype.get());
+            Log.d("TrayManageFragment", "【用户点停止】【步骤2】  - target：" + dm.target.get());
+
             if (dm.targettype.get() == ConstantData.DEVICE_PCR) {
+                Log.i("TrayManageFragment", "【用户点停止】【步骤2】检测到PCR设备，索引：" + dm.target.get());
                 PipePCRModel model = PCRManager.getInstance().getPipePCRModel(dm.target.get());
                 if (model != null) {
+                    Log.i("TrayManageFragment", "【用户点停止】【步骤2】标记PCR为用户中断");
+                    Log.d("TrayManageFragment", "【用户点停止】【步骤2】  - 修改前：usererror=" + model.usererror.get());
                     model.usererror.set(1);  // 标记为用户中断，不立即停止
-                    Log.w("TrayManageFragment", "【用户停止】标记PCR为用户中断，让当前队列继续");
+                    Log.d("TrayManageFragment", "【用户点停止】【步骤2】  - 修改后：usererror=1");
+                    Log.w("TrayManageFragment", "【用户点停止】【步骤2】标记PCR为用户中断，让当前队列继续");
+                }else{
+                    Log.w("TrayManageFragment", "【用户点停止】【步骤2】【警告】PCRModel为null");
                 }
             } else if (dm.targettype.get() == ConstantData.DEVICE_RNA) {
+                Log.i("TrayManageFragment", "【用户点停止】【步骤2】检测到RNA设备，索引：" + dm.target.get());
                 PipeRNAModel model = RNAManager.getInstance().getPipeRNAModel(dm.target.get());
                 if (model != null) {
+                    Log.i("TrayManageFragment", "【用户点停止】【步骤2】标记RNA为用户中断");
+                    Log.d("TrayManageFragment", "【用户点停止】【步骤2】  - 修改前：usererror=" + model.usererror.get());
                     model.usererror.set(1);  // 标记为用户中断，不立即停止
-                    Log.w("TrayManageFragment", "【用户停止】标记RNA为用户中断，让当前队列继续");
+                    Log.d("TrayManageFragment", "【用户点停止】【步骤2】  - 修改后：usererror=1");
+                    Log.w("TrayManageFragment", "【用户点停止】【步骤2】标记RNA为用户中断，让当前队列继续");
+                }else{
+                    Log.w("TrayManageFragment", "【用户点停止】【步骤2】【警告】RNAModel为null");
                 }
+            } else {
+                Log.w("TrayManageFragment", "【用户点停止】【步骤2】【警告】未知的targettype：" + dm.targettype.get());
             }
+        }else{
+            Log.i("TrayManageFragment", "【用户点停止】【步骤2】未检测到调度任务（dm=null 或 targettype=null 或 target=null）");
         }
 
         // 3. 【关键】注册"停止后还盘" - 让ArmManager在队列完成后自动还盘
         //    这里不要立即执行还盘逻辑，而是让RobotWorkManager继续完成队列
+        Log.i("TrayManageFragment", "【用户点停止】【步骤3】【关键】注册停止后还盘");
+        Log.w("TrayManageFragment", "【用户点停止】【步骤3】调用 ArmManager.setStopAndReturnTray(" + trayIndex + ")");
         ArmManager.getInstance().setStopAndReturnTray(trayIndex);
+        Log.i("TrayManageFragment", "【用户点停止】【步骤3】setStopAndReturnTray() 已调用完成");
 
         // 4. 保存托盘状态
+        Log.i("TrayManageFragment", "【用户点停止】【步骤4】保存托盘状态");
         TrayManager.getInstance().saveModel(trayIndex);
+        Log.d("TrayManageFragment", "【用户点停止】【步骤4】saveModel(" + trayIndex + ") 已调用");
 
+        Log.w("TrayManageFragment", "【用户点停止】【步骤5】显示提示信息");
         showLongToast("托盘已停止，等待机械臂完成当前动作...");
+
+        Log.w("TrayManageFragment", "【用户点停止】=== stopTrayExecution() 完成 ===");
+        Log.w("TrayManageFragment", "【用户点停止】现在等待RobotWorkManager继续完成队列...");
     }
 
     /**
@@ -169,31 +206,55 @@ public class TrayManageFragment extends Fragment {
     @Deprecated
     private void triggerArmReturnTray(int trayIndex){
         // 此方法已废弃，还盘逻辑已移到ArmManager中
-        Log.w("TrayManageFragment", "【已废弃】triggerArmReturnTray不再使用");
+        Log.w("TrayManageFragment", "【已废弃】triggerArmReturnTray()不再使用，请使用ArmManager.setStopAndReturnTray()");
     }
+
     private void stopRnawork(int index){
+        Log.i("TrayManageFragment", "【停止RNA】stopRnawork(" + index + ") 被调用");
         boolean result = RNAManager.getInstance().stopRnaWork(index);
+        Log.i("TrayManageFragment", "【停止RNA】RNAManager.stopRnaWork(" + index + ") 返回：" + result);
+
         PipeRNAModel model= RNAManager.getInstance().getPipeRNAModel(index);
         if (model!=null && model.usererror.get() != null) {
+            Log.d("TrayManageFragment", "【停止RNA】设置RNA" + index + "的usererror=1");
             model.usererror.set(1);
+        }else{
+            Log.w("TrayManageFragment", "【停止RNA】【警告】RNAModel为null或usererror为null");
         }
+
+        Log.i("TrayManageFragment", "【停止RNA】调用 APLManager.NotifyRnaTrayError(" + index + ")");
         APLManager.getInstance().NotifyRnaTrayError(index);
+
         if(result) {
+            Log.i("TrayManageFragment", "【停止RNA】停止成功");
             showLongToast("RNA" + index + "停止成功，" + getString(R.string.do_wait));
         }else{
+            Log.e("TrayManageFragment", "【停止RNA】停止失败");
             showLongToast("RNA" + index + "停止失败！");
         }
     }
+
     private void stopPcrwork(int index){
+        Log.i("TrayManageFragment", "【停止PCR】stopPcrwork(" + index + ") 被调用");
         boolean result = PCRManager.getInstance().stop(index);
+        Log.i("TrayManageFragment", "【停止PCR】PCRManager.stop(" + index + ") 返回：" + result);
+
         PipePCRModel model= PCRManager.getInstance().getPipePCRModel(index);
         if (model!=null && model.usererror.get() != null) {
+            Log.d("TrayManageFragment", "【停止PCR】设置PCR" + index + "的usererror=1");
             model.usererror.set(1);
+        }else{
+            Log.w("TrayManageFragment", "【停止PCR】【警告】PCRModel为null或usererror为null");
         }
+
+        Log.i("TrayManageFragment", "【停止PCR】调用 APLManager.NotifyPcrTrayError(" + index + ")");
         APLManager.getInstance().NotifyPcrTrayError(index);
+
         if(result) {
+            Log.i("TrayManageFragment", "【停止PCR】停止成功");
             showLongToast("PCR" + index + "停止成功，" + getString(R.string.do_wait));
         }else{
+            Log.e("TrayManageFragment", "【停止PCR】停止失败");
             showLongToast("PCR" + index + "停止失败！");
         }
     }
