@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "Live Vue -> Java -> C# -> real offline SDK with explicit synthetic CT/PEAK rules",
+  "bundleId": "c2f7f9ef-e935-48f7-b7cf-01eecc3b0190",
+  "reportId": "7045ed29-2d87-4f8a-9dc7-90e682002a34",
+  "checks": {
+    "realSdkCtRejudgedAndMissingMeltExplicit": true,
+    "historyAndResponsiveLayout": true,
+    "originalUnchanged": true
+  },
+  "analysisRunId": "22f883f9-4c0f-45ca-98d5-7a105d2bf6cf"
+}

@@ -1,0 +1,55 @@
+pluginManagement {
+    repositories {
+        // 腾讯云镜像（速度最快）
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/") }
+        // 阿里云镜像（国内加速）
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+        maven { url = uri("https://maven.aliyun.com/repository/central") }
+        maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        // 华为云镜像（备用）
+        maven { url = uri("https://repo.huaweicloud.com/repository/maven/") }
+        // 官方源（国内镜像无法访问时使用）
+        maven { url = uri("https://maven.aliyun.com/repository/releases") }
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        // JitPack
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.10.0'
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        // 腾讯云镜像（速度最快）
+        maven { url = uri("https://mirrors.cloud.tencent.com/nexus/repository/maven-public/") }
+        // 阿里云镜像（国内加速）
+        maven { url = uri("https://maven.aliyun.com/repository/google") }
+        maven { url = uri("https://maven.aliyun.com/repository/central") }
+        maven { url = uri("https://maven.aliyun.com/repository/public") }
+        // 华为云镜像（备用）
+        maven { url = uri("https://repo.huaweicloud.com/repository/maven/") }
+        // 官方源
+        maven { url = uri("https://maven.aliyun.com/repository/releases") }
+        google()
+        mavenCentral()
+        // JitPack
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+rootProject.name = 'SLAN_Pipeline'
+
+include ':SLAN_Server'
+project(':SLAN_Server').projectDir = file('slan_liushuixian_server_newschedule/Bio_PCR/app')
+
+include ':SLAN_Server:SerialPortLibrary'
+project(':SLAN_Server:SerialPortLibrary').projectDir = file('slan_liushuixian_server_newschedule/Bio_PCR/SerialPortLibrary')
+
+include ':SLAN_Client'
+project(':SLAN_Client').projectDir = file('slan_autopipe_client/Bio_PCR/app')
+
+include ':SLAN_Client:SerialPortLibrary'
+project(':SLAN_Client:SerialPortLibrary').projectDir = file('slan_autopipe_client/Bio_PCR/SerialPortLibrary')

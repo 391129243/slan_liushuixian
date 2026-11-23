@@ -1,0 +1,235 @@
+{
+  "status": "PASS",
+  "scope": "REAL vendor Service.SLANService offline APIs; test HTTP transport, real Java and C# bridge; no physical device or existing vendor process modification",
+  "source": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\result\\2026-10-29-16-23-17_06-1029-2-1022-单重-自研-定10-新冠-洗脱100-洗脱排气-21分钟-过转8度\\2026-10-29-17-15-07.pcr",
+  "sourceBytes": 240240,
+  "sourceSha256": "e294c024e1a41a30cb747dd95d4742d3d448049561ea529a21c9bc19123021a7",
+  "serviceDllSha256": "6094877b0e60fe2d8c3e14409f7f1d355aa53927a2df9674916ede31ab6f6c2c",
+  "parameters": {
+    "autoBaseline": true,
+    "baselineStart": 6,
+    "baselineEnd": 12,
+    "threshold": 0.24
+  },
+  "checks": {
+    "realSdkRead": true,
+    "realSdkReanalysis": true,
+    "resultAndParametersPersistedBeforeFileSave": true,
+    "actualSdkSavedDifferentPcr": true,
+    "savedPcrReopenedByRealSdk": true,
+    "reopenedCtAndCurvesMatch": true,
+    "originalRawCurvesPreserved": true,
+    "ctChangedBySdk": true,
+    "savedParametersReopenedCorrectly": true,
+    "sourceAndReportUnchanged": true,
+    "restartPersistenceWithoutSdk": true,
+    "onlyOfflineSdkMethods": true
+  },
+  "runDirectory": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\target\\real-sdk-reanalysis-20261123\\roundtrip-1795404314215",
+  "vendorMetadata": {
+    "serviceProductVersion": "9.0.1.260921"
+  },
+  "reportId": "85a68ae3-65b9-4cfb-9456-8190b26e8996",
+  "inputFileId": "d9b4467d-9a64-4c36-b8fa-a197da1765ee",
+  "analysisRunId": "616ca55c-a7ba-4d23-b3f2-e99200caad79",
+  "outputFileId": "365e2bbc-9481-4e06-86c7-744ec5282f5d",
+  "outputBytes": 165330,
+  "outputSha256": "f699ef6043510916b1c04c44e4e5d088fa32abc2f028a3f970ec308168969083",
+  "changedCtCount": 21,
+  "ctComparison": [
+    {
+      "well": "A1",
+      "channel": 1,
+      "before": 37.865534207440206,
+      "after": 39.053621906411
+    },
+    {
+      "well": "A1",
+      "channel": 2,
+      "before": 39.68851232518495,
+      "after": 40.94836413746588
+    },
+    {
+      "well": "A1",
+      "channel": 4,
+      "before": 36.47276085019572,
+      "after": 37.49084732878443
+    },
+    {
+      "well": "A2",
+      "channel": 1,
+      "before": "Infinity",
+      "after": "Infinity"
+    },
+    {
+      "well": "A2",
+      "channel": 2,
+      "before": "Infinity",
+      "after": "Infinity"
+    },
+    {
+      "well": "A2",
+      "channel": 4,
+      "before": 36.50881902139051,
+      "after": 37.45395106087851
+    },
+    {
+      "well": "A3",
+      "channel": 1,
+      "before": 37.34862915892126,
+      "after": 38.38787780070858
+    },
+    {
+      "well": "A3",
+      "channel": 2,
+      "before": "Infinity",
+      "after": "Infinity"
+    },
+    {
+      "well": "A3",
+      "channel": 4,
+      "before": 37.18234282782316,
+      "after": 38.12548122049855
+    },
+    {
+      "well": "A4",
+      "channel": 1,
+      "before": 39.873582710071155,
+      "after": 41.22353618750875
+    },
+    {
+      "well": "A4",
+      "channel": 2,
+      "before": 37.264670418993695,
+      "after": 38.409226187583336
+    },
+    {
+      "well": "A4",
+      "channel": 4,
+      "before": 37.176800635434205,
+      "after": 38.176074350823804
+    },
+    {
+      "well": "A5",
+      "channel": 1,
+      "before": 35.153659911841935,
+      "after": 36.16344775173592
+    },
+    {
+      "well": "A5",
+      "channel": 2,
+      "before": 35.04217978277356,
+      "after": 36.087879748255865
+    },
+    {
+      "well": "A5",
+      "channel": 4,
+      "before": 36.11992232743145,
+      "after": 37.07480631174754
+    },
+    {
+      "well": "A6",
+      "channel": 1,
+      "before": 34.26813521736928,
+      "after": 35.26693208575529
+    },
+    {
+      "well": "A6",
+      "channel": 2,
+      "before": 34.53386286992354,
+      "after": 35.58314938047329
+    },
+    {
+      "well": "A6",
+      "channel": 4,
+      "before": 35.722098549558375,
+      "after": 36.73059236499862
+    },
+    {
+      "well": "A7",
+      "channel": 1,
+      "before": 31.007679342045908,
+      "after": 32.023807475575005
+    },
+    {
+      "well": "A7",
+      "channel": 2,
+      "before": 31.49573748258891,
+      "after": 32.56049750443893
+    },
+    {
+      "well": "A7",
+      "channel": 4,
+      "before": 32.73064303155267,
+      "after": 33.7196145435551
+    },
+    {
+      "well": "A8",
+      "channel": 1,
+      "before": 30.904434157694627,
+      "after": 31.903970425335373
+    },
+    {
+      "well": "A8",
+      "channel": 2,
+      "before": 31.137310102960647,
+      "after": 32.21526058369979
+    },
+    {
+      "well": "A8",
+      "channel": 4,
+      "before": 32.51208281671341,
+      "after": 33.47544278327686
+    }
+  ],
+  "artifactPath": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\runtime\\simulations\\singleplex-reanalyzed-roundtrip-1795404314215.pcr",
+  "finishedAt": "2026-11-23T03:25:31.378Z",
+  "database": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\target\\real-sdk-reanalysis-20261123\\roundtrip-1795404314215\\db\\real-sdk.mv.db",
+  "sdkCalls": [
+    {
+      "method": "GetVersion",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "LoadExperimentResult",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "GetAllExperimentName",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "OpenExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SetExperimentParamter",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentData",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SaveExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "CloseExperiment",
+      "errorCode": 0,
+      "message": null
+    }
+  ]
+}

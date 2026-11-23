@@ -1,0 +1,56 @@
+import { test, expect } from '@playwright/test'
+import { readFile } from 'node:fs/promises'
+
+test('verified real melt data is distinct from mock mode and filters all original points', async ({ page }) => {
+  const calls: string[] = []
+  page.on('request', request => { if (request.url().includes('/api/')) calls.push(request.url()) })
+  await page.goto('/')
+  await expect(page.getByRole('heading', { name: '真实结果验证' })).toBeVisible()
+  await expect(page.getByText('24 条曲线 · 22,032 个真实坐标点')).toBeVisible()
+  await expect(page.locator('.real-result canvas')).toBeVisible()
+  await page.screenshot({ path: 'test-results/real-result-desktop.png', fullPage: true })
+  await page.getByRole('button', { name: '峰曲线', exact: true }).click()
+  await expect(page.getByText('24 条曲线 · 12,024 个真实坐标点')).toBeVisible()
+  await page.getByRole('tab', { name: '靶标与峰值' }).click()
+  await expect(page.locator('tbody tr')).toHaveCount(24)
+  await expect(page.locator('.missing-ct')).toHaveCount(24)
+  await expect(page.getByText('24 个靶标 · 21 个峰')).toBeVisible()
+  await page.getByRole('button', { name: '真实孔位 B1', exact: true }).click()
+  await expect(page.locator('tbody tr')).toHaveCount(21)
+  await page.getByRole('checkbox', { name: 'FAM' }).uncheck()
+  await expect(page.locator('tbody tr')).toHaveCount(14)
+  const downloadEvent = page.waitForEvent('download')
+  await page.getByRole('button', { name: '导出当前筛选' }).click()
+  const download = await downloadEvent
+  const result = JSON.parse(await readFile((await download.path())!, 'utf8'))
+  expect(result.offlineSnapshot).toBe(true)
+  expect(result.results).toHaveLength(14)
+  expect(result.results.every((r: {ct: unknown}) => r.ct === null)).toBe(true)
+  await page.getByRole('tab', { name: '上报验证' }).click()
+  await expect(page.getByRole('heading', { name: '真实文件上报验证通过' })).toBeVisible()
+  await expect(page.locator('.check-item b')).toHaveText(Array(9).fill('通过'))
+  expect(calls).toEqual([])
+})
+
+test('real snapshot excludes patient fields and mobile layout fits', async ({ page, request }) => {
+  const response = await request.get('/reference/melt-result.json')
+  const snapshot = await response.json()
+  const text = JSON.stringify(snapshot)
+  expect(text).not.toContain('PatientInfo')
+  expect(text).not.toContain('SampleName')
+  expect(snapshot.results.reduce((n: number, r: {rawMelt: unknown[]}) => n + r.rawMelt.length, 0)).toBe(22032)
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/')
+  await expect(page.locator('.real-result canvas')).toBeVisible()
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
+  await page.screenshot({ path: 'test-results/real-result-mobile.png', fullPage: true })
+})
+
+test('snapshot load errors are visible and retryable', async ({ page }) => {
+  await page.route('**/reference/melt-result.json', route => route.fulfill({ status: 503, body: 'unavailable' }))
+  await page.goto('/')
+  await expect(page.getByRole('alert')).toContainText('结果快照暂时无法加载')
+  await page.unroute('**/reference/melt-result.json')
+  await page.getByRole('button', { name: '重新加载' }).click()
+  await expect(page.getByText('24 条曲线 · 22,032 个真实坐标点')).toBeVisible()
+})

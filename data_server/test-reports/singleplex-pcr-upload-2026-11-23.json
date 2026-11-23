@@ -1,0 +1,312 @@
+{
+  "source": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\result\\2026-10-29-16-23-17_06-1029-2-1022-单重-自研-定10-新冠-洗脱100-洗脱排气-21分钟-过转8度\\2026-10-29-17-15-07.pcr",
+  "sourceBytes": 240240,
+  "sourceSha256": "e294c024e1a41a30cb747dd95d4742d3d448049561ea529a21c9bc19123021a7",
+  "statistics": {
+    "wells": 8,
+    "targets": 24,
+    "channels": [
+      1,
+      2,
+      4
+    ],
+    "rawAmplificationPoints": 1008,
+    "amplificationPoints": 1008,
+    "rawMeltPoints": 0,
+    "peakCurvePoints": 0,
+    "peaks": 0,
+    "validCt": 21,
+    "unavailableCt": 3,
+    "nonFiniteCt": 3,
+    "ctMin": 30.904434157694627,
+    "ctMax": 39.873582710071155
+  },
+  "ctByWell": [
+    {
+      "wellNames": [
+        "A1"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": 37.865534207440206,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "HEX",
+          "channel": 2,
+          "ct": 39.68851232518495,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": 36.47276085019572,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "A2"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": null,
+          "sdkCtState": "Infinity",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "HEX",
+          "channel": 2,
+          "ct": null,
+          "sdkCtState": "Infinity",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": 36.50881902139051,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "A3"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": 37.34862915892126,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "HEX",
+          "channel": 2,
+          "ct": null,
+          "sdkCtState": "Infinity",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": 37.18234282782316,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "A4"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": 39.873582710071155,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "HEX",
+          "channel": 2,
+          "ct": 37.264670418993695,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": 37.176800635434205,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "A5"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": 35.153659911841935,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "HEX",
+          "channel": 2,
+          "ct": 35.04217978277356,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": 36.11992232743145,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "A6"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": 34.26813521736928,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "HEX",
+          "channel": 2,
+          "ct": 34.53386286992354,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": 35.722098549558375,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "A7"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": 31.007679342045908,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "HEX",
+          "channel": 2,
+          "ct": 31.49573748258891,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": 32.73064303155267,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "A8"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": 30.904434157694627,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "HEX",
+          "channel": 2,
+          "ct": 31.137310102960647,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": 32.51208281671341,
+          "sdkCtState": "finite",
+          "rawPoints": 42,
+          "amplificationPoints": 42
+        }
+      ]
+    }
+  ],
+  "mappings": {
+    "SerialNumber": "SerialNo",
+    "UseModule": "Block",
+    "Cn": "CnValue",
+    "Rn": "RnValue",
+    "Wm": "Width",
+    "Ym": "YValue"
+  },
+  "normalizedNumbers": 171,
+  "dataSource": "Actual vendor Service.SLANService.LoadExperimentResult on a private input copy; no hardware calls",
+  "normalization": "Non-finite numeric results explicitly encoded as JSON null, never zero. This is a compatibility normalization, not unchanged Android Gson serialization.",
+  "database": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\target\\singleplex-pcr-upload-20261123\\http-1795399955611\\db\\upload-test.mv.db",
+  "status": "PASS",
+  "checks": {
+    "csharpShapeRequiresMapping": true,
+    "nonFiniteCtStringsAreRejected": true,
+    "jsonRetryDeduplicated": true,
+    "concurrentRetriesDeduplicated": true,
+    "allDataRoundTripIncludingCtAndCurves": true,
+    "finiteCtValuesUnchanged": true,
+    "nonFiniteCtEncodedAsNull": true,
+    "operatorMetadataMatchesSource": true,
+    "jsonSourceByteExact": true,
+    "binaryRetryDeduplicated": true,
+    "downloadHashMatchesSource": true,
+    "restartPersistence": true,
+    "sourceUnmodified": true
+  },
+  "reportId": "e8e804e2-56d3-4cff-8420-a53976c8c403",
+  "fileId": "3f2f7be6-a1da-420d-8478-4355f5dd5153",
+  "summary": {
+    "devices": 1,
+    "reports": 1,
+    "files": 1,
+    "sdkAvailable": false
+  },
+  "finishedAt": "2026-11-23T02:12:51.811Z",
+  "uploadJsonBytes": 41896
+}

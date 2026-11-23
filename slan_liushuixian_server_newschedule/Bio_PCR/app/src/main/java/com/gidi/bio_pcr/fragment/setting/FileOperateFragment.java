@@ -32,7 +32,9 @@ import com.gidi.bio_pcr.receiver.UsbBroadCastReceiver;
 import com.gidi.bio_pcr.util.FileUtils;
 import com.gidi.bio_pcr.util.LoadingDialog;
 import com.gidi.bio_pcr.util.StringUtil;
+import com.gidi.bio_pcr.util.UsbCopySession;
 import com.gidi.bio_pcr.util.UsbHelper;
+import com.gidi.bio_pcr.util.UsbToLocalCopySession;
 import com.gidi.bio_pcr.view.CustomDialog;
 import com.gidi.bio_pcr.view.DividerDecoration;
 import com.gidi.bio_pcr.view.NoticeDialog;
@@ -81,6 +83,14 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
     private TextView mLocalBackTv,mUsbBackTv;
     private boolean isDetach = true;
     private boolean interruptCopyThread = false;
+    //正在往 U 盘复制。复制期间不再响应插拔刷新,避免把正在写的连接打断
+    private volatile boolean copying = false;
+    //正在删除文件/文件夹。删除期间不再响应插拔刷新
+    private volatile boolean deleting = false;
+    //正在重命名文件/文件夹。重命名期间不再响应插拔刷新
+    private volatile boolean renaming = false;
+    //正在创建文件/文件夹。创建期间不再响应插拔刷新
+    private volatile boolean creating = false;
     @Override
     protected int getLayoutResource() {
         return R.layout.module_fragment_file_operate;
@@ -475,6 +485,10 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
 
     @Override
     public void insertUsb(UsbDevice device_add) {
+        //复制、删除、重命名、创建过程中不刷新:刷新会重新打开设备并抢占 USB 接口,把正在操作的连接打断
+        if (copying || deleting || renaming || creating) {
+            return;
+        }
         if(null != mUIHandler){
             Message msg = Message.obtain();
             msg.obj = device_add;
@@ -486,6 +500,15 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
 
     @Override
     public void removeUsb(UsbDevice device_remove) {
+        //正在复制、删除、重命名、创建时 U 盘被拔出:只请求中止,不在这里刷新或关闭设备
+        if (copying) {
+            usbHelper.cancelCopy();
+            return;
+        }
+        if (deleting || renaming || creating) {
+            //删除、重命名、创建也要中止
+            return;
+        }
         if(null != mUIHandler){
             Message msg = Message.obtain();
             msg.obj = device_remove;
@@ -615,47 +638,6 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
     }
 ///////////////////////////////////////////////////U盘文件操作///////////////////////////////////////////////////
     /**
-     * 获取复制Usb文件数量
-     * @return
-     */
-    private int getCopyUsbNumber(List<UsbFileBean> checkUsbFiles){
-        int count = 0;
-        for(UsbFileBean fileBean : checkUsbFiles){
-            UsbFile checkUsbFile = fileBean.getUsbFile();
-            if(null != checkUsbFile){
-                int num = getFilesInUsbDir(checkUsbFile);
-                count = count + num;
-            }
-        }
-        return count;
-    }
-    private int getFilesInUsbDir(UsbFile a_usbFile){
-        try {
-            int count = 0;
-            if(a_usbFile.isDirectory()){
-                UsbFile[] b_files = a_usbFile.listFiles();
-                if(b_files != null && b_files.length>0){
-                    for(int i=0;i<b_files.length;i++){
-                        if(b_files[i].isDirectory()){
-                          //  UsbFile[] usbFiles = files[i].listFiles();
-                            int num = getFilesInUsbDir(b_files[i]);
-                            count = count + num;
-                        }else{
-                            count = count +1;
-                        }
-
-                    }
-                }
-            }else{
-                count = count +1;
-            }
-            return count;
-        }catch (Exception e){
-            return 0;
-        }
-    }
-
-    /**
      * 获取U盘文件的大小
      * @return
      */
@@ -696,47 +678,63 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
 
     /**
      * 1-新建Usb文件
-     *
      */
-    private void  createUsbFile(String usbFileName,boolean isDirectory){
-        if(null != usbHelper){
-            if(isDirectory){
-                try{
-                    UsbFile usbFile = usbHelper.getCurrentFolder();
-                    UsbFile createDirectoty = usbFile.createDirectory(usbFileName);
-                    if(null != createDirectoty){
+    private void createUsbFile(String usbFileName, boolean isDirectory) {
+        if (null != usbHelper) {
+            creating = true;
+            try {
+                if (isDirectory) {
+                    try {
+                        UsbFile usbFile = usbHelper.getCurrentFolder();
+                        if (usbFile == null) {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    getActivity().getResources().getString(R.string.result_export_toast_create_foder_fail), Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        UsbFile createDirectoty = usbFile.createDirectory(usbFileName);
+                        if (null != createDirectoty) {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    getActivity().getResources().getString(R.string.result_export_toast_create_foder_success),
+                                    Toast.LENGTH_LONG).show();
+                            updateUsbFile(0);
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    getActivity().getResources().getString(R.string.result_export_toast_create_foder_fail),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        Log.e("FileOperateFragment", "create usb directory failed: " + e.getMessage());
                         Toast.makeText(getActivity().getApplicationContext(),
-                                getActivity().getResources().getString(R.string.result_export_toast_create_foder_success),
-                                Toast.LENGTH_LONG).show();
-                        updateUsbFile(0);
-                    }else{
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                getActivity().getResources().getString(R.string.result_export_toast_create_foder_fail),
-                                Toast.LENGTH_LONG).show();
+                                getActivity().getResources().getString(R.string.result_export_toast_create_foder_fail), Toast.LENGTH_LONG).show();
                     }
-                }catch (Exception e){
-                    Toast.makeText(getActivity().getApplicationContext(),
-                            getActivity().getResources().getString(R.string.result_export_toast_create_foder_fail),Toast.LENGTH_LONG).show();
-                }
-            }else{
-                try {
-                    UsbFile usbFile =  usbHelper.getCurrentFolder();
-                    UsbFile createFile = usbFile.createFile(usbFileName);
-                    if(createFile != null){
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                getActivity().getResources().getString(R.string.result_export_toast_create_file_success),
-                                Toast.LENGTH_LONG).show();
-                        updateUsbFile(0);
-                    }else{
+                } else {
+                    try {
+                        UsbFile usbFile = usbHelper.getCurrentFolder();
+                        if (usbFile == null) {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    getActivity().getResources().getString(R.string.result_export_toast_create_file_fail), Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        UsbFile createFile = usbFile.createFile(usbFileName);
+                        if (createFile != null) {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    getActivity().getResources().getString(R.string.result_export_toast_create_file_success),
+                                    Toast.LENGTH_LONG).show();
+                            updateUsbFile(0);
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(),
+                                    getActivity().getResources().getString(R.string.result_export_toast_create_file_fail),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    } catch (Exception e) {
+                        Log.e("FileOperateFragment", "create usb file failed: " + e.getMessage());
                         Toast.makeText(getActivity().getApplicationContext(),
                                 getActivity().getResources().getString(R.string.result_export_toast_create_file_fail),
                                 Toast.LENGTH_LONG).show();
                     }
-                }catch (Exception e){
-                    Toast.makeText(getActivity().getApplicationContext(),
-                            getActivity().getResources().getString(R.string.result_export_toast_create_file_fail),
-                            Toast.LENGTH_LONG).show();
                 }
+            } finally {
+                creating = false;
             }
         }
     }
@@ -770,161 +768,72 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
 
     }
 
+    /**
+     * U 盘文件复制到当前本地目录。
+     * 本地有同名文件时覆盖(先写临时文件再替换,失败时原文件不变),同名目录合并;结果在结束时汇总提示。
+     */
     private void copyUsbFileToLocal(){
-        if(null != checkUsbFiles && checkUsbFiles.size()>0){
-
-            if(!isDetach){
-                if(copyThread!= null && copyThread.isAlive()){
-                    copyThread.interrupt();
-                        copyThread = null;
-                }
-                suc_count = 0;
-                copyThread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        copyUsbCount = getCopyUsbNumber(checkUsbFiles);
-                        Log.i("FileOperateFragment_total","复制U盘至本地文件数量copyUsbFileToLocal copyUsbCount" + copyUsbCount);
-                        boolean result = copyUSbFile(checkUsbFiles,localCurrentPath);
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            //throw new RuntimeException(e);
-                        }
-                        if(result){
-                            if(null != mUIHandler){
-                                mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_USB);
-                            }
-                        }else{
-                            if(null != mUIHandler){
-                                mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_USB_FAIL);
-                            }
-                        }
-                    }
-                });
-                copyThread.start();
-            }
-        }else{
-            if(null != mUIHandler){
-                Log.i("FileOperateFragment","222-取消");
+        if (copying) {
+            //上一次复制还没结束,不再开第二个线程去抢同一个 U 盘
+            hideProgressDialog();
+            Toast.makeText(getActivity().getApplicationContext(),
+                    getResources().getString(R.string.result_export_dialog_message_copying_already), Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (checkUsbFiles == null || checkUsbFiles.size() == 0 || usbHelper == null || isDetach) {
+            if (mUIHandler != null) {
                 mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_USB);
             }
+            return;
         }
-
-    }
-    private boolean copyUSbFile(List<UsbFileBean> checkUsbFiles,String localCurrentPath) {
-        //复制到本地的文件路径
-        // 根部Template
-        Log.i("FileOperateFragment","复制文件夹localCurrentPath" +localCurrentPath);
-        interruptCopyThread = false;
-        try {
-            for (int i= 0;i<checkUsbFiles.size();i++){
-                if(interruptCopyThread){
-                    return false;
-                }
-                UsbFile usbFile = checkUsbFiles.get(i).getUsbFile();
-
-                if(usbFile.isDirectory()){
-                    Log.i("FileOperateFragment","复制文件夹 1111 usbFile" + usbFile.getName());
-                    copyUsbFileDir(usbFile,localCurrentPath);
-                }else{
-                    //直接复制
-                    String localFilePath = localCurrentPath + File.separator;
-                    copyUsbNoThread(usbFile,localFilePath , usbFile.getName());
-                }
-
-            }
-            return true;
-        }catch (Exception e){
-//            Log.e("copyUSbFile",e.getMessage());
-//            e.getMessage();
-            return false;
-        }
-
-    }
-
-    /**
-     * 复制U盘文件夹到本地
-     * @param file
-     * @param path
-     */
-    private void copyUsbFileDir(UsbFile file,String path){
-        //file是一个文件夹
-        ArrayList<UsbFile> firstFileList = usbHelper.getUsbFolderFileList(file);
-        //空文件夹
-        if(firstFileList == null || firstFileList.size() == 0){
-            String localFilePath = path + File.separator + file.getName();
-            File fileDir = new File(localFilePath);
-            if (!fileDir.exists()) {
-                fileDir.mkdirs();
+        //复制期间的插拔广播不再刷新列表,见 insertUsb/removeUsb
+        copying = true;
+        usbHelper.resetCopyCancelled();
+        final List<UsbFile> sources = new ArrayList<>();
+        for (UsbFileBean bean : checkUsbFiles) {
+            if (bean.getUsbFile() != null) {
+                sources.add(bean.getUsbFile());
             }
         }
-        for (UsbFile usbFile : firstFileList) {
-            //100，200
-            if (usbFile.isDirectory()) {
-                /*String usbDirPath = localCurrentPath + File.separator
-                        + file.getName() + File.separator + usbFile.getName() + File.separator;*/
-                String usbDirPath = path + File.separator
-                        + file.getName() + File.separator + usbFile.getName() + File.separator;
-                File copyFileDir = new File(usbDirPath);
-                if (!copyFileDir.exists()) {
-                    copyFileDir.mkdirs();
-                }
-                if (copyFileDir.exists()) {
-                    //显示usbFile文件下的文件
-                    ArrayList<UsbFile> secondFileList = usbHelper.getUsbFolderFileList(usbFile);
-                    //有文件
-
-                    for (UsbFile secondFile : secondFileList) {
-                        if (secondFile.isDirectory()) {
-                            copyUsbFileDir(secondFile,usbDirPath);
-                        } else {
-                            String localFilePath = copyFileDir.getAbsolutePath() + File.separator;
-                            File fileDir = new File(localFilePath);
-                            if (!fileDir.exists()) {
-                                fileDir.mkdirs();
-                            }
-                            copyUsbNoThread(secondFile, localFilePath, secondFile.getName());
+        final File destDir = new File(localCurrentPath);
+        copyThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //失败原因用资源 id 传回主线程再取字符串:后台线程里 fragment 可能已经 detach
+                int failRes = 0;
+                UsbToLocalCopySession session = null;
+                try {
+                    if (!destDir.isDirectory()) {
+                        failRes = R.string.result_export_dialog_message_copy_to_local_failed;
+                    } else {
+                        long need = UsbToLocalCopySession.totalSizeOf(sources);
+                        long free = destDir.getUsableSpace();
+                        if (need < 0) {
+                            //U 盘目录读不出来
+                            failRes = R.string.result_export_dialog_message_copy_to_local_failed;
+                        } else if (need + 8L * 1024 * 1024 > free) {
+                            failRes = R.string.result_export_dialog_message_copy_to_local_no_space;
                         }
                     }
+                    if (failRes == 0) {
+                        session = new UsbToLocalCopySession(usbHelper, sources, destDir);
+                        session.run(copyProgressListener);
+                    }
+                } catch (Exception e) {
+                    Log.e("FileOperateFragment", "copy to local failed: " + e.getMessage());
+                    failRes = R.string.result_export_dialog_message_copy_to_local_failed;
+                    session = null;
                 }
-            }else{
-                //子文件夹中的文件
-                String localPath = path + File.separator + file.getName() + File.separator;
-                File fileDir = new File(localPath);
-                if (!fileDir.exists()) {
-                    fileDir.mkdirs();
-                }
-                copyUsbNoThread(usbFile, localPath, usbFile.getName());
-            }
-        }
-
-    }
-
-    private void copyUsbNoThread( final UsbFile file, final String savefilePath,final String saveName){
-        usbHelper.saveUSbFileToLocal(file, savefilePath, saveName,new UsbHelper.CopyProgressListener() {
-            @Override
-            public void copyProgress(final int progress) {
-                if(null != mUIHandler){
+                copying = false;
+                if (mUIHandler != null) {
                     Message msg = Message.obtain();
-                    msg.what = MsgType.MSG_COPY_PROGRESS;
-                    msg.obj = file.getName();
-                    msg.arg1 = progress;
+                    msg.what = MsgType.MSG_END_COPY_USB;
+                    msg.obj = failRes == 0 ? session : Integer.valueOf(failRes);
                     mUIHandler.sendMessage(msg);
                 }
             }
-            @Override
-            public void copyResult(boolean result) {
-                if(result){
-                    if(null != mUIHandler){
-                        mUIHandler.sendEmptyMessage(MsgType.MSG_COPY_USB_SUCCESS);
-                    }
-                }else{
-                    if(null != mUIHandler){
-                        mUIHandler.sendEmptyMessage(MsgType.MSG_COPY_USB_FAIL);
-                    }
-                }
-            }
         });
+        copyThread.start();
     }
 
     /**
@@ -939,26 +848,39 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
         new Thread(new Runnable() {
             @Override
             public void run() {
-                final boolean result = deleteCheckUsbFile();
-                if (getActivity() != null){
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (result) {
-                                hideLoadingDialog();
-                                openUsbFile(usbHelper.getCurrentFolder());
-                                checkUsbFiles.clear();
-                                Toast.makeText(getActivity().getApplicationContext(),
-                                        getActivity().getResources().getString(R.string.result_export_toast_delete_success), Toast.LENGTH_SHORT).show();
-                            } else {
-                                hideLoadingDialog();
-                                openUsbFile(usbHelper.getCurrentFolder());
-                                checkUsbFiles.clear();
-                                Toast.makeText(getActivity().getApplicationContext(),
-                                        getActivity().getResources().getString(R.string.result_export_toast_delete_fail), Toast.LENGTH_SHORT).show();
+                deleting = true;
+                try {
+                    final boolean result = deleteCheckUsbFile();
+                    if (getActivity() != null){
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (result) {
+                                    hideLoadingDialog();
+                                    try {
+                                        openUsbFile(usbHelper.getCurrentFolder());
+                                    } catch (Exception e) {
+                                        Log.e("FileOperateFragment", "open usb folder after delete failed: " + e.getMessage());
+                                    }
+                                    checkUsbFiles.clear();
+                                    Toast.makeText(getActivity().getApplicationContext(),
+                                            getActivity().getResources().getString(R.string.result_export_toast_delete_success), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    hideLoadingDialog();
+                                    try {
+                                        openUsbFile(usbHelper.getCurrentFolder());
+                                    } catch (Exception e) {
+                                        Log.e("FileOperateFragment", "open usb folder after delete failed: " + e.getMessage());
+                                    }
+                                    checkUsbFiles.clear();
+                                    Toast.makeText(getActivity().getApplicationContext(),
+                                            getActivity().getResources().getString(R.string.result_export_toast_delete_fail), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                } finally {
+                    deleting = false;
                 }
             }
         }).start();
@@ -1113,36 +1035,6 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////本地文件操作//////////////////////////////////////////////////
-    private int copyLocalCount = 0;
-    private int getFilesInLocalDir(File file){
-        int count = 0;
-        if(file.isFile()){
-            count = count +1;
-        }else{
-            File[] files = file.listFiles();
-            if(files != null && files.length>0){
-                for(int i=0;i<files.length;i++){
-                    int num = getFilesInLocalDir(files[i]);
-                    count = count + num;
-                }
-            }
-        }
-        return count;
-    }
-    /**
-     * 获取复制本地文件的数量
-     */
-    private int getCopyLocalNumber(List<FileBean> checkLocalFiles){
-        int count = 0;
-        for(FileBean fileBean1 : checkLocalFiles){
-            File file = fileBean1.getFile();
-            if(null != file){
-                int num = getFilesInLocalDir(file);
-                count = count + num;
-            }
-        }
-        return count;
-    }
     /**
      * 1.复制本地文件
      */
@@ -1166,211 +1058,134 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
         }
     }
 
-    private void copyLocalFileToUsb(){
-        if(null != checkLocalFiles && checkLocalFiles.size()>0){
-            if(null != usbHelper){
-                if (checkLocalFiles != null && checkLocalFiles.size()>0){
-                    //创建完文件夹开始进行复制
-                    if(null != usbHelper){
-                        if(copyThread!= null && copyThread.isAlive()){
-                            copyThread.interrupt();
-                        copyThread = null;
-                        }
-                        suc_count = 0;
-                        copyThread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                copyLocalCount = getCopyLocalNumber(checkLocalFiles);
-                                Log.i("FileOperateFragment_total","本地复制到U盘的文件数量--" + copyLocalCount);
-                                for(FileBean file :checkLocalFiles){
-                                    createUsbFolder(file.getFile(),usbHelper.getCurrentFolder());
-                                }
-                                boolean result = copyLocalFiles(checkLocalFiles,usbHelper.getCurrentFolder());
-                                try {
-                                    Thread.sleep(2000);
-                                } catch (InterruptedException e) {
-                                    //throw new RuntimeException(e);
-                                }
-                                if(result){
-                                    if(null != mUIHandler){
-                                        mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL);
-                                        Log.i("FileOperateFragment","本地复制本地到U盘--end---" + "successfull");
-                                    }
-                                }else{
-                                    if(null != mUIHandler){
-                                        Log.i("FileOperateFragment","本地复制本地到U盘--end---" + "failed");
-                                        mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL_FAIL);
-                                    }
-                                }
-                            }
-                        });
-                        copyThread.start();
-                    }else{
-                        mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL);
-                        Toast.makeText(getActivity().getApplicationContext(),
-                                getActivity().getResources().getString(R.string.result_export_toast_udisk_no_exist),Toast.LENGTH_LONG).show();
-                    }
-                }
-
-            }else {
-                mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL);
-                Toast.makeText(getActivity().getApplicationContext(),
-                        getActivity().getResources().getString(R.string.result_export_toast_udisk_no_exist),Toast.LENGTH_LONG).show();
+    /**
+     * 统计待复制内容的总字节数,用于复制前和 U 盘剩余空间比较。
+     * 目录读不到时记为 -1,调用方据此放弃这次复制而不是照写。
+     */
+    private long totalSizeOf(List<FileBean> files) {
+        long total = 0;
+        for (FileBean bean : files) {
+            long size = sizeOf(bean.getFile());
+            if (size < 0) {
+                return -1;
             }
-        }else {
-            mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL);
-            Toast.makeText(getActivity().getApplicationContext(),
-                    getActivity().getResources().getString(R.string.result_export_toast_copy_file),Toast.LENGTH_LONG).show();
+            total += size;
         }
+        return total;
     }
 
-    //创建要复制的文件夹
-    private void createUsbFolder(File targetFile, UsbFile saveFolder){
-        try {
-            UsbFile exist_UsbFile = isSameNameFile(targetFile,saveFolder);
-            if(exist_UsbFile != null){
-                //存在
-                exist_UsbFile.delete();
-            }
-            if (targetFile.isDirectory()) {
-                //1如果复制的是一个文件夹，在目录下创建一个相同的文件夹
-                UsbFile saveFile = saveFolder.createDirectory(targetFile.getName());
-                File[] currentFiles = targetFile.listFiles();//当前目录下的所有文件
-                //遍历要复制的该目录下的所有文件
-                if (null != currentFiles) {
-                    for (int i = 0; i < currentFiles.length; i++) {
-                        //如果当前项目为子目录
-                        if (currentFiles[i].isDirectory()) {
-                            File dir = new File(currentFiles[i].getAbsolutePath()+"/");
-                            Log.i("FileOperateFragment","DIR" + dir.getAbsolutePath());
-                            createUsbFolder(dir,saveFile);
-                        }
-                    }
-                }
-            }
-        }catch (Exception e){
-            e.getMessage();
+    private long sizeOf(File file) {
+        if (file == null || !file.exists()) {
+            return 0;
         }
-    }
-
-    private UsbFile isSameNameFile(File targetFile, UsbFile saveFolder){
-        UsbFile saveFile = null;
-        try{
-            for (UsbFile usbFile : saveFolder.listFiles()) {
-                if (usbFile.getName().equals(targetFile.getName())) {
-                    saveFile = usbFile;
-                }
-            }
-        }catch (Exception e){
-            e.getMessage();
-            return null;
+        if (file.isFile()) {
+            return file.length();
         }
-        return saveFile;
+        File[] children = file.listFiles();
+        if (children == null) {
+            return -1;
+        }
+        long total = 0;
+        for (File child : children) {
+            long size = sizeOf(child);
+            if (size < 0) {
+                return -1;
+            }
+            total += size;
+        }
+        return total;
     }
 
     /**
-     * 复制本地的文件
-     * @param checkLocalFiles
-     * @param saveFolder
+     * 本地文件复制到 U 盘。
+     * 写到 U 盘当前目录下新建的时间戳目录里,不删除 U 盘上已有的内容。
      */
-    private boolean copyLocalFiles(List<FileBean> checkLocalFiles,UsbFile saveFolder){
-        try {
-            interruptCopyThread = false;
-            for(FileBean fileBean : checkLocalFiles){
-                if(interruptCopyThread){
-                    return false;
-                }
-                File localFile = fileBean.getFile();
-                if(localFile.isFile()){
-                    //直接复制
-                    UsbFile u_file = saveFolder.createFile(localFile.getName());
-                    copyFileNotThread(localFile,u_file);
-                }else{
-                    copyLocalFolder(localFile,saveFolder);
-                }
-            }
-            return true;
-        }catch (Exception e){
-//            Log.e("copyLocalFiles",e.getMessage());
-            e.printStackTrace();
-            Log.i("FileOperateFragment","本地复制本地到U盘--copyLocalFiles---" + "Exception");
-            Log.e("FileOperateFragment",e.toString());
-            return false;
+    private void copyLocalFileToUsb(){
+        if (copying) {
+            //上一次复制还没结束,不再开第二个线程去抢同一个 U 盘
+            hideProgressDialog();
+            Toast.makeText(getActivity().getApplicationContext(),
+                    getResources().getString(R.string.result_export_dialog_message_copying_already), Toast.LENGTH_LONG).show();
+            return;
         }
-    }
-
-
-    private void copyLocalFolder(File localFile, UsbFile saveFolder){
-        try{
-            UsbFile[] romoteUsbFiles = saveFolder.listFiles();
-            if(localFile.isDirectory()){
-                //是localfile文件夹在U盘有没有得到UsbFile
-                UsbFile usbFile = getUsbFile(localFile.getName(),romoteUsbFiles);
-                File[] files = localFile.listFiles();//a里的文件目录
-                if(files != null ){
-                    for(int i=0;i<files.length;i++){
-                        File copyFile = files[i];
-                        if(copyFile.isDirectory()){
-                            copyLocalFolder(copyFile,usbFile);
-                        }else{
-                            //
-                            UsbFile u_file = usbFile.createFile(files[i].getName());
-                            copyFileNotThread(files[i],u_file);
-
+        if (checkLocalFiles == null || checkLocalFiles.size() == 0 || usbHelper == null) {
+            hideProgressDialog();
+            Toast.makeText(getActivity().getApplicationContext(),
+                    getResources().getString(R.string.result_export_toast_copy_file), Toast.LENGTH_LONG).show();
+            return;
+        }
+        //复制期间的插拔广播不再刷新列表,见 insertUsb/removeUsb
+        copying = true;
+        usbHelper.resetCopyCancelled();
+        final List<FileBean> toCopy = new ArrayList<>(checkLocalFiles);
+        copyThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String failReason = null;
+                UsbCopySession session = null;
+                try {
+                    UsbFile destParent = usbHelper.getCurrentFolder();
+                    if (destParent == null) {
+                        //U 盘没挂载上:没授权、不是 FAT32,或还没读到分区
+                        failReason = getResources().getString(R.string.result_export_dialog_message_copy_not_fat32);
+                    } else {
+                        long need = totalSizeOf(toCopy);
+                        long free = usbHelper.getFreeSpace();
+                        //留 8MB 给 FAT 表和新目录项,避免写到最后一簇时失败
+                        if (need < 0 || free < 0 || need + 8L * 1024 * 1024 > free) {
+                            failReason = getResources().getString(R.string.result_export_dialog_message_copy_no_space);
                         }
                     }
+                    if (failReason == null) {
+                        List<File> sources = new ArrayList<>();
+                        for (FileBean bean : toCopy) {
+                            sources.add(bean.getFile());
+                        }
+                        session = new UsbCopySession(usbHelper, sources, destParent);
+                        session.run(copyProgressListener);
+                    }
+                } catch (Exception e) {
+                    Log.e("FileOperateFragment", "copy to usb failed: " + e.getMessage());
+                    failReason = getResources().getString(R.string.result_export_dialog_message_copy_failed);
                 }
-            }
-        }catch (Exception e){
-            e.getMessage();
-        }
-
-    }
-
-    private void copyFileNotThread(final File file,UsbFile usbFile){
-        Log.i("FileOperateFragment","copyFileNotThread---start----" + file.getName());
-        usbHelper.copyFile(file,usbFile, new UsbHelper.CopyProgressListener() {
-            @Override
-            public void copyProgress(int progress) {
-                if(null != mUIHandler){
+                copying = false;
+                if (mUIHandler != null) {
                     Message msg = Message.obtain();
-                    msg.what = MsgType.MSG_COPY_PROGRESS;
-                    msg.obj = file.getName();
-                    msg.arg1 = progress;
+                    msg.what = MsgType.MSG_END_COPY_LOCAL;
+                    msg.obj = failReason == null ? session : failReason;
                     mUIHandler.sendMessage(msg);
                 }
             }
-
-            @Override
-            public void copyResult(boolean result) {
-                if(result){
-                    if(null != mUIHandler){
-                        mUIHandler.sendEmptyMessage(MsgType.MSG_COPY_LOCAL_SUCCESS);
-                        Log.i("FileOperateFragment","copyFileNotThread---" + "success" + file.getName());
-                    }
-                }else{
-                    if(null != mUIHandler){
-                        mUIHandler.sendEmptyMessage(MsgType.MSG_COPY_LOCAL_FAIL);
-                        Log.i("FileOperateFragment","copyFileNotThread---" + "failed" + file.getName());
-                    }
-                }
-            }
         });
-
+        copyThread.start();
     }
 
-    /**
-     * 2--删除选中的本地文件
-     *
-     */
-    private UsbFile getUsbFile(String name,UsbFile[] remoteUsbFiles){
-        for(int i=0;i<remoteUsbFiles.length;i++){
-            if(remoteUsbFiles[i].getName().equals(name)){
-                return remoteUsbFiles[i];
+    /** 复制进度回调,由复制线程调用,转发到主线程更新进度框 */
+    private final UsbHelper.CopyProgressListener copyProgressListener = new UsbHelper.CopyProgressListener() {
+        //当前正在复制的文件名,随进度一起发给进度框
+        private volatile String fileName = "";
+
+        @Override
+        public void copyStart(String name) {
+            fileName = name;
+            copyProgress(0);
+        }
+
+        @Override
+        public void copyProgress(int progress) {
+            if (mUIHandler != null) {
+                Message msg = Message.obtain();
+                msg.what = MsgType.MSG_COPY_PROGRESS;
+                msg.obj = fileName;
+                msg.arg1 = progress;
+                mUIHandler.sendMessage(msg);
             }
         }
-        return null;
-    }
+
+        @Override
+        public void copyResult(boolean result) {
+        }
+    };
 
     /**
      * 2-删除本地文件
@@ -1884,6 +1699,12 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
                 }
             });
             noticeDialog.show();
+
+            // 复制完成提示（dialogType == -1）只显示确定按钮，隐藏取消按钮
+            // 必须在 show() 之后调用，确保控件已初始化
+            if (dialogType == -1) {
+                noticeDialog.setCancelButtonVisible(false);
+            }
         }
     }
 
@@ -1974,6 +1795,10 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
                     fragment.copyUsbCount = 0;
                     fragment.checkUsbFiles.clear();
                     fragment.hideProgressDialog();
+                    //obj 为空表示没有真正开始复制(没选文件、U 盘已拔出),不提示
+                    if (msg.obj != null) {
+                        fragment.showUsbToLocalResult(msg.obj);
+                    }
                     fragment.openLocalFile(new File(fragment.localCurrentPath));
                     break;
 
@@ -1991,7 +1816,7 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
                 case MsgType.MSG_COPY_USB_FAIL:
                     Log.i("FileOperateFragment", "复制Usb至本地 文件失败");
                     Log.i("FileOperateFragment", "复制Usb至本地数量失败--" + fragment.suc_count);
-                    Log.i("FileOperateFragment", "复制Usb至本地数量--" + fragment.copyLocalCount);
+                    Log.i("FileOperateFragment", "复制Usb至本地数量--" + fragment.copyUsbCount);
                     fragment.hideProgressDialog();
                     fragment.interruptCopyThread = true;
                     fragment.copyThread = null;
@@ -2006,7 +1831,7 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
                 case MsgType.MSG_END_COPY_USB_FAIL:
                     Log.i("FileOperateFragment", "结束复制Usb至本地 文件失败");
                     Log.i("FileOperateFragment", "结束复制Usb至本地数量失败--" + fragment.suc_count);
-                    Log.i("FileOperateFragment", "结束复制Usb至本地数量--" + fragment.copyLocalCount);
+                    Log.i("FileOperateFragment", "结束复制Usb至本地数量--" + fragment.copyUsbCount);
                     fragment.hideProgressDialog();
                     fragment.interruptCopyThread = true;
                     fragment.copyThread = null;
@@ -2018,50 +1843,12 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
                     fragment.openLocalFile(new File(fragment.localCurrentPath));
                     break;
 
-                case MsgType.MSG_COPY_LOCAL_FAIL:
-                    Log.i("FileOperateFragment", "复制本地至U盘数量失败--" + fragment.suc_count);
-                    Log.i("FileOperateFragment", "复制本地至U盘数量--" + fragment.copyLocalCount);
-                    fragment.hideProgressDialog();
-                    fragment.interruptCopyThread = true;
-                    fragment.copyThread = null;
-                    String failLocalUsb = fragment.getResources().getString(R.string.result_export_dialog_message_copy_failed);
-                    fragment.showNoticeDialog(failLocalUsb, -1);
-                    fragment.suc_count = 0;
-                    fragment.copyUsbCount = 0;
-                    fragment.checkLocalFiles.clear();
-                    fragment.openUsbFile(fragment.usbHelper.getCurrentFolder());
-                    break;
-
-                case MsgType.MSG_END_COPY_LOCAL_FAIL:
-                    Log.i("FileOperateFragment", "结束复制本地至U盘数量失败--" + fragment.suc_count);
-                    Log.i("FileOperateFragment", "结束复制本地至U盘数量--" + fragment.copyLocalCount);
-                    fragment.hideProgressDialog();
-                    fragment.interruptCopyThread = true;
-                    fragment.copyThread = null;
-                    String endFailLocalUsb = fragment.getResources().getString(R.string.result_export_dialog_message_copy_failed);
-                    fragment.showNoticeDialog(endFailLocalUsb, -1);
-                    fragment.suc_count = 0;
-                    fragment.copyUsbCount = 0;
-                    fragment.checkLocalFiles.clear();
-                    fragment.openUsbFile(fragment.usbHelper.getCurrentFolder());
-                    break;
-
-                case MsgType.MSG_COPY_LOCAL_SUCCESS:
-                    fragment.suc_count++;
-                    Log.i("FileOperateFragment", "复制本地至U盘数量成功" + fragment.suc_count);
-                    if (fragment.suc_count == fragment.copyLocalCount) {
-                        Log.i("FileOperateFragment", "复制成功 suc_count" + fragment.suc_count);
-                        if (fragment.mUIHandler != null) {
-                            fragment.mUIHandler.sendEmptyMessageDelayed(MsgType.MSG_END_COPY_LOCAL, 1000);
-                        }
-                    }
-                    break;
-
                 case MsgType.MSG_END_COPY_LOCAL:
-                    fragment.suc_count = 0;
-                    fragment.copyLocalCount = 0;
+                    //和原来一样,复制结束后清空本次的选择
                     fragment.checkLocalFiles.clear();
                     fragment.hideProgressDialog();
+                    fragment.showCopyResult(msg.obj);
+                    //复制已结束,可以安全地重新读取 U 盘
                     fragment.openUsbFile(fragment.usbHelper.getCurrentFolder());
                     break;
             }
@@ -2077,26 +1864,87 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
             progressDialog.setOnCanlceListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //只请求中止,不在这里刷新:刷新会重新打开设备,和正在写的线程抢 USB 接口
+                    //进度框两个方向共用:cancelCopy 管本地→U盘,interruptCopyThread 管U盘→本地
+                    usbHelper.cancelCopy();
+                    interruptCopyThread = true;
                     progressDialog.dismiss();
-                    if(copyThread!= null && copyThread.isAlive()){
-                        interruptCopyThread = true;
-                        copyThread = null;
-                    }
-                    updateUsbFile(0);
                 }
             });
             progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
+                    usbHelper.cancelCopy();
+                    interruptCopyThread = true;
                     progressDialog.dismiss();
-                    if(copyThread!= null && copyThread.isAlive()){
-                        copyThread.interrupt();
-                        copyThread = null;
-                    }
-                    updateUsbFile(0);
                 }
             });
             progressDialog.show();
+        }
+    }
+
+    /**
+     * 复制结束后的提示。在主线程调用。
+     *
+     * @param result 失败原因(String),或复制过程(UsbCopySession)
+     */
+    private void showCopyResult(Object result) {
+        String message;
+        if (result instanceof String) {
+            message = (String) result;
+        } else if (result instanceof UsbCopySession) {
+            UsbCopySession session = (UsbCopySession) result;
+            if (session.isCancelled()) {
+                message = getResources().getString(R.string.result_export_dialog_message_copy_cancelled);
+            } else if (session.getFailedFiles().isEmpty()) {
+                message = getResources().getString(R.string.result_export_dialog_message_copy_done,
+                        countFiles(session.getDestDir()), session.getDestDir().getName());
+            } else {
+                message = getResources().getString(R.string.result_export_dialog_message_copy_partial,
+                        countFiles(session.getDestDir()), session.getFailedFiles().size());
+            }
+        } else {
+            message = getResources().getString(R.string.result_export_dialog_message_copy_failed);
+        }
+        showNoticeDialog(message, -1);
+    }
+
+    /**
+     * U 盘复制到本地结束后的提示。在主线程调用。
+     *
+     * @param result 失败原因的字符串资源 id(Integer),或复制过程(UsbToLocalCopySession)
+     */
+    private void showUsbToLocalResult(Object result) {
+        String message;
+        if (result instanceof Integer) {
+            message = getResources().getString((Integer) result);
+        } else if (result instanceof UsbToLocalCopySession) {
+            UsbToLocalCopySession session = (UsbToLocalCopySession) result;
+            if (session.isCancelled()) {
+                message = getResources().getString(R.string.result_export_dialog_message_copy_cancelled);
+            } else if (session.getFailedFiles().isEmpty()) {
+                message = getResources().getString(R.string.result_export_dialog_message_copy_to_local_done,
+                        session.getCopiedCount(), session.getDestDir().getName());
+            } else {
+                message = getResources().getString(R.string.result_export_dialog_message_copy_to_local_partial,
+                        session.getCopiedCount(), session.getFailedFiles().size());
+            }
+        } else {
+            message = getResources().getString(R.string.result_export_dialog_message_copy_to_local_failed);
+        }
+        showNoticeDialog(message, -1);
+    }
+
+    /** 统计一个 U 盘目录下(含子目录)的文件数,统计失败返回 0 */
+    private int countFiles(UsbFile dir) {
+        try {
+            int count = 0;
+            for (UsbFile file : dir.listFiles()) {
+                count += file.isDirectory() ? countFiles(file) : 1;
+            }
+            return count;
+        } catch (Exception e) {
+            return 0;
         }
     }
 }

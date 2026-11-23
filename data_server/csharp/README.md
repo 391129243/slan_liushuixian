@@ -1,6 +1,6 @@
 ﻿# 宏石 SLAN 离线分析桥接
 
-已根据本次提供的 SLAN 9.0.1.260921 API 文档实现离线 HTTP 适配。默认仍关闭真实调用，Vue 页面继续模拟，不启动厂商程序，不连接设备。
+已根据本次提供的 SLAN 9.0.1.260921 API 文档实现离线 HTTP 适配。Vue 页面继续模拟。正常启动 Java 后端时，Java 自动启动或复用 `SLAN.WCFServer.exe`，等待版本接口可用后再启动本适配服务，并设置 `PCR_VENDOR_ENABLED=true`。无需分别手动启动这两个程序。
 
 ## 已确认的接入方式
 
@@ -21,7 +21,9 @@
 
 Java 管理入口沿用管理员 Basic 认证。最终文件由已有 `/api/admin/files/{FileID}/download` 下载。没有设备枚举、运行、停止、释放、开关门或项目注册接口，也不自动调用厂家 Login；有权限要求时通过环境变量提供已有 Token。
 
-## 默认模拟模式
+Java 现已通过 Flyway V3 持久化分析历史。读取时登记输入文件/原报告/SDK 版本；二次分析成功后先存参数、完整结果、登录用户名和状态，再返回新增的 analysisRunId。保存时把新 FileID 关联到该版本，原始报告不覆盖。新增 GET `/api/admin/pcr/analyses`、`/analyses/{id}`、`/analyses/{id}/result` 查询数据库，无需 C# 在线。具体字段、requestId 重试和父版本关联见 [主说明](../README.md#二次分析版本持久化)。
+
+## 单独启动适配服务的模拟模式
 
 ```powershell
 cd E:\PCRinOne\framework\bowei_liushuixian\liushuixian_melody\data_server
@@ -29,11 +31,11 @@ cd E:\PCRinOne\framework\bowei_liushuixian\liushuixian_melody\data_server
  dotnet run --project .\csharp\PcrSdkBridge
 ```
 
-C# 默认监听 `http://127.0.0.1:5099`。能力接口返回 `vendorAdapterImplemented=true`、`sdkReady=false`，操作返回 501。前端模拟按钮不调用它，因此独立页面不要求启动任何后端。
+C# 单独运行默认监听 `http://127.0.0.1:5099`，默认禁用厂商调用，操作返回 501；由 Java 托管启动时则会自动启用调用。前端模拟按钮不调用它，因此独立页面不要求启动任何后端。
 
 ## 后续在独立离线环境启用
 
-以下仅为配置说明，本次没有执行启用或启动厂商服务。需先由维护者确认厂商运行目录、依赖、权限、授权及独立服务实例已准备好；不要使用正在承载现场设备实验的共享服务。
+以下是绕过 Java 进程托管、单独调试适配层的配置。常规使用 `run.ps1` 即可。仍需确认厂商运行目录、依赖、权限、授权及独立服务实例已准备好。
 
 ```powershell
 $env:PCR_VENDOR_ENABLED = 'true'
@@ -50,7 +52,9 @@ dotnet run --project .\csharp\PcrSdkBridge
 
 ## 请求结构与数据保护
 
-读取：`{"fileId":"已上传文件的ID"}`。Java 解析其可信存储路径，再传递 `{fileId,fileName,sourcePath}`。C# 只允许 PCR_INPUT_ROOT 下的现有普通文件，拒绝软链接/重解析点；先复制为工作区 source.pcr，再交给厂商读取。输入大小限制 32 MiB，不需要依赖存储文件的 .bin 后缀判断内容。
+读取请求新增可选 attachments：每项为 `{fileName,sourcePath,sha256,role}`。Java 仅从已归档结果包生成这些参数，C# 按可信输入根目录、文件大小、文件名及哈希校验，再将原文件名复制到私有 PCR 工作目录。读取、复算、导出均保留同一份附件，返回附件摘要及 `applicationRulesApplied=false`，表示 C# 自身只负责 SDK 计算。随后 Java 使用 AndroidRuleEvaluator 执行 Android `.ct/.peak` 区间判读，将新结论及引擎版本写入 analysis_runs.result_json；最终 Java 响应包含 applicationRuleEvaluation 和实际 applicationRulesApplied。不将这些应用规则传入厂商 SetProjectRule。原始 `.conclusion`/judgeConclusion.result、SDK 计算结果、新应用判读分别保留。
+
+读取：`{"fileId":"已上传文件的ID"}`。Java 先查询能力记录 SDK 版本，解析可信存储路径，再传递 `{fileId,fileName,sourcePath}`。Java 请求还可选择 reportId 或 parentAnalysisId，用于持久化归属，不会直接传给厂商。C# 只允许 PCR_INPUT_ROOT 下的现有普通文件，拒绝软链接/重解析点；先复制为工作区 source.pcr，再交给厂商读取，Java 核对源哈希。输入大小限制 32 MiB，不需要依赖存储文件的 .bin 后缀判断内容。
 
 二次分析：
 
@@ -58,15 +62,17 @@ dotnet run --project .\csharp\PcrSdkBridge
 {"experimentId":"读取返回的句柄","parameters":{"autoBaseline":true,"baselineStart":3,"baselineEnd":15,"threshold":300}}
 ```
 
-当前参数统一应用到实验的所有项目和靶标，尚未提供选孔或选通道修改接口。先获取原始完整 AnalyseParamter，保留 `__type`、BasicRule、滤波、交叉干扰、算法及熔解相关字段，只改：
+旧的四参数请求仍统一应用到所有项目和靶标。新增 `scope:"SELECTED"`、projects、targets 后，可按项目/靶标索引精确修改扩增算法、自动阈值、定性开关、优化模式、滤波、基线，以及熔解峰高/温度范围/算法/峰型。完整字段与枚举见 [高级参数说明](../README.md#高级参数可编辑规则版本与综合结论)。先获取原始完整 AnalyseParamter，保留 `__type`、BasicRule、交叉干扰和未修改的字段；旧四项映射为：
 
 - BeginBaseline / EndBaseline：基线起止。
 - OptimizationMode：autoBaseline=true 映射 AUTO=1，false 映射 MANUAL=2；SDK 没有名为 AutoBaseline 的布尔字段。
 - AutoThreshold=false、Threshold：使用传入手动阈值。
 
-服务端保留现有演示请求的参数范围（基线 1–20，阈值 10–3000），这不是厂家支持范围的完整声明。HTTP 外层 `方法名Result` 会剥离，必须先检查 ErrorCode=0；保存、关闭和参数设置还检查 Result=true。
+GetExperimentParamters 的部分 JSON 传输没有返回派生类型标识；完整项目回传前，对所有熔解靶标补齐 `__type:"TargetParamterMelt:#SLAN.API.Model"`，包括没有被选择修改的熔解靶标。隔离 SDK 宿主按这个已知类型还原，避免 JSON 将 TargetParamterMelt 降为 TargetParamter 后发生 SDK 强制转换异常；不加载任意外部类型。读取响应返回原参数集，复算响应返回请求参数集和 SDK 实际回读参数集。
 
-保存：`{"analysisId":"复算返回的句柄","fileName":"result.pcr"}`。厂商 SaveExperiment 只接受实验名，不能传输出路径。因此分析时在新的工作副本上 Open/Save；对外保存仅导出该副本。Java 拉取已保存文件，校验 SHA256，再生成下载 FileID。不会将 JSON 改后缀充当 PCR，也不会显式向厂商发送原文件路径。
+基线范围仍为 1–20；阈值接受正的有限数，包括真实扩增文件使用的 0.12、0.24，不再强制套用演示 UI 的 10–3000 范围。HTTP 外层 `方法名Result` 会剥离，必须先检查 ErrorCode=0；保存、关闭和参数设置还检查 Result=true。
+
+保存：Java 接口使用 `{"analysisId":"analysisRunId或复算返回的旧句柄","fileName":"result.pcr"}`，服务端查出对应 C# 句柄后转发。厂商 SaveExperiment 只接受实验名，不能传输出路径。因此分析时在新的工作副本上 Open/Save；对外保存仅导出该副本。Java 拉取文件，校验 SHA256，在事务中生成 FileID 并关联分析版本。相同版本/文件名重试直接返回已存文件。不会将 JSON 改后缀充当 PCR，也不会显式向厂商发送原文件路径。
 
 同一桥接内串行调用。打开前检查同名实验，发现冲突返回 409，不覆盖或关闭其他客户端的实验。只关闭本桥接确认打开的实验，不调用 ReleaseExperiment。失败或超时不重发原操作；超时可能意味着厂商仍在处理，需维护者确认服务状态。
 
@@ -84,6 +90,8 @@ node .\scripts\slan-offline-contract.mjs
 node .\scripts\bridge-smoke.mjs
 ```
 
-已通过 C# 编译、Java 测试及协议替身测试：真实 Java/C# 进程调用模拟的厂商 HTTP 服务器，覆盖读取、全参数保留、复算、保存、Java 文件入库与下载、校验、源文件不变、错误时关闭自有实验、同名冲突及路径拒绝。测试文件为明确标记的假字节，只用于协议与存储验证。
+协议替身测试使用真实 Java/C# 进程调用模拟厂商 HTTP 服务器，覆盖读取、全参数保留、复算、保存、分析历史入库、失败记录、原始报告不变、幂等重试，以及停止 C# 后重启 Java 仍可读取历史结果和下载已保存文件。测试文件为明确标记的假字节，只用于协议与存储验证。
 
-本次未启动 SLAN.WCFServer.exe，未连接设备，未由厂家 SDK 解析真实 `.pcr`，未验证真实 Ct、曲线或保存文件能被厂家软件再次打开。原参考文件 SHA256 仍应为 `577afff986549e59d29f611358a776b5e1c0439bc34d4504cbda7889724031e2`。
+上述协议测试未启动厂商发行目录的 SLAN.WCFServer.exe（Windows 进程托管测试使用替身 EXE），未连接设备。另已通过独立 .NET Framework 读取工具调用真实厂商 DLL，验证扩增/熔解 PCR 的离线读取及 Java 上报，见 [真实单重扩增测试](../test-reports/singleplex-pcr-upload-2026-11-23.md)。
+
+`scripts/simulate-real-sdk-reanalysis.mjs` 进一步以真实厂商 `Service.SLANService` 方法执行单重文件的调参、复算、保存和重新打开校验，经现有 C# 桥接与 Java 自动入库，并核对重启恢复。测试 HTTP 入口仅作实际 SDK 的传输封装，算法和文件保存由厂商 DLL 执行；SDK 宿主调用公开 RefreshStatus 按真实数据完整性更新状态，不直接指定 Completed。Ct 从原阈值 0.12 改为 0.24 后实际发生变化，新文件重新读取一致。详见 [实际 SDK 证据](../test-reports/real-sdk-reanalysis-2026-11-23.json)。厂商 EXE 自带的 8186 HTTP 端点未在该模拟中启动；本机原有厂商进程未改动。

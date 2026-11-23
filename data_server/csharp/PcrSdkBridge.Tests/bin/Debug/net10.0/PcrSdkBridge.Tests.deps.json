@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "PcrSdkBridge.Tests/1.0.0": {
+        "dependencies": {
+          "PcrSdkBridge": "1.0.0"
+        },
+        "runtime": {
+          "PcrSdkBridge.Tests.dll": {}
+        }
+      },
+      "PcrSdkBridge/1.0.0": {
+        "runtime": {
+          "PcrSdkBridge.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PcrSdkBridge.Tests/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PcrSdkBridge/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

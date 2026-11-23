@@ -1603,6 +1603,11 @@ public class BiowayActivity extends BaseFragmentActivity implements View.OnClick
             File[] files = jsonDir.listFiles();
             if (files.length > 0) {
                 for (File file : files) {
+                    //规则文件留给二次分析,二次分析读的就是结果目录里的规则
+                    String name = file.getName().toLowerCase();
+                    if(name.endsWith(".ct") || name.endsWith(".peak")){
+                        continue;
+                    }
                     file.delete();
                 }
             }
@@ -1651,6 +1656,10 @@ public class BiowayActivity extends BaseFragmentActivity implements View.OnClick
             //本地
             saveResultToPCR(experiment_device,subFirName);
         }
+        //把模板里的规则文件(.ct/.peak)复制到结果目录,二次分析读结果目录而不是模板目录
+        File resultDir = new File(FileUtils.BIOWAY_RESULT_PATH, subFirName);
+        File templateDir = new File(FileUtils.FULL_PROCESS_TEMPLATE_PATH, PcrApplication.rootTempName);
+        FileUtils.copyRuleFiles(templateDir, resultDir);
         //上传实验数据
     }
 

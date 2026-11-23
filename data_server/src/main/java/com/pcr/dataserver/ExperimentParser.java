@@ -12,8 +12,10 @@ public class ExperimentParser {
     private final ObjectMapper mapper;
     private final ServerSettings settings;
     public ExperimentParser(ObjectMapper mapper,ServerSettings settings) { this.mapper=mapper; this.settings=settings; }
-    public record Parsed(ObjectNode experiment,String serial,String name,String start,String end,
-                         String fingerprint,int wells,int targets) { }
+    public record Parsed(ObjectNode experiment,String serial,String name,String start,String end,String operator,
+                         String fingerprint,int wells,int targets) {
+        public Parsed withFingerprint(String value) { return new Parsed(experiment,serial,name,start,end,operator,value,wells,targets); }
+    }
     public Parsed parse(byte[] raw) {
         if(raw.length==0 || raw.length>settings.maxJsonBytes()) throw ApiException.bad("Invalid experiment JSON size");
         try {
@@ -21,6 +23,8 @@ public class ExperimentParser {
             if(!(tree instanceof ObjectNode object)) throw ApiException.bad("Experiment JSON object required");
             String serial=required(object,"SerialNo",96),name=required(object,"Name",255);
             String start=optional(object,"StartTime",128),end=optional(object,"EndTime",128);
+            String operator=optional(object,"Operator",160);
+            if(operator!=null && operator.isBlank()) operator=null;
             JsonNode wells=object.get("WellResult");
             if(wells==null || !wells.isArray()) throw ApiException.bad("WellResult array required");
             int count=0;
@@ -38,7 +42,7 @@ public class ExperimentParser {
                 }
             }
             String fingerprint=Digests.sha256(mapper.writeValueAsString(canonical(object)));
-            return new Parsed(object,serial,name,start,end,fingerprint,wells.size(),count);
+            return new Parsed(object,serial,name,start,end,operator,fingerprint,wells.size(),count);
         } catch(IOException e) { throw ApiException.bad("Invalid Experiment JSON"); }
     }
     private String required(ObjectNode node,String name,int max) {

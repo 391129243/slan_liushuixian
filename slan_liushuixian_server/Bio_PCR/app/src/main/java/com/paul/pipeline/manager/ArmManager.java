@@ -435,12 +435,65 @@ public class ArmManager {
     }
 
     /**
-     * 【新增】停止后的还盘逻辑
-     * 此时机械臂已完成所有worker，处于安全状态
+     * 【新增】停止后的还盘逻辑 - 强制复位版本
+     * 新策略：停止后强制复位RNA和PCR，确保所有设备安全再执行还盘
      */
     private void triggerReturnTrayAfterStop(int trayIndex) {
         Log.w("ArmManager", "【执行还盘】=== triggerReturnTrayAfterStop() 被调用 ===");
         Log.w("ArmManager", "【执行还盘】参数：trayIndex=" + trayIndex);
+
+        // 【强制复位】RNA和PCR确保安全
+        Log.w("ArmManager", "【强制复位】【第一步】强制复位RNA/PCR设备");
+
+        DispatchModel dm = TrayManager.getInstance().getCurrentDispatch(trayIndex);
+        if (dm != null && dm.targettype.get() != null && dm.target.get() != null) {
+            int targetType = dm.targettype.get();
+            int targetIndex = dm.target.get();
+
+            if (targetType == ConstantData.DEVICE_RNA) {
+                Log.w("ArmManager", "【强制复位】【RNA】强制关闭RNA门，索引：" + targetIndex);
+                closeRNADoor(targetIndex, new ArmFinishCallback() {
+                    @Override
+                    public void finish(int arm, ItemProperty aim, ItemProperty source) {
+                        Log.w("ArmManager", "【强制复位】【RNA】关闭成功");
+                    }
+                    @Override
+                    public void fail(int arm, ItemProperty aim, ItemProperty source, String error) {
+                        Log.e("ArmManager", "【强制复位】【RNA】关闭失败：" + error);
+                    }
+                });
+
+                try {
+                    Log.d("ArmManager", "【强制复位】【RNA】等待3秒确保关闭完成");
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    Log.e("ArmManager", "【强制复位】【RNA】等待被中断");
+                }
+            } else if (targetType == ConstantData.DEVICE_PCR) {
+                Log.w("ArmManager", "【强制复位】【PCR】强制放回PCR盖子，索引：" + targetIndex);
+                putPcrCover(targetIndex, new ArmFinishCallback() {
+                    @Override
+                    public void finish(int arm, ItemProperty aim, ItemProperty source) {
+                        Log.w("ArmManager", "【强制复位】【PCR】放回成功");
+                    }
+                    @Override
+                    public void fail(int arm, ItemProperty aim, ItemProperty source, String error) {
+                        Log.e("ArmManager", "【强制复位】【PCR】放回失败：" + error);
+                    }
+                });
+
+                try {
+                    Log.d("ArmManager", "【强制复位】【PCR】等待3秒确保放回完成");
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    Log.e("ArmManager", "【强制复位】【PCR】等待被中断");
+                }
+            }
+        }
+
+        Log.w("ArmManager", "【强制复位】【完成】RNA/PCR已安全，开始执行还盘");
+
+        // 【原有还盘逻辑】从这里开始原有的还盘流程
         Log.w("ArmManager", "【执行还盘】开始处理停止后的还盘，托盘索引：" + trayIndex);
 
         // 检查机械臂是否持有物品

@@ -544,6 +544,11 @@ public class APLManager {
         this.armWorkListener = armWorkListener;
     }
 
+    /** 释放设备调度占用：armStep 置 FREE 并触发界面初始化。供停止时释放尚未取盘的设备。 */
+    public void markDeviceScheduleDone(int deviceType, int deviceIndex) {
+        schedulingPort.markDeviceScheduleDone(deviceType, deviceIndex);
+    }
+
     //第 3 步：RNA/PCR 调度引擎与其端口适配（适配到现有 Manager，行为不变）
     private final SchedulingPort schedulingPort = new AplSchedulingPort();
     private final SchedulingEngine schedulingEngine = new SchedulingEngine(schedulingPort);

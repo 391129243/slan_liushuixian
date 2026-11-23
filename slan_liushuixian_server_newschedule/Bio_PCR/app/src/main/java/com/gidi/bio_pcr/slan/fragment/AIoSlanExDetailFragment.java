@@ -2296,30 +2296,17 @@ public class AIoSlanExDetailFragment extends Fragment implements OnDetailExCallb
 
 
     private void getAllRawCurve() {
-        // 优化：switch 替代 6 个 if/else 链
-        mCheckRawList.clear();
-        if (mRawCurveList != null && mRawCurveList.size() > 0) {
-            for (SLANCurveList curveList : mRawCurveList) {
-                if (curveList.getChannelNo() != -1 && isChannelChecked(curveList.getChannelNo())) {
-                    mCheckRawList.add(curveList);
-                }
-            }
-        }
+        // 始终从全量快照按"孔位 + 通道"重算，不能读 mRawCurveList：
+        // 孔位点击路径会把它改写成已筛选的子集，读它会导致取消通道后再勾选数据回不来
+        fillCheckedCurves(mOriginRaw, mCheckRawList);
     }
 
 
 
     /*******************************获取所有的扩增曲线值**********************************/
     private void getAllAPMCurve() {
-        // 优化：switch 替代 6 个 if/else 链
-        mCheckAMPList.clear();
-        if (mAMPCurveList != null && mAMPCurveList.size() > 0) {
-            for (SLANCurveList curveList : mAMPCurveList) {
-                if (curveList.getChannelNo() != -1 && isChannelChecked(curveList.getChannelNo())) {
-                    mCheckAMPList.add(curveList);
-                }
-            }
-        }
+        // 同 getAllRawCurve：从全量快照重算，避免读被孔位筛选改写过的 mAMPCurveList
+        fillCheckedCurves(mOriginAMP, mCheckAMPList);
     }
 
     //根据选择的通道显示扩增曲线/
@@ -2351,16 +2338,8 @@ public class AIoSlanExDetailFragment extends Fragment implements OnDetailExCallb
 
     /*******************************获取所有的熔解曲线值******Melt***************************/
     private void getAllMelturve() {
-        Log.i("SLAN", "getAllMelturve" + mMeltCurveList.size());
-        // 优化：switch 替代 6 个 if/else 链
-        mCheckMeltList.clear();
-        if (mMeltCurveList != null && mMeltCurveList.size() > 0) {
-            for (SLANCurveList curveList : mMeltCurveList) {
-                if (curveList.getChannelNo() != -1 && isChannelChecked(curveList.getChannelNo())) {
-                    mCheckMeltList.add(curveList);
-                }
-            }
-        }
+        // 同 getAllRawCurve：从全量快照重算，避免读被孔位筛选改写过的 mMeltCurveList
+        fillCheckedCurves(mOriginMelt, mCheckMeltList);
     }
 
     //根据选择的通道显示扩增曲线/
@@ -2386,16 +2365,8 @@ public class AIoSlanExDetailFragment extends Fragment implements OnDetailExCallb
 
 
     private void getAllPeakCurve() {
-        // 优化：switch 替代 6 个 if/else 链
-        mCheckPeakList.clear();
-        if (mPeakCurveList != null && mPeakCurveList.size() > 0) {
-            for (SLANCurveList curveList : mPeakCurveList) {
-                if (curveList.getCurve_hole() != null
-                        && isChannelChecked(curveList.getChannelNo())) {
-                    mCheckPeakList.add(curveList);
-                }
-            }
-        }
+        // 同 getAllRawCurve：从全量快照重算，避免读被孔位筛选改写过的 mPeakCurveList
+        fillCheckedCurves(mOriginPeak, mCheckPeakList);
     }
 
     //根据选择的通道显示扩增曲线/
@@ -2867,90 +2838,45 @@ public class AIoSlanExDetailFragment extends Fragment implements OnDetailExCallb
         }
     }
 
-    private void setCheckWellRawCurve() {
-
-        // 优化：单一循环直接按 wellNum + channelNo 联合筛选，跳过中间 mRawCurveList
-        mCheckRawList.clear();
-        if (mOriginRaw != null && mOriginRaw.size() > 0) {
-            for (SLANCurveList c : mOriginRaw) {
-                if (c.getWellNum() != null && isWellChecked(c.getWellNum())
-                        && isChannelChecked(c.getChannelNo())) {
-                    mCheckRawList.add(c);
-                }
+    /**
+     * 从全量快照按当前勾选的孔位和荧光通道重算待显示曲线。
+     * 每次都从 origin 重新筛选，不改写 origin，保证勾选可来回切换。
+     */
+    private void fillCheckedCurves(List<SLANCurveList> origin, List<SLANCurveList> checked) {
+        checked.clear();
+        if (origin == null || origin.isEmpty()) {
+            return;
+        }
+        for (SLANCurveList curve : origin) {
+            if (curve.getWellNum() != null && isWellChecked(curve.getWellNum())
+                    && curve.getChannelNo() != -1 && isChannelChecked(curve.getChannelNo())) {
+                checked.add(curve);
             }
         }
+    }
 
-        // 兼容：保留 mRawCurveList，让其他读取它的逻辑不受影响
-        mRawCurveList.clear();
-        mRawCurveList.addAll(mCheckRawList);
-
+    private void setCheckWellRawCurve() {
+        fillCheckedCurves(mOriginRaw, mCheckRawList);
         Log.i(TAG, "updateWellResult解析结果 mCheckRawList" + mCheckRawList.size());
     }
 
     private void setCheckWellAMPCurve() {
-        // 优化：联合 wellNum + channelNo 筛选，单循环
-        mCheckAMPList.clear();
-        if (mOriginAMP != null && mOriginAMP.size() > 0) {
-            for (SLANCurveList c : mOriginAMP) {
-                if (c.getWellNum() != null && isWellChecked(c.getWellNum())
-                        && isChannelChecked(c.getChannelNo())) {
-                    mCheckAMPList.add(c);
-                }
-            }
-        }
-        // 兼容：保留 mAMPCurveList
-        mAMPCurveList.clear();
-        mAMPCurveList.addAll(mCheckAMPList);
+        fillCheckedCurves(mOriginAMP, mCheckAMPList);
         Log.i("AIO", "updateWellResult解析结果 mCheckAMPList" + mCheckAMPList.size());
     }
 
     private void setCheckWellMeltCurve() {
-        // 优化：联合筛选，单循环
-        mCheckMeltList.clear();
-        if (mOriginMelt != null && mOriginMelt.size() > 0) {
-            for (SLANCurveList c : mOriginMelt) {
-                if (c.getWellNum() != null && isWellChecked(c.getWellNum())
-                        && isChannelChecked(c.getChannelNo())) {
-                    mCheckMeltList.add(c);
-                }
-            }
-        }
-        // 兼容：保留 mMeltCurveList
-        mMeltCurveList.clear();
-        mMeltCurveList.addAll(mCheckMeltList);
+        fillCheckedCurves(mOriginMelt, mCheckMeltList);
     }
 
     private void setCheckWellPeakCurve() {
-        // 优化：联合筛选，单循环
-        mCheckPeakList.clear();
-        if (mOriginPeak != null && mOriginPeak.size() > 0) {
-            for (SLANCurveList c : mOriginPeak) {
-                if (c.getWellNum() != null && isWellChecked(c.getWellNum())
-                        && isChannelChecked(c.getChannelNo())) {
-                    mCheckPeakList.add(c);
-                }
-            }
-        }
-        // 兼容：保留 mPeakCurveList
-        mPeakCurveList.clear();
-        mPeakCurveList.addAll(mCheckPeakList);
+        fillCheckedCurves(mOriginPeak, mCheckPeakList);
         Log.i(TAG, "updateWellResult解析结果 mCheckPeakList" + mCheckPeakList.size());
     }
 
     private void setCheckWellExResult() {
-        // 优化：联合筛选，单循环替代双重 if/else 链
-        mCheckExlResults.clear();
-        if (mOriginExResults != null && mOriginExResults.size() > 0) {
-            for (SLANExlResult e : mOriginExResults) {
-                if (e.getWellNum() != null && isWellChecked(e.getWellNum())
-                        && isChannelChecked(e.getChannelNo())) {
-                    mCheckExlResults.add(e);
-                }
-            }
-        }
-        // 兼容：保留 mExlResults，让其他读取它的逻辑不受影响
-        mExlResults.clear();
-        mExlResults.addAll(mCheckExlResults);
+        // 只重算待显示的结果，不再回写 mExlResults，否则结果行被筛掉后无法恢复
+        fillCheckedExResults();
     }
 
     /**
@@ -2991,38 +2917,20 @@ public class AIoSlanExDetailFragment extends Fragment implements OnDetailExCallb
 
 
     private void getShowExlResults() {
-        //判断channel和wellNum
-        if (null != mExlResults) {
-            mCheckExlResults.clear();
-            if (mExlResults.size() > 0) {
-                for (SLANExlResult exlResult : mExlResults) {
-                    if (exlResult.getChannelNo() == 1) {
-                        if (isFAMCheck) {
-                            mCheckExlResults.add(exlResult);
-                        }
-                    }else if (exlResult.getChannelNo() == 2) {
-                        if (isHEXCheck) {
-                            mCheckExlResults.add(exlResult);
-                        }
-                    } else if (exlResult.getChannelNo() == 3) {
-                        if (isROXCheck) {
-                            mCheckExlResults.add(exlResult);
-                        }
-                    }else if (exlResult.getChannelNo() == 4) {
-                        if (isCY5Check) {
-                            mCheckExlResults.add(exlResult);
-                        }
-                    }else if (exlResult.getChannelNo() == 5) {
-                        if (isQuaSarCheck) {
-                            mCheckExlResults.add(exlResult);
-                        }
-                    }else if (exlResult.getChannelNo() == 6) {
-                        if (isAttoCheck) {
-                            mCheckExlResults.add(exlResult);
-                        }
-                    }
+        // 从全量结果快照重算。原先读 mExlResults，而它会被孔位筛选回写成子集，
+        // 导致结果行取消通道后再勾选无法恢复，且结果表不随孔位勾选变化
+        fillCheckedExResults();
+    }
 
-                }
+    private void fillCheckedExResults() {
+        mCheckExlResults.clear();
+        if (mOriginExResults == null || mOriginExResults.isEmpty()) {
+            return;
+        }
+        for (SLANExlResult exlResult : mOriginExResults) {
+            if (exlResult.getWellNum() != null && isWellChecked(exlResult.getWellNum())
+                    && isChannelChecked(exlResult.getChannelNo())) {
+                mCheckExlResults.add(exlResult);
             }
         }
     }

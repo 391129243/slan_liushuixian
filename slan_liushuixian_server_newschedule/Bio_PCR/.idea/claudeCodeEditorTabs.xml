@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ClaudeCodeEditorTabs">
-    <option name="activeSessionId" value="93925af9-067b-425c-b1bf-821b60ea12f2" />
+    <option name="activeSessionId" value="7ed64f73-d192-4e05-ad57-4a3773d83c9d" />
     <option name="openSessionIds">
       <list>
         <option value="753cb560-b184-413f-afea-e78ba8f841ad" />
@@ -16,6 +16,7 @@
         <option value="ffdbeb94-8549-45f2-9fc2-ebdbe9b65775" />
         <option value="4b0e0785-7a6c-46e1-997a-c2c34da40a82" />
         <option value="93925af9-067b-425c-b1bf-821b60ea12f2" />
+        <option value="7ed64f73-d192-4e05-ad57-4a3773d83c9d" />
       </list>
     </option>
     <option name="sessionPaths">
@@ -25,6 +26,7 @@
         <entry key="4b0e0785-7a6c-46e1-997a-c2c34da40a82" value="/sessions/d1fffc3a-8f8e-45e8-86d1-31b9fc152e21" />
         <entry key="753cb560-b184-413f-afea-e78ba8f841ad" value="/sessions/b5e486d2-8951-4abb-9105-086f7d301536" />
         <entry key="7a517b1f-aedb-4fab-a1b5-474acbc09706" value="/sessions/new" />
+        <entry key="7ed64f73-d192-4e05-ad57-4a3773d83c9d" value="/sessions/ee076fa2-71d0-4cfc-8a36-53b5c41b0909" />
         <entry key="93925af9-067b-425c-b1bf-821b60ea12f2" value="/sessions/1eab3b1e-8f3c-479c-8553-5e4069ce975d" />
         <entry key="9e2ac52a-d6ae-44f9-a739-a06eaeb1670d" value="/sessions/978b18c9-18a7-4117-b535-307adb73eb10" />
         <entry key="a9130322-42ce-48eb-a1a8-254dd9e45c7f" value="/sessions/d0b5b96b-826d-409c-a3c8-52002c01891a" />
@@ -39,6 +41,7 @@
         <entry key="4b0e0785-7a6c-46e1-997a-c2c34da40a82" value="slansdk261026.aar 荧光通道配置接口" />
         <entry key="753cb560-b184-413f-afea-e78ba8f841ad" value="# # There is insufficient memory for the Java Run" />
         <entry key="7a517b1f-aedb-4fab-a1b5-474acbc09706" value="Claude Code" />
+        <entry key="7ed64f73-d192-4e05-ad57-4a3773d83c9d" value="数据库详情页荧光通道显示" />
         <entry key="93925af9-067b-425c-b1bf-821b60ea12f2" value="onReceiveMessage 二进制解码性能" />
         <entry key="9e2ac52a-d6ae-44f9-a739-a06eaeb1670d" value="调试一键还盘盖子归位错误" />
         <entry key="a9130322-42ce-48eb-a1a8-254dd9e45c7f" value="清空托盘信息，但是不清空设备状态信息要用于还盘操作，设备模组页面有单独的空闲按钮" />

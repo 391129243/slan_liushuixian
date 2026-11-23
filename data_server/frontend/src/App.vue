@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, reactive, ref, watch, defineAsyncComponent } from 'vue'
 import Icon from './components/Icon.vue'
 import CurveChart from './components/CurveChart.vue'
 import { channels, wells, defaults, referenceFolder, referenceSha256, analyze, formatSize, formatTime, type Analysis, type Experiment } from './domain'
 import { loadState, saveState, mockService, exportSnapshot, pcrApi } from './services'
+const RealResultView = defineAsyncComponent(() => import('./components/RealResultView.vue'))
+const DataCenterView = defineAsyncComponent(() => import('./components/DataCenterView.vue'))
 
 const saved = loadState()
 const experiments = ref(saved.experiments), history = ref(saved.history)
 const selectedId = ref(experiments.value[0]?.id || '')
-const view = ref('workspace'), tab = ref('curves'), query = ref(''), busy = ref(false), compare = ref(false)
+const mode = new URLSearchParams(location.search).get('mode')
+const view = ref(mode === 'server' ? 'server' : mode === 'mock' ? 'workspace' : 'real'), tab = ref('curves'), query = ref(''), busy = ref(false), compare = ref(false)
 const selectedWells = ref(['A1', 'A2', 'A3', 'A4']), selectedChannels = ref(['FAM', 'HEX', 'ROX'])
 const parameters = reactive({ ...defaults })
 const modal = ref(''), toast = ref(''), fileInput = ref<HTMLInputElement>(), current = ref<Analysis>()
@@ -48,7 +51,7 @@ function openHistory(analysis: Analysis) {
   selectedId.value = experiment.id; current.value = analysis; Object.assign(parameters, analysis.parameters); view.value = 'workspace'; tab.value = 'results'
 }
 function exportCurrent() { if (current.value) { exportSnapshot(current.value); notify('已导出模拟分析 JSON，未生成 .pcr 文件。') } }
-const pageTitle = computed(() => ({ workspace: '实验分析工作台', files: '实验文件库', history: '分析记录', settings: '接入设置' })[view.value])
+const pageTitle = computed(() => ({ server: '数据中心', real: '真实结果验证', workspace: '实验分析工作台', files: '实验文件库', history: '分析记录', settings: '接入设置' })[view.value])
 </script>
 
 <template>
@@ -57,20 +60,22 @@ const pageTitle = computed(() => ({ workspace: '实验分析工作台', files: '
       <a class="brand" href="#" @click.prevent="view = 'workspace'"><span class="brand-symbol"><i></i><i></i><i></i></span><span>PCR<span class="brand-light"> Studio</span><small>实验数据分析平台</small></span></a>
       <div class="nav-caption">工作空间</div>
       <nav aria-label="主导航">
-        <button v-for="item in [{ key: 'workspace', icon: 'chart', text: '实验工作台' }, { key: 'files', icon: 'folder', text: '文件库' }, { key: 'history', icon: 'clock', text: '分析记录' }, { key: 'settings', icon: 'settings', text: '接入设置' }]" :key="item.key" :class="{ active: view === item.key }" @click="view = item.key"><Icon :name="item.icon" /><span>{{ item.text }}</span><span v-if="item.key === 'files'" class="nav-count">{{ experiments.length }}</span></button>
+        <button v-for="item in [{ key: 'server', icon: 'folder', text: '数据中心' }, { key: 'real', icon: 'check', text: '真实结果验证' }, { key: 'workspace', icon: 'chart', text: '模拟工作台' }, { key: 'files', icon: 'folder', text: '文件库' }, { key: 'history', icon: 'clock', text: '分析记录' }, { key: 'settings', icon: 'settings', text: '接入设置' }]" :key="item.key" :class="{ active: view === item.key }" @click="view = item.key"><Icon :name="item.icon" /><span>{{ item.text }}</span><span v-if="item.key === 'files'" class="nav-count">{{ experiments.length }}</span></button>
       </nav>
-      <div class="sidebar-note"><span class="tiny-dot"></span> 独立演示环境<p>无需连接设备<br>数据仅保存在当前浏览器</p></div>
-      <div class="sidebar-user"><span class="avatar">研</span><div>研发工作空间<small>本地模拟 · v0.1</small></div></div>
+      <div class="sidebar-note"><span class="tiny-dot"></span> {{ view === 'server' ? '服务器数据管理' : view === 'real' ? '真实文件离线快照' : '独立演示环境' }}<p>无需连接设备<br>{{ view === 'server' ? '文件与版本保存在服务端' : view === 'real' ? '已验证上报与存储' : '模拟数据保存在浏览器' }}</p></div>
+      <div class="sidebar-user"><span class="avatar">研</span><div>研发工作空间<small>{{ view === 'server' ? '在线分析 · v0.3' : view === 'real' ? '结果验证 · v0.3' : '本地模拟 · v0.3' }}</small></div></div>
     </aside>
 
     <main>
-      <header class="topbar"><div class="breadcrumb">工作空间 <Icon name="chevron" :size="13" /> <span>{{ pageTitle }}</span></div><div class="topbar-right"><span class="demo-label"><span class="tiny-dot"></span> 模拟演示</span><span class="top-date">2026 年 11 月 16 日</span><span class="avatar light">研</span></div></header>
+      <header class="topbar"><div class="breadcrumb">工作空间 <Icon name="chevron" :size="13" /> <span>{{ pageTitle }}</span></div><div class="topbar-right"><span class="demo-label"><span class="tiny-dot"></span> {{ view === 'server' ? '服务器数据' : view === 'real' ? '真实数据 · 离线' : '模拟演示' }}</span><span class="top-date">{{ new Date().toLocaleDateString('zh-CN', { timeZone: 'Asia/Shanghai' }) }}</span><span class="avatar light">研</span></div></header>
       <div class="content">
-        <section class="page-heading"><div><div class="eyebrow">EXPERIMENT WORKSPACE</div><h1>{{ pageTitle }}</h1><p>{{ view === 'workspace' ? '从实验文件到分析结果，让每一次数据复核更清晰。' : view === 'files' ? '统一管理实验文件信息，保留原始数据与分析记录。' : view === 'history' ? '每次参数调整独立留存，随时回看与导出。' : '预留 Java 与 C# SDK 服务之间的分析接口。' }}</p></div><button class="button primary" :disabled="busy" @click="fileInput?.click()"><Icon name="upload" :size="17" />读取文件</button></section>
+        <section class="page-heading"><div><div class="eyebrow">EXPERIMENT WORKSPACE</div><h1>{{ pageTitle }}</h1><p>{{ view === 'server' ? '上传实验文件、查看实际结果，保留每次分析的参数与版本。' : view === 'real' ? '查看真实熔解曲线、峰值及 HTTP 上报验证结果。' : view === 'workspace' ? '从实验文件到分析结果，让每一次数据复核更清晰。' : view === 'files' ? '统一管理实验文件信息，保留原始数据与分析记录。' : view === 'history' ? '每次参数调整独立留存，随时回看与导出。' : '预留 Java 与 C# SDK 服务之间的分析接口。' }}</p></div><button v-if="view !== 'real' && view !== 'server'" class="button primary" :disabled="busy" @click="fileInput?.click()"><Icon name="upload" :size="17" />读取文件</button><button v-else-if="view === 'real'" class="button" @click="view = 'workspace'"><Icon name="play" :size="16" />进入模拟分析</button></section>
         <input ref="fileInput" type="file" accept=".pcr" class="sr-only" aria-label="选择 PCR 文件" @change="onFileChange" />
-        <div class="demo-banner"><Icon name="info" :size="17" /><span>当前为模拟数据。参考文件仅核实名称、大小和哈希；曲线与 Ct 未从真实文件解析。</span><button @click="view = 'settings'">查看接入说明 <Icon name="arrow" :size="14" /></button></div>
+        <div v-if="view !== 'server'" class="demo-banner"><Icon name="info" :size="17" /><span>{{ view === 'real' ? '当前展示原厂 SDK 离线读取的真实文件快照；不是实时查询，页面未连接设备。' : '当前为模拟数据。模拟曲线与 Ct 不代表真实文件的检测结果。' }}</span><button @click="view = 'settings'">查看接入说明 <Icon name="arrow" :size="14" /></button></div>
 
-        <template v-if="view === 'workspace'">
+        <DataCenterView v-if="view === 'server'" />
+        <RealResultView v-else-if="view === 'real'" />
+        <template v-else-if="view === 'workspace'">
           <section class="stats-grid"><article v-for="stat in [{ label: '实验文件', value: experiments.length.toString().padStart(2, '0'), unit: '份', icon: 'folder', foot: '当前工作空间' }, { label: '模拟孔位', value: '08', unit: '孔', icon: 'grid', foot: 'A1–A8 · 演示布局' }, { label: '显示通道', value: selectedChannels.length.toString().padStart(2, '0'), unit: '/ 6', icon: 'chart', foot: '支持多通道叠加' }, { label: '分析记录', value: history.length.toString().padStart(2, '0'), unit: '次', icon: 'clock', foot: '参数版本独立留存' }]" :key="stat.label"><div class="stat-top"><span>{{ stat.label }}</span><Icon :name="stat.icon" :size="18" /></div><div class="stat-number">{{ stat.value }}<small>{{ stat.unit }}</small></div><div class="stat-foot">{{ stat.foot }}</div></article></section>
 
           <section class="workspace-grid">
@@ -95,11 +100,11 @@ const pageTitle = computed(() => ({ workspace: '实验分析工作台', files: '
 
         <section v-else-if="view === 'history'" class="panel library-panel"><div class="panel-heading"><div><h2>模拟分析版本</h2><p>保存最近 50 次分析记录，可回看参数、结果或导出快照。</p></div><span class="micro-badge">{{ history.length }} 个版本</span></div><div v-if="!history.length" class="empty-state"><Icon name="clock" :size="36" /><h3>还没有分析记录</h3><p>在实验工作台调整参数并执行二次分析后，记录将显示在这里。</p><button class="button primary" @click="view = 'workspace'">前往工作台</button></div><div v-else class="table-scroll"><table><thead><tr><th>实验 / 版本</th><th>分析时间</th><th>基线</th><th>阈值</th><th>操作</th></tr></thead><tbody><tr v-for="h in history" :key="h.id"><td><strong>{{ h.experimentName }}</strong><small class="cell-subtitle monospace">{{ h.id.slice(0, 8) }} · 模拟版本</small></td><td>{{ formatTime(h.createdAt) }}</td><td>{{ h.parameters.autoBaseline ? '自动 3–15' : `${h.parameters.baselineStart}–${h.parameters.baselineEnd}` }}</td><td>{{ h.parameters.threshold }}</td><td class="actions"><button class="text-button" @click="openHistory(h)">查看</button><button class="text-button secondary" @click="exportSnapshot(h)">导出 JSON</button></td></tr></tbody></table></div></section>
 
-        <section v-else class="settings-grid"><article class="panel settings-card"><div class="settings-icon"><Icon name="settings" :size="24" /></div><h2>C# SDK 分析服务</h2><p>Java 保留业务与文件管理，独立的 C# 服务负责调用厂家 SDK。</p><div class="connection-state"><span class="tiny-dot"></span>宏石 SDK 资料已就绪 · 真实解析未验证</div><dl><dt>页面运行方式</dt><dd>本地模拟，不调用设备或后端</dd><dt>模拟数据存储</dt><dd>当前浏览器，保留最近 50 个版本</dd><dt>真实 .pcr 读取</dt><dd>离线接口已适配，默认关闭</dd><dt>真实二次分析</dt><dd>离线接口已适配，默认关闭</dd><dt>真实 .pcr 保存</dt><dd>离线接口已适配，模拟模式不生成文件</dd></dl></article><article class="panel settings-card"><h2>服务接口约定</h2><p>页面 → Java HTTP API → C# HTTP 服务 → 厂家 SDK。演示按钮使用独立模拟服务。</p><div class="endpoint" v-for="(path, key) in pcrApi" :key="key"><span>{{ key === 'capabilities' ? 'GET' : 'POST' }}</span><code>{{ path }}</code></div><div class="integration-note"><Icon name="info" :size="18" /><p>厂商 DLL 使用 .NET Framework 4.0，由独立服务承载。离线接口默认关闭，当前页面保持模拟，不调用厂商服务。</p></div></article></section>
-        <footer><span>PCR Studio <span class="footer-dot">·</span> 实验数据分析工作空间</span><span>模拟模式 <span class="footer-dot">·</span> 原文件保持不变</span></footer>
+        <section v-else class="settings-grid"><article class="panel settings-card"><div class="settings-icon"><Icon name="settings" :size="24" /></div><h2>C# SDK 分析服务</h2><p>Java 保留业务与文件管理，独立的 C# 服务负责调用厂家 SDK。</p><div class="connection-state"><span class="tiny-dot"></span>真实 SDK 离线分析已验证</div><dl><dt>页面运行方式</dt><dd>数据中心连接后端，模拟入口独立</dd><dt>模拟数据存储</dt><dd>当前浏览器，保留最近 50 个版本</dd><dt>真实 .pcr 读取</dt><dd>数据中心已接入真实离线分析</dd><dt>真实二次分析</dt><dd>数据中心已接入真实离线分析</dd><dt>真实 .pcr 保存</dt><dd>数据中心保存新文件并关联版本</dd></dl></article><article class="panel settings-card"><h2>服务接口约定</h2><p>页面 → Java HTTP API → C# HTTP 服务 → 厂家 SDK。演示按钮使用独立模拟服务。</p><div class="endpoint" v-for="(path, key) in pcrApi" :key="key"><span>{{ key === 'capabilities' ? 'GET' : 'POST' }}</span><code>{{ path }}</code></div><div class="integration-note"><Icon name="info" :size="18" /><p>数据中心通过 Java 调用 C# 分析服务；离线快照和模拟工作台不发送分析请求。</p></div></article></section>
+        <footer><span>PCR Studio <span class="footer-dot">·</span> 实验数据分析工作空间</span><span>{{ view === 'server' ? '服务器工作空间' : view === 'real' ? '真实离线快照' : '模拟模式' }} <span class="footer-dot">·</span> 原文件保持不变</span></footer>
       </div>
     </main>
     <Transition name="toast"><div v-if="toast" class="toast-message" role="status"><Icon name="info" :size="18" />{{ toast }}<button class="icon-button" aria-label="关闭提示" @click="toast = ''"><Icon name="close" :size="15" /></button></div></Transition>
-    <div v-if="modal" class="modal-backdrop" @click.self="modal = ''"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="save-title"><div class="modal-icon"><Icon name="save" :size="26" /></div><h2 id="save-title">保存真实 .pcr 文件</h2><p>该功能已适配离线接口，需要启用并验证厂商分析服务。当前演示不会修改原文件，也不会把模拟 JSON 伪装成 .pcr。</p><div class="modal-info">你可以导出演示快照，保存本次模拟参数与曲线，文件格式为 <b>.analysis.json</b>。</div><div class="modal-actions"><button class="button" @click="modal = ''">关闭</button><button class="button primary" @click="exportCurrent(); modal = ''">导出演示快照</button></div></section></div>
+    <div v-if="modal" class="modal-backdrop" @click.self="modal = ''"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="save-title"><div class="modal-icon"><Icon name="save" :size="26" /></div><h2 id="save-title">保存真实 .pcr 文件</h2><p>真实 PCR 保存请进入数据中心。当前演示不会修改原文件，也不会把模拟 JSON 伪装成 .pcr。</p><div class="modal-info">你可以导出演示快照，保存本次模拟参数与曲线，文件格式为 <b>.analysis.json</b>。</div><div class="modal-actions"><button class="button" @click="modal = ''">关闭</button><button class="button primary" @click="exportCurrent(); modal = ''">导出演示快照</button></div></section></div>
   </div>
 </template>

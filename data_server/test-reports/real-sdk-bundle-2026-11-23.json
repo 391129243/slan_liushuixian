@@ -1,0 +1,588 @@
+{
+  "status": "PASS",
+  "scope": "REAL vendor Service.SLANService offline APIs; test HTTP transport, real Java and C# bridge; no physical device or existing vendor process modification",
+  "source": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\result\\2026-10-29-16-23-17_06-1029-2-1022-单重-自研-定10-新冠-洗脱100-洗脱排气-21分钟-过转8度\\2026-10-29-17-15-07.pcr",
+  "sourceBytes": 240240,
+  "sourceSha256": "e294c024e1a41a30cb747dd95d4742d3d448049561ea529a21c9bc19123021a7",
+  "serviceDllSha256": "6094877b0e60fe2d8c3e14409f7f1d355aa53927a2df9674916ede31ab6f6c2c",
+  "parameters": {
+    "autoBaseline": true,
+    "baselineStart": 6,
+    "baselineEnd": 12,
+    "threshold": 0.24
+  },
+  "checks": {
+    "actualAndroidUploaderAndRetry": true,
+    "ruleAndConclusionBytesPreserved": true,
+    "realSdkRead": true,
+    "attachmentsRestoredIntoSdkReadWorkdir": true,
+    "realSdkReanalysis": true,
+    "analysisRuleSnapshotPersisted": true,
+    "androidApplicationRulesAppliedToRecomputedCt": true,
+    "missingMeltDataNotCalledNegative": true,
+    "resultAndParametersPersistedBeforeFileSave": true,
+    "actualSdkSavedDifferentPcr": true,
+    "savedPcrReopenedByRealSdk": true,
+    "reopenedCtAndCurvesMatch": true,
+    "originalRawCurvesPreserved": true,
+    "ctChangedBySdk": true,
+    "savedParametersReopenedCorrectly": true,
+    "sourceAndReportUnchanged": true,
+    "restartPersistenceWithoutSdk": true,
+    "ruleSnapshotAvailableAfterRestart": true,
+    "onlyOfflineSdkMethods": true
+  },
+  "runDirectory": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\target\\real-sdk-reanalysis-20261123\\roundtrip-1795412822644",
+  "vendorMetadata": {
+    "serviceProductVersion": "9.0.1.260921"
+  },
+  "ruleFixtureOrigin": "Original judgeConclusion.result copied unchanged; missing CT/PEAK/conclusion attachments are explicit private test fixtures, not recovered original rules.",
+  "bundleId": "40daaf31-201e-4f86-9fb9-bfd30309a90a",
+  "reportId": "4b557ffd-00b0-4d00-a879-880d34247e3c",
+  "inputFileId": "6d967ce8-de67-4a0b-b19c-6fbbc6addd6d",
+  "analysisRunId": "6217511a-9cfe-4a99-a4ab-9ab45ddc5e30",
+  "applicationRuleEvaluation": {
+    "engineVersion": "android-slan-rules-v1",
+    "status": "PARTIAL",
+    "applicationRulesApplied": true,
+    "sources": [
+      {
+        "fileName": "fixture.ct",
+        "sha256": "b807da40e502f5856ac9b74e7afb2709978c27ce2831e16025dfcdf0924a6585",
+        "role": "CT_RULE"
+      },
+      {
+        "fileName": "fixture.peak",
+        "sha256": "c1a3bb9d16b3ae46195f277c900f3dc9d7119922ff8f2b37a1d0fdf3f1de4db6",
+        "role": "PEAK_RULE"
+      }
+    ],
+    "errors": [],
+    "rows": [
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A1",
+        "sampleName": "P202",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "SUSPICIOUS",
+        "conclusion": "可疑样本",
+        "sampleWellNames": [
+          "A1"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 39.053621906411
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A1",
+        "sampleName": "P202",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A1"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A2",
+        "sampleName": "P201",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "NEGATIVE",
+        "conclusion": "阴性",
+        "sampleWellNames": [
+          "A2"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": null,
+        "reason": "NON_AMPLIFYING_CT"
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A2",
+        "sampleName": "P201",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A2"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A3",
+        "sampleName": "P102",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "SUSPICIOUS",
+        "conclusion": "可疑样本",
+        "sampleWellNames": [
+          "A3"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 38.38787780070858
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A3",
+        "sampleName": "P102",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A3"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A4",
+        "sampleName": "P101",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "NEGATIVE",
+        "conclusion": "阴性",
+        "sampleWellNames": [
+          "A4"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 41.22353618750875
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A4",
+        "sampleName": "P101",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A4"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A5",
+        "sampleName": "4",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "POSITIVE",
+        "conclusion": "阳性",
+        "sampleWellNames": [
+          "A5"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 36.16344775173592
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A5",
+        "sampleName": "4",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A5"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A6",
+        "sampleName": "3",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "POSITIVE",
+        "conclusion": "阳性",
+        "sampleWellNames": [
+          "A6"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 35.26693208575529
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A6",
+        "sampleName": "3",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A6"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A7",
+        "sampleName": "2",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "POSITIVE",
+        "conclusion": "阳性",
+        "sampleWellNames": [
+          "A7"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 32.023807475575005
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A7",
+        "sampleName": "2",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A7"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A8",
+        "sampleName": "1",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "POSITIVE",
+        "conclusion": "阳性",
+        "sampleWellNames": [
+          "A8"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 31.903970425335373
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A8",
+        "sampleName": "1",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A8"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      }
+    ],
+    "sourceBundleId": "40daaf31-201e-4f86-9fb9-bfd30309a90a",
+    "analysisRunId": "6217511a-9cfe-4a99-a4ab-9ab45ddc5e30"
+  },
+  "outputFileId": "c6a631b4-b09f-4052-84fc-eff46a98fc5c",
+  "outputBytes": 165330,
+  "outputSha256": "084a875dfcbfac04867870b3779eac1d8fb929b26e953dc0b7d05750641bff31",
+  "changedCtCount": 21,
+  "ctComparison": [
+    {
+      "well": "A1",
+      "channel": 1,
+      "before": 37.865534207440206,
+      "after": 39.053621906411
+    },
+    {
+      "well": "A1",
+      "channel": 2,
+      "before": 39.68851232518495,
+      "after": 40.94836413746588
+    },
+    {
+      "well": "A1",
+      "channel": 4,
+      "before": 36.47276085019572,
+      "after": 37.49084732878443
+    },
+    {
+      "well": "A2",
+      "channel": 1,
+      "before": "Infinity",
+      "after": "Infinity"
+    },
+    {
+      "well": "A2",
+      "channel": 2,
+      "before": "Infinity",
+      "after": "Infinity"
+    },
+    {
+      "well": "A2",
+      "channel": 4,
+      "before": 36.50881902139051,
+      "after": 37.45395106087851
+    },
+    {
+      "well": "A3",
+      "channel": 1,
+      "before": 37.34862915892126,
+      "after": 38.38787780070858
+    },
+    {
+      "well": "A3",
+      "channel": 2,
+      "before": "Infinity",
+      "after": "Infinity"
+    },
+    {
+      "well": "A3",
+      "channel": 4,
+      "before": 37.18234282782316,
+      "after": 38.12548122049855
+    },
+    {
+      "well": "A4",
+      "channel": 1,
+      "before": 39.873582710071155,
+      "after": 41.22353618750875
+    },
+    {
+      "well": "A4",
+      "channel": 2,
+      "before": 37.264670418993695,
+      "after": 38.409226187583336
+    },
+    {
+      "well": "A4",
+      "channel": 4,
+      "before": 37.176800635434205,
+      "after": 38.176074350823804
+    },
+    {
+      "well": "A5",
+      "channel": 1,
+      "before": 35.153659911841935,
+      "after": 36.16344775173592
+    },
+    {
+      "well": "A5",
+      "channel": 2,
+      "before": 35.04217978277356,
+      "after": 36.087879748255865
+    },
+    {
+      "well": "A5",
+      "channel": 4,
+      "before": 36.11992232743145,
+      "after": 37.07480631174754
+    },
+    {
+      "well": "A6",
+      "channel": 1,
+      "before": 34.26813521736928,
+      "after": 35.26693208575529
+    },
+    {
+      "well": "A6",
+      "channel": 2,
+      "before": 34.53386286992354,
+      "after": 35.58314938047329
+    },
+    {
+      "well": "A6",
+      "channel": 4,
+      "before": 35.722098549558375,
+      "after": 36.73059236499862
+    },
+    {
+      "well": "A7",
+      "channel": 1,
+      "before": 31.007679342045908,
+      "after": 32.023807475575005
+    },
+    {
+      "well": "A7",
+      "channel": 2,
+      "before": 31.49573748258891,
+      "after": 32.56049750443893
+    },
+    {
+      "well": "A7",
+      "channel": 4,
+      "before": 32.73064303155267,
+      "after": 33.7196145435551
+    },
+    {
+      "well": "A8",
+      "channel": 1,
+      "before": 30.904434157694627,
+      "after": 31.903970425335373
+    },
+    {
+      "well": "A8",
+      "channel": 2,
+      "before": 31.137310102960647,
+      "after": 32.21526058369979
+    },
+    {
+      "well": "A8",
+      "channel": 4,
+      "before": 32.51208281671341,
+      "after": 33.47544278327686
+    }
+  ],
+  "artifactPath": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\runtime\\simulations\\singleplex-reanalyzed-roundtrip-1795412822644.pcr",
+  "ruleArtifactDirectory": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\runtime\\simulations\\rules-roundtrip-1795412822644",
+  "finishedAt": "2026-11-23T05:47:19.752Z",
+  "database": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\target\\real-sdk-reanalysis-20261123\\roundtrip-1795412822644\\db\\real-sdk.mv.db",
+  "sdkCalls": [
+    {
+      "method": "GetVersion",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "LoadExperimentResult",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "GetAllExperimentName",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "OpenExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SetExperimentParamter",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentData",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SaveExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "CloseExperiment",
+      "errorCode": 0,
+      "message": null
+    }
+  ]
+}

@@ -1856,6 +1856,12 @@ public class FileOperateFragment extends BaseFragment implements View.OnClickLis
                 }
             });
             noticeDialog.show();
+
+            // 复制完成提示（dialogType == -1）只显示确定按钮，隐藏取消按钮
+            // 必须在 show() 之后调用，确保控件已初始化
+            if (dialogType == -1) {
+                noticeDialog.setCancelButtonVisible(false);
+            }
         }
     }
 

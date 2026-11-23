@@ -3,17 +3,24 @@ package com.pcr.dataserver;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import java.io.IOException;
+import java.io.InputStream;
+import java.security.Principal;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
     private final DeviceService devices;
     private final ReportService reports;
-    public AdminController(DeviceService devices,ReportService reports) { this.devices=devices; this.reports=reports; }
+    private final UploadService uploads;
+    private final ServerSettings settings;
+    public AdminController(DeviceService devices,ReportService reports,UploadService uploads,ServerSettings settings) {
+        this.devices=devices;this.reports=reports;this.uploads=uploads;this.settings=settings;
+    }
     @GetMapping("/summary") public Map<String,Object> summary() { return reports.summary(); }
     @PostMapping("/devices") @ResponseStatus(HttpStatus.CREATED)
     public Map<String,String> create(@Valid @RequestBody DeviceService.CreateDevice input) { return devices.create(input); }
@@ -37,6 +44,12 @@ public class AdminController {
     }
     @GetMapping("/files") public List<Map<String,Object>> files(@RequestParam(defaultValue="0") @Min(0) int offset,
         @RequestParam(defaultValue="20") @Min(1) @Max(100) int limit) { return reports.files(offset,limit); }
+    @PostMapping(value="/files",consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+    public UploadService.UploadReply upload(@RequestPart("file") MultipartFile file,Principal principal) throws IOException {
+        try(InputStream stream=file.getInputStream()) {
+            return uploads.file(file.getOriginalFilename(),UploadController.readBounded(stream,settings.maxFileBytes()),principal.getName(),"ADMIN_UPLOAD");
+        }
+    }
     @GetMapping("/files/{id}/download") public ResponseEntity<byte[]> download(@PathVariable String id) throws IOException {
         var file=reports.download(id);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM)

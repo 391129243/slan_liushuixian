@@ -204,6 +204,16 @@
             android:textColor="@color/color_blue_odd_selector"
             android:background="@drawable/shape_rect_stoke"/>
         <TextView
+            android:id="@+id/result_ex_list_export_tv"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginLeft="36dp"
+            android:text="@string/result_ex_export_usb"
+            android:textSize="@dimen/font_size_normal_18sp"
+            android:textColor="@color/color_blue_odd_selector"
+            android:background="@drawable/shape_rect_stoke"/>
+        <TextView
             android:id="@+id/result_ex_list_allcheck_tv"
             android:layout_width="120dp"
             android:layout_height="match_parent"

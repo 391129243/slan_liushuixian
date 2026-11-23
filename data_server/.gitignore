@@ -8,3 +8,5 @@
 /frontend/playwright-report/
 /csharp/PcrSdkBridge/bin/
 /csharp/PcrSdkBridge/obj/
+/scripts/fixtures/**/bin/
+/scripts/fixtures/**/obj/

@@ -581,6 +581,11 @@ public class PcrCurveFragment extends Fragment {
             saveExperimentResult(experiment_device,subFirName, starttime, batchno, description);
             //本地
             saveResultToPCR(experiment_device, subFirName);
+            //把模板里的规则文件(.ct/.peak)复制到结果目录,二次分析读结果目录而不是模板目录
+            File resultDir = new File(FileUtils.BIOWAY_RESULT_PATH, subFirName);
+            File templateDir = new File(FileUtils.FULL_PROCESS_TEMPLATE_PATH, PcrApplication.rootTempName);
+            int copied = FileUtils.copyRuleFiles(templateDir, resultDir);
+            Log.i(TAG, "copyRuleFiles " + copied + " to " + resultDir.getAbsolutePath());
 //
             //上传实验数据
             resultMessage.setResult(true);

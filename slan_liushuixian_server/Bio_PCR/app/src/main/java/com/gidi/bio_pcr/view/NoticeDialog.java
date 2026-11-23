@@ -101,4 +101,14 @@ public class NoticeDialog extends Dialog {
     public void setMessage(String message) {
         messageStr = message;
     }
+
+    /**
+     * 隐藏取消按钮，只显示确定按钮
+     * 注意：必须在 show() 之后调用，确保控件已初始化
+     */
+    public void setCancelButtonVisible(boolean visible) {
+        if (cancelBtn != null) {
+            cancelBtn.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
+    }
 }

@@ -14,8 +14,9 @@ public sealed class SlanOfflineService
     readonly ConcurrentDictionary<string, Session> sessions = new();
     readonly ConcurrentDictionary<string, Analysis> analyses = new();
     readonly ConcurrentDictionary<string, Output> outputs = new();
-    record Session(string File, string Name, string SourceHash);
-    record Analysis(string File, string ExperimentId);
+    record Sidecar(string FileName, string File, string Sha256, string Role);
+    record Session(string File, string Name, string SourceHash, Sidecar[] Attachments);
+    record Analysis(string File, string ExperimentId, Sidecar[] Attachments);
     public record Output(string Path, string FileName, string Hash, long Size);
 
     public SlanOfflineService()
@@ -72,6 +73,50 @@ public sealed class SlanOfflineService
         Directory.CreateDirectory(directory);
         return Path.Combine(directory, name);
     }
+    static string AttachmentRole(string filename)
+    {
+        if (string.IsNullOrWhiteSpace(filename) || filename.Length > 255 || filename.IndexOfAny(['/', '\\', ':']) >= 0
+            || filename.Any(char.IsControl) || filename.IndexOfAny(['"', '<', '>', '|', '?', '*']) >= 0 || filename.EndsWith(' ') || filename.EndsWith('.'))
+            throw new BridgeFault(400, "INVALID_RULE_FILE", "Unsafe rule filename");
+        string basename = filename.Split('.')[0].Trim().ToUpperInvariant();
+        if (System.Text.RegularExpressions.Regex.IsMatch(basename, "^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$"))
+            throw new BridgeFault(400, "INVALID_RULE_FILE", "Reserved rule filename");
+        return Path.GetExtension(filename).ToLowerInvariant() switch {
+            ".ct" => "CT_RULE", ".peak" => "PEAK_RULE", ".conclusion" => "CONCLUSION_ARCHIVE",
+            _ when filename.Equals("judgeConclusion.result", StringComparison.OrdinalIgnoreCase) => "DEVICE_CONCLUSION",
+            _ => throw new BridgeFault(400, "INVALID_RULE_FILE", "Unsupported rule attachment type")
+        };
+    }
+    Sidecar[] CopyInputAttachments(RuleAttachmentRequest[]? items, string directory)
+    {
+        if (items == null) return [];
+        if (items.Length > 64) throw new BridgeFault(400, "INVALID_RULE_FILES", "Too many attachments");
+        var names = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var result = new List<Sidecar>();
+        foreach (var item in items) {
+            if (item == null || AttachmentRole(item.FileName) != item.Role || !names.Add(item.FileName))
+                throw new BridgeFault(400, "INVALID_RULE_FILES", "Invalid or duplicate rule attachment");
+            var source = ValidateSource(item.SourcePath);
+            if (new FileInfo(source).Length > 2 * 1024 * 1024 || Hash(source) != item.Sha256)
+                throw new BridgeFault(400, "RULE_CHECKSUM", "Rule file checksum or size mismatch");
+            string copy = Path.Combine(directory, item.FileName); File.Copy(source, copy, false);
+            if (Hash(copy) != item.Sha256) throw new BridgeFault(400, "RULE_CHECKSUM", "Copied rule file checksum mismatch");
+            result.Add(new Sidecar(item.FileName, copy, item.Sha256, item.Role));
+        }
+        return result.ToArray();
+    }
+    Sidecar[] CopyFrozenAttachments(Sidecar[] items, string directory)
+    {
+        return items.Select(item => {
+            if (Hash(item.File) != item.Sha256) throw new BridgeFault(422, "RULE_CHECKSUM", "Private rule snapshot changed");
+            string copy = Path.Combine(directory, item.FileName); File.Copy(item.File, copy, false);
+            if (Hash(copy) != item.Sha256) throw new BridgeFault(422, "RULE_CHECKSUM", "Copied private rule snapshot changed");
+            return new Sidecar(item.FileName, copy, item.Sha256, item.Role);
+        }).ToArray();
+    }
+    static object[] AttachmentSummary(Sidecar[] items) => items.Select(item => (object)new {
+        fileName = item.FileName, sha256 = item.Sha256, role = item.Role
+    }).ToArray();
     public async Task<object> Read(ReadPcrRequest request)
     {
         RequireEnabled();
@@ -80,19 +125,29 @@ public sealed class SlanOfflineService
             if (sessions.Count >= 128) throw new BridgeFault(429, "SESSION_LIMIT", "Restart this isolated bridge to clear expired handles");
             var source = ValidateSource(request.SourcePath);
             var copy = NewWorkFile("source.pcr"); File.Copy(source, copy, false);
-            var result = AsObject(await Checked("LoadExperimentResult", new { file = copy }));
+            var attachments = CopyInputAttachments(request.Attachments, Path.GetDirectoryName(copy)!);
+            // Unlike OpenExperiment, LoadExperimentResult returns Experiment directly, not APIExperimentResult.
+            var result = AsObject(await Call("LoadExperimentResult", new { file = copy }));
+            // Open only our private copy to obtain the complete polymorphic parameter sets for editing.
+            var existing = await Checked("GetAllExperimentName", new { }) as JsonArray;
+            if(existing is null || existing.Any(n=>n?.GetValue<string>()==Required(result,"Name")))
+                throw new BridgeFault(409,"EXPERIMENT_ALREADY_OPEN","Private experiment name is already open");
+            string? opened=null;JsonNode? parameterSets;
+            try {
+                opened=Required(AsObject(await Checked("OpenExperiment",new { file=copy })),"Name");
+                parameterSets=await Checked("GetExperimentParamters",new { name=opened });
+            } finally { if(opened!=null)await Checked("CloseExperiment",new { name=opened },true); }
             var id = Guid.NewGuid().ToString("N");
-            var hash = Hash(copy); sessions[id] = new Session(copy, Required(result, "Name"), hash);
-            return new { experimentId = id, experiment = result, sourceSha256 = hash, mock = false };
+            var hash = Hash(copy); sessions[id] = new Session(copy, Required(result, "Name"), hash, attachments);
+            return new { experimentId = id, experiment = result, parameterSets, sourceSha256 = hash, attachments = AttachmentSummary(attachments), applicationRulesApplied = false, mock = false };
         } finally { gate.Release(); }
     }
     public async Task<object> Reanalyze(ReanalyzeRequest request)
     {
         RequireEnabled();
         var p = request.Parameters;
-        if (p == null || p.BaselineStart < 1 || p.BaselineEnd > 20 || p.BaselineStart >= p.BaselineEnd
-            || !double.IsFinite(p.Threshold) || p.Threshold < 10 || p.Threshold > 3000)
-            throw new BridgeFault(400, "INVALID_PARAMETERS", "Invalid baseline or threshold");
+        if(p is null)throw new BridgeFault(400,"INVALID_PARAMETERS","Missing parameters");
+        AnalysisParameterEditor.Validate(p);
         await gate.WaitAsync();
         try {
             if (request.ExperimentId == null || !sessions.TryGetValue(request.ExperimentId, out var session))
@@ -103,6 +158,8 @@ public sealed class SlanOfflineService
             if (names.Any(n => n?.GetValue<string>() == session.Name))
                 throw new BridgeFault(409, "EXPERIMENT_ALREADY_OPEN", "Experiment is already open in the vendor instance; it will not be replaced or closed");
             var working = NewWorkFile("analysis.pcr"); File.Copy(session.File, working, false);
+            var attachments = request.Attachments is null ? CopyFrozenAttachments(session.Attachments, Path.GetDirectoryName(working)!)
+                : CopyInputAttachments(request.Attachments,Path.GetDirectoryName(working)!);
             string? opened = null;
             bool closeAttempted = false;
             try {
@@ -112,29 +169,20 @@ public sealed class SlanOfflineService
                 var parameterSets = await Checked("GetExperimentParamters", new { name = opened }) as JsonArray
                     ?? throw new BridgeFault(502, "VENDOR_SCHEMA", "Analysis parameters must be an array");
                 if (parameterSets.Count == 0) throw new BridgeFault(422, "NO_TARGETS", "Experiment has no analysis parameter sets");
-                int count = 0;
+                int count = AnalysisParameterEditor.Apply(parameterSets,p);
                 foreach (var set in parameterSets) {
                     var parameter = AsObject(set);
                     var targets = parameter["Targets"] as JsonArray ?? throw new BridgeFault(502, "VENDOR_SCHEMA", "Targets array missing");
-                    foreach (var target in targets) {
-                        var targetParameter = AsObject(AsObject(target)["Paramter"]);
-                        targetParameter["BeginBaseline"] = p.BaselineStart;
-                        targetParameter["EndBaseline"] = p.BaselineEnd;
-                        targetParameter["OptimizationMode"] = p.AutoBaseline ? 1 : 2; // AUTO / MANUAL per supplied enum
-                        targetParameter["AutoThreshold"] = false;
-                        targetParameter["Threshold"] = p.Threshold;
-                        count++;
-                    }
                     if (targets.Count > 0) await Checked("SetExperimentParamter", new { name = opened, paramter = parameter }, true);
                 }
-                if (count == 0) throw new BridgeFault(422, "NO_TARGETS", "No target analysis parameters found");
                 var experiment = AsObject(await Checked("GetExperimentData", new { name = opened }));
+                var effectiveParameterSets=await Checked("GetExperimentParamters",new { name=opened });
                 // SaveExperiment has no output-path argument: it only writes our private working copy.
                 await Checked("SaveExperiment", new { name = opened }, true);
                 closeAttempted = true;
                 await Checked("CloseExperiment", new { name = opened }, true); opened = null;
-                var id = Guid.NewGuid().ToString("N"); analyses[id] = new Analysis(working, request.ExperimentId);
-                return new { analysisId = id, experimentId = request.ExperimentId, experiment, targetsChanged = count, mock = false };
+                var id = Guid.NewGuid().ToString("N"); analyses[id] = new Analysis(working, request.ExperimentId, attachments);
+                return new { analysisId = id, experimentId = request.ExperimentId, experiment, parameterSets=effectiveParameterSets, requestedParameterSets=parameterSets, targetsChanged = count, attachments = AttachmentSummary(attachments), applicationRulesApplied = false, mock = false };
             } finally {
                 if (opened != null && !closeAttempted) {
                     // Close only a name we successfully opened. Never release a device session.
@@ -155,10 +203,11 @@ public sealed class SlanOfflineService
                 throw new BridgeFault(404, "ANALYSIS_NOT_FOUND", "Analysis handle not found");
             if (outputs.Count >= 128) throw new BridgeFault(429, "OUTPUT_LIMIT", "Maximum saved outputs reached");
             var path = NewWorkFile(request.FileName); File.Copy(analysis.File, path, false);
+            var attachments = CopyFrozenAttachments(analysis.Attachments, Path.GetDirectoryName(path)!);
             var output = new Output(path, request.FileName, Hash(path), new FileInfo(path).Length);
             if (output.Size <= 0 || output.Size > 32 * 1024 * 1024) throw new BridgeFault(422, "INVALID_OUTPUT", "Unexpected saved file size");
             var id = Guid.NewGuid().ToString("N"); outputs[id] = output;
-            return new { outputId = id, fileName = output.FileName, sha256 = output.Hash, size = output.Size, mock = false };
+            return new { outputId = id, fileName = output.FileName, sha256 = output.Hash, size = output.Size, attachments = AttachmentSummary(attachments), mock = false };
         } finally { gate.Release(); }
     }
     public Output GetOutput(string id) => outputs.TryGetValue(id, out var output) ? output

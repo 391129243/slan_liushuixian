@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises'
 test('mock analysis changes Ct, stores versions and exports honest JSON without device calls', async ({ page }) => {
   const apiRequests: string[] = []
   page.on('request', request => { if (request.url().includes('/api/')) apiRequests.push(request.url()) })
-  await page.goto('/')
+  await page.goto('/?mode=mock')
   await expect(page.getByRole('heading', { name: '实验分析工作台' })).toBeVisible()
   await expect(page.getByText('2026-11-16-13-04-40.pcr').first()).toBeVisible()
   await page.screenshot({ path: 'test-results/workspace-desktop.png', fullPage: true })
@@ -35,7 +35,7 @@ test('mock analysis changes Ct, stores versions and exports honest JSON without 
 })
 
 test('file selection simulates metadata only and invalid parameters are rejected', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/?mode=mock')
   await page.locator('input[type=file]').setInputFiles({ name: '本地演示.pcr', mimeType: 'application/octet-stream', buffer: Buffer.from('not-a-real-pcr') })
   await expect(page.getByRole('status')).toContainText('未解码文件内容')
   await expect(page.locator('.analysis-heading h2')).toHaveText('本地演示')
@@ -43,12 +43,12 @@ test('file selection simulates metadata only and invalid parameters are rejected
   await page.getByRole('button', { name: '执行二次分析' }).click()
   await expect(page.getByRole('status')).toContainText('阈值范围')
   await page.getByRole('navigation').getByRole('button', { name: '接入设置' }).click()
-  await expect(page.getByText('宏石 SDK 资料已就绪 · 真实解析未验证')).toBeVisible()
+  await expect(page.getByText('真实 SDK 离线分析已验证')).toBeVisible()
 })
 
 test('mobile layout remains usable and fits viewport', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
-  await page.goto('/')
+  await page.goto('/?mode=mock')
   await expect(page.getByRole('button', { name: '执行二次分析' })).toBeVisible()
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390)
   await page.screenshot({ path: 'test-results/workspace-mobile.png', fullPage: true })

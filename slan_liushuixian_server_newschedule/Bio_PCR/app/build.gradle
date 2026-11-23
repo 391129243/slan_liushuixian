@@ -22,8 +22,8 @@ android {
         applicationId "com.gidi.bio_pcr.pipeline"
         minSdkVersion 26
         targetSdkVersion 33
-        versionCode 20261109
-        versionName "V2.0.19_20261109(增加机械臂异常处理、增加重启client消息)"//V1.0.0_autopipeline_20251010" ///加入ack的log调试
+        versionCode 20261123
+        versionName "V2.0.21_20261123(增加机械臂异常处理、增加重启client消息、优化u盘、优化托盘停止、优化曲线显示)"//V1.0.0_autopipeline_20251010" ///加入ack的log调试
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
@@ -98,7 +98,7 @@ android {
 
 dependencies {
     implementation files('libs/slansdk260916.aar')
-    implementation project(path: ':SerialPortLibrary')
+    implementation project(path: rootProject.name == 'SLAN_Pipeline' ? ':SLAN_Server:SerialPortLibrary' : ':SerialPortLibrary')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

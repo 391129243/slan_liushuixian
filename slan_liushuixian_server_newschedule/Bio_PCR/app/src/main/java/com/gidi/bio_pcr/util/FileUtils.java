@@ -579,6 +579,42 @@ public class FileUtils {
 	}
 
 	/**
+	 * 把模板目录里的规则文件(.ct/.peak)复制到结果目录,供二次分析使用。
+	 * 原来二次分析直接读模板目录,结果导出后模板不在一起,二次分析就做不了。
+	 * 同名文件已存在时不覆盖:二次分析后重新保存结果时,结果目录里已经是当时用的规则。
+	 *
+	 * @return 复制成功的文件数
+	 */
+	public static int copyRuleFiles(File templateDir, File resultDir){
+		if(templateDir == null || resultDir == null
+				|| !templateDir.isDirectory() || !resultDir.isDirectory()){
+			return 0;
+		}
+		File[] files = templateDir.listFiles();
+		if(files == null){
+			return 0;
+		}
+		int copied = 0;
+		for(File file : files){
+			if(!file.isFile()){
+				continue;
+			}
+			String name = file.getName().toLowerCase();
+			if(!name.endsWith(".ct") && !name.endsWith(".peak")){
+				continue;
+			}
+			File dest = new File(resultDir, file.getName());
+			if(dest.exists()){
+				continue;
+			}
+			if(copyFile(file, dest)){
+				copied++;
+			}
+		}
+		return copied;
+	}
+
+	/**
 	 * 复制assert文件到制定的目录
 	 * @param context
 	 * @param assetsPath

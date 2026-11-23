@@ -27,7 +27,7 @@ async function start(legacyEnabled = true) {
   child = spawn(join(jdk, 'bin', process.platform === 'win32' ? 'java.exe' : 'java'),
     ['-jar', join(root, 'target', 'dataserver-0.1.0.jar')], {
       cwd, windowsHide: true, stdio: ['ignore', fd, fd],
-      env: { ...process.env, DATASERVER_ADMIN_PASSWORD: password, DATASERVER_PORT: String(port),
+      env: { ...process.env, DATASERVER_ADMIN_PASSWORD: password, DATASERVER_PORT: String(port), DATASERVER_MANAGED_ENABLED: 'false',
         DATASERVER_BIND: '127.0.0.1', DATASERVER_LEGACY_UPLOAD_ENABLED: String(legacyEnabled),
         DATASERVER_STORAGE: join(cwd, 'files'), SPRING_PROFILES_ACTIVE: 'default',
         SPRING_DATASOURCE_URL: 'jdbc:h2:file:' + join(cwd, 'database', 'smoke').replaceAll('\\', '/')

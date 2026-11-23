@@ -3153,34 +3153,27 @@ public class BiowayExDetailFragment extends Fragment implements View.OnClickList
      */
     private void secondAnalyse(Experiment sec_experiment) {
         if(null != configTargets && configTargets.size()>0){
-            File allFileDir = new File(curTemplatePath);
+            //二次分析用结果目录里的规则文件,不再读模板目录:结果导出后模板不在一起
+            File allFileDir = new File(saveFileDirPath);
             List<File> localList = new ArrayList<File>();
-            if (null != allFileDir) {
-                if (allFileDir.isDirectory() && allFileDir.exists()) {
-                    Collections.addAll(localList, allFileDir.listFiles());
+            if (allFileDir.isDirectory() && allFileDir.exists()) {
+                Collections.addAll(localList, allFileDir.listFiles());
+            }
+            if (localList.size() > 0) {
+                final File ctFile = FileUtils.getFile(localList, ".ct");
+                final File peakFile = FileUtils.getFile(localList, ".peak");
+                if(ctFile == null && peakFile == null){
+                    DialogUtil.showMessage(getContext(), "结果目录没有规则文件，无法进行二次分析");
+                    return;
                 }
-                if (null != localList && localList.size() > 0) {
-                    final File ctFile = FileUtils.getFile(localList, ".ct");
-                    final File peakFile = FileUtils.getFile(localList, ".peak");
-                    showLoadingDialog(getResources().getString(R.string.dialog_message_second_analyse));
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            BiowayManager.getInstance().secondBiowayExAnalyse(configTargets,optimizations,AMPAlgorithm,
-                                    ctFile, peakFile,sec_experiment,startTime);
-                        }
-                    }).start();
-
-                }else{
-                    showLoadingDialog(getResources().getString(R.string.dialog_message_second_analyse));
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            BiowayManager.getInstance().secondBiowayExAnalyse(configTargets,optimizations,AMPAlgorithm,
-                                    null, null,sec_experiment,startTime);
-                        }
-                    }).start();
-                }
+                showLoadingDialog(getResources().getString(R.string.dialog_message_second_analyse));
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        BiowayManager.getInstance().secondBiowayExAnalyse(configTargets,optimizations,AMPAlgorithm,
+                                ctFile, peakFile,sec_experiment,startTime);
+                    }
+                }).start();
             } else {
                 DialogUtil.showMessage(getContext(), "没有判断文件，无法进行二次分析");
             }
@@ -3215,6 +3208,11 @@ public class BiowayExDetailFragment extends Fragment implements View.OnClickList
                 File[] files = jsonDir.listFiles();
                 if(files.length>0){
                     for(File file : files){
+                        //规则文件留给二次分析,二次分析读的就是结果目录里的规则
+                        String name = file.getName().toLowerCase();
+                        if(name.endsWith(".ct") || name.endsWith(".peak")){
+                            continue;
+                        }
                         file.delete();
                     }
                 }

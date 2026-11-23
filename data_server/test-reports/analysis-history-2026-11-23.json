@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "scope": "PROTOCOL FIXTURE ONLY; no real vendor process, PCR parsing, or physical device",
+  "checks": {
+    "resultPersistedBeforeSave": true,
+    "parametersAndOperatorPersisted": true,
+    "sdkVersionRecorded": true,
+    "reportAndFileLinked": true,
+    "requestIdReplayWithoutSdk": true,
+    "saveIdempotent": true,
+    "failedAnalysisRecorded": true,
+    "originalReportUnchanged": true,
+    "javaRestartWithBridgeStopped": true,
+    "resultAndFileAvailableAfterRestart": true
+  },
+  "reportId": "b982397f-9955-4b3d-b04c-d8f2ae81a74d",
+  "inputFileId": "fb0758bc-05a8-4c48-8b40-711a84a7dbe5",
+  "analysisRunId": "ec52371d-c11b-4793-b390-8f51ae1eb03d",
+  "outputFileId": "b6850626-e4ba-4a63-bf97-6f3f5fcb1446",
+  "failedAnalysisRunId": "f224a9e8-5fe5-4b61-bafd-a3c69ef9b204",
+  "database": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\target\\slan-contract-1795402627227\\db\\contract.mv.db",
+  "finishedAt": "2026-11-23T02:57:33.154Z"
+}

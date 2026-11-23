@@ -26,11 +26,11 @@ public class ReportService {
         List<Object> args=new ArrayList<>(); if(serial!=null) args.add(serial);
         Long count=jdbc.queryForObject("SELECT COUNT(*) FROM reports"+where,Long.class,args.toArray());
         args.add(limit); args.add(offset);
-        var rows=jdbc.queryForList("SELECT id,device_id,experiment_name,start_time,end_time,received_at,well_count,target_count,file_id,analysis_status FROM reports"+where+" ORDER BY received_at DESC,id LIMIT ? OFFSET ?",args.toArray());
+        var rows=jdbc.queryForList("SELECT id,device_id,experiment_name,start_time,end_time,received_at,well_count,target_count,file_id,analysis_status,bundle_id,operator_user_id,operator_name,upload_source,uploaded_by_device_id,uploaded_by_username FROM reports"+where+" ORDER BY received_at DESC,id LIMIT ? OFFSET ?",args.toArray());
         return Map.of("total",count,"offset",offset,"limit",limit,"items",rows);
     }
     public Map<String,Object> detail(String id) throws IOException {
-        var rows=jdbc.queryForList("SELECT id,device_id,experiment_name,start_time,end_time,received_at,well_count,target_count,file_id,analysis_status,payload_json FROM reports WHERE id=?",id);
+        var rows=jdbc.queryForList("SELECT id,device_id,experiment_name,start_time,end_time,received_at,well_count,target_count,file_id,analysis_status,bundle_id,operator_user_id,operator_name,upload_source,uploaded_by_device_id,uploaded_by_username,payload_json FROM reports WHERE id=?",id);
         if(rows.isEmpty()) throw missing("Report");
         var row=rows.getFirst(); row.put("Experiment",mapper.readTree(row.remove("payload_json").toString())); return row;
     }
@@ -39,7 +39,7 @@ public class ReportService {
         if(rows.isEmpty()) throw missing("Report"); return rows.getFirst();
     }
     public List<Map<String,Object>> files(int offset,int limit) {
-        return jdbc.queryForList("SELECT id,file_name,file_sha256,file_size,received_at FROM uploaded_files ORDER BY received_at DESC,id LIMIT ? OFFSET ?",limit,offset);
+        return jdbc.queryForList("SELECT id,file_name,file_sha256,file_size,received_at,uploaded_by_username,upload_source FROM uploaded_files ORDER BY received_at DESC,id LIMIT ? OFFSET ?",limit,offset);
     }
     public record Download(String name,byte[] content) { }
     public PcrAnalysisGateway.SourceFile sourceFile(String id) {

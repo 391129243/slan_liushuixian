@@ -1,0 +1,2126 @@
+[
+    {
+        "IsSelected": true,
+        "Name": "heat",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "65",
+                "Delay": 0,
+                "Description": "温控 65℃",
+                "IsSelected": true
+            }
+        ],
+        "Description": "加热 65℃"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 23 01 00 08 00 00 00 00 00 2C FF FC FF ",
+                "Delay": 0,
+                "Description": "托盘进出-0",
+                "IsSelected": true
+            }
+        ],
+        "Description": "托盘收回"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 23 01 00 32 00 00 0B B8 01 19 FF FC FF ",
+                "Delay": 0,
+                "Description": "托盘进出-3",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关门正位"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0E 00 00 DA C0 01 DC FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0E 00 00 DA C0 01 DD FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-56",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 21 01 01 1E 00 00 3E 80 00 FF FF FC FF ",
+                "Delay": 0,
+                "Description": "托盘升降1-16",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 22 01 01 1E 00 00 3E 80 01 00 FF FC FF ",
+                "Delay": 0,
+                "Description": "托盘升降2-16",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "托盘推拉杆落"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 43 01 00 0A 00 00 27 10 00 85 FF FC FF ",
+                "Delay": 0,
+                "Description": "推拉杆平移-10",
+                "IsSelected": true
+            }
+        ],
+        "Description": "推拉杆平移"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 43 01 00 0A 00 00 13 88 00 E9 FF FC FF ",
+                "Delay": 0,
+                "Description": "推拉杆平移-5",
+                "IsSelected": true
+            }
+        ],
+        "Description": "推拉杆平移"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 02 01 00 0A 00 00 0D AC 00 C6 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀2-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 0D AC 00 C9 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀2,5-270"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 32 00 00 61 A8 01 6F FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 588.8ul（25.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 588.8ul（25.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 3,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 0A 00 00 DA C0 01 D8 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 -19.6ul（56.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 -19.6ul（56.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 0F 00 00 61 A8 01 4C FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 588.8ul（25.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 588.8ul（25.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 3,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 02 01 00 0A 00 00 35 E8 01 2A FF FC FF ",
+                "Delay": 0,
+                "Description": "阀2-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀2"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 57 E4 01 47 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀1-270"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 0F 00 00 3A 98 01 15 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 785ul（15.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 785ul（15.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 2,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "样本混合"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 0A 00 00 D6 D8 01 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 0ul（55.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 0ul（55.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 0F 00 00 3A 98 01 15 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 785ul（15.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 785ul（15.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 2,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "样本混合"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 2F A8 00 E3 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 35 E8 01 2D FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀1,5"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 04 01 00 0A 00 00 57 E4 01 4A FF FC FF ",
+                "Delay": 0,
+                "Description": "阀4-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 0D AC 00 C9 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 41 01 00 0A 00 00 5D C0 01 69 FF FC FF ",
+                "Delay": 0,
+                "Description": "平移41-24",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 3 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 31 01 00 0A 00 00 27 10 00 73 FF FC FF ",
+                "Delay": 0,
+                "Description": "左推杆 → 10mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "左推杆 → 10mm"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 3,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "样本混合"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 0A 00 00 DA C0 01 D8 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 -19.6ul（56.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 -19.6ul（56.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 0F 00 00 3A 98 01 15 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 785ul（15.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 785ul（15.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 3,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "样本混合"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 04 01 00 0A 00 00 2F A8 00 E6 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀4-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 35 E8 01 2D FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 31 01 00 0A 00 00 00 00 00 3C FF FC FF ",
+                "Delay": 0,
+                "Description": "左推杆-0",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 3 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 25,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "total_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 3A 98 01 10 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-785ul(15.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 D6 D8 01 ED FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 D6 D8 01 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 3A 98 01 11 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-785ul(15.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 25,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "total_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "heat",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "0",
+                "Delay": 0,
+                "Description": "关闭加热",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关闭加热"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 11 01 00 0A 00 00 23 28 00 67 FF FC FF ",
+                "Delay": 0,
+                "Description": "磁铁 → 9mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "磁铁 → 9mm"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 C8 00 00 3A 98 01 CE FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-785ul(15.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 C8 00 00 DA C0 02 97 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 96 00 00 DA C0 02 64 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 96 00 00 3A 98 01 9D FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-785ul(15.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 96 00 00 3A 98 01 9C FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-785ul(15.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 96 00 00 DA C0 02 65 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": ""
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 02 01 00 0A 00 00 0D AC 00 C6 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀2-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 0D AC 00 C9 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀2,5-270"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 1E 00 00 DA C0 01 EB FF FC FF ",
+                "Delay": 0,
+                "Description": "管5--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 1E 00 00 DA C0 01 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "管6--19.6ul(56.00mm)",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 02 01 00 0A 00 00 35 E8 01 2A FF FC FF ",
+                "Delay": 0,
+                "Description": "阀2-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 35 E8 01 2D FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 31 01 00 0A 00 00 00 00 00 3C FF FC FF ",
+                "Delay": 0,
+                "Description": "左推杆-0",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 3 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 03 01 00 0A 00 00 57 E4 01 49 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀3-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 57 E4 01 4B FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 41 01 00 0A 00 00 2E E0 01 5A FF FC FF ",
+                "Delay": 0,
+                "Description": "平移41-12",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 3 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 32 00 00 9C 40 01 42 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-294.4ul(40.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 31 01 00 0A 00 00 1F 40 00 9B FF FC FF ",
+                "Delay": 0,
+                "Description": "左推杆-8",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 03 01 00 0A 00 00 2F A8 00 E5 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀3-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 2F A8 00 E7 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀3,5"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 32 00 00 9C 40 01 42 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-294.4ul(40.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 32 00 00 D6 D8 02 15 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 32 00 00 D6 D8 02 14 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 32 00 00 9C 40 01 43 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-294.4ul(40.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 50 00 00 DA C0 02 1D FF FC FF ",
+                "Delay": 0,
+                "Description": "管5--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 50 00 00 DA C0 02 1E FF FC FF ",
+                "Delay": 0,
+                "Description": "管6--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 0D AC 00 C5 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 57 E4 01 4B FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 4 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 35 E8 01 29 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 2F A8 00 E7 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀1,5"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 03 01 00 0A 00 00 57 E4 01 49 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀3-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 57 E4 01 4B FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀3,5-90"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 32 00 00 9C 40 01 42 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 294.4ul（40.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 294.4ul（40.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 11 01 00 0A 00 00 00 00 00 1C FF FC FF ",
+                "Delay": 0,
+                "Description": "磁铁-0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 03 01 00 0A 00 00 2F A8 00 E5 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀3-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 2F A8 00 E7 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 3 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 5,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xidiye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 9C 40 01 1A FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-294.4ul(40.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 D6 D8 01 ED FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 D6 D8 01 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 9C 40 01 1B FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-294.4ul(40.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 5,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xidiye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 11 01 00 0A 00 00 23 28 00 67 FF FC FF ",
+                "Delay": 0,
+                "Description": "磁铁 → 9mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "磁铁 → 9mm"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 2,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xidiye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 96 00 00 D6 D8 02 78 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 96 00 00 9C 40 01 A7 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-294.4ul(40.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 96 00 00 9C 40 01 A6 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-294.4ul(40.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 96 00 00 D6 D8 02 79 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 2,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xidiye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 50 00 00 DA C0 02 1D FF FC FF ",
+                "Delay": 0,
+                "Description": "管5--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 50 00 00 DA C0 02 1E FF FC FF ",
+                "Delay": 0,
+                "Description": "管6--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 57 E4 01 4B FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 03 01 00 0A 00 00 57 E4 01 49 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀3-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 4 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 03 01 00 0A 00 00 2F A8 00 E5 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀3-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 2F A8 00 E7 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 31 01 00 0A 00 00 00 00 00 3C FF FC FF ",
+                "Delay": 0,
+                "Description": "左推杆-0",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 3 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 50 00 00 B3 B0 01 E6 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-176.6ul(46.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 0D AC 00 CA FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 09 01 00 0A 00 00 0D AC 00 CD FF FC FF ",
+                "Delay": 0,
+                "Description": "阀9-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 3 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 32 00 00 8C A0 01 92 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 372.9ul（36.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 372.9ul（36.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 35 E8 01 2E FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 09 01 00 0A 00 00 35 E8 01 31 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀9-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀6,9"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 32 00 00 DA C0 02 00 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 32 01 00 32 00 00 DA C0 01 FF FF FC FF ",
+                "Delay": 0,
+                "Description": "管5--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 0D AC 00 C9 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 57 E4 01 47 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 4 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 35 E8 01 2D FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 2F A8 00 E3 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀5,1"
+    },
+    {
+        "IsSelected": true,
+        "Name": "heat",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "85",
+                "Delay": 0,
+                "Description": "温控 85℃",
+                "IsSelected": true
+            }
+        ],
+        "Description": "加热 85℃"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 57 E4 01 4C FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 08 01 00 0A 00 00 0D AC 00 CC FF FC FF ",
+                "Delay": 0,
+                "Description": "阀8-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 11 01 00 0A 00 00 00 00 00 1C FF FC FF ",
+                "Delay": 0,
+                "Description": "磁铁-0",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 3 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 33 01 00 64 00 00 C2 F0 02 4A FF FC FF ",
+                "Delay": 0,
+                "Description": "管6 100ul（49.90mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管6 100ul（49.90mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "2",
+                "Delay": 2,
+                "Description": "2",
+                "IsSelected": true
+            }
+        ],
+        "Description": "延时 2s"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 2F A8 00 E8 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 08 01 00 0A 00 00 35 E8 01 30 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀8-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀6,8"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 10,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xituoye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 C2 F0 01 F0 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-100ul(49.90mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 D6 D8 01 ED FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0A 00 00 D6 D8 01 EC FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0A 00 00 C2 F0 01 F1 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-100ul(49.90mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 10,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xituoye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 11 01 00 0A 00 00 23 28 00 67 FF FC FF ",
+                "Delay": 0,
+                "Description": "磁铁 → 9mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "磁铁 → 9mm"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 3,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xituoye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 64 00 00 C2 F0 02 4A FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-100ul(49.90mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 64 00 00 D6 D8 02 47 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 64 00 00 D6 D8 02 46 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-0ul(55.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 64 00 00 C2 F0 02 4B FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-100ul(49.90mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 3,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "xituoye_mixloop_setting"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 0D AC 00 CA FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 09 01 00 0A 00 00 0D AC 00 CD FF FC FF ",
+                "Delay": 0,
+                "Description": "阀9-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀6,9-90"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 64 00 00 DA C0 02 31 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 64 00 00 DA C0 02 32 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6--19.6ul(56.00mm)",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopstart",
+        "Loop": 25,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "洗脱磁吸"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 28 00 00 C3 EF 02 0D FF FC FF ",
+                "Delay": 0,
+                "Description": "管5 95ul（50.16mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管5 95ul（50.16mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 28 00 00 DA C0 01 F5 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5 -19.6ul（56.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管5 -19.6ul（56.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "loopend",
+        "Loop": 25,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "洗脱磁吸"
+    },
+    {
+        "IsSelected": true,
+        "Name": "heat",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "0",
+                "Delay": 0,
+                "Description": "关闭加热",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关闭加热"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 64 00 00 C3 EF 02 49 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5 95ul（50.16mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管5 95ul（50.16mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 02 00 C8 00 00 09 C4 01 C9 FF FC FF ",
+                "Delay": 0,
+                "Description": "相对 管5 → 2.5mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "相对 管5 → 2.5mm"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 09 01 00 0A 00 00 57 E4 01 4F FF FC FF ",
+                "Delay": 0,
+                "Description": "阀9-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀9-270"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 10 01 00 0A 00 00 57 E4 01 56 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀10-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀10-90"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 57 E4 01 4C FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 08 01 00 0A 00 00 0D AC 00 CC FF FC FF ",
+                "Delay": 0,
+                "Description": "阀8-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀6,8-270"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 0A 00 00 DA C0 01 D7 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5--19.6ul(56.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 00 0A 00 00 DA C0 01 D8 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6--19.6ul(56.00mm)",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 2 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 2F A8 00 E8 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 08 01 00 0A 00 00 35 E8 01 30 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀8-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀6,8"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 57 E4 01 4C FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 07 01 00 0A 00 00 0D AC 00 CB FF FC FF ",
+                "Delay": 0,
+                "Description": "阀7-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀6,7-270"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 32 00 00 C2 F0 02 17 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5 100ul（49.90mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管5 100ul（49.90mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 2F A8 00 E8 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 07 01 00 0A 00 00 35 E8 01 2F FF FC FF ",
+                "Delay": 0,
+                "Description": "阀7-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀6,7"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 57 E4 01 47 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 0D AC 00 C9 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀1,5-270"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 0A 00 00 DA C0 01 D7 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5 -19.6ul（56.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管5 -19.6ul（56.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 2F A8 00 E3 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 35 E8 01 2D FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀1,5"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 57 E4 01 4C FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 07 01 00 0A 00 00 0D AC 00 CB FF FC FF ",
+                "Delay": 0,
+                "Description": "阀7-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀6,7-270"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 32 00 00 C2 F0 02 17 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5 100ul（49.90mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管5 100ul（49.90mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 2F A8 00 E8 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 07 01 00 0A 00 00 35 E8 01 2F FF FC FF ",
+                "Delay": 0,
+                "Description": "阀7-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀6,7"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 0D AC 00 CA FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-90",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 10 01 00 0A 00 00 57 E4 01 56 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀10-90",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀6,10-90"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 28 00 00 D2 DD 02 0A FF FC FF ",
+                "Delay": 0,
+                "Description": "管5 20ul（53.98mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管5 20ul（53.98mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 06 01 00 0A 00 00 35 E8 01 2E FF FC FF ",
+                "Delay": 0,
+                "Description": "阀6-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 10 01 00 0A 00 00 2F A8 00 F2 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀10-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀6,10"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 57 E4 01 47 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-270",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 0D AC 00 C9 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-270",
+                "IsSelected": true
+            }
+        ],
+        "Description": "开阀1,5-270"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 00 14 00 00 DA C0 01 E1 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5 -19.6ul（56.00mm）",
+                "IsSelected": true
+            }
+        ],
+        "Description": "管5 -19.6ul（56.00mm）"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 05 01 00 0A 00 00 35 E8 01 2D FF FC FF ",
+                "Delay": 0,
+                "Description": "阀5-180",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 01 01 00 0A 00 00 2F A8 00 E3 FF FC FF ",
+                "Delay": 0,
+                "Description": "阀1-180",
+                "IsSelected": true
+            }
+        ],
+        "Description": "关阀5,1"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 41 01 00 0A 00 00 00 00 00 4C FF FC FF ",
+                "Delay": 0,
+                "Description": "平移41-0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 42 01 00 0A 00 00 00 00 00 4D FF FC FF ",
+                "Delay": 0,
+                "Description": "平移42-0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 43 01 00 0A 00 00 00 00 00 4E FF FC FF ",
+                "Delay": 0,
+                "Description": "推拉杆平移-0",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 3 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 32 01 01 0E 00 00 00 00 00 42 FF FC FF ",
+                "Delay": 0,
+                "Description": "管5-1079.4ul(0.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 33 01 01 0E 00 00 00 00 00 43 FF FC FF ",
+                "Delay": 0,
+                "Description": "管6-1079.4ul(0.00mm)",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 21 01 01 1E 00 00 00 00 00 41 FF FC FF ",
+                "Delay": 0,
+                "Description": "托盘升降1-0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 22 01 01 1E 00 00 00 00 00 42 FF FC FF ",
+                "Delay": 0,
+                "Description": "托盘升降2-0",
+                "IsSelected": true
+            },
+            {
+                "Hex": "5A A5 00 A0 00 00 00 00 00 00 00 A0 FF FC FF ",
+                "Delay": 0,
+                "Description": "A0 同步",
+                "IsSelected": true
+            }
+        ],
+        "Description": "组合 4 帧"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 12 01 00 14 00 00 30 D4 01 2B FF FC FF ",
+                "Delay": 0,
+                "Description": "PCR 升降 → 12.5mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "PCR 升降 → 12.5mm"
+    },
+    {
+        "IsSelected": true,
+        "Name": "move",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [
+            {
+                "Hex": "5A A5 34 01 00 0A 00 00 17 70 00 C6 FF FC FF ",
+                "Delay": 0,
+                "Description": "右推杆 → 6mm",
+                "IsSelected": true
+            }
+        ],
+        "Description": "右推杆 → 6mm"
+    },
+    {
+        "IsSelected": true,
+        "Name": "finish",
+        "Loop": 1,
+        "Parms": [],
+        "HexActionList": [],
+        "Description": "完成"
+    }
+]

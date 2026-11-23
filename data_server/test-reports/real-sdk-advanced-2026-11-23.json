@@ -1,0 +1,1358 @@
+{
+  "status": "PASS",
+  "scope": "REAL vendor Service.SLANService offline APIs; test HTTP transport, real Java and C# bridge; no physical device or existing vendor process modification",
+  "source": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\result\\2026-10-29-16-23-17_06-1029-2-1022-单重-自研-定10-新冠-洗脱100-洗脱排气-21分钟-过转8度\\2026-10-29-17-15-07.pcr",
+  "sourceBytes": 240240,
+  "sourceSha256": "e294c024e1a41a30cb747dd95d4742d3d448049561ea529a21c9bc19123021a7",
+  "serviceDllSha256": "6094877b0e60fe2d8c3e14409f7f1d355aa53927a2df9674916ede31ab6f6c2c",
+  "parameters": {
+    "autoBaseline": true,
+    "baselineStart": 6,
+    "baselineEnd": 12,
+    "threshold": 0.24
+  },
+  "checks": {
+    "actualAndroidUploaderAndRetry": true,
+    "ruleAndConclusionBytesPreserved": true,
+    "realSdkRead": true,
+    "attachmentsRestoredIntoSdkReadWorkdir": true,
+    "realSdkReanalysis": true,
+    "analysisRuleSnapshotPersisted": true,
+    "androidApplicationRulesAppliedToRecomputedCt": true,
+    "missingMeltDataNotCalledNegative": true,
+    "resultAndParametersPersistedBeforeFileSave": true,
+    "actualSdkSavedDifferentPcr": true,
+    "savedPcrReopenedByRealSdk": true,
+    "reopenedCtAndCurvesMatch": true,
+    "originalRawCurvesPreserved": true,
+    "ctChangedBySdk": true,
+    "savedParametersReopenedCorrectly": true,
+    "sourceAndReportUnchanged": true,
+    "restartPersistenceWithoutSdk": true,
+    "ruleSnapshotAvailableAfterRestart": true,
+    "onlyOfflineSdkMethods": true
+  },
+  "runDirectory": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\target\\real-sdk-reanalysis-20261123\\roundtrip-1795429426740",
+  "vendorMetadata": {
+    "serviceProductVersion": "9.0.1.260921"
+  },
+  "ruleFixtureOrigin": "Original judgeConclusion.result copied unchanged; missing CT/PEAK/conclusion attachments are explicit private test fixtures, not recovered original rules.",
+  "bundleId": "f89b0f6a-1cb8-48b9-9cbf-1eae89c5b037",
+  "reportId": "49b660f1-fb37-44c6-a779-8453b1fb7625",
+  "inputFileId": "661875e0-fe2e-44cf-8f3f-9bb21678eb3e",
+  "analysisRunId": "b60c5d5d-fa70-4a22-beaa-96c86fed84da",
+  "applicationRuleEvaluation": {
+    "engineVersion": "android-slan-rules-v1",
+    "status": "PARTIAL",
+    "applicationRulesApplied": true,
+    "sources": [
+      {
+        "fileName": "fixture.ct",
+        "sha256": "b807da40e502f5856ac9b74e7afb2709978c27ce2831e16025dfcdf0924a6585",
+        "role": "CT_RULE"
+      },
+      {
+        "fileName": "fixture.peak",
+        "sha256": "c1a3bb9d16b3ae46195f277c900f3dc9d7119922ff8f2b37a1d0fdf3f1de4db6",
+        "role": "PEAK_RULE"
+      }
+    ],
+    "errors": [],
+    "rows": [
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A1",
+        "sampleName": "P202",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "SUSPICIOUS",
+        "conclusion": "可疑样本",
+        "sampleWellNames": [
+          "A1"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 39.053621906411
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A1",
+        "sampleName": "P202",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A1"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A2",
+        "sampleName": "P201",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "NEGATIVE",
+        "conclusion": "阴性",
+        "sampleWellNames": [
+          "A2"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": null,
+        "reason": "NON_AMPLIFYING_CT"
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A2",
+        "sampleName": "P201",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A2"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A3",
+        "sampleName": "P102",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "SUSPICIOUS",
+        "conclusion": "可疑样本",
+        "sampleWellNames": [
+          "A3"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 38.38787780070858
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A3",
+        "sampleName": "P102",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A3"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A4",
+        "sampleName": "P101",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "NEGATIVE",
+        "conclusion": "阴性",
+        "sampleWellNames": [
+          "A4"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 41.22353618750875
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A4",
+        "sampleName": "P101",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A4"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A5",
+        "sampleName": "4",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "POSITIVE",
+        "conclusion": "阳性",
+        "sampleWellNames": [
+          "A5"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 36.16344775173592
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A5",
+        "sampleName": "4",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A5"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A6",
+        "sampleName": "3",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "POSITIVE",
+        "conclusion": "阳性",
+        "sampleWellNames": [
+          "A6"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 35.26693208575529
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A6",
+        "sampleName": "3",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A6"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A7",
+        "sampleName": "2",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "POSITIVE",
+        "conclusion": "阳性",
+        "sampleWellNames": [
+          "A7"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 32.023807475575005
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A7",
+        "sampleName": "2",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A7"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      },
+      {
+        "fileName": "fixture.ct",
+        "ruleIndex": 0,
+        "type": "CT",
+        "well": "A8",
+        "sampleName": "1",
+        "channel": "FAM",
+        "category": "SIMULATION CT ONLY",
+        "center": 35,
+        "lower": 0,
+        "upper": 38,
+        "status": "POSITIVE",
+        "conclusion": "阳性",
+        "sampleWellNames": [
+          "A8"
+        ],
+        "suspiciousUpper": 40,
+        "actualCt": 31.903970425335373
+      },
+      {
+        "fileName": "fixture.peak",
+        "ruleIndex": 0,
+        "type": "PEAK",
+        "well": "A8",
+        "sampleName": "1",
+        "channel": "FAM",
+        "category": "SIMULATION PEAK ONLY",
+        "center": 80,
+        "lower": 79,
+        "upper": 81,
+        "status": "UNDETERMINED",
+        "conclusion": "未判定",
+        "sampleWellNames": [
+          "A8"
+        ],
+        "minimumRm": 100,
+        "observedPeaks": [],
+        "matchedPeaks": [],
+        "reason": "MISSING_PEAK_DATA"
+      }
+    ],
+    "sourceBundleId": "f89b0f6a-1cb8-48b9-9cbf-1eae89c5b037",
+    "analysisRunId": "b60c5d5d-fa70-4a22-beaa-96c86fed84da",
+    "ruleVersionId": null
+  },
+  "outputFileId": "aa7810d8-c594-43e3-8e6e-b283195523ed",
+  "outputBytes": 165330,
+  "outputSha256": "9146898cc55ebc27ed0e993e613a6232fe5ce038609cf4b49b2b6835f8c555fd",
+  "changedCtCount": 21,
+  "ctComparison": [
+    {
+      "well": "A1",
+      "channel": 1,
+      "before": 37.865534207440206,
+      "after": 39.053621906411
+    },
+    {
+      "well": "A1",
+      "channel": 2,
+      "before": 39.68851232518495,
+      "after": 40.94836413746588
+    },
+    {
+      "well": "A1",
+      "channel": 4,
+      "before": 36.47276085019572,
+      "after": 37.49084732878443
+    },
+    {
+      "well": "A2",
+      "channel": 1,
+      "before": "Infinity",
+      "after": "Infinity"
+    },
+    {
+      "well": "A2",
+      "channel": 2,
+      "before": "Infinity",
+      "after": "Infinity"
+    },
+    {
+      "well": "A2",
+      "channel": 4,
+      "before": 36.50881902139051,
+      "after": 37.45395106087851
+    },
+    {
+      "well": "A3",
+      "channel": 1,
+      "before": 37.34862915892126,
+      "after": 38.38787780070858
+    },
+    {
+      "well": "A3",
+      "channel": 2,
+      "before": "Infinity",
+      "after": "Infinity"
+    },
+    {
+      "well": "A3",
+      "channel": 4,
+      "before": 37.18234282782316,
+      "after": 38.12548122049855
+    },
+    {
+      "well": "A4",
+      "channel": 1,
+      "before": 39.873582710071155,
+      "after": 41.22353618750875
+    },
+    {
+      "well": "A4",
+      "channel": 2,
+      "before": 37.264670418993695,
+      "after": 38.409226187583336
+    },
+    {
+      "well": "A4",
+      "channel": 4,
+      "before": 37.176800635434205,
+      "after": 38.176074350823804
+    },
+    {
+      "well": "A5",
+      "channel": 1,
+      "before": 35.153659911841935,
+      "after": 36.16344775173592
+    },
+    {
+      "well": "A5",
+      "channel": 2,
+      "before": 35.04217978277356,
+      "after": 36.087879748255865
+    },
+    {
+      "well": "A5",
+      "channel": 4,
+      "before": 36.11992232743145,
+      "after": 37.07480631174754
+    },
+    {
+      "well": "A6",
+      "channel": 1,
+      "before": 34.26813521736928,
+      "after": 35.26693208575529
+    },
+    {
+      "well": "A6",
+      "channel": 2,
+      "before": 34.53386286992354,
+      "after": 35.58314938047329
+    },
+    {
+      "well": "A6",
+      "channel": 4,
+      "before": 35.722098549558375,
+      "after": 36.73059236499862
+    },
+    {
+      "well": "A7",
+      "channel": 1,
+      "before": 31.007679342045908,
+      "after": 32.023807475575005
+    },
+    {
+      "well": "A7",
+      "channel": 2,
+      "before": 31.49573748258891,
+      "after": 32.56049750443893
+    },
+    {
+      "well": "A7",
+      "channel": 4,
+      "before": 32.73064303155267,
+      "after": 33.7196145435551
+    },
+    {
+      "well": "A8",
+      "channel": 1,
+      "before": 30.904434157694627,
+      "after": 31.903970425335373
+    },
+    {
+      "well": "A8",
+      "channel": 2,
+      "before": 31.137310102960647,
+      "after": 32.21526058369979
+    },
+    {
+      "well": "A8",
+      "channel": 4,
+      "before": 32.51208281671341,
+      "after": 33.47544278327686
+    }
+  ],
+  "advanced": {
+    "scope": "Real singleplex and melt PCR, real SDK, synthetic rule versions, no instrument",
+    "checks": {
+      "selectedTargetAndAlgorithmApplied": true,
+      "otherChannelsPreserved": true,
+      "allMeltFieldsAndAutomaticThresholdApplied": true,
+      "editedCtAndPeakRulesAppliedTogether": true,
+      "configuredCombinedConclusionComputed": true,
+      "advancedParametersPersistInsideSavedPcr": true,
+      "derivedPcrInheritsEditedRuleVersion": true,
+      "originalMeltPcrUnchanged": true,
+      "restartPreservesRulesAdvancedParametersAndCombinedResults": true
+    },
+    "meltSourceSha256": "577afff986549e59d29f611358a776b5e1c0439bc34d4504cbda7889724031e2",
+    "artifactDirectory": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\runtime\\simulations\\advanced-roundtrip-1795429426740",
+    "analysisRunId": "63aaf03e-f92e-4977-84b4-9399311ee61c",
+    "ruleVersionId": "e9a4cf05-b537-4c0e-b586-8e1a73ade12c",
+    "parameters": {
+      "autoBaseline": true,
+      "baselineStart": 6,
+      "baselineEnd": 12,
+      "threshold": 0.24,
+      "scope": "SELECTED",
+      "projects": [
+        {
+          "projectIndex": 0,
+          "ampAlgorithm": 2
+        }
+      ],
+      "targets": [
+        {
+          "projectIndex": 0,
+          "targetIndex": 0,
+          "settings": {
+            "baselineStart": 6,
+            "baselineEnd": 12,
+            "autoThreshold": true,
+            "qualitativeAnalysis": false,
+            "optimizationMode": 2,
+            "digitalFilter": 1,
+            "peakHeightThreshold": 5,
+            "minTemperature": 35.1,
+            "maxTemperature": 84.9,
+            "meltPeakAlgorithm": 0,
+            "peakType": 2
+          }
+        }
+      ]
+    },
+    "effectiveParameterSets": [
+      {
+        "ProjectName": "second",
+        "AMPAlgorithm": 2,
+        "Targets": [
+          {
+            "Name": "FAM",
+            "TubeNo": 1,
+            "ChannelNo": 1,
+            "TargetIndex": 0,
+            "Dye": "FAM",
+            "Paramter": {
+              "MinTemperature": 35.1,
+              "MaxTemperature": 84.9,
+              "NoiseThreshold": 0,
+              "PeekWidthThreshold": 0,
+              "PeekHightThreshold": 5,
+              "PeekType": 2,
+              "MeltPeakAlgorithm": 0,
+              "QualitativeAnalysis": false,
+              "BeginBaseline": 6,
+              "EndBaseline": 12,
+              "AutoThreshold": true,
+              "Threshold": 0.12000000000000001,
+              "OptimizationMode": 2,
+              "DigitalFilter": 1,
+              "DetectionMin": 0,
+              "DetectionMax": 10000000000
+            },
+            "Color": "#FF0000FF"
+          },
+          {
+            "Name": "ROX",
+            "TubeNo": 1,
+            "ChannelNo": 3,
+            "TargetIndex": 0,
+            "Dye": "ROX",
+            "Paramter": {
+              "MinTemperature": 35,
+              "MaxTemperature": 85,
+              "NoiseThreshold": 0,
+              "PeekWidthThreshold": 0,
+              "PeekHightThreshold": 10,
+              "PeekType": 0,
+              "MeltPeakAlgorithm": 1,
+              "QualitativeAnalysis": true,
+              "BeginBaseline": 6,
+              "EndBaseline": 12,
+              "AutoThreshold": false,
+              "Threshold": 0.12000000000000001,
+              "OptimizationMode": 1,
+              "DigitalFilter": 2,
+              "DetectionMin": 0,
+              "DetectionMax": 10000000000
+            },
+            "Color": "#FFFF8000"
+          },
+          {
+            "Name": "CY5",
+            "TubeNo": 1,
+            "ChannelNo": 4,
+            "TargetIndex": 0,
+            "Dye": "CY5",
+            "Paramter": {
+              "MinTemperature": 35,
+              "MaxTemperature": 85,
+              "NoiseThreshold": 0,
+              "PeekWidthThreshold": 0,
+              "PeekHightThreshold": 10,
+              "PeekType": 0,
+              "MeltPeakAlgorithm": 1,
+              "QualitativeAnalysis": true,
+              "BeginBaseline": 6,
+              "EndBaseline": 12,
+              "AutoThreshold": false,
+              "Threshold": 0.12000000000000001,
+              "OptimizationMode": 1,
+              "DigitalFilter": 2,
+              "DetectionMin": 0,
+              "DetectionMax": 10000000000
+            },
+            "Color": "#FFFF0000"
+          }
+        ],
+        "CorssTalk": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "BasicRule": {
+          "Name": "second",
+          "UseBasicRule": true,
+          "ExperimentQC": {
+            "Use": true,
+            "Items": []
+          },
+          "SampleQC": {
+            "Use": true,
+            "Items": []
+          },
+          "ResultRule": {
+            "Use": true,
+            "Items": []
+          }
+        }
+      }
+    ],
+    "combinedConclusions": {
+      "engineVersion": "ct-peak-combination-v1",
+      "status": "PARTIAL",
+      "rows": [
+        {
+          "well": "B1",
+          "name": "SIMULATION ALL",
+          "mode": "ALL",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "POSITIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B1"
+          ]
+        },
+        {
+          "well": "B1",
+          "name": "SIMULATION ANY",
+          "mode": "ANY",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "POSITIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B1"
+          ]
+        },
+        {
+          "well": "B2",
+          "name": "SIMULATION ALL",
+          "mode": "ALL",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "UNDETERMINED",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B2"
+          ]
+        },
+        {
+          "well": "B2",
+          "name": "SIMULATION ANY",
+          "mode": "ANY",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "UNDETERMINED",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B2"
+          ]
+        },
+        {
+          "well": "B3",
+          "name": "SIMULATION ALL",
+          "mode": "ALL",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B3"
+          ]
+        },
+        {
+          "well": "B3",
+          "name": "SIMULATION ANY",
+          "mode": "ANY",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B3"
+          ]
+        },
+        {
+          "well": "B4",
+          "name": "SIMULATION ALL",
+          "mode": "ALL",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B4"
+          ]
+        },
+        {
+          "well": "B4",
+          "name": "SIMULATION ANY",
+          "mode": "ANY",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B4"
+          ]
+        },
+        {
+          "well": "B5",
+          "name": "SIMULATION ALL",
+          "mode": "ALL",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "POSITIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B5"
+          ]
+        },
+        {
+          "well": "B5",
+          "name": "SIMULATION ANY",
+          "mode": "ANY",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "POSITIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B5"
+          ]
+        },
+        {
+          "well": "B6",
+          "name": "SIMULATION ALL",
+          "mode": "ALL",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B6"
+          ]
+        },
+        {
+          "well": "B6",
+          "name": "SIMULATION ANY",
+          "mode": "ANY",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B6"
+          ]
+        },
+        {
+          "well": "B7",
+          "name": "SIMULATION ALL",
+          "mode": "ALL",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B7"
+          ]
+        },
+        {
+          "well": "B7",
+          "name": "SIMULATION ANY",
+          "mode": "ANY",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B7"
+          ]
+        },
+        {
+          "well": "B8",
+          "name": "SIMULATION ALL",
+          "mode": "ALL",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B8"
+          ]
+        },
+        {
+          "well": "B8",
+          "name": "SIMULATION ANY",
+          "mode": "ANY",
+          "ctStatus": "UNDETERMINED",
+          "peakStatus": "NEGATIVE",
+          "status": "UNDETERMINED",
+          "conclusion": "未判定",
+          "ct": {
+            "fileName": "advanced.ct",
+            "ruleIndex": 0
+          },
+          "peak": {
+            "fileName": "advanced.peak",
+            "ruleIndex": 0
+          },
+          "sampleWellNames": [
+            "B8"
+          ]
+        }
+      ]
+    },
+    "measuredPeak": {
+      "tm": 47.02000000000017,
+      "rm": 12.85609810031365
+    }
+  },
+  "artifactPath": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\runtime\\simulations\\singleplex-reanalyzed-roundtrip-1795429426740.pcr",
+  "ruleArtifactDirectory": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\runtime\\simulations\\rules-roundtrip-1795429426740",
+  "finishedAt": "2026-11-23T10:24:18.207Z",
+  "database": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\target\\real-sdk-reanalysis-20261123\\roundtrip-1795429426740\\db\\real-sdk.mv.db",
+  "sdkCalls": [
+    {
+      "method": "GetVersion",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "LoadExperimentResult",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "GetAllExperimentName",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "OpenExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "CloseExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetAllExperimentName",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "OpenExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SetExperimentParamter",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentData",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SaveExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "CloseExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetAllExperimentName",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "OpenExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SetExperimentParamter",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentData",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SaveExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "CloseExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetVersion",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "LoadExperimentResult",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "GetAllExperimentName",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "OpenExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "CloseExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetAllExperimentName",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "OpenExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SetExperimentParamter",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentData",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SaveExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "CloseExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetAllExperimentName",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "OpenExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SetExperimentParamter",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentData",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "SaveExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "CloseExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetVersion",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "LoadExperimentResult",
+      "errorCode": null,
+      "message": null
+    },
+    {
+      "method": "GetAllExperimentName",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "OpenExperiment",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "GetExperimentParamters",
+      "errorCode": 0,
+      "message": null
+    },
+    {
+      "method": "CloseExperiment",
+      "errorCode": 0,
+      "message": null
+    }
+  ]
+}

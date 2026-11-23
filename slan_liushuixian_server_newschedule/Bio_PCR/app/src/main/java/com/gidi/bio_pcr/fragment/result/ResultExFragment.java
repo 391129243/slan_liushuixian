@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.usb.UsbDevice;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,11 +35,18 @@ import com.gidi.bio_pcr.bean.ExQueryCondition;
 import com.gidi.bio_pcr.bioway.activity.BiowayExDetailActivity;
 import com.gidi.bio_pcr.db.ExperimentModel;
 import com.gidi.bio_pcr.db.LiteORMCtrlMgr;
+import com.gidi.bio_pcr.receiver.UsbBroadCastReceiver;
 import com.gidi.bio_pcr.util.DateFormatUtil;
 import com.gidi.bio_pcr.util.FileUtils;
 import com.gidi.bio_pcr.util.StringUtil;
+import com.gidi.bio_pcr.util.UsbCopySession;
+import com.gidi.bio_pcr.util.UsbHelper;
 import com.gidi.bio_pcr.view.CustomDialog;
 import com.gidi.bio_pcr.view.NoticeDialog;
+import com.gidi.bio_pcr.view.ProgressDialog;
+
+import me.jahnen.libaums.core.UsbMassStorageDevice;
+import me.jahnen.libaums.core.fs.UsbFile;
 import com.paul.pipeline.activity.viewmodel.PipeMainViewModel;
 import com.paul.pipeline.data.ConstantData;
 
@@ -48,7 +59,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
-public class ResultExFragment extends BaseFragment implements View.OnClickListener{
+public class ResultExFragment extends BaseFragment implements View.OnClickListener, UsbBroadCastReceiver.UsbListener{
    // private ResultActivity resultActivity;
     private ListView mExperimentRv;
     private Button searchBtn;
@@ -74,7 +85,32 @@ public class ResultExFragment extends BaseFragment implements View.OnClickListen
     private TextView mLastPageTv;
     private TextView mAllCheckTv;
     private TextView mDeleteTv;
+    private TextView mExportUsbTv;
     private TextView mCancelTv;
+
+    private UsbHelper usbHelper;
+    private ProgressDialog progressDialog;
+    private Thread exportThread;
+    private volatile boolean exporting = false;
+    private static final int MSG_EXPORT_END = 1;
+    private static final int MSG_EXPORT_PROGRESS = 2;
+    private final Handler exportHandler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(Message msg) {
+            if (!isAdded()) {
+                return;
+            }
+            if (msg.what == MSG_EXPORT_PROGRESS) {
+                if (progressDialog != null && progressDialog.isShowing()) {
+                    progressDialog.setFileName((String) msg.obj);
+                    progressDialog.setProgress(msg.arg1);
+                }
+            } else if (msg.what == MSG_EXPORT_END) {
+                hideExportProgress();
+                showExportResult(msg.obj);
+            }
+        }
+    };
 
     private int index = 0;//初始的页数
     private int pageCount = 1;//总共的页数
@@ -118,6 +154,7 @@ public class ResultExFragment extends BaseFragment implements View.OnClickListen
         mNextPageTv = (TextView)rootView.findViewById(R.id.result_ex_list_nextpage_tv);
         mLastPageTv = (TextView)rootView.findViewById(R.id.result_ex_list_lastpage_tv);
         mDeleteTv = (TextView)rootView.findViewById(R.id.result_ex_list_delete_tv) ;
+        mExportUsbTv = (TextView)rootView.findViewById(R.id.result_ex_list_export_tv);
         mAllCheckTv = (TextView)rootView.findViewById(R.id.result_ex_list_allcheck_tv) ;
         mCancelTv = (TextView)rootView.findViewById(R.id.result_ex_list_cancel_tv) ;
 //        if(null != resultActivity){
@@ -146,7 +183,9 @@ public class ResultExFragment extends BaseFragment implements View.OnClickListen
         mNextPageTv.setOnClickListener(this);
         mLastPageTv.setOnClickListener(this);
         mDeleteTv.setOnClickListener(this);
+        mExportUsbTv.setOnClickListener(this);
         mAllCheckTv.setOnClickListener(this);
+        usbHelper = new UsbHelper(getActivity().getApplicationContext(), this);
         mCancelTv.setOnClickListener(this);
         mExAdapter.setOnItemClickListener(new ExResultAdapter.OnItemClickListener() {
             @Override
@@ -244,6 +283,12 @@ public class ResultExFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onDestroy() {
+        if (usbHelper != null) {
+            usbHelper.cancelCopy();
+            usbHelper.finishUsbHelper();
+            usbHelper = null;
+        }
+        exportHandler.removeCallbacksAndMessages(null);
         super.onDestroy();
         if (null != mSelectExperiments) {
             mSelectExperiments.clear();
@@ -289,6 +334,7 @@ public class ResultExFragment extends BaseFragment implements View.OnClickListen
             noticeDialog.dismiss();
             noticeDialog = null;
         }
+        hideExportProgress();
     }
 
 
@@ -342,6 +388,13 @@ public class ResultExFragment extends BaseFragment implements View.OnClickListen
                 showNoticeDialog("确认删除所选实验结果？" + mSelectExperiments.size()+"项");
             }else {
                 Toast.makeText(getActivity().getApplicationContext(),"请选择要删除的实验结果",Toast.LENGTH_LONG).show();
+            }
+        }else if(id == R.id.result_ex_list_export_tv){
+            if (mSelectExperiments == null || mSelectExperiments.size() == 0) {
+                Toast.makeText(getActivity().getApplicationContext(),
+                        getString(R.string.result_ex_toast_export_select), Toast.LENGTH_LONG).show();
+            } else {
+                showExportConfirmDialog();
             }
         }else if(id == R.id.result_ex_list_allcheck_tv){
             if(null != mExperiments && mExperiments.size()>0){
@@ -748,6 +801,278 @@ public class ResultExFragment extends BaseFragment implements View.OnClickListen
                }
             }
         }
+    }
+
+    /**
+     * 确认后把勾选的实验结果目录复制到 U 盘根目录下新建的时间戳目录里。
+     * 不删除 U 盘上已有的内容,失败原因会在结束后提示。
+     */
+    private void showExportConfirmDialog() {
+        if (noticeDialog != null) {
+            noticeDialog.dismiss();
+            noticeDialog = null;
+        }
+        noticeDialog = new NoticeDialog(getActivity(), R.style.Dialog);
+        noticeDialog.setMessage(getString(R.string.result_ex_dialog_export_confirm, mSelectExperiments.size()));
+        noticeDialog.setOnOkClickListener(new NoticeDialog.OnOkClickListener() {
+            @Override
+            public void onConfirmClick() {
+                noticeDialog.dismiss();
+                exportSelectedToUsb();
+            }
+        });
+        noticeDialog.setOnCancelOnclickListener(new NoticeDialog.OnCancelClickListener() {
+            @Override
+            public void onCancelClick() {
+                noticeDialog.dismiss();
+            }
+        });
+        noticeDialog.show();
+    }
+
+    private void exportSelectedToUsb() {
+        if (exporting) {
+            Toast.makeText(getActivity().getApplicationContext(),
+                    getString(R.string.result_export_dialog_message_copying_already), Toast.LENGTH_LONG).show();
+            return;
+        }
+        final List<ExperimentModel> selected = new ArrayList<>(mSelectExperiments);
+        final List<File> sources = new ArrayList<>();
+        for (ExperimentModel model : selected) {
+            File dir = resultDirOf(model);
+            if (dir != null && dir.exists()) {
+                sources.add(dir);
+            }
+        }
+        if (sources.isEmpty()) {
+            Toast.makeText(getActivity().getApplicationContext(),
+                    getString(R.string.result_ex_toast_result_folder_missing), Toast.LENGTH_LONG).show();
+            return;
+        }
+        showExportProgress();
+        exporting = true;
+        usbHelper.resetCopyCancelled();
+        exportThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String failReason = null;
+                UsbCopySession session = null;
+                try {
+                    UsbFile destParent = mountUsbRoot();
+                    if (destParent == null) {
+                        failReason = getString(R.string.result_export_dialog_message_copy_not_fat32);
+                    } else {
+                        long need = totalSizeOf(sources);
+                        long free = usbHelper.getFreeSpace();
+                        //留 8MB 给 FAT 表和新目录项,避免写到最后一簇时失败
+                        if (need < 0 || free < 0 || need + 8L * 1024 * 1024 > free) {
+                            failReason = getString(R.string.result_export_dialog_message_copy_no_space);
+                        }
+                    }
+                    if (failReason == null) {
+                        session = new UsbCopySession(usbHelper, sources, destParent);
+                        session.run(exportProgressListener);
+                    }
+                } catch (Exception e) {
+                    Log.e("ResultExFragment", "export to usb failed: " + e.getMessage());
+                    failReason = getString(R.string.result_export_dialog_message_copy_failed);
+                }
+                exporting = false;
+                Message msg = Message.obtain();
+                msg.what = MSG_EXPORT_END;
+                msg.obj = failReason == null ? session : failReason;
+                exportHandler.sendMessage(msg);
+            }
+        });
+        exportThread.start();
+    }
+
+    /**
+     * 实验结果所在的目录。优先用数据库里保存的路径,没有时按保存时的命名规则拼出来。
+     * 拼出来的名字在两个结果目录里都找一次,避免实验类型记错时导到不存在的目录。
+     */
+    private File resultDirOf(ExperimentModel model) {
+        String saved = model.getFilePath();
+        if (!StringUtil.isEmpty(saved)) {
+            File savedDir = new File(saved);
+            if (savedDir.exists()) {
+                return savedDir;
+            }
+        }
+        String startTime = model.getStartTime();
+        String testItem = model.getTestItem();
+        if (StringUtil.isEmpty(startTime) || StringUtil.isEmpty(testItem)) {
+            return null;
+        }
+        String afterTime = DateFormatUtil.convertDateFormat(startTime);
+        String name = StringUtil.isEmpty(model.getDescription())
+                ? afterTime + "_" + testItem
+                : afterTime + "_" + testItem + "_" + model.getDescription();
+        File biowayDir = new File(FileUtils.BIOWAY_RESULT_PATH, name);
+        if (biowayDir.exists()) {
+            return biowayDir;
+        }
+        File slanDir = new File(FileUtils.SLAN_RESULT_PATH, name);
+        if (slanDir.exists()) {
+            return slanDir;
+        }
+        return null;
+    }
+
+    /**
+     * 挂载 U 盘并返回根目录。没有授权、不是 FAT32 或还没读到分区时返回 null。
+     * 必须在后台线程调用:readDevice 里有等待。
+     */
+    private UsbFile mountUsbRoot() {
+        if (usbHelper == null) {
+            return null;
+        }
+        UsbMassStorageDevice[] devices = usbHelper.getDeviceList();
+        if (devices == null || devices.length == 0) {
+            return null;
+        }
+        usbHelper.readDevice(devices[0]);
+        return usbHelper.getCurrentFolder();
+    }
+
+    private long totalSizeOf(List<File> files) {
+        long total = 0;
+        for (File file : files) {
+            long size = sizeOf(file);
+            if (size < 0) {
+                return -1;
+            }
+            total += size;
+        }
+        return total;
+    }
+
+    private long sizeOf(File file) {
+        if (file == null || !file.exists()) {
+            return 0;
+        }
+        if (file.isFile()) {
+            return file.length();
+        }
+        File[] children = file.listFiles();
+        if (children == null) {
+            return -1;
+        }
+        long total = 0;
+        for (File child : children) {
+            long size = sizeOf(child);
+            if (size < 0) {
+                return -1;
+            }
+            total += size;
+        }
+        return total;
+    }
+
+    private final UsbHelper.CopyProgressListener exportProgressListener = new UsbHelper.CopyProgressListener() {
+        private volatile String fileName = "";
+
+        @Override
+        public void copyStart(String name) {
+            fileName = name;
+            copyProgress(0);
+        }
+
+        @Override
+        public void copyProgress(int progress) {
+            Message msg = Message.obtain();
+            msg.what = MSG_EXPORT_PROGRESS;
+            msg.obj = fileName;
+            msg.arg1 = progress;
+            exportHandler.sendMessage(msg);
+        }
+
+        @Override
+        public void copyResult(boolean result) {
+        }
+    };
+
+    private void showExportProgress() {
+        hideExportProgress();
+        progressDialog = new ProgressDialog(getActivity(), getString(R.string.result_export_dialog_message_copying));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setProgress(0);
+        progressDialog.setOnCanlceListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                usbHelper.cancelCopy();
+                progressDialog.dismiss();
+            }
+        });
+        progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                usbHelper.cancelCopy();
+                progressDialog.dismiss();
+            }
+        });
+        progressDialog.show();
+    }
+
+    private void hideExportProgress() {
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+    }
+
+    /** 导出结束后的提示。在主线程调用。 */
+    private void showExportResult(Object result) {
+        String message;
+        if (result instanceof String) {
+            message = (String) result;
+        } else if (result instanceof UsbCopySession) {
+            UsbCopySession session = (UsbCopySession) result;
+            if (session.isCancelled()) {
+                message = getString(R.string.result_export_dialog_message_copy_cancelled);
+            } else if (session.getFailedFiles().isEmpty()) {
+                message = getString(R.string.result_export_dialog_message_copy_done,
+                        countFiles(session.getDestDir()), session.getDestDir().getName());
+            } else {
+                message = getString(R.string.result_export_dialog_message_copy_partial,
+                        countFiles(session.getDestDir()), session.getFailedFiles().size());
+            }
+        } else {
+            message = getString(R.string.result_export_dialog_message_copy_failed);
+        }
+        Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    private int countFiles(UsbFile dir) {
+        try {
+            int count = 0;
+            for (UsbFile file : dir.listFiles()) {
+                count += file.isDirectory() ? countFiles(file) : 1;
+            }
+            return count;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public void insertUsb(UsbDevice device_add) {
+    }
+
+    @Override
+    public void removeUsb(UsbDevice device_remove) {
+        //正在导出时 U 盘被拔出:只请求中止,不在这里关闭设备
+        if (exporting && usbHelper != null) {
+            usbHelper.cancelCopy();
+        }
+    }
+
+    @Override
+    public void getReadUsbPermission(UsbDevice usbDevice) {
+    }
+
+    @Override
+    public void failedReadUsb(UsbDevice usbDevice) {
     }
 
     private void showNoticeDialog(String message){

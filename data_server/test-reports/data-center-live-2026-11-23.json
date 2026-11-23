@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "scope": "Actual browser -> Java -> C# -> real offline SLAN SDK",
+  "sourceSha256": "e294c024e1a41a30cb747dd95d4742d3d448049561ea529a21c9bc19123021a7",
+  "checks": {
+    "actualCtAndMissingnessDisplayed": true,
+    "sdkNumericCurveArraysDisplayed": true,
+    "actualSdkCtChangeDisplayed": true,
+    "savedPcrDownloaded": true,
+    "historyAndMobileLayout": true,
+    "reloadAndReauthentication": true,
+    "passwordNotStoredInBrowser": true,
+    "originalPcrUnchanged": true
+  },
+  "analysisRunId": "4c6f1933-127d-4707-9764-327b7f261045",
+  "outputFileId": "7ecfe502-f46f-4913-99dd-b9b9e506477a",
+  "outputSha256": "481606bcef1b916f9f6a3d1b02ab7ae9334d072fe779b790c26524d7f80d32e4",
+  "finishedAt": "2026-11-23T03:58:01.168Z"
+}

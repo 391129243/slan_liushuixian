@@ -22,8 +22,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class SecurityConfig {
     @Bean org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
     @Bean UserDetailsService admins(ServerSettings settings) {
-        if (settings.adminPassword() == null || settings.adminPassword().length() < 12)
-            throw new IllegalStateException("Set DATASERVER_ADMIN_PASSWORD to at least 12 characters");
+        if (settings.adminPassword() == null || settings.adminPassword().length() < 8)
+            throw new IllegalStateException("Set DATASERVER_ADMIN_PASSWORD to at least 8 characters");
         return new InMemoryUserDetailsManager(User.withUsername("admin")
             .password(new BCryptPasswordEncoder().encode(settings.adminPassword())).roles("ADMIN").build());
     }

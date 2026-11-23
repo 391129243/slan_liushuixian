@@ -30,6 +30,7 @@ import com.gidi.bio_pcr.event.MsgType;
 import com.gidi.bio_pcr.receiver.UsbBroadCastReceiver;
 import com.gidi.bio_pcr.util.LoadingDialog;
 import com.gidi.bio_pcr.util.StringUtil;
+import com.gidi.bio_pcr.util.UsbCopySession;
 import com.gidi.bio_pcr.util.UsbHelper;
 import com.gidi.bio_pcr.view.CustomDialog;
 import com.gidi.bio_pcr.view.NoticeDialog;
@@ -78,8 +79,14 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
     private final String PCR_PATH = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator
             +"PCR";
     private String localCurrentPath = PCR_PATH;
-    private int suc_result = 0;
-    private int file_count = 0;
+    //正在往 U 盘复制。复制期间不再响应插拔刷新,避免把正在写的连接打断
+    private volatile boolean copying = false;
+    //正在删除文件/文件夹。删除期间不再响应插拔刷新
+    private volatile boolean deleting = false;
+    //正在重命名文件/文件夹。重命名期间不再响应插拔刷新
+    private volatile boolean renaming = false;
+    //正在创建文件/文件夹。创建期间不再响应插拔刷新
+    private volatile boolean creating = false;
 
     @Override
     protected int getLayoutId() {
@@ -500,267 +507,134 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
         return length;
     }
 
-    private int getCopyFileNumber(List<FileBean> checkLocalFiles){
-        int count = 0;
-        for(FileBean fileBean1 : checkLocalFiles){
-            File file = fileBean1.getFile();
-            if(null != file){
-                int num = getFilesInDir(file);
-                count = count + num;
+    /**
+     * 统计待复制内容的总字节数,用于复制前和 U 盘剩余空间比较。
+     * 目录读不到(listFiles 返回 null)时记为 -1,调用方据此放弃这次复制而不是照写。
+     */
+    private long totalSizeOf(List<FileBean> files) {
+        long total = 0;
+        for (FileBean bean : files) {
+            long size = sizeOf(bean.getFile());
+            if (size < 0) {
+                return -1;
             }
+            total += size;
         }
-        return count;
+        return total;
     }
 
-    private int getFilesInDir(File file){
-        int count = 0;
-        if(file.isFile()){
-            count = count +1;
-        }else{
-            File[] files = file.listFiles();
-            if(files != null && files.length>0){
-                for(int i=0;i<files.length;i++){
-                    count = count + getFilesInDir(files[i]);
-                }
-            }
+    private long sizeOf(File file) {
+        if (file == null || !file.exists()) {
+            return 0;
         }
-        return count;
+        if (file.isFile()) {
+            return file.length();
+        }
+        File[] children = file.listFiles();
+        if (children == null) {
+            return -1;
+        }
+        long total = 0;
+        for (File child : children) {
+            long size = sizeOf(child);
+            if (size < 0) {
+                return -1;
+            }
+            total += size;
+        }
+        return total;
     }
 
     /**
-     * 本地文件复制到U盘
-     * 1.先创建U盘再复制？
+     * 本地文件复制到U盘。
+     * 写到 U 盘当前目录下新建的时间戳目录里,不删除 U 盘上已有的内容。
      */
     private void localFileCopyToUsb(){
-        if(null != checkLocalFiles && checkLocalFiles.size()>0){
-
-            if(null != usbHelper){
-
-                if(usbHelper.getDeviceList() == null || usbHelper.getDeviceList().length == 0){
-                    mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL);
-                    //U盘不存在
-                    Toast.makeText(getApplicationContext()
-                            ,getResources().getString(R.string.result_export_toast_udisk_not_exist),Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                if (checkLocalFiles != null && checkLocalFiles.size()>0){
-//                    for(FileBean file :checkLocalFiles){
-//                        createUsbFolder(file.getFile(),usbHelper.getCurrentFolder());
-//                    }
-                    //创建完文件夹开始进行复制
-                    suc_result = 0;
-                    if(null != usbHelper){
-                        if(copyThread!= null && copyThread.isAlive()){
-                            copyThread.interrupt();
-                            copyThread = null;
-                        }
-                        copyThread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                file_count = getCopyFileNumber(checkLocalFiles);
-                                Log.i("ResultExportActivity","本地複製到U盤的文件数量 " + file_count );
-                                for(FileBean file :checkLocalFiles){
-                                    createUsbFolder(file.getFile(),usbHelper.getCurrentFolder());
-                                }
-                                boolean result = copyLocalFiles(checkLocalFiles,usbHelper.getCurrentFolder());
-                                try {
-                                    Thread.sleep(2000);
-                                } catch (InterruptedException e) {
-                                    //throw new RuntimeException(e);
-                                }
-                                if(result){
-                                    if(null != mUIHandler){
-                                        mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL);
-                                    }
-                                }else{
-                                    if(null != mUIHandler){
-                                        mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL_FAIL);
-                                    }
-                                }
-                            }
-                        });
-                        copyThread.start();
-                    }else{
-                        mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL);
-                        //U盘不存在
-                        Toast.makeText(getApplicationContext()
-                                ,getResources().getString(R.string.result_export_toast_udisk_not_exist),Toast.LENGTH_LONG).show();
-                    }
-                }
-
-            }else {
-                mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL);
-                //U 盘不存在
-                Toast.makeText(getApplicationContext()
-                        ,getResources().getString(R.string.result_export_toast_udisk_not_exist),Toast.LENGTH_LONG).show();
-            }
-        }else {
-            mUIHandler.sendEmptyMessage(MsgType.MSG_END_COPY_LOCAL);
-            //请选择复制的文件
-            Toast.makeText(getApplicationContext()
-                    ,getResources().getString(R.string.result_export_toast_copy_file),Toast.LENGTH_LONG).show();
-        }
-    }
-
-    //创建要复制的文件夹
-    private void createUsbFolder(File targetFile, UsbFile saveFolder){
-        try {
-            UsbFile exist_UsbFile = isSameNameFile(targetFile,saveFolder);
-            if(exist_UsbFile != null){
-                //存在
-                exist_UsbFile.delete();
-            }
-            if (targetFile.isDirectory()) {
-                //1如果复制的是一个文件夹，在目录下创建一个相同的文件夹
-                UsbFile saveFile = saveFolder.createDirectory(targetFile.getName());
-                File[] currentFiles = targetFile.listFiles();//当前目录下的所有文件
-                //遍历要复制的该目录下的所有文件
-                if (null != currentFiles) {
-                    for (int i = 0; i < currentFiles.length; i++) {
-                        //如果当前项目为子目录
-                        if (currentFiles[i].isDirectory()) {
-                            File dir = new File(currentFiles[i].getAbsolutePath()+"/");
-                           // Log.i("AAA","DIR" + dir.getAbsolutePath());
-                            createUsbFolder(dir,saveFile);
-                        }
-                    }
-                }
-            }
-        }catch (Exception e){
-//            e.getMessage();
-//            Log.e("createUsbFolder",e.getMessage());
-        }finally {
+        if (copying) {
+            //上一次复制还没结束,不再开第二个线程去抢同一个 U 盘
+            hideFileProgressDialog();
+            Toast.makeText(getApplicationContext(),
+                    getResources().getString(R.string.result_export_dialog_message_copying_already), Toast.LENGTH_LONG).show();
             return;
         }
-    }
-
-    private UsbFile getUsbFile(String name,UsbFile[] remoteUsbFiles){
-        for(int i=0;i<remoteUsbFiles.length;i++){
-            if(remoteUsbFiles[i].getName().equals(name)){
-                return remoteUsbFiles[i];
-            }
+        if (checkLocalFiles == null || checkLocalFiles.size() == 0 || usbHelper == null) {
+            hideFileProgressDialog();
+            Toast.makeText(getApplicationContext(),
+                    getResources().getString(R.string.result_export_toast_copy_file), Toast.LENGTH_LONG).show();
+            return;
         }
-        return null;
-    }
-
-    private boolean copyLocalFiles(List<FileBean> checkLocalFiles,UsbFile saveFolder){
-        try {
-            interruptCopyThread = false;
-            for(FileBean fileBean : checkLocalFiles){
-                if(interruptCopyThread){
-                    return false;
-                }
-                File localFile = fileBean.getFile();
-                if(localFile.isFile()){
-                    //直接复制
-                    UsbFile u_file = saveFolder.createFile(localFile.getName());
-//                    copyFileThread(localFile,u_file);
-                    copyFileNotThread(localFile,u_file);
-                }else{
-                    copyLocalFolder(localFile,saveFolder);
-                }
-            }
-            return true;
-        }catch (Exception e){
-//            Log.e("copyLocalFiles",e.getMessage());
-            return false;
-        }
-    }
-
-    private void copyLocalFolder(File localFile, UsbFile saveFolder){
-        try{
-            UsbFile[] romoteUsbFiles = saveFolder.listFiles();
-            if(localFile.isDirectory()){
-                //是localfile文件夹在U盘有没有得到UsbFile
-                UsbFile usbFile = getUsbFile(localFile.getName(),romoteUsbFiles);
-                File[] files = localFile.listFiles();//a里的文件目录
-
-                    if(files != null ){
-                        for(int i=0;i<files.length;i++){
-                            File copyFile = files[i];
-                            if(copyFile.isDirectory()){
-                                copyLocalFolder(copyFile,usbFile);
-                            }else{
-                                //
-                                UsbFile u_file = usbFile.createFile(files[i].getName());
-                                copyFileNotThread(files[i],u_file);
-                            }
-                        }
-                    }
-
-
-            }
-        }catch (Exception e){
-            e.getMessage();
-        }
-
-    }
-
-    private void copyFileThread(final File file,UsbFile usbFile){
-        Log.i("ResultExportActvity","copyFileThread---" + file.getName());
-        new Thread(new Runnable() {
+        //复制期间的插拔广播不再刷新列表,见 insertUsb/removeUsb
+        copying = true;
+        usbHelper.resetCopyCancelled();
+        final List<FileBean> toCopy = new ArrayList<>(checkLocalFiles);
+        copyThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                usbHelper.copyFile(file,usbFile, new UsbHelper.CopyProgressListener() {
-                    @Override
-                    public void copyProgress(int progress) {
-                        if(null != mUIHandler){
-                            Message msg = Message.obtain();
-                            msg.what = MsgType.MSG_COPY_PROGRESS;
-                            msg.obj = file.getName();
-                            msg.arg1 = progress;
-                            mUIHandler.sendMessage(msg);
+                String failReason = null;
+                UsbCopySession session = null;
+                try {
+                    UsbFile destParent = usbHelper.getCurrentFolder();
+                    if (destParent == null) {
+                        //U 盘没挂载上:没授权、不是 FAT32,或还没读到分区
+                        failReason = getResources().getString(R.string.result_export_dialog_message_copy_not_fat32);
+                    } else {
+                        long need = totalSizeOf(toCopy);
+                        long free = usbHelper.getFreeSpace();
+                        //留 8MB 给 FAT 表和新目录项,避免写到最后一簇时失败
+                        if (need < 0 || free < 0 || need + 8L * 1024 * 1024 > free) {
+                            failReason = getResources().getString(R.string.result_export_dialog_message_copy_no_space);
                         }
                     }
-
-                    @Override
-                    public void copyResult(boolean result) {
-                        if(result){
-                            if(null != mUIHandler){
-                                mUIHandler.sendEmptyMessage(MsgType.MSG_COPY_LOCAL_SUCCESS);
-                            }
-                        }else{
-                            if(null != mUIHandler){
-                                mUIHandler.sendEmptyMessage(MsgType.MSG_COPY_LOCAL_FAIL);
-                            }
+                    if (failReason == null) {
+                        List<File> sources = new ArrayList<>();
+                        for (FileBean bean : toCopy) {
+                            sources.add(bean.getFile());
                         }
+                        session = new UsbCopySession(usbHelper, sources, destParent);
+                        session.run(copyProgressListener);
                     }
-                });
-
-            }
-        }).start();
-    }
-
-    private void copyFileNotThread(final File file,UsbFile usbFile){
-        Log.i("ResultExportActvity","copyFileNotThread---" + file.getName());
-        usbHelper.copyFile(file,usbFile, new UsbHelper.CopyProgressListener() {
-            @Override
-            public void copyProgress(int progress) {
-                if(null != mUIHandler){
+                } catch (Exception e) {
+                    Log.e("ResultExportActivity", "copy to usb failed: " + e.getMessage());
+                    failReason = getResources().getString(R.string.result_export_dialog_message_copy_failed);
+                }
+                copying = false;
+                if (mUIHandler != null) {
                     Message msg = Message.obtain();
-                    msg.what = MsgType.MSG_COPY_PROGRESS;
-                    msg.obj = file.getName();
-                    msg.arg1 = progress;
+                    msg.what = MsgType.MSG_END_COPY_LOCAL;
+                    msg.obj = failReason == null ? session : failReason;
                     mUIHandler.sendMessage(msg);
                 }
             }
-
-            @Override
-            public void copyResult(boolean result) {
-                if(result){
-                    if(null != mUIHandler){
-                        mUIHandler.sendEmptyMessage(MsgType.MSG_COPY_LOCAL_SUCCESS);
-                    }
-                }else{
-                    if(null != mUIHandler){
-                        mUIHandler.sendEmptyMessage(MsgType.MSG_COPY_LOCAL_FAIL);
-                    }
-                }
-            }
         });
-
+        copyThread.start();
     }
+
+    /** 复制进度回调,由复制线程调用,转发到主线程更新进度框 */
+    private final UsbHelper.CopyProgressListener copyProgressListener = new UsbHelper.CopyProgressListener() {
+        //当前正在复制的文件名,随进度一起发给进度框
+        private volatile String fileName = "";
+
+        @Override
+        public void copyStart(String name) {
+            fileName = name;
+            copyProgress(0);
+        }
+
+        @Override
+        public void copyProgress(int progress) {
+            if (mUIHandler != null) {
+                Message msg = Message.obtain();
+                msg.what = MsgType.MSG_COPY_PROGRESS;
+                msg.obj = fileName;
+                msg.arg1 = progress;
+                mUIHandler.sendMessage(msg);
+            }
+        }
+
+        @Override
+        public void copyResult(boolean result) {
+        }
+    };
 
 
     /**
@@ -897,6 +771,7 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
         new Thread(new Runnable() {
             @Override
             public void run() {
+                deleting = true;
                 try{
                     final boolean result = deleteCheckUsbFile();
                     runOnUiThread(new Runnable() {
@@ -904,14 +779,22 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
                         public void run() {
                             if (result) {
                                 hideLoadingDialog();
-                                openUsbFile(usbHelper.getCurrentFolder());
+                                try {
+                                    openUsbFile(usbHelper.getCurrentFolder());
+                                } catch (Exception e) {
+                                    Log.e("ResultExportActivity", "open usb folder after delete failed: " + e.getMessage());
+                                }
                                 checkUsbFiles.clear();
                                 //删除成功
                                 Toast.makeText(getApplicationContext()
                                         , getResources().getString(R.string.result_export_toast_delete_success), Toast.LENGTH_SHORT).show();
                             } else {
                                 hideLoadingDialog();
-                                openUsbFile(usbHelper.getCurrentFolder());
+                                try {
+                                    openUsbFile(usbHelper.getCurrentFolder());
+                                } catch (Exception e) {
+                                    Log.e("ResultExportActivity", "open usb folder after delete failed: " + e.getMessage());
+                                }
                                 checkUsbFiles.clear();
                                 //删除失败
                                 Toast.makeText(getApplicationContext()
@@ -920,17 +803,24 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
                         }
                     });
                 }catch (Exception E){
+                    Log.e("ResultExportActivity", "delete usb file failed: " + E.getMessage());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             hideLoadingDialog();
-                            openUsbFile(usbHelper.getCurrentFolder());
+                            try {
+                                openUsbFile(usbHelper.getCurrentFolder());
+                            } catch (Exception e) {
+                                Log.e("ResultExportActivity", "open usb folder after delete failed: " + e.getMessage());
+                            }
                             checkUsbFiles.clear();
                             //删除失败
                             Toast.makeText(getApplicationContext()
                                     , getResources().getString(R.string.result_export_toast_delete_fail), Toast.LENGTH_SHORT).show();
                         }
                     });
+                } finally {
+                    deleting = false;
                 }
             }
         }).start();
@@ -969,7 +859,8 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
      * U盘文件重命名
      * @param usbFileName
      */
-    private void renameUsbFile(String usbFileName,UsbFile usbFile){
+    private void renameUsbFile(String usbFileName, UsbFile usbFile){
+        renaming = true;
         try{
             usbFile.setName(usbFileName);
             //重命名成功
@@ -977,9 +868,12 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
                     ,getResources().getString(R.string.result_export_toast_rename_success),Toast.LENGTH_LONG).show();
             updateUsbFile(0);
         }catch (Exception e){
+            Log.e("ResultExportActivity", "rename usb file failed: " + e.getMessage());
             //重命名失败
             Toast.makeText(getApplicationContext()
                     ,getResources().getString(R.string.result_export_toast_rename_fail),Toast.LENGTH_LONG).show();
+        } finally {
+            renaming = false;
         }
         isUsbCheckShow = false;
         isUsbAllCheck = false;
@@ -988,48 +882,63 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
 
     /**
      * 新建Usb文件
-     *
      */
-    private void  createUsbFile(String usbFileName,boolean isDirectory){
-        if(null != usbHelper){
-            if(isDirectory){
-                try{
-                    UsbFile usbFile = usbHelper.getCurrentFolder();
-                    UsbFile createDirectory = usbFile.createDirectory(usbFileName);
-                    if(null != createDirectory){
-                        //创建文件夹成功
-                        Toast.makeText(getApplicationContext()
-                                ,getResources().getString(R.string.result_export_toast_create_foder_success),Toast.LENGTH_LONG).show();
-                        updateUsbFile(0);
-                    }else{
-                        //创建文件夹失败
+    private void createUsbFile(String usbFileName, boolean isDirectory){
+        creating = true;
+        try {
+            if(null != usbHelper){
+                if(isDirectory){
+                    try{
+                        UsbFile usbFile = usbHelper.getCurrentFolder();
+                        if (usbFile == null) {
+                            Toast.makeText(getApplicationContext()
+                                    ,getResources().getString(R.string.result_export_toast_create_foder_fail),Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        UsbFile createDirectory = usbFile.createDirectory(usbFileName);
+                        if(null != createDirectory){
+                            //创建文件夹成功
+                            Toast.makeText(getApplicationContext()
+                                    ,getResources().getString(R.string.result_export_toast_create_foder_success),Toast.LENGTH_LONG).show();
+                            updateUsbFile(0);
+                        }else{
+                            //创建文件夹失败
+                            Toast.makeText(getApplicationContext()
+                                    ,getResources().getString(R.string.result_export_toast_create_foder_fail),Toast.LENGTH_LONG).show();
+                        }
+                    }catch (Exception e){
+                        Log.e("ResultExportActivity", "create usb directory failed: " + e.getMessage());
                         Toast.makeText(getApplicationContext()
                                 ,getResources().getString(R.string.result_export_toast_create_foder_fail),Toast.LENGTH_LONG).show();
                     }
-                }catch (Exception e){
-                    //创建文件夹失败
-                    Toast.makeText(getApplicationContext()
-                            ,getResources().getString(R.string.result_export_toast_create_foder_fail),Toast.LENGTH_LONG).show();
-                }
-            }else{
-                try {
-                    UsbFile usbFile =  usbHelper.getCurrentFolder();
-                    UsbFile createFile = usbFile.createFile(usbFileName);
-                    if(createFile != null){
-                        //创建文件成功
-                        Toast.makeText(getApplicationContext()
-                                ,getResources().getString(R.string.result_export_toast_create_file_success),Toast.LENGTH_LONG).show();
-                        updateUsbFile(0);
-                    }else{
-                        //创建文件失败
+                }else{
+                    try {
+                        UsbFile usbFile = usbHelper.getCurrentFolder();
+                        if (usbFile == null) {
+                            Toast.makeText(getApplicationContext()
+                                    ,getResources().getString(R.string.result_export_toast_create_file_fail),Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        UsbFile createFile = usbFile.createFile(usbFileName);
+                        if(createFile != null){
+                            //创建文件成功
+                            Toast.makeText(getApplicationContext()
+                                    ,getResources().getString(R.string.result_export_toast_create_file_success),Toast.LENGTH_LONG).show();
+                            updateUsbFile(0);
+                        }else{
+                            //创建文件失败
+                            Toast.makeText(getApplicationContext()
+                                    ,getResources().getString(R.string.result_export_toast_create_file_fail),Toast.LENGTH_LONG).show();
+                        }
+                    }catch (Exception e){
+                        Log.e("ResultExportActivity", "create usb file failed: " + e.getMessage());
                         Toast.makeText(getApplicationContext()
                                 ,getResources().getString(R.string.result_export_toast_create_file_fail),Toast.LENGTH_LONG).show();
                     }
-                }catch (Exception e){
-                    Toast.makeText(getApplicationContext()
-                            ,getResources().getString(R.string.result_export_toast_create_file_fail),Toast.LENGTH_LONG).show();
                 }
             }
+        } finally {
+            creating = false;
         }
     }
 
@@ -1086,21 +995,6 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
             udiskAdapter.setFileList(usbFileList);
             udiskAdapter.notifyDataSetChanged();
         }
-    }
-
-    private UsbFile isSameNameFile(File targetFile, UsbFile saveFolder){
-        UsbFile saveFile = null;
-        try{
-            for (UsbFile usbFile : saveFolder.listFiles()) {
-                if (usbFile.getName().equals(targetFile.getName())) {
-                    saveFile = usbFile;
-                }
-            }
-        }catch (Exception e){
-            e.getMessage();
-            return null;
-        }
-       return saveFile;
     }
 
     private void localButtomAction(boolean isEnable){
@@ -1237,6 +1131,10 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
 
     @Override
     public void insertUsb(UsbDevice device_add) {
+        //复制、删除、重命名、创建过程中不刷新:刷新会重新打开设备并抢占 USB 接口,把正在操作的连接打断
+        if (copying || deleting || renaming || creating) {
+            return;
+        }
         if(null != mUIHandler){
             Message msg = Message.obtain();
             msg.obj = device_add;
@@ -1249,6 +1147,15 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
 
     @Override
     public void removeUsb(UsbDevice device_remove) {
+        //正在复制、删除、重命名、创建时 U 盘被拔出:只请求中止,不在这里刷新或关闭设备
+        if (copying) {
+            usbHelper.cancelCopy();
+            return;
+        }
+        if (deleting || renaming || creating) {
+            //删除、重命名、创建也要中止
+            return;
+        }
 //        updateUsbFile(0);
         usbHelper.closeUsbMassStorageDevice();
         usbFileList.clear();
@@ -1293,60 +1200,18 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
                     }
                     mActivity.get().updateUsbFile(0);
                     break;
-                case MsgType.MSG_COPY_LOCAL_SUCCESS:
-                    mActivity.get().suc_result++;
-                    Log.i("ResultExportActivity","MSG_COPY_LOCAL_SUCCESS--" + mActivity.get().suc_result);
-                    if(mActivity.get().suc_result == mActivity.get().file_count){
-                        //复制完成
-                        if(null != mActivity.get().progressDialog){
-                            if(mActivity.get().progressDialog.isShowing()) {
-                                mActivity.get().progressDialog.dismiss();
-                            }
-                        }
-                        mActivity.get().openUsbFile(mActivity.get().usbHelper.getCurrentFolder());
-                    }
-                    break;
-                case MsgType.MSG_COPY_LOCAL_FAIL:
-                    //停止
-                    mActivity.get().suc_result++;
-                    Log.i("ResultExportActivity","MSG_COPY_LOCAL_FAIL--" + mActivity.get().suc_result);
-//                    if(mActivity.get().suc_result == mActivity.get().file_count){
-                        //复制完成
-                    mActivity.get().hideFileProgressDialog();
-                    if(mActivity.get().copyThread!= null && mActivity.get().copyThread.isAlive()){
-                        mActivity.get().interruptCopyThread = true;
-                        mActivity.get().copyThread = null;
-                    }
-                        //复制至U盘失败,请检查
-                    mActivity.get().showNoticeDialog(mActivity.get().getResources().getString(R.string.result_export_dialog_message_copy_failed),-1);
-                    mActivity.get().openUsbFile(mActivity.get().usbHelper.getCurrentFolder());
-//
-                    break;
-                case MsgType.MSG_END_COPY_LOCAL_FAIL:
-                    //停止
-                    mActivity.get().suc_result++;
-                    Log.i("ResultExportActivity","MSG_END_COPY_LOCAL_FAIL--" + mActivity.get().suc_result);
-                    mActivity.get().hideFileProgressDialog();
-                    if(mActivity.get().copyThread!= null && mActivity.get().copyThread.isAlive()){
-                        mActivity.get().interruptCopyThread = true;
-                        mActivity.get().copyThread = null;
-                    }
-                    //复制至U盘失败
-                    mActivity.get().showNoticeDialog(mActivity.get().getResources().getString(R.string.result_export_dialog_message_copy_failed),-1);
-                    mActivity.get().openUsbFile(mActivity.get().usbHelper.getCurrentFolder());
-                    break;
                 case MsgType.MSG_START_COPY_LOCAL:
                     Log.i("ResultExportActivity","MSG_START_COPY_LOCAL");
                     //复制进行中，请等待
                     mActivity.get().showFileProgressDialog(mActivity.get().getResources().getString(R.string.result_export_dialog_message_copying));
-                    //停止
-                     mActivity.get().localFileCopyToUsb();
+                    mActivity.get().localFileCopyToUsb();
                     break;
                 case MsgType.MSG_END_COPY_LOCAL:
                     Log.i("ResultExportActivity","MSG_END_COPY_LOCAL");
                     mActivity.get().hideFileProgressDialog();
+                    mActivity.get().showCopyResult(msg.obj);
+                    //复制已结束,可以安全地重新读取 U 盘
                     mActivity.get().updateUsbFile(0);
-                    //停止
                     break;
                 case MsgType.MSG_COPY_PROGRESS:
                     int progress = (int)msg.arg1;
@@ -1534,24 +1399,16 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
             progressDialog.setOnCanlceListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    //只请求中止,不在这里刷新:刷新会重新打开设备,和正在写的线程抢 USB 接口
+                    usbHelper.cancelCopy();
                     progressDialog.dismiss();
-                    if(copyThread!= null && copyThread.isAlive()){
-//                        copyThread.interrupt();
-                        interruptCopyThread = true;
-                        copyThread = null;
-                    }
-                    updateUsbFile(0);
                 }
             });
             progressDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
+                    usbHelper.cancelCopy();
                     progressDialog.dismiss();
-                    if(copyThread!= null && copyThread.isAlive()){
-                        copyThread.interrupt();
-                        copyThread = null;
-                    }
-                    updateUsbFile(0);
                 }
             });
             progressDialog.show();
@@ -1562,6 +1419,45 @@ public class ResultExportActivity extends BaseActivity implements UsbBroadCastRe
         if(null != progressDialog){
             progressDialog.dismiss();
             progressDialog = null;
+        }
+    }
+
+    /**
+     * 复制结束后的提示。在主线程调用。
+     *
+     * @param result 失败原因(String),或复制过程(UsbCopySession)
+     */
+    private void showCopyResult(Object result) {
+        String message;
+        if (result instanceof String) {
+            message = (String) result;
+        } else if (result instanceof UsbCopySession) {
+            UsbCopySession session = (UsbCopySession) result;
+            if (session.isCancelled()) {
+                message = getResources().getString(R.string.result_export_dialog_message_copy_cancelled);
+            } else if (session.getFailedFiles().isEmpty()) {
+                message = getResources().getString(R.string.result_export_dialog_message_copy_done,
+                        countFiles(session.getDestDir()), session.getDestDir().getName());
+            } else {
+                message = getResources().getString(R.string.result_export_dialog_message_copy_partial,
+                        countFiles(session.getDestDir()), session.getFailedFiles().size());
+            }
+        } else {
+            message = getResources().getString(R.string.result_export_dialog_message_copy_failed);
+        }
+        showNoticeDialog(message, -1);
+    }
+
+    /** 统计一个 U 盘目录下(含子目录)的文件数,统计失败返回 0 */
+    private int countFiles(UsbFile dir) {
+        try {
+            int count = 0;
+            for (UsbFile file : dir.listFiles()) {
+                count += file.isDirectory() ? countFiles(file) : 1;
+            }
+            return count;
+        } catch (Exception e) {
+            return 0;
         }
     }
 

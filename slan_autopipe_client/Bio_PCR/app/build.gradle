@@ -55,7 +55,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':SerialPortLibrary')
+    implementation project(path: rootProject.name == 'SLAN_Pipeline' ? ':SLAN_Client:SerialPortLibrary' : ':SerialPortLibrary')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.13.2'

@@ -1,0 +1,313 @@
+{
+  "source": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\result\\AIO_AAA_2026-11-16-11-01-01_07-自研试剂ab管多重测试_20261020\\2026-11-16-13-04-40.pcr",
+  "sourceBytes": 5736758,
+  "sourceSha256": "577afff986549e59d29f611358a776b5e1c0439bc34d4504cbda7889724031e2",
+  "statistics": {
+    "wells": 8,
+    "targets": 24,
+    "channels": [
+      1,
+      3,
+      4
+    ],
+    "rawAmplificationPoints": 0,
+    "amplificationPoints": 0,
+    "rawMeltPoints": 22032,
+    "peakCurvePoints": 12024,
+    "peaks": 21,
+    "validCt": 0,
+    "unavailableCt": 24,
+    "nonFiniteCt": 24,
+    "ctMin": null,
+    "ctMax": null
+  },
+  "ctByWell": [
+    {
+      "wellNames": [
+        "B1"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "ROX",
+          "channel": 3,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "B2"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "ROX",
+          "channel": 3,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "B3"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "ROX",
+          "channel": 3,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "B4"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "ROX",
+          "channel": 3,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "B5"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "ROX",
+          "channel": 3,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "B6"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "ROX",
+          "channel": 3,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "B7"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "ROX",
+          "channel": 3,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        }
+      ]
+    },
+    {
+      "wellNames": [
+        "B8"
+      ],
+      "targets": [
+        {
+          "name": "FAM",
+          "channel": 1,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "ROX",
+          "channel": 3,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        },
+        {
+          "name": "CY5",
+          "channel": 4,
+          "ct": null,
+          "sdkCtState": "NaN",
+          "rawPoints": 0,
+          "amplificationPoints": 0
+        }
+      ]
+    }
+  ],
+  "mappings": {
+    "SerialNumber": "SerialNo",
+    "UseModule": "Block",
+    "Cn": "CnValue",
+    "Rn": "RnValue",
+    "Wm": "Width",
+    "Ym": "YValue"
+  },
+  "normalizedNumbers": 216,
+  "dataSource": "Actual vendor Service.SLANService.LoadExperimentResult on a private input copy; no hardware calls",
+  "normalization": "Non-finite numeric results explicitly encoded as JSON null, never zero. This is a compatibility normalization, not unchanged Android Gson serialization.",
+  "database": "E:\\PCRinOne\\framework\\bowei_liushuixian\\liushuixian_melody\\data_server\\target\\real-pcr-upload-20261121\\http-1795400001952\\db\\upload-test.mv.db",
+  "status": "PASS",
+  "checks": {
+    "originalGsonNonStandardNaNRejected": true,
+    "csharpShapeRequiresMapping": true,
+    "nonFiniteCtStringsAreRejected": true,
+    "jsonRetryDeduplicated": true,
+    "concurrentRetriesDeduplicated": true,
+    "allDataRoundTripIncludingCtAndCurves": true,
+    "finiteCtValuesUnchanged": true,
+    "nonFiniteCtEncodedAsNull": true,
+    "operatorMetadataMatchesSource": true,
+    "jsonSourceByteExact": true,
+    "binaryRetryDeduplicated": true,
+    "downloadHashMatchesSource": true,
+    "restartPersistence": true,
+    "sourceUnmodified": true
+  },
+  "reportId": "c17ec6b5-de0b-43f5-acbd-b139b72a874f",
+  "fileId": "026cde07-f3f3-4b57-9501-67d1cf400d35",
+  "summary": {
+    "devices": 1,
+    "sdkAvailable": false,
+    "files": 1,
+    "reports": 1
+  },
+  "finishedAt": "2026-11-23T02:13:37.159Z",
+  "uploadJsonBytes": 1596505
+}
