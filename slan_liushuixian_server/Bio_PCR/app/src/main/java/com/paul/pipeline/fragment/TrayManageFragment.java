@@ -30,6 +30,7 @@ import com.paul.pipeline.fragment.model.PipeRNAModel;
 import com.paul.pipeline.fragment.viewmodel.TrayManageViewModel;
 import com.paul.pipeline.listener.OnItemChildClickListener;
 import com.paul.pipeline.manager.APLManager;
+import com.paul.pipeline.manager.ArmManager;
 import com.paul.pipeline.manager.PCRManager;
 import com.paul.pipeline.manager.RNAManager;
 import com.paul.pipeline.manager.TrayManager;
@@ -79,9 +80,6 @@ public class TrayManageFragment extends Fragment {
                                 mainViewModel.onNavClicked(ConstantData.NAV_TRAYDETAIL);
                                 mainViewModel.setTrayEdittype(ConstantData.TRAY_Add);
                                 break;
-                            case ConstantData.FLAG_PAUSE:
-                                showLongToast("暂停状态，请结束还盘后进行新增操作！");
-                                break;
                             case ConstantData.FLAG_STOP:
                                 showLongToast("停止状态，请结束还盘后进行新增操作！");
                                 break;
@@ -100,44 +98,13 @@ public class TrayManageFragment extends Fragment {
 //                mainViewModel.setTrayEdittype(ConstantData.TRAY_Edit);
 //            }
 //        });
-        binding.continueBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(selectedDispatchModel!=null){
-                    TrayManager.getInstance().continueTray(trayModel.index.get());
-                    TrayManager.getInstance().saveModel(trayModel.index.get());
-                    executeDispatchTask();
-                    showLongToast("继续执行！");
-                }else{
-                    showLongToast("请选择目标！");
-                }
-            }
-        });
-        binding.pauseBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(trayModel!=null&&trayModel.flagstatus.get()!=null) {
-                    int status = trayModel.flagstatus.get();
-                    switch (status) {
-                        case ConstantData.FLAG_FREE:
-                            trayModel.flagstatus.set(ConstantData.FLAG_PAUSE);
-                            TrayManager.getInstance().stopTray(trayModel.index.get());
-                            TrayManager.getInstance().saveModel(trayModel.index.get());
-                            break;
-                        case ConstantData.FLAG_PAUSE:
-                            showLongToast("已经暂停！");
-                            break;
-                        case ConstantData.FLAG_STOP:
-                            showLongToast("已经处于停止状态！");
-                            break;
-                    }
-                }
-            }
-        });
+        // continueBtn 已删除，不再支持暂停后继续
+
+        // pauseBtn 已删除，停止按钮作为唯一的停止操作
         binding.stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopTrayDispatch();
+                stopTrayExecution();
             }
         });
         binding.clearBtn.setOnClickListener(new View.OnClickListener() {
@@ -150,37 +117,64 @@ public class TrayManageFragment extends Fragment {
         });
         binding.ivBack.setOnClickListener(v -> close());
     }
-    private void stopTrayDispatch(){
-        if(trayModel!=null) {
-            trayModel.flagstatus.set(ConstantData.FLAG_STOP);
-            if (trayModel.exist.get() != null && !trayModel.exist.get()) {
-                if (trayModel.index.get() != null) {
-                    DispatchModel dm = TrayManager.getInstance().getCurrentDispatch(trayModel.index.get());
-                    if (dm!=null && dm.targettype.get()!=null){
-                        if(dm.targettype.get() == ConstantData.DEVICE_PCR){
-                            if(dm.target.get()!=null) {
-                                stopPcrwork(dm.target.get());
-                            }else{
-                                showLongToast("目标位置信息为空！");
-                            }
-                        }else if(dm.targettype.get() == ConstantData.DEVICE_RNA){
-                            if(dm.target.get()!=null) {
-                                stopRnawork(dm.target.get());
-                            }else{
-                                showLongToast("目标位置信息为空！");
-                            }
-                        }else{
-                            showLongToast("调度位置信息为空！");
-                        }
-                    }else{
-                        showLongToast("调度信息为空！");
-                    }
-                }
-            }else{
-                showLongToast("托盘调度停止成功！");
-            }
-        }else{
+    /**
+     * 统一的停止执行方法
+     * 停止后不可恢复，需要清盘后重新开始
+     */
+    private void stopTrayExecution(){
+        if(trayModel == null) {
             showLongToast("托盘信息为空！");
+            return;
+        }
+
+        int trayIndex = trayModel.index.get();
+
+        // 1. 设置状态为STOP，停止后不可恢复
+        trayModel.flagstatus.set(ConstantData.FLAG_STOP);
+
+        // 2. 停止当前运行的设备（PCR或RNA）
+        DispatchModel dm = TrayManager.getInstance().getCurrentDispatch(trayIndex);
+        if (dm != null && dm.targettype.get() != null && dm.target.get() != null) {
+            if (dm.targettype.get() == ConstantData.DEVICE_PCR) {
+                stopPcrwork(dm.target.get());
+            } else if (dm.targettype.get() == ConstantData.DEVICE_RNA) {
+                stopRnawork(dm.target.get());
+            }
+        }
+
+        // 3. 【关键修复】触发机械臂还盘
+        triggerArmReturnTray(trayIndex);
+
+        // 4. 保存托盘状态
+        TrayManager.getInstance().saveModel(trayIndex);
+
+        showLongToast("托盘已停止，请等待机械臂还盘完成！");
+    }
+
+    /**
+     * 触发机械臂还盘逻辑
+     * 如果机械臂持有托盘或其他设备，需要还回
+     */
+    private void triggerArmReturnTray(int trayIndex){
+        ArmManager armManager = ArmManager.getInstance();
+
+        // 清理机械臂的source/target引用
+        // 如果机械臂持有东西（target不为空），则放回到对应位置
+        if (armManager.itemProperty_target != null) {
+            Log.w("TrayManageFragment", "机械臂持有物品：" + armManager.itemProperty_target.getType()
+                    + armManager.itemProperty_target.getPosition() + "，触发还回");
+            // 将持有的物品放回原位置
+            String result = armManager.startPut(
+                ConstantData.ConvertDeviceType(armManager.itemProperty_target.getType()),
+                armManager.itemProperty_target.getPosition()
+            );
+            if (result != null) {
+                Log.e("TrayManageFragment", "还盘失败：" + result);
+            }
+        } else {
+            // 机械臂没有持有物品，直接清理引用
+            armManager.setFree();
+            Log.w("TrayManageFragment", "机械臂无持有物品，清理引用");
         }
     }
     private void stopRnawork(int index){
