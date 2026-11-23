@@ -296,29 +296,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_centerInParent="true">
-                    <Button
-                        android:id="@+id/continue_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="30dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@string/main_tab_continue"
-                        android:textSize="@dimen/pipemain_btn"
-                        android:textColor="@color/white"
-                        android:background="@drawable/selector_general_btn_bg"/>
+                    <!-- 【删除】继续按钮 - 合并为停止后自动还盘 -->
 
-                    <Button
-                        android:id="@+id/pause_btn"
-                        android:layout_width="wrap_content"
-                        android:background="@drawable/selector_general_btn_bg"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="30dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@string/running_interupt"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/pipemain_btn" />
+
+                    <!-- 【删除】中断按钮 - 合并为停止 -->
+
                     <Button
                         android:id="@+id/modify_btn"
                         android:layout_width="wrap_content"
